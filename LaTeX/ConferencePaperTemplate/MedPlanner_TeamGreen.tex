@@ -1,0 +1,175 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{MedPlanner\\
+{\large Web-Anwendungsentwicklung Sommersemester 2021}
+}
+
+\author{\IEEEauthorblockN{Egidia Cenko}
+\IEEEauthorblockA{\textit{Medieninformatik} \\
+e.cenko@oth-aw.de}
+\and
+\IEEEauthorblockN{Madina Kamalova}
+\IEEEauthorblockA{\textit{Medieninformatik} \\
+m.kamalova@oth-aw.de}
+\and
+\IEEEauthorblockN{Matthias Schön}
+\IEEEauthorblockA{\textit{Medieninformatik} \\
+m.schoen@oth-aw.de}
+\and
+\IEEEauthorblockN{Christoph Schuster}
+\IEEEauthorblockA{\textit{Medieninformatik} \\
+	c.schuster1@oth-aw.de}
+\and
+\IEEEauthorblockN{Andrei Trukhin}
+\IEEEauthorblockA{\textit{Medieninformatik} \\
+	a.trukhin@oth-aw.de}
+}
+
+\maketitle
+
+\begin{abstract}
+In diesem Konzeptpapier wird die Projektidee von Team Grün vorgestellt. Elemente, die mit * gekennzeichnet sind, gelten als optionale Features, die je nach Projektfortschritt erst eingebaut werden würden. Sie sind dennoch vollständigkeitshalber mit aufgeführt.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Termin, Web-Anwendung
+\end{IEEEkeywords}
+
+\section{Einleitung}
+\subsection{Motivation}
+In der heutigen Zeit ist alles schnelllebig und wir als Menschen müssen so flexibel wie möglich bleiben, um nicht den Überblick zu verlieren. 
+Hierbei ist es wichtig, dass man den Fokus auf die zentralen Aufgaben legen kann ohne dadurch einen Nachteil für sich selbst zu schaffen.
+Wir als Menschen sind nicht unverwundbar und so kann es eben sein, dass durch chronische Krankheiten oder gesundheitliche Einschränkungen der Bedarf besteht, gehäuft verschiedene Arztbesuche wahrzunehmen.
+Aber auch Menschen ohne gesundheitliche Beschwerden sollten die Wichtigkeit der Vorsorge nicht aus den Augen verlieren:
+Routineuntersuchungen, Check-Ups oder einfach nur spontan auftretende Beschwerden sind Lebensaspekte, die auch durch die Schnelllebigkeit der heutigen Zeit nicht in den Hintergrund gerückt werden sollten.
+
+\subsection{Überblick}
+\textit{MedPlanner} bietet die Möglichkeit, ärztliche Termine übersichtlich zu verwalten. Es handelt sich hierbei um eine Web-Anwendung, die gezielt auf das Selbstmanagement von Arztterminen abgestimmt ist. Der Grund dafür besteht darin, dass in einem standardmäßigen Terminkalender auch weitere themenunabhängige Termine enthalten sind.\\
+Mithilfe von \textit{MedPlanner} können geplante Arzttermine eingetragen werden. Dies soll vor allem dazu dienen, einen Überblick über die ärztlichen Untersuchungen zu behalten, die man bereits in der Vergangenheit hatte bzw. die zukünftig noch anstehen. Dadurch soll gewährleistet werden, dass man auch als Privatperson ohne Konsultierung der verschiedenen Arztpraxen weiß, wann welche Untersuchungen durchgeführt wurden, um diese bei Bedarf erwähnen zu können.
+
+\subsection{Alleinstellungsmerkmal}
+Innerhalb der Web-Anwendung ist es möglich, Kontaktinformationen für die eigenen Ärzte abzuspeichern. So kann man zum Beispiel immer die Telefonnummer, Adresse und, falls vorhanden, die Webseite der Arztpraxis einsehen, ohne extra vor einer Terminvereinbarung immer wieder nach den nötigen Informationen zu suchen.
+
+Je nach Projektfortschritt, soll \textit{MedPlanner} zusätzlich noch die Möglichkeit geboten werden, Erinnerungen für das Vereinbaren von Terminen zu erhalten, sprich Reminder. So kann man sich beispielhaft vorsorglich eintragen, wann die Auffrischung einer Impfung wieder fällig ist oder in welchem Zeitintervall man eine Routineuntersuchung machen möchte.\\
+
+\subsection{technische Schlüsselbausteine}
+MedPlanner wird als Frontend das Framework \textit{Angular} in Kombination mit TypeScript verwenden. Für das Backend wird das Python-Framework \textit{Django} mit REST-API genutzt für die Verknüpfung mit der Datenbank.
+
+TODO: DATENBANK
+
+\section{Verwandte Arbeiten}
+
+\section{Anforderungen}
+\subsection{User Story 1}
+Ich als \textit{User} möchte meine Termine filtern können, um einen besseren Überblick zu haben.\\\\
+\textbf{Akzeptanzkriterien:}\\
+Filterung durch:
+\begin{itemize}
+	\item Fachrichtung von Arzt
+	\item Zeitraum
+	\item Priorität
+	\item Tags*, Fälligkeit*, Ort* 
+\end{itemize}
+
+\subsection{User Story 2}
+Ich als \textit{User} möchte mithilfe des User Interfaces die Termine unterscheiden können, um einen schnellen Überblick ohne Filterung zu bekommen.\\\\
+\textbf{Akzeptanzkriterien:}
+\begin{itemize}
+	\item visuelle Unterscheidung (farblich oder mit Icons)
+	\item Unterscheidung von einem Reminder zu einem tatsächlichen Termin*
+\end{itemize}
+
+\subsection{User Story 3}
+Ich als \textit{User} möchte über ein User Interface zwischen meinen ärztlichen Terminen wählen können, um die ganze Information über den Termin zu bekommen.\\\\
+\textbf{Akzeptanzkriterien:}
+\begin{itemize}
+	\item Detailansicht von einem gewählten Termin
+	\item Termininformation ändern und löschen
+\end{itemize}
+
+\subsection{User Story 4}
+Ich als \textit{User} möchte meine Termine abspeichern können, um in Zukunft den Termin nicht zu verpassen.\\\\
+\textbf{Akzeptanzkriterien:}
+\begin{itemize}
+	\item Neue Termine einfügen
+	\item Termin-Information angeben: Datum, Arzt, Adresse*, Tags*
+\end{itemize}
+
+
+\subsection{User Story 5}
+Ich als \textit{User} möchte in Zukunft Erinnerungen bezüglich meiner Termine bekommen, um meinen Alltag besser zu planen.\\\\
+\textbf{Akzeptanzkriterien:}
+\begin{itemize}
+	\item Meldungen zum nächsten Termin per EMail schicken
+	\item Meldungen für Reminder*
+	\item Reminder in der App zeigen*
+	\item Erinnerungs-Periode einstellen*
+\end{itemize}
+
+\subsection{User Story 6}
+Ich als \textit{User} möchte die Kontaktinformation meiner bereits eingetragenen Ärzte abrufen können, um nicht immer wieder danach suchen zu müssen.\\\\
+\textbf{Akzeptanzkriterien:}
+\begin{itemize}
+	\item Arztinformation: Name, Adresse, Telefonnummer, Fachrichtung des Arztes, ggf. Website 
+	\item Übersicht der Ärzte in der Web-Anwendung
+	\item standardmäßig alphabetisch sortiert
+	\item Filterung nach Fachrichtung
+\end{itemize}
+
+\section{Methoden}
+\subsection{geplante Architektur}
+TODO: EINFÜGEN VON DOCKER-ARCHITEKTUR
+\subsection{Mechanik der Anwendung}
+Der Benutzer loggt sich mit seiner EMail-Adresse und einem Passwort in MedPlanner ein. Dabei werden die Passwörter als Hashes in der Datenbank abgelegt. Dadurch erhält jeder Nutzer eine eineindeutige ID, wodurch data leaks anderer Nutzerdaten verhindert werden sollen.\\
+Der eingeloggte Benutzer kann dann seine Termine verwalten: 
+\begin{itemize}
+	\item neue Termine hinzufügen
+	\item bestehende Termine bearbeiten
+	\item ungewollte Termine löschen
+\end{itemize}
+Man erhält hierbei per E-Mail die Benachrichtigung für den festgelegten Termin.
+Die Web-Anwendung ermöglicht zudem die Terminfilterung z.B. nach Zeitraum, Fachrichtung des Arztes. Aber auch ohne Filterung sollen Termine visuell zuordenbar sein. Ein angewählter Termin präsentiert, falls vorhanden, nähere Informationen und die Bearbeitungsmöglichkeit.\\
+Außerdem kann der Nutzer seine eigenen Ärzte hinzufügen, indem er selbst die Kontaktinformationen einträgt sowie die Fachrichtung des Arztes.
+
+\section*{References}
+
+Please number citations consecutively within brackets \cite{b1}. The 
+sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
+number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
+the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
+
+Number footnotes separately in superscripts. Place the actual footnote at 
+the bottom of the column in which it was cited. Do not put footnotes in the 
+abstract or reference list. Use letters for table footnotes.
+
+Unless there are six authors or more give all authors' names; do not use 
+``et al.''. Papers that have not been published, even if they have been 
+submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
+that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
+Capitalize only the first word in a paper title, except for proper nouns and 
+element symbols.
+
+For papers published in translation journals, please give the English 
+citation first, followed by the original foreign-language citation \cite{b6}.
+
+\begin{thebibliography}{00}
+\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
+\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
+\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
+\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
+\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
+\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
+\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
+\end{thebibliography}
+\end{document}

@@ -72,7 +72,7 @@ TODO: DATENBANK
 
 \section{Anforderungen}
 \subsection{User Story 1}
-Ich als \textit{User} möchte meine Termine filtern können, um einen besseren Überblick zu haben.\\\\
+Ich als \textit{User} möchte meine Termine filtern können, um einen besseren Überblick zu haben.\\
 \textbf{Akzeptanzkriterien:}\\
 Filterung durch:
 \begin{itemize}
@@ -83,15 +83,14 @@ Filterung durch:
 \end{itemize}
 
 \subsection{User Story 2}
-Ich als \textit{User} möchte mithilfe des User Interfaces die Termine unterscheiden können, um einen schnellen Überblick ohne Filterung zu bekommen.\\\\
+Ich als \textit{User} möchte mithilfe des User Interfaces die Termine unterscheiden können, um einen schnellen Überblick ohne Filterung zu bekommen.\\
 \textbf{Akzeptanzkriterien:}
 \begin{itemize}
 	\item visuelle Unterscheidung (farblich oder mit Icons)
-	\item Unterscheidung von einem Reminder zu einem tatsächlichen Termin*
 \end{itemize}
 
 \subsection{User Story 3}
-Ich als \textit{User} möchte über ein User Interface zwischen meinen ärztlichen Terminen wählen können, um die ganze Information über den Termin zu bekommen.\\\\
+Ich als \textit{User} möchte über ein User Interface zwischen meinen ärztlichen Terminen wählen können, um die ganze Information über den Termin zu bekommen.\\
 \textbf{Akzeptanzkriterien:}
 \begin{itemize}
 	\item Detailansicht von einem gewählten Termin
@@ -99,7 +98,7 @@ Ich als \textit{User} möchte über ein User Interface zwischen meinen ärztlich
 \end{itemize}
 
 \subsection{User Story 4}
-Ich als \textit{User} möchte meine Termine abspeichern können, um in Zukunft den Termin nicht zu verpassen.\\\\
+Ich als \textit{User} möchte meine Termine abspeichern können, um in Zukunft den Termin nicht zu verpassen.\\
 \textbf{Akzeptanzkriterien:}
 \begin{itemize}
 	\item Neue Termine einfügen
@@ -108,23 +107,31 @@ Ich als \textit{User} möchte meine Termine abspeichern können, um in Zukunft d
 
 
 \subsection{User Story 5}
-Ich als \textit{User} möchte in Zukunft Erinnerungen bezüglich meiner Termine bekommen, um meinen Alltag besser zu planen.\\\\
+Ich als \textit{User} möchte in Zukunft Erinnerungen bezüglich meiner Termine bekommen, um meinen Alltag besser zu planen.\\
 \textbf{Akzeptanzkriterien:}
 \begin{itemize}
-	\item Meldungen zum nächsten Termin per EMail schicken
-	\item Meldungen für Reminder*
-	\item Reminder in der App zeigen*
-	\item Erinnerungs-Periode einstellen*
+	\item Meldungen zum nächsten Termin per EMail erhalten
 \end{itemize}
 
 \subsection{User Story 6}
-Ich als \textit{User} möchte die Kontaktinformation meiner bereits eingetragenen Ärzte abrufen können, um nicht immer wieder danach suchen zu müssen.\\\\
+Ich als \textit{User} möchte die Kontaktinformation meiner bereits eingetragenen Ärzte abrufen können, um nicht immer wieder danach suchen zu müssen.\\
 \textbf{Akzeptanzkriterien:}
 \begin{itemize}
 	\item Arztinformation: Name, Adresse, Telefonnummer, Fachrichtung des Arztes, ggf. Website 
 	\item Übersicht der Ärzte in der Web-Anwendung
+	\item In der Detail-Ansicht eines Termins abrufbar*
 	\item standardmäßig alphabetisch sortiert
 	\item Filterung nach Fachrichtung
+\end{itemize}
+
+\subsection{User Story 7* (optional)}
+Ich als \textit{User} möchte mir Reminder setzen können, um daran erinnert zu werden, bei einem Arzt wieder einen Termin für eine Routineuntersuchung o.Ä. auszumachen.\\
+\textbf{Akzeptanzkriterien:}
+\begin{itemize}
+	\item Erinnerungs-Periode kann eingestellt werden
+	\item Meldungen für Reminder ggf. auch per EMail verschickbar (sofern von User gewollt)
+	\item Reminder in der App anzeigen
+	\item Unterscheidung von einem Reminder zu einem tatsächlichen Termin
 \end{itemize}
 
 \section{Methoden}
@@ -144,6 +151,9 @@ Die Web-Anwendung ermöglicht zudem die Terminfilterung z.B. nach Zeitraum, Fach
 Außerdem kann der Nutzer seine eigenen Ärzte hinzufügen, indem er selbst die Kontaktinformationen einträgt sowie die Fachrichtung des Arztes.
 
 \section*{References}
+
+TODO: Später entfernen, aber aktuell noch gebraucht, falls Quellen zitieren nötig.
+
 
 Please number citations consecutively within brackets \cite{b1}. The 
 sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 

@@ -5,7 +5,7 @@ RUN npm install -g @angular/cli
 ENV theport=4220
 EXPOSE ${theport}
 
-#docker run -p 4220:4220 -v ${PWD}:/angular --env theport=4220 --name MedPlanner -t -i --rm angular:10.0 /bin/ash
-#docker run -p 4220:4220 -v ${PWD}:/angular --env theport=4220 --name MedPlanner -t -i --rm angular:10.0 ng serve --host 0.0.0.0
+#docker run -p 4220:4220 -v ${PWD}:/angular --env theport=4220 --name MedPlanner -t -i --rm ng:10.0 /bin/ash
+#docker run -p 4220:4220 -v ${PWD}:/angular --env theport=4220 --name MedPlanner -t -i --rm ng:10.0 ng serve --host 0.0.0.0
 #ng serve --host 0.0.0.0 --port 4220
 

@@ -146,8 +146,8 @@ Ich als \textit{User} möchte mir Reminder setzen können, um daran erinnert zu 
 
 \section{Methoden}
 \subsection{geplante Architektur}
-\textit{Docker}~\cite{docker}
-TODO: EINFÜGEN VON DOCKER-ARCHITEKTUR
+Es wird eine Microservice-Architektur genutzt unter Verwendung von Docker~\cite{docker}. Dabei soll jede Komponente (Frontend, Backend und Database) in einem separaten Container laufen. Mithilfe von Docker Compose können alle Container in einem Netzwerk verbunden werden und so miteinander kommunizieren.
+
 \subsection{Mechanik der Anwendung}
 Der Benutzer loggt sich mit seiner EMail-Adresse und einem Passwort in MedPlanner ein. Dabei werden die Passwörter als Hashes in der Datenbank abgelegt. Dadurch erhält jeder Nutzer eine eineindeutige ID, wodurch data leaks anderer Nutzerdaten verhindert werden sollen.\\
 Der eingeloggte Benutzer kann dann seine Termine verwalten: 

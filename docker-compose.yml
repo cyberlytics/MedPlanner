@@ -16,12 +16,22 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: 0Y7jrmp?
-  #web:
-   # build: .
-   # command: python manage.py runserver 0.0.0.0:4221
-    #volumes:
-    #  - .:/django
-    #ports:
-    #  - "4221:4221"
-   # depends_on:
-    #  - mongo
+  jango:
+    image: docker-django-v0.0
+    container_name: DjangoMedPlanner
+    working_dir: /django
+    volumes:
+        - ./djangoMedPlanner:/django
+    ports:
+        - "4223:4223"
+    command: python ./djangoMedPlanner/manage.py runserver 4223
+  web:
+    image: ng:10.0
+    container_name: MedPlanner
+    working_dir: /angular
+    volumes:
+        - ./ngMedPlanner:/angular
+    ports:
+        - "4220:4220"
+    command: ng serve --host 0.0.0.0 --port 4220
+

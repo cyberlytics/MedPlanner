@@ -1,0 +1,40 @@
+
+
+.card-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 20em;
+
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-radius: 8px;
+
+    padding: 1em;
+}
+
+.card-block div span {
+    margin-left: 1em;
+}
+
+.detail-button {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-top: 0.5em;
+}
+
+.detail-button button {
+    position: relative;
+    bottom: 1.5em;
+    right: -2em;
+
+    padding: 1em;
+
+    border-radius: 8px;
+}

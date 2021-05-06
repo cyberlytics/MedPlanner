@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'djangoMedPlanner.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'mongo_db',
+        'NAME': 'mongo',
         'HOST': '127.0.0.1',
         'PORT': 27017,
     }
@@ -127,6 +127,5 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-    #'http://localhost:4220',
-    []
+    'http://localhost:4220',
 )

@@ -1,0 +1,40 @@
+{
+    "appointments": [
+        {
+            "id": "1",
+            "date": 1620295096398,
+            "title": "Donec ac felis dapibus, congue ex non",
+            "medic_name": "Mr. Smith"
+        },
+        {
+            "id": "2",
+            "date": 1622392096398,
+            "title": "Quisque maximus odio a consequat",
+            "medic_name": "Mrs. Smith"
+        },
+        {
+            "id": "3",
+            "date": 1620395046398,
+            "title": "Mauris consequat congue sem,",
+            "medic_name": "Mr. John Watson"
+        },
+        {
+            "id": "4",
+            "date": 1610395096398,
+            "title": "Curabitur tincidunt sagittis nibh",
+            "medic_name": "Mr. John Doe"
+        },
+        {
+            "id": "5",
+            "date": 1620305096398,
+            "title": "Maecenas eleifend quam",
+            "medic_name": "Mrs. Holmes"
+        },
+        {
+            "id": "6",
+            "date": 1620395056398,
+            "title": "Lorem ipsum dolor sit amet",
+            "medic_name": "Mr. Markus"
+        }
+    ]
+}

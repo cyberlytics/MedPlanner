@@ -10,7 +10,7 @@ describe('AppHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppHeaderComponent, MatToolbar, ElementRef ]
+      declarations: [ AppHeaderComponent, MatToolbar ]
     })
     .compileComponents();
   });

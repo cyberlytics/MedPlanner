@@ -1,5 +1,5 @@
 import { Component, Inject, Injectable } from '@angular/core';
-import { HttpService } from './services/http-service/http-service';
+import { HttpService } from './services/http-service/http.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,7 @@ import { HttpService } from './services/http-service/http-service';
 export class AppComponent {
   title = 'med-planner';
 
-  constructor(private httpService: HttpService) {
-    this.httpService.getMeetingList();
-  }
+  constructor(private httpService: HttpService) {}
+
 
 }

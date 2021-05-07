@@ -9,7 +9,6 @@ export class PopupDetailViewComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

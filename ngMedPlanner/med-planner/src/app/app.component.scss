@@ -1,25 +1,4 @@
 
-.header-block {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-
-    position: fixed;
-    top: 0;
-
-    background-color: rgba($color: #3949ab, $alpha: 1.0);
-
-    width: 100%;
-
-    padding: 1em;
-
-    z-index: 100;
-}
-
-.header-block span {
-    color: rgba(255, 255, 255, 1);
-}
 
 .templates-test {
     display: flex;

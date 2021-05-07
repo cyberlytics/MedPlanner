@@ -4,7 +4,7 @@
 
 ## Einrichtung von Docker
 
-* Installationsschritten je nach Linux-Distribution in der Docker-Dokumentation folgen, beispielhaft für [Ubuntu-Nutzer](https://docs.docker.com/engine/install/fedora/) 
+* Installationsschritten je nach Linux-Distribution in der Docker-Dokumentation folgen, beispielhaft für [Ubuntu-Nutzer](https://docs.docker.com/engine/install/ubuntu/) 
 
 * Daemon aktivieren (bei jedem Systemstart direkt aktiv)
 ```
@@ -26,20 +26,3 @@ firewall-cmd --reload
 ```
 
 Quelle: https://www.linuxuprising.com/2019/11/how-to-install-and-use-docker-on-fedora.html (Zugriff: 03.05.21)
-
-## Benötigte Pakete
-Für das Frontend wird `npm` benötigt [1]
-
-```
-#Ubuntu
-sudo apt install npm
-
-#Fedora
-sudo dnf install npm
-```
-
-
-
-
-
-[1] Zumindest bei mir hat es Probleme gemacht

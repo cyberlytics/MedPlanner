@@ -10,7 +10,6 @@ export class AppointmentCardComponent implements OnInit {
   private static readonly LOCALE_DE = 'de-DE';
 
   @Input() set id(value: string | undefined) {
-    console.log(`set id ${value}`);
     this._id = value;
   }
   private _id: string | undefined;
@@ -49,7 +48,6 @@ export class AppointmentCardComponent implements OnInit {
     if (value === undefined) {
       return;
     }
-    console.log(value);
     this._date.setTime( parseFloat(value) );
   }
   private _date: Date;

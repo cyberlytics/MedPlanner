@@ -10,13 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppointmentDashboardComponent } from './templates/appointment-dashboard/appointment-dashboard.component';
 import { PopupDetailViewComponent } from './templates/popup-detail-view/popup-detail-view.component';
 import { MaterialModule } from './material/material.module';
+import { AppHeaderComponent } from './app-header/app-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppointmentCardComponent,
     AppointmentDashboardComponent,
-    PopupDetailViewComponent
+    PopupDetailViewComponent,
+    AppHeaderComponent
   ],
   imports: [
     BrowserModule,

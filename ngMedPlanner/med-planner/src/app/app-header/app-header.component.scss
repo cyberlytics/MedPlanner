@@ -1,3 +1,9 @@
+mat-toolbar {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+}
+
 .header-block {
     display: flex;
     flex-direction: column;

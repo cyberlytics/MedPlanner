@@ -1,4 +1,0 @@
-# Entwurf
-
-* Benutzeroberflächen-Spezifikation
-* Systementwurf

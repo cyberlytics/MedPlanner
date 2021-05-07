@@ -22,4 +22,69 @@ describe('appointmentCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('shoud create an empty appointment title', () => {
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement.querySelector('#appointment-title');
+    expect(element.innerText).toContain('<< none >>');
+  });
+
+  it('shoud create an appointment title', () => {
+    const titleToTest = 'Some appointment title';
+
+    component.title = titleToTest;
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement.querySelector('#appointment-title');
+    expect(element.innerText).toContain(titleToTest);
+  });
+
+  it('shoud create an empty medic name', () => {
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement.querySelector('#appointment-medic-name');
+    expect(element.innerText).toContain('<< none >>');
+  });
+
+  it('shoud create a medic name', () => {
+    const nameToTest = 'Mr. Dr. John Doe';
+
+    component.medicName = nameToTest;
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement.querySelector('#appointment-medic-name');
+    expect(element.innerText).toContain(nameToTest);
+  });
+
+  it('shoud create a date day/month/year', () => {
+    const dateToTest = new Date();
+
+    component.dateTimeMillis = dateToTest.getTime().toString();
+    fixture.detectChanges();
+
+    const dateString = dateToTest.toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+
+    const element = fixture.nativeElement.querySelector('#appointment-date');
+    expect(element.innerText).toContain(dateString);
+  });
+
+  it('shoud create a date time hour/minute', () => {
+    const dateToTest = new Date();
+
+    component.dateTimeMillis = dateToTest.getTime().toString();
+    fixture.detectChanges();
+
+    const dateString = dateToTest.toLocaleTimeString('de-DE', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    const element = fixture.nativeElement.querySelector('#appointment-time');
+    expect(element.innerText).toContain(dateString);
+  });
 });

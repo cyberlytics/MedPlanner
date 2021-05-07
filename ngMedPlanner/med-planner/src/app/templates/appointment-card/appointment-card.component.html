@@ -2,18 +2,18 @@
 <div>
     <div class="card-block">
         <div>
-            <span>{{date}}</span>
-            <span>{{time}}</span>
+            <span id="appointment-date">{{date}}</span>
+            <span id="appointment-time">{{time}}</span>
         </div>
         <div>
-            <span>{{medicName}}</span>
+            <span id="appointment-medic-name">{{medicName}}</span>
         </div>
         <div>
-            <span>{{title}}</span>
+            <span id="appointment-title">{{title}}</span>
         </div>
     </div>
     
     <div class="detail-button">
-        <button (click)="onDetailsButtonClick()">Details</button>
+        <button id="appointment-button" (click)="onDetailsButtonClick()">Details</button>
     </div>
 </div>

@@ -1,6 +1,6 @@
 
 <div>
-    <div class="card-block">
+    <div class="card-block base-shadow primary-border">
         <div>
             <span id="appointment-date">{{date}}</span>
             <span id="appointment-time">{{time}}</span>
@@ -14,6 +14,9 @@
     </div>
     
     <div class="detail-button">
-        <button id="appointment-button" (click)="onDetailsButtonClick()">Details</button>
+        <button class="secondary-border base-button" id="appointment-button"
+        (click)="onDetailsButtonClick()">
+            Details
+        </button>
     </div>
 </div>

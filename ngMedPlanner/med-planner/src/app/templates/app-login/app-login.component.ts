@@ -67,6 +67,7 @@ export class AppLoginComponent implements OnInit {
   }
 
   onLogInClick(_email: string, _password: string): void {
+    console.log(`Email: ${_email}; Password: ${_password}`);
     // TODO (called on log in button clicked)
   }
 

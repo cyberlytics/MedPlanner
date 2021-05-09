@@ -11,6 +11,7 @@ import { AppointmentDashboardComponent } from './templates/appointment-dashboard
 import { PopupDetailViewComponent } from './templates/popup-detail-view/popup-detail-view.component';
 import { MaterialModule } from './material/material.module';
 import { AppHeaderComponent } from './app-header/app-header.component';
+import { AppLoginComponent } from './templates/app-login/app-login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AppHeaderComponent } from './app-header/app-header.component';
     AppointmentCardComponent,
     AppointmentDashboardComponent,
     PopupDetailViewComponent,
-    AppHeaderComponent
+    AppHeaderComponent,
+    AppLoginComponent
   ],
   imports: [
     BrowserModule,

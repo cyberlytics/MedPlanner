@@ -43,7 +43,8 @@ export class AppointmentCardComponent implements OnInit {
   }
   private _tag: Tag | undefined;
 
-
+  // TODO: To change date time format from millis to DD-MM-YYYY HH-MM
+  // TODO: !!! Then to rewrite unit-test !!!
   @Input() set dateTimeMillis(value: string) {
     if (value === undefined) {
       return;

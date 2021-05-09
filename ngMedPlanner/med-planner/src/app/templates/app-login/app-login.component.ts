@@ -63,7 +63,11 @@ export class AppLoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSignUpClick(): void {
-    console.log('Jetzt regisrieren');
+    // TODO (called on sign up text clicked)
+  }
+
+  onLogInClick(_email: string, _password: string): void {
+    // TODO (called on log in button clicked)
   }
 
 }

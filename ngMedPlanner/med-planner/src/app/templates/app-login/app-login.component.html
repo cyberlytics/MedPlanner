@@ -8,14 +8,14 @@
         <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput placeholder="beispiel@beispiel.de" [formControl]="emailFormControl" required
-            [(ngModel)]="emailValue">
+            #emailValue>
             <mat-error *ngIf="emailFormControl.invalid">{{emailErrorMessage}}</mat-error>
         </mat-form-field>
         
         <mat-form-field appearance="outline">
             <mat-label>Passwort</mat-label>
             <input matInput [formControl]="passwordFormControl" required
-            [(ngModel)]="passwordValue"
+            #passwordValue
             [type]="hidePassword ? 'password' : 'text'">
             
             <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
@@ -34,7 +34,7 @@
     <div class="sign-up-button-block">
         <button mat-raised-button color="primary" id="sing-in-button"
         [disabled]="passwordFormControl.invalid || emailFormControl.invalid"
-        (click)="onLogInClick(emailValue, passwordValue)">
+        (click)="onLogInClick(emailValue.value, passwordValue.value)">
             Einloggen
             <mat-icon matSuffix>login</mat-icon>
         </button>

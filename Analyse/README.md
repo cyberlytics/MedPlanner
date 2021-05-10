@@ -1,5 +1,5 @@
 # Analyse
 
-* Konzeptuelles Datenmodell
+* ER-Modell
 * wichtige Systemoperationen
 * ggf. Glossar

@@ -17,7 +17,7 @@ sudo usermod -aG docker $USER
 ```
 
 **Anmerkung speziell für Fedora**<br>
-Damit die Netzwerkfähigkeit innerhalb von Docker-Containern definitv gewährleistet wird
+Damit die Netzwerkfähigkeit innerhalb von Docker-Containern definitv gewährleistet wird (bis Fedora 32)
 
 ```
 firewall-cmd --permanent --zone=trusted --add-interface=docker0

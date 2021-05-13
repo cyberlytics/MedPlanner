@@ -7,7 +7,7 @@ class Doctor(models.Model):
     doctor_first_name = models.CharField(max_length=100)
     doctor_last_name = models.CharField(max_length=100)
     def __str__(self):
-        return self.doctor_first_name + self.doctor_last_name
+        return self.doctor_first_name + '' + self.doctor_last_name
 
 class User(models.Model):
     username = models.CharField(max_length=100)
@@ -20,6 +20,12 @@ class Appointment(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
-    notes = models.TextField(max_length=400)
+    notes = models.TextField()
+
+
+
+
+    #posted = model.DateTimeField(auto_now=True) #it will update the `posted` field every time when it was modified 
+    #posted = model.DateTimeField(auto_now_add=True) # ... when it was created
 
 

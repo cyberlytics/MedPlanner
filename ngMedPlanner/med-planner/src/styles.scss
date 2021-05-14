@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import './colors.scss';
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -9,19 +10,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .bottom-shadow {
-    box-shadow: 0 8px 8px 2px rgba(149, 149, 149, 0.5);
+    box-shadow: 0 8px 8px -2px rgba(149, 149, 149, 0.5);
 }
 
 .primary-border {
-    border: 2px solid rgba($color: #3949ab, $alpha: .8);
+    border: 2px solid rgba($color: map-get($custom-colors, primary), $alpha: .8);
 }
 
 .secondary-border {
-    border: 2px solid rgba($color: #001064, $alpha: .8);
+    border: 2px solid rgba($color: map-get($custom-colors, secondary), $alpha: .8);
 }
 
 .base-button {
-    background-color: rgba($color: #001064, $alpha: .9);
+    border: 2px solid rgba($color: map-get($custom-colors, primary-dark), $alpha: .9);
+    background-color: rgba($color: map-get($custom-colors, primary-dark), $alpha: .9);
     padding: .6em;
 
     color: white;
@@ -35,7 +37,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .base-button:hover {
-    background-color: rgba($color: #001064, $alpha: 1);
+    border: 2px solid rgba($color: map-get($custom-colors, primary-dark), $alpha: 1);
+    background-color: rgba($color: map-get($custom-colors, primary-dark), $alpha: 1);
     border-radius: 0 24px 0 24px;
     transition: .8s;
 }

@@ -1,0 +1,20 @@
+$custom-colors: (
+    primary: #80cbc4,
+    primary-light: #b2fef7,
+    primary-dark: #4f9a94,
+    secondary: #455a64,
+    secondary-light: #718792,
+    secondary-dark: #1c313a,
+    contrast: (
+        primary: #000000,
+        primary-light: #000000,
+        primary-dark: #000000,
+        secondary: #ffffff,
+        secondary-light: #ffffff,
+        secondary-dark: #ffffff
+    )
+);
+
+$contrast-colors: (
+    map-get($custom-colors, contrast)
+)

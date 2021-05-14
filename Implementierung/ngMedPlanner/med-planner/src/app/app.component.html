@@ -1,12 +1,13 @@
-<app-header-component></app-header-component>
+<app-header-component (onHeaderHeightInit)="onHeaderHeightInit($event)"></app-header-component>
 
-<div class="templates-test">
+<!-- <div class="templates-test">
   <app-appointment-dashboard-component></app-appointment-dashboard-component>
-</div>
+</div> -->
 
-<div class="templates-test">
-  <!-- <app-popup-detail-view-component></app-popup-detail-view-component> -->
+<!-- <div class="templates-test">
+  <app-popup-detail-view-component></app-popup-detail-view-component>
   <app-login-component></app-login-component>
+</div> -->
+<div class="router-block" #routerBlockDiv>
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>

@@ -1,8 +1,8 @@
-<mat-toolbar color="primary" #toolbarElement>
-    <span>My Application</span>
+<mat-toolbar class="primary-dark-background" (window:resize)="onWindowResize()" #toolbarElement>
+    <span>MedPlanner</span>
 </mat-toolbar>
 
 <div class="header-block bottom-shadow primary-background" #headerElement>
-    <span class="title">Some title</span>
-    <span class="subtitle">Some subtitle</span>
+    <span class="title">{{headerTitle}}</span>
+    <span class="subtitle">{{headerSubTitle}}</span>
 </div>

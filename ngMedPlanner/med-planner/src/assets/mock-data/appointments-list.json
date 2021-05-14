@@ -1,0 +1,16 @@
+{
+    "appointments": [
+        {
+            "id": "1",
+            "date": 1620295096398,
+            "title": "Donec ac felis dapibus, congue ex non",
+            "medic_name": "Mr. Smith"
+        },
+        {
+            "id": "2",
+            "date": 1622392096398,
+            "title": "Quisque maximus odio a consequat",
+            "medic_name": "Mrs. Smith"
+        }
+    ]
+}

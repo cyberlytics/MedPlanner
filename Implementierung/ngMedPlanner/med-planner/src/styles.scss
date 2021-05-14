@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@import './colors.scss';
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.base-shadow {
+    box-shadow: 0 0 10px 2px rgba(180, 180, 180, 0.8);
+}
+
+.bottom-shadow {
+    box-shadow: 0 8px 8px -2px rgba(149, 149, 149, 0.5);
+}
+
+.primary-border {
+    border: 2px solid rgba($color: map-get($custom-colors, primary), $alpha: .8);
+}
+
+.secondary-border {
+    border: 2px solid rgba($color: map-get($custom-colors, secondary), $alpha: .8);
+}
+
+.base-button {
+    border: 2px solid rgba($color: map-get($custom-colors, primary-dark), $alpha: .9);
+    background-color: rgba($color: map-get($custom-colors, primary-dark), $alpha: .9);
+    padding: .6em;
+
+    color: white;
+    font-size: 1.2em;
+
+    border-radius: 24px;
+
+    transition: .8s;
+
+    cursor: pointer;
+}
+
+.base-button:hover {
+    border: 2px solid rgba($color: map-get($custom-colors, primary-dark), $alpha: 1);
+    background-color: rgba($color: map-get($custom-colors, primary-dark), $alpha: 1);
+    border-radius: 0 24px 0 24px;
+    transition: .8s;
+}

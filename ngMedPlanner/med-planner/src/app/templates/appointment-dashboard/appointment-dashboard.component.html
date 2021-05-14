@@ -1,0 +1,13 @@
+
+
+<div class="">
+    <div *ngFor="let appointment of appointmentsList">
+        <app-appointment-card-component
+            id="{{appointment.id}}"
+            title="{{appointment.title}}"
+            medicName="{{appointment.medic_name}}"
+            dateTimeMillis="{{appointment.date}}"
+            (onDetailsClick)="onDetailsClick($event)"
+        ></app-appointment-card-component>
+    </div>
+</div>

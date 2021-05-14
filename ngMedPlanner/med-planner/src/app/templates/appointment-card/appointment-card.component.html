@@ -1,0 +1,22 @@
+
+<div>
+    <div class="card-block base-shadow primary-border">
+        <div>
+            <span id="appointment-date">{{date}}</span>
+            <span id="appointment-time">{{time}}</span>
+        </div>
+        <div>
+            <span id="appointment-medic-name">{{medicName}}</span>
+        </div>
+        <div>
+            <span id="appointment-title">{{title}}</span>
+        </div>
+    </div>
+    
+    <div class="detail-button">
+        <button class="base-button" id="appointment-button"
+        (click)="onDetailsButtonClick()">
+            Details
+        </button>
+    </div>
+</div>

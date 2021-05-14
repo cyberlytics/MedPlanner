@@ -1,0 +1,50 @@
+.main-block {
+    border-radius: 24px 24px 0 0;
+
+    padding: 2em;
+}
+
+.sing-in-text-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 1em;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.sing-up-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 1em;
+}
+
+.sing-up-block span {
+    margin-left: 0.5em;
+}
+
+#sing-up-now-text {
+    color: royalblue;
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+#sing-up-now-text:hover {
+    opacity: 0.8;
+}
+
+.sign-up-button-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

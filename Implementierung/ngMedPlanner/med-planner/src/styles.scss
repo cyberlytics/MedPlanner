@@ -22,6 +22,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: 2px solid rgba($color: map-get($custom-colors, primary), $alpha: .8);
 }
 
+.primary-dark-background {
+    background-color: rgba($color: map-get($custom-colors, primary-dark), $alpha: 1.0);
+    color: map-get($contrast-colors, primary-dark);
+}
+
 .secondary-border {
     border: 2px solid rgba($color: map-get($custom-colors, secondary), $alpha: .8);
 }

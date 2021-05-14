@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
 
 @Component({
   selector: 'app-login-component',
@@ -53,11 +54,14 @@ export class AppLoginComponent implements OnInit {
   }
   private _hidePassword: boolean;
 
-  constructor() {
+  constructor(private headerState: AppHeaderStateService) {
     this._emailFormControl = new FormControl('', [Validators.required, Validators.email]);
     this._passwordFormControl = new FormControl('', [Validators.required]);
 
     this._hidePassword = true;
+
+    headerState.setHeaderTitle('Hallo!');
+    headerState.setHeaderSubTitle('Melden Sie sich bitte an.');
   }
 
   ngOnInit(): void {}

@@ -13,15 +13,9 @@ mat-toolbar {
     position: fixed;
     top: 5em;
 
-    background-color: rgba($color: #3949ab, $alpha: 1.0);
-
     width: 100%;
 
     padding: 1em;
 
     z-index: 100;
-}
-
-.header-block span {
-    color: rgba(255, 255, 255, 1);
 }

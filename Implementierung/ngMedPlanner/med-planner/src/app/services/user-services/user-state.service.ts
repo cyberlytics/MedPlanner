@@ -24,6 +24,11 @@ export class UserStateService {
         this._token = storedToken ? storedToken : null;
     }
 
+    /**
+     * Checks if user logged in. If logged in, then navigates to dashboard.
+     * Else navigates to login component.
+     * @returns void.
+     */
     public checkLogin(): void {
         if (this.loggedIn) {
             this.router.navigate(['appointment-dashboard']);
@@ -33,6 +38,13 @@ export class UserStateService {
         this.router.navigate(['login']);
     }
 
+    /**
+     * Sends user login request to sever.
+     * @param _email Email to login.
+     * @param _password Password to login.
+     * @param _mockCall Is call local mock json data?
+     * @returns Promise with call result.
+     */
     public async login(_email: string, _password: string, _mockCall = false): Promise<boolean> {
         if (_mockCall) {
             return this.loginMockCall(_email, _password);
@@ -43,7 +55,10 @@ export class UserStateService {
             resolve(false);
         });
     }
-
+    /**
+     * Logs out the user from app.
+     * @returns Promise with logout result.
+     */
     public async logout(): Promise<boolean> {
         this.removeToken();
         await this.router.navigate(['login']);

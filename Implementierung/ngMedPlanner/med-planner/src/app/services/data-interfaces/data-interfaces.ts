@@ -6,3 +6,8 @@ export interface AppointmentMock {
     title: string;
     medic_name: string;
 }
+
+export interface UserMock {
+    email: string;
+    password: string;
+}

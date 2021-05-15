@@ -33,12 +33,13 @@
         </div>
         
         <div class="sign-up-button-block">
-            <button mat-raised-button color="primary" id="sing-in-button"
+            <button mat-raised-button color="primary" id="sing-in-button" *ngIf="!isLoading"
             [disabled]="passwordFormControl.invalid || emailFormControl.invalid"
             (click)="onLogInClick(emailValue.value, passwordValue.value)">
                 Einloggen
                 <mat-icon matSuffix>login</mat-icon>
             </button>
+            <mat-spinner diameter="35" *ngIf="isLoading"></mat-spinner>
         </div>
     </div>
 </div>

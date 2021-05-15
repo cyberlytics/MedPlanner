@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class HttpService {
 
     public static readonly MOCK_DATA_APPOINTMENTS_URL = 'assets/mock-data/appointments-list.json';
+    public static readonly MOCK_DATA_USERS_URL = 'assets/mock-data/users-list.json';
 
     constructor(private http: HttpClient) {}
 

@@ -4,6 +4,10 @@ mat-toolbar {
     top: 0;
 }
 
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
 .header-block {
     display: flex;
     flex-direction: column;

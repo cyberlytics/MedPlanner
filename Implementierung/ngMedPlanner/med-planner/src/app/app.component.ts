@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,17 @@ export class AppComponent implements AfterViewInit {
 
   title = 'med-planner';
 
-  constructor() {
+  constructor(private router: Router) {
     this.routerBlockDiv = new ElementRef(null);
   }
 
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.router.navigate(['login']);
+  }
 
   public onHeaderHeightInit(_headerHeight: number): void {
     try {
-      console.log(_headerHeight);
       this.routerBlockDiv.nativeElement.style.marginTop = _headerHeight + 'px';
     } catch (e) {
       console.error(e);

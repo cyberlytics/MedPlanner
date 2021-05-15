@@ -1,7 +1,9 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ElementRef } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatToolbar } from '@angular/material/toolbar';
-
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppHeaderComponent } from './app-header.component';
 
 describe('AppHeaderComponent', () => {
@@ -10,7 +12,17 @@ describe('AppHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppHeaderComponent, MatToolbar ]
+      imports: [
+        RouterTestingModule
+      ],
+      declarations: [
+        AppHeaderComponent,
+        MatToolbar
+      ],
+      providers: [
+        HttpClient,
+        HttpHandler
+      ]
     })
     .compileComponents();
   });

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
 import { AppHeaderStateService } from '../services/state-services/app-header-state.service';
+import { UserStateService } from '../services/user-services/user-state.service';
 
 @Component({
   selector: 'app-header-component',
@@ -26,7 +27,11 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     return this.headerState.headerSubTitle;
   }
 
-  constructor(private headerState: AppHeaderStateService) {
+  get loggedIn(): boolean {
+    return this.userState.loggedIn;
+  }
+
+  constructor(private headerState: AppHeaderStateService, private userState: UserStateService) {
     this.headerElement = new ElementRef(null);
     this._headerHeightInit = new EventEmitter<number>();
   }
@@ -39,6 +44,10 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
 
   public onWindowResize(): void {
     this.initTopOffsets();
+  }
+
+  public logout(): void {
+    this.userState.logout();
   }
 
   private initTopOffsets(): void {

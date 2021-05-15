@@ -1,10 +1,12 @@
 <div class="main-block">
+
+    <!-- Shape form -->
     <div class="login-block base-shadow primary-border">
         <div class="sing-in-text-block">
             <span>Anmelden</span>
         </div>
         
-        
+        <!-- Login form -->
         <form class="login-form">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
@@ -27,12 +29,14 @@
             </mat-form-field>
         </form>
         
+        <!-- Sign up block -->
         <div class="sing-up-block">
             <span>Kein Konto?</span>
             <span (click)="onSignUpClick()" id="sing-up-now-text">Jetzt registrieren</span>
         </div>
         
-        <div class="sign-up-button-block">
+        <!-- Login button -->
+        <div class="login-button-block">
             <button mat-raised-button color="primary" id="sing-in-button" *ngIf="!isLoading"
             [disabled]="passwordFormControl.invalid || emailFormControl.invalid"
             (click)="onLogInClick(emailValue.value, passwordValue.value)"

@@ -74,7 +74,7 @@ export class AppLoginComponent implements OnInit {
 
 
   constructor(
-    private headerState: AppHeaderStateService,
+    headerState: AppHeaderStateService,
     private userState: UserStateService,
     private router: Router
   ) {
@@ -116,6 +116,8 @@ export class AppLoginComponent implements OnInit {
       this.router.navigate(['appointment-dashboard']);
     }
 
+    // TODO: implement logic for different login messages
+    // (email doesn't exist or wrong password)
     PasswordValidator.isWrong = true;
     this._passwordFormControl.updateValueAndValidity();
     PasswordValidator.isWrong = false;
@@ -131,7 +133,9 @@ export class AppLoginComponent implements OnInit {
 
 }
 
-
+/**
+ * Email input custom validator.
+ */
 class EmailValidator {
   static isExist = false;
 
@@ -139,7 +143,9 @@ class EmailValidator {
     return EmailValidator.isExist ? { emailNotExist: true } : null;
   }
 }
-
+/**
+ * Password input custom validator.
+ */
 class PasswordValidator {
   static isWrong = false;
 

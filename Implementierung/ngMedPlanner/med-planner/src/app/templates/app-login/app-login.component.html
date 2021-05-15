@@ -35,7 +35,8 @@
         <div class="sign-up-button-block">
             <button mat-raised-button color="primary" id="sing-in-button" *ngIf="!isLoading"
             [disabled]="passwordFormControl.invalid || emailFormControl.invalid"
-            (click)="onLogInClick(emailValue.value, passwordValue.value)">
+            (click)="onLogInClick(emailValue.value, passwordValue.value)"
+            color="accent">
                 Einloggen
                 <mat-icon matSuffix>login</mat-icon>
             </button>

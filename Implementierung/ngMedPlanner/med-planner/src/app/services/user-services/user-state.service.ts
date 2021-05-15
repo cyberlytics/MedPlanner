@@ -8,6 +8,8 @@ import { HttpService } from '../http-service/http.service';
 })
 export class UserStateService {
 
+    private readonly USER_TOKEN_KEY = 'user_token';
+
     get loggedIn(): boolean {
         return this._token !== null;
     }
@@ -18,7 +20,17 @@ export class UserStateService {
     private _token: string | null;
 
     constructor(private httpService: HttpService, private router: Router) {
-        this._token = null;
+        const storedToken = localStorage.getItem(this.USER_TOKEN_KEY);
+        this._token = storedToken ? storedToken : null;
+    }
+
+    public checkLogin(): void {
+        if (this.loggedIn) {
+            this.router.navigate(['appointment-dashboard']);
+            return;
+        }
+
+        this.router.navigate(['login']);
     }
 
     public async login(_email: string, _password: string, _mockCall = false): Promise<boolean> {
@@ -33,8 +45,7 @@ export class UserStateService {
     }
 
     public async logout(): Promise<boolean> {
-        this._token = null;
-
+        this.removeToken();
         await this.router.navigate(['login']);
 
         return true;
@@ -54,7 +65,7 @@ export class UserStateService {
         // Check login data
         for (const user of callResult.users) {
             if (user.email === _email && user.password === _password) {
-                this.setToken('some_token');
+                this.storeToken('some_token');
                 return true;
             }
         }
@@ -62,8 +73,14 @@ export class UserStateService {
         return false;
     }
 
-    private setToken(_token: string): void {
+    private storeToken(_token: string): void {
         this._token = _token;
+        localStorage.setItem(this.USER_TOKEN_KEY, _token);
+    }
+
+    private removeToken(): void {
+        this._token = null;
+        localStorage.removeItem(this.USER_TOKEN_KEY);
     }
 
 }

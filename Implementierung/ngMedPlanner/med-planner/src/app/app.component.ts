@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { UserStateService } from './services/user-services/user-state.service';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +11,13 @@ export class AppComponent implements AfterViewInit {
 
   title = 'med-planner';
 
-  constructor(private router: Router) {
+  constructor(private userState: UserStateService) {
     this.routerBlockDiv = new ElementRef(null);
   }
 
 
   ngAfterViewInit(): void {
-    this.router.navigate(['login']);
+    this.userState.checkLogin();
   }
 
   public onHeaderHeightInit(_headerHeight: number): void {

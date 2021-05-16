@@ -14,14 +14,21 @@
 
 .sing-in-text-block {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
     margin-bottom: 1em;
+
+    height: auto;
 }
 .sing-in-text-block span {
-    font-size: 1.3em
+    font-size: 1.5em
+}
+
+.sing-in-text-block mat-icon {
+    height: 7em;
+    transform: scale(4);
 }
 
 .login-form {

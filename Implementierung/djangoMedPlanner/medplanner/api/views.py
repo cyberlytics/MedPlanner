@@ -6,9 +6,21 @@ from medplanner.api.serializers import DoctorSerializer
 
 
 @api_view(['GET', ])
-def api_detail_doctor_view(request):
+def api_all_doctors_view(request):
     try:
         doctor = Doctor.objects.all()
+    except Doctor.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        serializer = DoctorSerializer(doctor, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET', ])
+def api_detail_doctor_view(request, pk):
+    try:
+        doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -18,9 +30,9 @@ def api_detail_doctor_view(request):
 
 
 @api_view(['PUT', ])
-def api_update_doctor_view(request, slug):
+def api_update_doctor_view(request, pk):
     try:
-        doctor = Doctor.objects.get(slug=slug)
+        doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -35,13 +47,14 @@ def api_update_doctor_view(request, slug):
 
 
 @api_view(['DELETE', ])
-def api_delete_doctor_view(request, slug):
+def api_delete_doctor_view(request, pk):
+    print('delete')
     try:
-        doctor = Doctor.objects.get(slug=slug)
+        doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == "DELETE":
+    if request.method == 'DELETE':
         operations = doctor.delete()
         data = {}
         if operations:
@@ -55,7 +68,7 @@ def api_delete_doctor_view(request, slug):
 def api_create_doctor_view(request):
     doctor = Doctor()
     if request.method == 'POST':
-        serializer = DoctorSerializer(doctor, dara=request.data)
+        serializer = DoctorSerializer(doctor, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

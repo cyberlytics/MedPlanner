@@ -13,8 +13,9 @@ def find_user(user_name):
 
 
 # create a new user
-def create_user(user_name, password, email, is_superuser, is_staff):
+def create_user(user_name, password, email='', is_superuser=False, is_staff=False):
     new_user = User.objects.create_user(user_name, password)
+    # new_user = User.objects.create_user(user_name, email, password)
     new_user.email = email
     new_user.is_superuser = is_superuser
     new_user.is_staff = is_staff

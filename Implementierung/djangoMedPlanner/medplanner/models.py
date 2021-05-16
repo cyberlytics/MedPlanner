@@ -25,8 +25,8 @@ class User(models.Model):
 
 
 class Appointment(models.Model):
-    doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    doctor_id = models.ForeignKey(Doctor, related_name='doctor', on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
     notes = models.TextField()
@@ -37,5 +37,6 @@ class Appointment(models.Model):
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
+    # Creates a token by registrating a new user
     if created:
         Token.objects.create(user=instance)

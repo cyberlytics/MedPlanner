@@ -1,0 +1,40 @@
+{
+  "doctors": [
+    {
+      "id": 1,
+      "first_name": "Jeff",
+      "surname": "Wilcox",
+      "specialization": "Orthopädie"
+    },
+    {
+      "id": 2,
+      "first_name": "Keith",
+      "surname": "Guy",
+      "specialization": "Allgemeinmedizin"
+    },
+    {
+      "id": 3,
+      "first_name": "Sara",
+      "surname": "Leblanc",
+      "specialization": "Innere Medizin"
+    },
+    {
+      "id": 4,
+      "first_name": "Chandra",
+      "surname": "Young",
+      "specialization": "Zahnarzt"
+    },
+    {
+      "id": 5,
+      "first_name": "Madeline",
+      "surname": "Barker",
+      "specialization": "Neurologie"
+    },
+    {
+      "id": 6,
+      "first_name": "Chris",
+      "surname": "Browning",
+      "specialization": "Kieferorthopädie"
+    }
+  ]
+}

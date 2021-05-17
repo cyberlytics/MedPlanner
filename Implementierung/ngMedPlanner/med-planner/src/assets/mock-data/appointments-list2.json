@@ -4,7 +4,8 @@
       "id": 1,
       "title": "Zahnschiene abholen",
       "datetime": "2021-06-25 10:00:00",
-      "medic_name": "Chandra Young",
+      "doc_id": 4,
+      "user_id": 1,
       "priority": "Hoch",
       "note": "Gesundheitskarte mitnehmen"
     },
@@ -12,7 +13,8 @@
       "id": 2,
       "title": "Zahnuntersuchung",
       "datetime": "2021-01-27 15:15:00",
-      "medic_name": "Chandra Young",
+      "doc_id": 4,
+      "user_id": 1,
       "priority": "Hoch",
       "note": "Gesundheitskarte mitnehmen"
     },
@@ -20,7 +22,8 @@
       "id": 3,
       "title": "Weisheitszähne entfernen",
       "datetime": "2021-03-08 18:00:00",
-      "medic_name": "Chris Browning",
+      "doc_id": 6,
+      "user_id": 1,
       "priority": "Hoch",
       "note": "Gesundheitskarte mitnehmen"
     },
@@ -28,7 +31,8 @@
       "id": 4,
       "title": "Zeckenimpfung nachholen",
       "datetime": "2021-01-05 15:00:00",
-      "medic_name": "Keith Guy",
+      "doc_id": 2, 
+      "user_id": 2,
       "priority": "Mittel",
       "note": "Gesundheitskarte mitnehmen"
     },
@@ -36,7 +40,8 @@
       "id": 5,
       "title": "Kniebeschwerden untersuchen",
       "datetime": "2021-01-25 16:30:35",
-      "medic_name": "Jeff Wilcox",
+      "doc_id": 1,
+      "user_id": 2,
       "priority": "Niedrig",
       "note": "Gesundheitskarte mitnehmen"
     }

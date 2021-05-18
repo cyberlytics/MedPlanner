@@ -51,7 +51,7 @@ Termin, Selbstmanagement, Verwaltung, Web-Anwendung
 \subsection{Motivation}
 In der heutigen Zeit ist alles schnelllebig und wir als Menschen müssen so flexibel wie möglich bleiben, um nicht den Überblick zu verlieren. 
 Hierbei ist es wichtig, dass man den Fokus auf die zentralen Aufgaben legen kann ohne dadurch einen Nachteil für sich selbst zu schaffen.
-Wir als Menschen sind nicht unverwundbar und so kann es eben sein, dass durch chronische Krankheiten oder gesundheitliche Einschränkungen der Bedarf besteht, gehäuft verschiedene Arztbesuche wahrzunehmen.
+Wir als Menschen sind nicht unverwundbar und so kann es sein, dass durch chronische Krankheiten oder gesundheitliche Einschränkungen der Bedarf besteht, gehäuft verschiedene Arztbesuche wahrzunehmen.
 Aber auch Menschen ohne gesundheitliche Beschwerden sollten die Wichtigkeit der Vorsorge nicht aus den Augen verlieren:
 Routineuntersuchungen, Check-Ups oder einfach nur spontan auftretende Beschwerden sind Lebensaspekte, die auch trotz Schnelllebigkeit der heutigen Zeit nicht in den Hintergrund gerückt werden sollten.
 
@@ -76,29 +76,33 @@ Die Smartphone-App \textit{DoctorBox}\cite{docBox} bietet hierbei aus Patientens
 In Bezug auf übersichtliche Verwaltung kann \textit{Notion}\cite{notion} erwähnt werden: Dieses vielseitige Tool stellt Komponenten wie Notizen, Datenbanken, Kanban-Boards, Kalender und Erinnerungen bereit und kann dabei nicht nur von einem User, sondern auch im Team verwendet werden.
 
 \section{Anforderungen}
-Die Web-Anwendung soll für dieses Projekt nur aus Sicht des Patienten realisiert werden. In Zukunft könnte man auch eine Erweiterung aus Ärztesicht in Erwägung ziehen. Im Folgenden ist die Rolle \textit{User} als Patient anzusehen.
+Die Web-Anwendung soll für dieses Projekt nur aus Sicht des Patienten realisiert werden. In Zukunft könnte man auch eine Erweiterung aus Ärztesicht in Erwägung ziehen.
 
 \subsection{User Story 1}
-Ich als \textit{User} möchte meine Termine filtern können, um einen besseren Überblick zu haben.\\
+Ich als \textit{Patient} möchte meine Termine filtern können, um einen besseren Überblick zu haben.\\
 \underline{\textbf{Akzeptanzkriterien:}}\\
-Filterung durch:
+Clientseitige Filterung durch:
 \begin{itemize}
 	\item Fachrichtung von Arzt
 	\item Zeitraum
 	\item Priorität
 	\item standardmäßig nach Fälligkeit\footnote{Termin, der als Nächstes ansteht, wird zuerst angezeigt} sortiert
-	\item Tags*, Ort* 
+	\item Ort
+	\item Tags* 
 \end{itemize}
 
+Zunächst sollen Mock-Daten im JSON-Format erzeugt werden, um die ersten Frontend-Funktionalitäten zu testen.
+
 \subsection{User Story 2}
-Ich als \textit{User} möchte mithilfe des User Interfaces die Termine unterscheiden können, um einen schnellen Überblick ohne Filterung zu bekommen.\\
+Ich als \textit{Patient} möchte mithilfe des User Interfaces die Termine unterscheiden können, um einen schnellen Überblick ohne Filterung zu bekommen.\\
 \underline{\textbf{Akzeptanzkriterien:}}
 \begin{itemize}
-	\item visuelle Unterscheidung (farblich oder mit Icons)
+	\item visuelle Unterscheidung je nach Terminart (durch Fachrichtung des Arztes)
+	\item farblich oder mithilfe von Icons
 \end{itemize}
 
 \subsection{User Story 3}
-Ich als \textit{User} möchte über ein User Interface zwischen meinen ärztlichen Terminen wählen können, um die ganze Information über den Termin zu bekommen.\\
+Ich als \textit{Patient} möchte über ein User Interface zwischen meinen ärztlichen Terminen wählen können, um die ganze Information über den Termin zu bekommen.\\
 \underline{\textbf{Akzeptanzkriterien:}}
 \begin{itemize}
 	\item Detailansicht von einem gewählten Termin
@@ -106,25 +110,26 @@ Ich als \textit{User} möchte über ein User Interface zwischen meinen ärztlich
 \end{itemize}
 
 \subsection{User Story 4}
-Ich als \textit{User} möchte meine Termine abspeichern können, um in Zukunft den Termin nicht zu verpassen.\\
+Ich als \textit{Patient} möchte meine Termine abspeichern können, um in Zukunft den Termin nicht zu verpassen.\\
 \underline{\textbf{Akzeptanzkriterien:}}
 \begin{itemize}
 	\item Neue Termine einfügen
 	\item Termin-Information angeben: Datum, Arzt, Adresse, Tags*
 \end{itemize}
 \textbf{Anmerkungen:}\\
-Die Möglichkeit, eine Adresse manuell im Termin einzutragen, soll gegeben sein. Damit ist gewährleistet, dass der User dennoch eine Adresse im Termin nachlesen kann, auch wenn der Arzt nicht abgespeichert ist. 
+Die Möglichkeit, eine Adresse manuell im Termin einzutragen, soll gegeben sein. Damit ist gewährleistet, dass der Patient dennoch eine Adresse im Termin nachlesen kann, auch wenn der Arzt nicht abgespeichert ist. 
 
 
 \subsection{User Story 5}
-Ich als \textit{User} möchte in Zukunft Erinnerungen bezüglich meiner Termine bekommen, um meinen Alltag besser zu planen.\\
+Ich als \textit{Patient} möchte in Zukunft Erinnerungen bezüglich meiner Termine bekommen, um meinen Alltag besser zu planen.\\
 \underline{\textbf{Akzeptanzkriterien:}}
 \begin{itemize}
-	\item Meldungen zum nächsten Termin per EMail erhalten
+	\item Meldungen über nächsten Termin \textbf{24 Stunden vorher} per EMail erhalten
+	\item Festlegung der Zeitzone: Europe/Berlin
 \end{itemize}
 
 \subsection{User Story 6}
-Ich als \textit{User} möchte die Kontaktinformation meiner bereits eingetragenen Ärzte abrufen können, um nicht immer wieder danach suchen zu müssen.\\
+Ich als \textit{Patient} möchte die Kontaktinformation meiner bereits eingetragenen Ärzte abrufen können, um nicht immer wieder danach suchen zu müssen.\\
 \underline{\textbf{Akzeptanzkriterien:}}
 \begin{itemize}
 	\item Arztinformation: Name, Adresse, Telefonnummer, Fachrichtung des Arztes, ggf. Website 
@@ -135,7 +140,7 @@ Ich als \textit{User} möchte die Kontaktinformation meiner bereits eingetragene
 \end{itemize}
 
 \subsection{User Story 7* (optional)}
-Ich als \textit{User} möchte mir Reminder setzen können, um daran erinnert zu werden, bei einem Arzt wieder einen Termin für eine Routineuntersuchung o.Ä. auszumachen.\\
+Ich als \textit{Patient} möchte mir Reminder setzen können, um daran erinnert zu werden, bei einem Arzt wieder einen Termin für eine Routineuntersuchung o.Ä. auszumachen.\\
 \underline{\textbf{Akzeptanzkriterien:}}
 \begin{itemize}
 	\item Erinnerungs-Periode kann eingestellt werden

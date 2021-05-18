@@ -8,6 +8,6 @@
 * *Entwurf* behinhaltet Artefakte für die Erstellung der Anwendung
 * *Implementierung* enthält die Realisierung der Anwendung <br>
 &rightarrow; [Anleitung](Implementierung/README.md) für das Starten des Projekts mit Docker <br>
-&rightarrow; [Frontend-Container](Implementierung/ndMedPlanner) <br>
-&rightarrow; [Backend-Container](Implemtierung/djangoMedPlanner)
+&rightarrow; [Frontend-Container](Implementierung/ngMedPlanner/) <br>
+&rightarrow; [Backend-Container](Implementierung/djangoMedPlanner/)
 

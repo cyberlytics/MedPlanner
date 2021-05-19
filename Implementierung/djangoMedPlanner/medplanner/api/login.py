@@ -1,7 +1,10 @@
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
-
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from medplanner.api.serializers import DoctorSerializer
 
 # get users
 def get_all_users():
@@ -46,18 +49,21 @@ def activate_user(user_name, is_active):
 
 
 # user login ; request is the http request in rest framework
-def login(request, user_name, password):
-    login_user = User.objects.get(username=user_name)
-    check = login_user.check_password(password)
+@api_view(['GET', 'POST'])
+def login(request):
+    login_user = User.objects.get(username=request.user_name)
+    check = login_user.check_password(request.password)
     if (check is True) & login_user.is_active:
-        auth_user = auth.authenticate(username=user_name, password=password)
+        auth_user = auth.authenticate(username=request.user_name, password=request.password)
         if auth_user is not None:
             auth.login(request, auth_user)
             new_token, created = Token.objects.get_or_create(user=auth_user)
+    return Response(DoctorSerializer.data)
 
 
 # user logout ; request is the http request in rest framework
-def logout(request, user_name):
-    logout_user = User.objects.get(username=user_name)
+@api_view(['GET'])
+def logout(request):
+    logout_user = User.objects.get(username=request.user_name)
     auth.logout(request)
     logout_user.auth_token.delete()

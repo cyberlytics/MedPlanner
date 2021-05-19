@@ -1,6 +1,6 @@
 from django.urls import path
 from medplanner.api.views import api_create_doctor_view, api_delete_doctor_view, api_all_doctors_view, api_update_doctor_view, api_detail_doctor_view
-from medplanner.api.login import create_user
+from medplanner.api.login import create_user, login, logout
 
 
 app_name = 'medplanner'
@@ -11,5 +11,7 @@ urlpatterns = [
     path('new-doctor', api_create_doctor_view, name="create"),
     path('doctor-delete/<pk>/', api_delete_doctor_view, name="delete"),
     path('doctor-update/<pk>/', api_update_doctor_view, name="update"),
-    path('new-user', create_user)
+    path('new-user', create_user),
+    path('login', login),
+    path('logout', logout),
 ]

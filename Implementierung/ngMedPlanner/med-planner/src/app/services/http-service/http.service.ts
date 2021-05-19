@@ -11,15 +11,20 @@ export class HttpService {
     public static readonly MOCK_DATA_APPOINTMENTS_URL = 'assets/mock-data/appointments-list.json';
     public static readonly MOCK_DATA_USERS_URL = 'assets/mock-data/users-list.json';
 
+    public static readonly LOGIN_URL = 'http://localhost:8000/api/login';
+
     constructor(private http: HttpClient) {}
 
-    async requestData<T>(_url: string): Promise<T> {
+    async requestData<T>(_url: string, body?: any): Promise<T> {
         const promise = this.http.get<T>(
             _url,
             {
-                responseType: 'json'
+                responseType: 'json',
+                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
             }
-        ).toPromise();
+        )
+        .toPromise()
+        .catch();
 
         return promise;
     }

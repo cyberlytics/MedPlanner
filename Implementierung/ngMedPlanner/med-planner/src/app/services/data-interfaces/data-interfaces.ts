@@ -43,3 +43,7 @@ export interface SurgeryMock{
     telephone_num: string;
     website: string;
 }
+export interface UserMock {
+    email: string;
+    password: string;
+}

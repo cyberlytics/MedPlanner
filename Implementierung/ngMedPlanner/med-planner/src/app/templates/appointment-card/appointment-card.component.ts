@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
 
 @Component({
   selector: 'app-appointment-card-component',
@@ -77,7 +78,7 @@ export class AppointmentCardComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private headerState: AppHeaderStateService) {
     this._title = '<< none >>';
 
     this._medicName = '<< none >>';
@@ -85,6 +86,9 @@ export class AppointmentCardComponent implements OnInit {
     this._date = new Date();
 
     this._onDetailsClickEmmiter = new EventEmitter();
+
+    headerState.setHeaderTitle('Hallo Maximilian!');
+    headerState.setHeaderSubTitle('');
   }
 
 

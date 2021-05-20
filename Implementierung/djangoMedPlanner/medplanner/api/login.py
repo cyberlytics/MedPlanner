@@ -5,8 +5,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from medplanner.api.serializers import DoctorSerializer
-import json
-
+from django.views.decorators.http import require_http_methods
 
 # get users
 def get_all_users():
@@ -51,24 +50,38 @@ def activate_user(user_name, is_active):
 
 
 # user login ; request is the http request in rest framework
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def login(request):
-    print(request['user_name'])
-    login_user = User.objects.get(username=request.data.user_name)
-    check = login_user.check_password(request.password)
-    if (check is True) & login_user.is_active:
-        auth_user = auth.authenticate(username=request.user_name, password=request.password)
-        if auth_user is not None:
-            auth.login(request, auth_user)
-            new_token, created = Token.objects.get_or_create(user=auth_user)
-
-    response_data = {"new_token": new_token, "created_token": created}
-    return Response(json.dumps(response_data))
+    if request.user.is_authenticated:
+        return Response({"result": "is authenticated"})
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        login_user = User.objects.get(username=username)
+        check = login_user.check_password(password)
+        if (check is True) & login_user.is_active:
+            user = auth.authenticate(username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+                new_token, created = Token.objects.get_or_create(user=user)
+                return Response({"ok": str(new_token)})
+            else:
+                return Response({"error": "User does not exist"})
+    else:
+        return Response({"error": "Wrong method"})
 
 
 # user logout ; request is the http request in rest framework
 @api_view(['GET'])
 def logout(request):
-    logout_user = User.objects.get(username=request.user_name)
+    print(request.GET)
+    username = request.GET.get('username')
+    print(username)
+    return Response(True)
+
+'''    username = request.POST.get('username')
+    print(username)
+    logout_user = User.objects.get(username)
+    print(logout_user)
     auth.logout(request)
-    logout_user.auth_token.delete()
+    logout_user.auth_token.delete()'''

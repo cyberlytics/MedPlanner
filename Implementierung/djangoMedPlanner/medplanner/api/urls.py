@@ -12,6 +12,6 @@ urlpatterns = [
     path('doctor-delete/<pk>/', api_delete_doctor_view, name="delete"),
     path('doctor-update/<pk>/', api_update_doctor_view, name="update"),
     path('new-user', create_user),
-    path('login', login),
-    path('logout', logout),
+    path('login', login, name="login"),
+    path('logout', logout, name="logout"),
 ]

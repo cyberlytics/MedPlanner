@@ -32,17 +32,21 @@ export class AppComponent implements AfterViewInit {
   }
 
   private async requestLogin(): Promise<void> {
-    console.log('response');
-    const headers = new HttpHeaders({
-      'user_name': 'test_user_2',
-      'password': 'Yxcvb56789'
-    });
-    const response = await this.httpService.requestData(
+    const response = await this.httpService.postMessage(
       HttpService.LOGIN_URL,
-      headers
-      // {user_name: 'test_user_2', password: 'Yxcvb56789'}
+      {
+        username: 'test_user_2',
+        password: 'Yxcvb56789'
+      }
     );
     console.log('response', response);
+    const responseGet = await this.httpService.getMessage(
+      HttpService.LOGOUT_URL,
+      {
+        username: 'test_user_2'
+      }
+    );
+    console.log('response', responseGet);
   }
 
 

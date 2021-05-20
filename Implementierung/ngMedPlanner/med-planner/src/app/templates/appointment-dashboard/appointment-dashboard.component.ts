@@ -38,7 +38,7 @@ export class AppointmentDashboardComponent implements OnInit {
     this.changeDet.detectChanges();
   }
 
-  public onDetailsClick(appointmentId: string): void {
+  public onDetailsClick(appointmentId: number | null): void {
     console.log(`clicked on appointment with id: ${appointmentId}`);
   }
 

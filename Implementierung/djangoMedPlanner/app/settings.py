@@ -149,9 +149,12 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Headers'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4220'
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

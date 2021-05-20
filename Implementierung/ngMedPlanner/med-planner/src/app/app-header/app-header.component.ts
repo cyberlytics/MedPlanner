@@ -27,8 +27,8 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     return this.headerState.headerSubTitle;
   }
 
-  get loggedIn(): boolean {
-    return this.userState.loggedIn;
+  get isLoggedIn(): boolean {
+    return this.userState.isLoggedIn;
   }
 
   constructor(private headerState: AppHeaderStateService, private userState: UserStateService) {

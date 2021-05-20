@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
+import { SpecializationMock } from '../data-interfaces/data-interfaces';
 import { HttpService } from '../http-service/http.service';
 import { DataServiceBasic } from './data-basic.service';
-
-import { AppointmentMock } from '../data-interfaces/data-interfaces';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AppointmentsDataService extends DataServiceBasic<AppointmentsData> {
+export class SpecializationsDataService extends DataServiceBasic<Array<SpecializationMock>> {
 
     constructor(httpService: HttpService) {
         super(
             httpService,
             {
-                requestURL: HttpService.APPOINTMENTS_URL
+                requestURL: HttpService.SPECIALIZATIONS_URL
             }
         );
     }
 
 }
 
-interface AppointmentsData {
-    appointments: Array<AppointmentMock>;
-}

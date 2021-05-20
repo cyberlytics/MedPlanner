@@ -1,6 +1,7 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LoginResult } from 'src/app/services/user-services/login.service';
 
 import { AppLoginComponent } from './app-login.component';
 
@@ -80,12 +81,52 @@ describe('AppLoginComponent', () => {
       'UserStateService',
       {
         login: () => {
-          return false;
+          return LoginResult.PASSWORD_IS_WRONG;
         }
       }
     );
 
+    component.onLogInClick('email@email.com', 'password');
+
     expect(component.passwordFormControl.valid).toBeFalsy();
+  });
+
+  it('email form should be invalid, cause invalid login', () => {
+    // spy user state service
+    userState = jasmine.createSpyObj(
+      'UserStateService',
+      {
+        login: () => {
+          return LoginResult.USER_DOES_NOT_EXIST;
+        }
+      }
+    );
+
+    component.onLogInClick('email@email.com', 'password');
+
+    expect(component.emailFormControl.valid).toBeFalsy();
+  });
+
+  it('email and password form should be valid: loggin is succesfull', () => {
+    // spy user state service
+    userState = jasmine.createSpyObj(
+      'UserStateService',
+      {
+        login: () => {
+          return LoginResult.LOGIN_SUCCESFULL;
+        }
+      }
+    );
+
+    const email = 'email@email.com';
+    const password = 'password';
+    component.emailFormControl.setValue(email);
+    component.passwordFormControl.setValue(password);
+
+    component.onLogInClick(email, password);
+
+    expect(component.emailFormControl.valid).toBeTruthy();
+    expect(component.passwordFormControl.valid).toBeTruthy();
   });
 
 });

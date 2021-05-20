@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AppointmentMock } from 'src/app/services/data-interfaces/data-interfaces';
-import { AppointmentsDataService } from 'src/app/services/data/appointments-data.service';
+import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
+import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
+import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 
 @Component({
   selector: 'app-appointment-dashboard-component',
@@ -9,16 +10,20 @@ import { AppointmentsDataService } from 'src/app/services/data/appointments-data
 })
 export class AppointmentDashboardComponent implements OnInit {
 
-  get appointmentsList(): Array<AppointmentMock> {
-    return this._appointmentsList;
+  get appointments(): Array<AppointmentModel> {
+    return this._appointments;
   }
-  private _appointmentsList: Array<AppointmentMock>;
+  private _appointments: Array<AppointmentModel>;
 
   constructor(
-    private appointmentsData: AppointmentsDataService,
+    headerState: AppHeaderStateService,
+    private appointmentsState: AppointmentsDashboardStateService,
     private changeDet: ChangeDetectorRef
   ) {
-    this._appointmentsList = new Array<AppointmentMock>();
+    this._appointments = new Array<AppointmentModel>();
+
+    headerState.setHeaderTitle('Hallo Maximilian!');
+    headerState.setHeaderSubTitle('');
   }
 
   ngOnInit(): void {
@@ -26,11 +31,9 @@ export class AppointmentDashboardComponent implements OnInit {
   }
 
   private async loadAppointments(): Promise<void> {
-    const data = await this.appointmentsData.getData();
+    this._appointments = await this.appointmentsState.getAppointments();
 
-    this._appointmentsList = data.appointments;
-
-    console.log(this._appointmentsList);
+    console.log(this._appointments);
 
     this.changeDet.detectChanges();
   }

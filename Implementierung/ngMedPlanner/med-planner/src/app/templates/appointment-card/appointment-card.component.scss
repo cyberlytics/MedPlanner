@@ -1,5 +1,5 @@
 .main-block {
-    width: 22em;
+    width: 20em;
 }
 
 .card-block {
@@ -8,15 +8,38 @@
     align-items: flex-start;
     justify-content: center;
 
-    width: 20em;
+    width: 90%;
 
     border-radius: 0 24px 0 0;
 
     padding: 1em;
 }
 
+.pri-datetime-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.datetime-block span {
+    margin-left: 0.5em;
+    font-size: 1em;
+}
+
+.doctor-block {
+    margin-top: 0.5em;
+    font-size: 1.1em;
+}
+
+.appointment-name-block {
+    margin-top: 0.5em;
+    font-size: 1.2em;
+}
+
 .card-block div span {
-    margin-left: 1em;
+    /* margin-left: 1em; */
+    text-align: center;
 }
 
 .detail-button {
@@ -33,5 +56,5 @@
 .detail-button button {
     position: relative;
     bottom: 2em;
-    right: -2em;
+    right: -1em;
 }

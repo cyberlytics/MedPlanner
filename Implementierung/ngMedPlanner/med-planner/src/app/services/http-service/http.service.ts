@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as $ from 'jquery';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class HttpService {
 
+    private static readonly serverHost: string = environment.serverHost;
+
     public static readonly APPOINTMENTS_URL = 'assets/mock-data/appointments-list.json';
     public static readonly DOCTORS_URL = 'assets/mock-data/doctors_list.json';
     public static readonly SURGERIES_URL = 'assets/mock-data/surgery-list.json';
     public static readonly SPECIALIZATIONS_URL = 'assets/mock-data/specialization-list.json';
 
-
     public static readonly MOCK_DATA_USERS_URL = 'assets/mock-data/users-list.json';
 
-    public static readonly LOGIN_URL = 'http://localhost:8000/api/login';
-    public static readonly LOGOUT_URL = 'http://localhost:8000/api/logout';
-    public static readonly REGISTER_NEW_USER_URL = 'http://localhost:8000/api/new-user';
+    public static readonly LOGIN_URL = `http://${HttpService.serverHost}:8000/api/login`;
+    public static readonly LOGOUT_URL = `http://${HttpService.serverHost}:8000/api/logout`;
+    public static readonly REGISTER_NEW_USER_URL = `http://${HttpService.serverHost}:8000/api/new-user`;
 
     constructor(private http: HttpClient) {}
 
@@ -36,6 +38,7 @@ export class HttpService {
     }
 
     async getMessage<T>(_url: string, options?: any): Promise<T> {
+        console.log('URL', _url);
         const promise = this.http.get<T>(
             _url,
             {
@@ -52,6 +55,7 @@ export class HttpService {
     }
 
     async postMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
+        console.log('URL', _url);
         const promise = this.http.post<T>(
             _url,
             $.param(body),

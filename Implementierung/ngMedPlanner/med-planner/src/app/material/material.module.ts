@@ -43,6 +43,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
   exports: [
@@ -94,4 +95,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule {
+
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+
+    // app logo
+    iconRegistry.addSvgIcon(
+      'app-logo',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/logo.svg')
+    );
+  }
+
+}

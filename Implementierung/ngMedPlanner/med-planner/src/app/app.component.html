@@ -1,12 +1,16 @@
-<app-header-component></app-header-component>
+<app-header-component (onHeaderHeightInit)="onHeaderHeightInit($event)"></app-header-component>
 
-<div class="templates-test">
+<!-- To DELETE. Used for test.  -->
+<!-- <div class="templates-test">
   <app-appointment-dashboard-component></app-appointment-dashboard-component>
-</div>
+</div> -->
 
-<div class="templates-test">
-  <!-- <app-popup-detail-view-component></app-popup-detail-view-component> -->
+<!-- To DELETE. Used for test.  -->
+<!-- <div class="templates-test">
+  <app-popup-detail-view-component></app-popup-detail-view-component>
   <app-login-component></app-login-component>
-</div>
+</div> -->
 
-<router-outlet></router-outlet>
+<div class="router-block" #routerBlockDiv>
+  <router-outlet></router-outlet>
+</div>

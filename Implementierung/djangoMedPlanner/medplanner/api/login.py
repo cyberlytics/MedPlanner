@@ -50,8 +50,8 @@ def find_user(user_name):
 @api_view(['POST'])
 def create_user(request):
     username = request.POST.get('username')
-    password = request.POST.get('email')
-    email = request.POST.get('password')
+    password = request.POST.get('password')
+    email = request.POST.get('email')
     # TODO: check if username exists
     new_user = User.objects.create_user(username, email, password)
     new_user.save()

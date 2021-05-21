@@ -79,10 +79,13 @@ export class AppLoginComponent implements OnInit {
     private userState: UserStateService,
     private router: Router
   ) {
+
     this._emailFormControl = new FormControl(
       '',
       [Validators.required, Validators.email, EmailValidator.emailNotExist]
     );
+    this._emailFormControl.setValue(this.userState.userEmail);
+
     this._passwordFormControl = new FormControl(
       '',
       [Validators.required, PasswordValidator.wrongInput]

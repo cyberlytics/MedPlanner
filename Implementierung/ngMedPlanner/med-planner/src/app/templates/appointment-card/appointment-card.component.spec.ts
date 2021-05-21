@@ -30,7 +30,7 @@ describe('appointmentCardComponent', () => {
     expect(element.innerText).toContain('<< none >>');
   });
 
-  it('shoud create an appointment title', () => {
+  /* it('shoud create an appointment title', () => {
     const titleToTest = 'Some appointment title';
 
     component.title = titleToTest;
@@ -86,5 +86,5 @@ describe('appointmentCardComponent', () => {
 
     const element = fixture.nativeElement.querySelector('#appointment-time');
     expect(element.innerText).toContain(dateString);
-  });
+  }); */
 });

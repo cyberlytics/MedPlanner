@@ -42,7 +42,6 @@ export class AppointmentModel {
 
     public static getPriorityByName(_name: string): Priority {
         switch (_name) {
-            case 'Sehr hoch': return Priority.VERY_HIGHT;
             case 'Hoch': return Priority.HIGHT;
             case 'Mittel': return Priority.MEDIUM;
             case 'Niedrig': return Priority.LOW;
@@ -53,7 +52,6 @@ export class AppointmentModel {
 }
 
 export enum Priority {
-    VERY_HIGHT,
     HIGHT,
     MEDIUM,
     LOW

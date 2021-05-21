@@ -10,21 +10,23 @@ from rest_framework.response import Response
 def login(request):
     if request.user.is_authenticated:
         return Response({"result": "is authenticated"})
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    
+    try:
         login_user = User.objects.get(username=username)
-        check = login_user.check_password(password)
-        if (check is True) & login_user.is_active:
-            user = auth.authenticate(username=username, password=password)
-            if user is not None:
-                auth.login(request, user)
-                new_token, created = Token.objects.get_or_create(user=user)
-                return Response({"ok": str(new_token)})
-            else:
-                return Response({"error": "User does not exist"})
+    except:
+        return Response({"error": "User does not exist"})
+    
+    check = login_user.check_password(password)
+    if (check is True) & login_user.is_active:
+        user = auth.authenticate(username=username, password=password)
+        auth.login(request, user)
+        new_token, created = Token.objects.get_or_create(user=user)
+        return Response({"ok": str(new_token)})
     else:
-        return Response({"error": "Wrong method"})
+        return Response({"error": "Password is wrong"})
 
 
 # user logout ; request is the http request in rest framework
@@ -50,8 +52,8 @@ def find_user(user_name):
 @api_view(['POST'])
 def create_user(request):
     username = request.POST.get('username')
-    password = request.POST.get('email')
-    email = request.POST.get('password')
+    password = request.POST.get('password')
+    email = request.POST.get('email')
     # TODO: check if username exists
     new_user = User.objects.create_user(username, email, password)
     new_user.save()

@@ -46,12 +46,36 @@ export class LoginService implements Login {
      * @returns Promise with call result.
      */
     public async login(_email: string, _password: string): Promise<LoginResult> {
-        return this.loginMockCall(_email, _password);
+        // return this.loginMockCall(_email, _password);
 
-        // TODO: To implement true server request.
-        return new Promise<LoginResult>( (resolve) => {
-            resolve(LoginResult.USER_DOES_NOT_EXIST);
+        const response = await this.httpService.postMessage<any>(
+            HttpService.LOGIN_URL,
+            {
+              username: _email,
+              password: _password
+            }
+        ).catch( (result) => {
+            console.error(result);
+            return LoginResult.USER_DOES_NOT_EXIST;
         });
+
+        // TODO: Rewrite logic, now is just pseude checking.
+        console.log('response', response);
+
+        if (response.ok) {
+            this.storeToken(response.ok);
+            return LoginResult.LOGIN_SUCCESFULL;
+        }
+
+        if (response.error === 'User does not exist') {
+            return LoginResult.USER_DOES_NOT_EXIST;
+        }
+
+        if (response.error === 'Password is wrong') {
+            return LoginResult.PASSWORD_IS_WRONG;
+        }
+
+        return LoginResult.USER_DOES_NOT_EXIST;
     }
     /**
      * Logs out the user from app.

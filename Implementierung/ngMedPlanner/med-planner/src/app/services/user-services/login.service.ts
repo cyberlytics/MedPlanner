@@ -56,7 +56,7 @@ export class LoginService implements Login {
             }
         ).catch( (result) => {
             console.error(result);
-            return LoginResult.USER_DOES_NOT_EXIST;
+            return LoginResult.SERVER_ERROR;
         });
 
         // TODO: Rewrite logic, now is just pseude checking.
@@ -75,7 +75,7 @@ export class LoginService implements Login {
             return LoginResult.PASSWORD_IS_WRONG;
         }
 
-        return LoginResult.USER_DOES_NOT_EXIST;
+        return LoginResult.UNKNOWN_ERROR;
     }
     /**
      * Logs out the user from app.
@@ -86,42 +86,6 @@ export class LoginService implements Login {
         await this.router.navigate(['login']);
 
         return true;
-    }
-
-    private async loginMockCall(_email: string, _password: string): Promise<LoginResult> {
-        // get mock users' data
-        const callResult = await this.httpService.requestData<{ users: Array<UserMock> }>(
-            HttpService.MOCK_DATA_USERS_URL
-        );
-
-        // Simulate server answer timeout
-        await new Promise<void>( (resolve) => {
-            setTimeout( () => { resolve(); }, 1500);
-        });
-
-        // Check login data
-        for (const user of callResult.users) {
-            if (user.email === _email) {
-                return this.mockCheckUser({
-                    user,
-                    password: _password
-                });
-            }
-        }
-
-        return LoginResult.USER_DOES_NOT_EXIST;
-    }
-
-    private mockCheckUser(data: {
-        user: UserMock,
-        password: string
-    }): LoginResult {
-        if (data.user.password !== data.password) {
-            return LoginResult.PASSWORD_IS_WRONG;
-        }
-
-        this.storeToken('some_token');
-        return LoginResult.LOGIN_SUCCESFULL;
     }
 
     private storeToken(_token: string): void {
@@ -147,5 +111,7 @@ export interface Login {
 export enum LoginResult {
     USER_DOES_NOT_EXIST,
     PASSWORD_IS_WRONG,
-    LOGIN_SUCCESFULL
+    LOGIN_SUCCESFULL,
+    SERVER_ERROR,
+    UNKNOWN_ERROR
 }

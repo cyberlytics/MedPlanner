@@ -1,8 +1,20 @@
-<mat-toolbar color="primary" #toolbarElement>
-    <span>My Application</span>
+<mat-toolbar class="primary-dark-background" (window:resize)="onWindowResize()" #toolbarElement>
+    <!-- App title -->
+    <span class="bold-font">MedPlanner</span>
+
+    <span class="toolbar-spacer"></span>
+
+    <!-- Logout icon button -->
+    <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()">
+        <mat-icon>
+            logout
+        </mat-icon>
+    </button>
+    
 </mat-toolbar>
 
+<!-- App header -->
 <div class="header-block bottom-shadow primary-background" #headerElement>
-    <span class="title">Some title</span>
-    <span class="subtitle">Some subtitle</span>
+    <span class="title regular-font">{{headerTitle}}</span>
+    <span class="subtitle italic-font">{{headerSubTitle}}</span>
 </div>

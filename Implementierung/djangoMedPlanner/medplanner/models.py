@@ -53,4 +53,3 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     # Creates a token by registrating a new user
     if created:
         Token.objects.create(user=instance)
->>>>>>> Implementierung/djangoMedPlanner/medplanner/models.py

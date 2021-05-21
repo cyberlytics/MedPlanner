@@ -1,15 +1,11 @@
 
-
-export interface AppointmentMock {
-    id: string;
-    date: number;
-    title: string;
-    medic_name: string;
+export interface UserMock {
+    email: string;
+    password: string;
 }
 
-
-// from appointments-list2.json
-export interface AppointmentMock2 {
+// from appointments-list.json
+export interface AppointmentMock {
     id: number;
     title: string;
     datetime: string;
@@ -20,7 +16,7 @@ export interface AppointmentMock2 {
 }
 
 
-export interface DoctorMock{
+export interface DoctorMock {
     id: number;
     first_name: string;
     surname: string;
@@ -29,21 +25,17 @@ export interface DoctorMock{
 }
 
 
-export interface SpecializationMock{
+export interface SpecializationMock {
     id: number;
     description: string;
 }
 
 
-export interface SurgeryMock{
+export interface SurgeryMock {
     id: number;
     city: string;
     address: string;
     description: string;
     telephone_num: string;
     website: string;
-}
-export interface UserMock {
-    email: string;
-    password: string;
 }

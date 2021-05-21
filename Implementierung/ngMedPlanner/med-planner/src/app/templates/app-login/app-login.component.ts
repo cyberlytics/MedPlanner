@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
+import { LoginResult } from 'src/app/services/user-services/login.service';
 import { UserStateService } from 'src/app/services/user-services/user-state.service';
 
 @Component({
@@ -104,23 +105,41 @@ export class AppLoginComponent implements OnInit {
     this.enableLoading();
 
     // Now called as mock serice
-    const loggedIn = await this.userState.login(_email, _password, true); // true for mock call
+    const loggedIn = await this.userState.login(_email, _password);
 
     this.handleLoginResult(loggedIn);
 
     this.disableLoading();
   }
 
-  private handleLoginResult(_loggedIn: boolean): void {
-    if (_loggedIn) {
-      this.router.navigate(['appointment-dashboard']);
+  private handleLoginResult(_loginResult: LoginResult): void {
+    console.log('login result', _loginResult.toString());
+    switch (_loginResult) {
+      case LoginResult.LOGIN_SUCCESFULL: {
+        this.router.navigate(['appointment-dashboard']);
+        break;
+      }
+      case LoginResult.USER_DOES_NOT_EXIST: {
+        this.handleUserDoesNotExistError();
+        break;
+      }
+      case LoginResult.PASSWORD_IS_WRONG: {
+        this.handleWrongPasswordError();
+        break;
+      }
     }
+  }
 
-    // TODO: implement logic for different login messages
-    // (email doesn't exist or wrong password)
-    PasswordValidator.isWrong = true;
+  private handleUserDoesNotExistError(): void {
+    EmailValidator.enableError();
+    this._emailFormControl.updateValueAndValidity();
+    EmailValidator.disableError();
+  }
+
+  private handleWrongPasswordError(): void {
+    PasswordValidator.enableError();
     this._passwordFormControl.updateValueAndValidity();
-    PasswordValidator.isWrong = false;
+    PasswordValidator.disableError();
   }
 
   private enableLoading(): void {
@@ -137,17 +156,33 @@ export class AppLoginComponent implements OnInit {
  * Email input custom validator.
  */
 class EmailValidator {
-  static isExist = false;
+  private static isNotExist = false;
+
+  static enableError(): void {
+    this.isNotExist = true;
+  }
+
+  static disableError(): void {
+    this.isNotExist = false;
+  }
 
   static emailNotExist(control: AbstractControl): ValidationErrors | null {
-    return EmailValidator.isExist ? { emailNotExist: true } : null;
+    return EmailValidator.isNotExist ? { emailNotExist: true } : null;
   }
 }
 /**
  * Password input custom validator.
  */
 class PasswordValidator {
-  static isWrong = false;
+  private static isWrong = false;
+
+  static enableError(): void {
+    this.isWrong = true;
+  }
+
+  static disableError(): void {
+    this.isWrong = false;
+  }
 
   static wrongInput(control: AbstractControl): ValidationErrors | null {
     return PasswordValidator.isWrong ? { wrongInput: true } : null;

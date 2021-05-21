@@ -1,12 +1,9 @@
 
 
-<div class="">
-    <div *ngFor="let appointment of appointmentsList">
+<div class="main-block">
+    <div *ngFor="let appointment of appointments">
         <app-appointment-card-component
-            id="{{appointment.id}}"
-            title="{{appointment.title}}"
-            medicName="{{appointment.medic_name}}"
-            dateTimeMillis="{{appointment.date}}"
+            [appointment]="appointment"
             (onDetailsClick)="onDetailsClick($event)"
         ></app-appointment-card-component>
     </div>

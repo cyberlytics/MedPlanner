@@ -7,7 +7,12 @@ import * as $ from 'jquery';
 })
 export class HttpService {
 
-    public static readonly MOCK_DATA_APPOINTMENTS_URL = 'assets/mock-data/appointments-list.json';
+    public static readonly APPOINTMENTS_URL = 'assets/mock-data/appointments-list.json';
+    public static readonly DOCTORS_URL = 'assets/mock-data/doctors_list.json';
+    public static readonly SURGERIES_URL = 'assets/mock-data/surgery-list.json';
+    public static readonly SPECIALIZATIONS_URL = 'assets/mock-data/specialization-list.json';
+
+
     public static readonly MOCK_DATA_USERS_URL = 'assets/mock-data/users-list.json';
 
     public static readonly LOGIN_URL = 'http://localhost:8000/api/login';

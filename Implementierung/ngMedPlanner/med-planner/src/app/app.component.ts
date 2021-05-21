@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit {
       }
     );
     console.log('response', response);
-    const responseGet = await this.httpService.getMessage(
+    const responseGet = await this.httpService.postMessage(
       HttpService.LOGOUT_URL,
       {
         username: 'test_user_2'

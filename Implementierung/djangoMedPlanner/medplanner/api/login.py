@@ -1,11 +1,8 @@
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from medplanner.api.serializers import DoctorSerializer
-from django.views.decorators.http import require_http_methods
 
 # get users
 def get_all_users():
@@ -72,16 +69,10 @@ def login(request):
 
 
 # user logout ; request is the http request in rest framework
-@api_view(['GET'])
+@api_view(['POST'])
 def logout(request):
-    print(request.GET)
-    username = request.GET.get('username')
-    print(username)
-    return Response(True)
-
-'''    username = request.POST.get('username')
-    print(username)
-    logout_user = User.objects.get(username)
-    print(logout_user)
+    username = request.POST.get('username')
+    logout_user = User.objects.get(username=username)
     auth.logout(request)
-    logout_user.auth_token.delete()'''
+    logout_user.auth_token.delete()
+    return Response(True)

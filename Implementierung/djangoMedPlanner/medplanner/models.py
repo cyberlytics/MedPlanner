@@ -18,8 +18,7 @@ class User(models.Model):
 class Appointment(models.Model):
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     user_id   = models.ForeignKey(User, on_delete=models.CASCADE)
-    date      = models.DateField()
-    time      = models.TimeField()
+    date_time = models.DateTimeField()
     notes     = models.TextField()
 
 class Specialization(models.Model):

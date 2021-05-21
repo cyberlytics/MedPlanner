@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { HttpService } from './services/http-service/http.service';
 import { UserStateService } from './services/user-services/user-state.service';
 
 @Component({
@@ -11,13 +12,16 @@ export class AppComponent implements AfterViewInit {
 
   title = 'med-planner';
 
-  constructor(private userState: UserStateService) {
+  constructor(private userState: UserStateService, private httpService: HttpService) {
     this.routerBlockDiv = new ElementRef(null);
   }
 
 
   ngAfterViewInit(): void {
     this.userState.checkLogin();
+    // this.requestLogin();
+    // this.requestLogout();
+    this.registerNewUser();
   }
 
   public onHeaderHeightInit(_headerHeight: number): void {
@@ -28,6 +32,38 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
+  private async requestLogin(): Promise<void> {
+    const response = await this.httpService.postMessage(
+      HttpService.LOGIN_URL,
+      {
+        username: 'test_user_2',
+        password: 'Yxcvb56789'
+      }
+    );
+    console.log('response', response);
+  }
 
+  private async requestLogout(): Promise<void> {
+    const response = await this.httpService.postMessage(
+      HttpService.LOGOUT_URL,
+      {
+        username: 'test_user_2'
+      }
+    );
+    console.log('response', response);
+  }
 
+  private async registerNewUser(): Promise<void> {
+    const response = await this.httpService.postMessage(
+      HttpService.REGISTER_NEW_USER_URL,
+      {
+        username: 'new_user_7',
+        email: 'example@mail.com',
+        password: 'HZ86IH7zg98t5ouuo7',
+        is_superuser: false,
+        is_staff: false
+      }
+    );
+    console.log('response', response);
+  }
 }

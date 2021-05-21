@@ -4,47 +4,6 @@ from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# get users
-def get_all_users():
-    return User.objects.all()
-
-
-def find_user(user_name):
-    return User.objects.get(username=user_name)
-
-
-# create a new user
-def create_user(user_name, password, email='', is_superuser=False, is_staff=False):
-    new_user = User.objects.create_user(user_name, password)
-    # new_user = User.objects.create_user(user_name, email, password)
-    new_user.email = email
-    new_user.is_superuser = is_superuser
-    new_user.is_staff = is_staff
-    new_user.save()
-
-
-# update user profile
-def update_user(user_name, new_password, is_superuser, is_staff):
-    user = User.objects.get(username=user_name)
-    user.set_password(new_password)
-    user.is_superuser = is_superuser
-    user.is_staff = is_staff
-    user.save()
-
-
-# deactivate / activate user
-# not recommend the delete behavior for users, so we use deactivate instead
-def deactivate_user(user_name, is_active):
-    user = User.objects.get(username=user_name)
-    user.is_active = is_active
-    user.save()
-
-
-def activate_user(user_name, is_active):
-    user = User.objects.get(username=user_name)
-    user.is_active = is_active
-    user.save()
-
 
 # user login ; request is the http request in rest framework
 @api_view(['POST'])
@@ -76,3 +35,50 @@ def logout(request):
     auth.logout(request)
     logout_user.auth_token.delete()
     return Response(True)
+
+
+# get users
+def get_all_users():
+    return User.objects.all()
+
+
+def find_user(user_name):
+    return User.objects.get(username=user_name)
+
+
+# create a new user
+@api_view(['POST'])
+def create_user(request):
+    username = request.POST.get('username')
+    password = request.POST.get('email')
+    email = request.POST.get('password')
+    # TODO: check if username exists
+    new_user = User.objects.create_user(username, email, password)
+    new_user.save()
+    return Response(True)
+
+
+# update user profile
+def update_user(user_name, new_password, is_superuser, is_staff):
+    user = User.objects.get(username=user_name)
+    user.set_password(new_password)
+    user.is_superuser = is_superuser
+    user.is_staff = is_staff
+    user.save()
+
+
+# deactivate / activate user
+# not recommend the delete behavior for users, so we use deactivate instead
+def deactivate_user(user_name, is_active):
+    user = User.objects.get(username=user_name)
+    user.is_active = is_active
+    user.save()
+
+
+def activate_user(user_name, is_active):
+    user = User.objects.get(username=user_name)
+    user.is_active = is_active
+    user.save()
+
+
+

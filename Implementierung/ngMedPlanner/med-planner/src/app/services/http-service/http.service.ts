@@ -12,6 +12,7 @@ export class HttpService {
 
     public static readonly LOGIN_URL = 'http://localhost:8000/api/login';
     public static readonly LOGOUT_URL = 'http://localhost:8000/api/logout';
+    public static readonly REGISTER_NEW_USER_URL = 'http://localhost:8000/api/new-user';
 
     constructor(private http: HttpClient) {}
 

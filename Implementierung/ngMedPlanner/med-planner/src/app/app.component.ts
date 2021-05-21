@@ -18,10 +18,10 @@ export class AppComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    this.userState.checkLogin();
+    // this.userState.checkLogin();
     // this.requestLogin();
     // this.requestLogout();
-    this.registerNewUser();
+    // this.registerNewUser();
   }
 
   public onHeaderHeightInit(_headerHeight: number): void {
@@ -57,8 +57,8 @@ export class AppComponent implements AfterViewInit {
     const response = await this.httpService.postMessage(
       HttpService.REGISTER_NEW_USER_URL,
       {
-        username: 'new_user_7',
-        email: 'example@mail.com',
+        username: 'user@mail.com',
+        email: 'user@mail.com',
         password: 'HZ86IH7zg98t5ouuo7',
         is_superuser: false,
         is_staff: false

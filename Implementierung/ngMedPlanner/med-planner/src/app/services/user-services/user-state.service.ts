@@ -9,6 +9,11 @@ export class UserStateService implements Login {
 
     private readonly USER_TOKEN_KEY = 'user_token';
 
+    get userEmail(): string | null {
+        return this._userEmail;
+    }
+    private _userEmail: string | null = null;
+
     get token(): string | null {
         return this.loginService.token;
     }
@@ -36,6 +41,7 @@ export class UserStateService implements Login {
      * @returns Promise with call result.
      */
     public async login(_email: string, _password: string): Promise<LoginResult> {
+        this._userEmail = _email;
         return this.loginService.login(_email, _password);
     }
     /**

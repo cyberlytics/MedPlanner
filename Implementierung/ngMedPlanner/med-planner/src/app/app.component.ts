@@ -14,6 +14,7 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private userState: UserStateService, private httpService: HttpService) {
     this.routerBlockDiv = new ElementRef(null);
+    this.userState.checkLogin();
   }
 
 

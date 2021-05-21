@@ -13,7 +13,7 @@ export class AppointmentsDataService extends DataServiceBasic<AppointmentsData> 
         super(
             httpService,
             {
-                requestURL: HttpService.MOCK_DATA_APPOINTMENTS_URL
+                requestURL: HttpService.APPOINTMENTS_URL
             }
         );
     }

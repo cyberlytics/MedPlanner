@@ -4,6 +4,10 @@ mat-toolbar {
     top: 0;
 }
 
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
 .header-block {
     display: flex;
     flex-direction: column;
@@ -18,4 +22,14 @@ mat-toolbar {
     padding: 1em;
 
     z-index: 100;
+}
+
+.title {
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+.subtitle {
+    margin: 1em 0;
+    font-size: 1.2em;
 }

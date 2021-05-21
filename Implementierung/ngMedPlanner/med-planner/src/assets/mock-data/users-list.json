@@ -1,0 +1,12 @@
+{
+    "users": [
+        {
+            "email": "mock@email.com",
+            "password": "12UGZU5R7TGH345"
+        },
+        {
+            "email": "pseudo@email.com",
+            "password": "qwer786zgzgTGUZTZty"
+        }
+    ]
+}

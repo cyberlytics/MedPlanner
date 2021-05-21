@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 
 @Component({
   selector: 'app-appointment-card-component',
@@ -9,30 +10,25 @@ export class AppointmentCardComponent implements OnInit {
 
   private static readonly LOCALE_DE = 'de-DE';
 
-  @Input() set id(value: string | undefined) {
-    this._id = value;
-  }
-  private _id: string | undefined;
+  @Input() set appointment(value: AppointmentModel | null) {
+    this._appointment = value;
 
-  @Input() set title(value: string) {
-    if (value === undefined) {
-      return;
+    if (value !== null) {
+      this._date = new Date(value.datetime);
     }
-    this._title = value;
   }
-  get title(): string {
-    return this._title;
+  get appointment(): AppointmentModel | null {
+    return this._appointment;
   }
-  private _title: string;
+  private _appointment: AppointmentModel | null = null;
 
+  get title(): string | undefined {
+    return this._appointment?.title;
+  }
 
-  @Input() set medicName(value: string) {
-    this._medicName = value;
+  get doctorName(): string | undefined {
+    return this._appointment?.doctorName;
   }
-  get medicName(): string {
-    return this._medicName;
-  }
-  private _medicName: string;
 
 
   @Input() set tag(value: Tag | undefined) {
@@ -43,16 +39,8 @@ export class AppointmentCardComponent implements OnInit {
   }
   private _tag: Tag | undefined;
 
-  // TODO: To change date time format from millis to DD-MM-YYYY HH-MM
-  // TODO: !!! Then to rewrite unit-test !!!
-  @Input() set dateTimeMillis(value: string) {
-    if (value === undefined) {
-      return;
-    }
-    this._date.setTime( parseFloat(value) );
-  }
-  private _date: Date;
 
+  private _date: Date;
 
   get time(): string {
     return this._date.toLocaleTimeString(AppointmentCardComponent.LOCALE_DE, {
@@ -61,8 +49,7 @@ export class AppointmentCardComponent implements OnInit {
     });
   }
 
-
-  get date(): string {
+  get dateTime(): string {
     return this._date.toLocaleDateString(AppointmentCardComponent.LOCALE_DE, {
       day: '2-digit',
       month: '2-digit',
@@ -70,29 +57,22 @@ export class AppointmentCardComponent implements OnInit {
     });
   }
 
-  @Output('onDetailsClick') get onDetailsClickEmmiter(): EventEmitter<string> {
+  @Output('onDetailsClick') get onDetailsClickEmmiter(): EventEmitter<number | null> {
     return this._onDetailsClickEmmiter;
   }
-  private _onDetailsClickEmmiter: EventEmitter<string>;
-
+  private _onDetailsClickEmmiter: EventEmitter<number | null>;
 
 
   constructor() {
-    this._title = '<< none >>';
-
-    this._medicName = '<< none >>';
-
     this._date = new Date();
 
-    this._onDetailsClickEmmiter = new EventEmitter();
+    this._onDetailsClickEmmiter = new EventEmitter<number | null>();
   }
-
 
   ngOnInit(): void {}
 
-
   public onDetailsButtonClick(): void {
-    this._onDetailsClickEmmiter.emit(this._id);
+    this._onDetailsClickEmmiter.emit(this._appointment?.id);
   }
 
 }

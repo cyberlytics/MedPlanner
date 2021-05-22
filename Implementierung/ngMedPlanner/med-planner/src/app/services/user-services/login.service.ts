@@ -62,8 +62,8 @@ export class LoginService implements Login {
         // TODO: Rewrite logic, now is just pseude checking.
         console.log('response', response);
 
-        if (response.ok) {
-            this.storeToken(response.ok);
+        if (response.result) {
+            this.storeToken(response.result);
             return LoginResult.LOGIN_SUCCESFULL;
         }
 

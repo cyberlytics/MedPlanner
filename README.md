@@ -1,13 +1,12 @@
-# MedPlanner
+# MedPlanner - TeamGrün
 
 ## Web-Anwendungsentwicklung Sommersemester 2021
-
 ### Projektordnerstruktur
-* *Dokumentation* beinhaltet neben allgemeinen Richtlinien für die Projektmitglieder ebenfalls das [Konzeptpapier](Dokumentation/LaTeX/ConferencePaper/20210503_TeamGruen_Konzeptpapier.pdf) für die Web-Anwendung.
-* *Analyse* beinhaltet Artefakte für die strukturelle Planung der Anwendung
-* *Entwurf* behinhaltet Artefakte für die Erstellung der Anwendung
-* *Implementierung* enthält die Realisierung der Anwendung <br>
-&rightarrow; [Anleitung](Implementierung/README.md) für das Starten des Projekts mit Docker <br>
-&rightarrow; [Frontend-Container](Implementierung/ngMedPlanner/) <br>
-&rightarrow; [Backend-Container](Implementierung/djangoMedPlanner/)
+Unter [sys-doc](sys-doc) sind Artefakte sowie Projektrichtlinien enthalten, die während des Projektes zustande kamen. <br>
+&rightarrow; Zudem befinden sich in diesem Ordner die [Conference Papers](sys-doc/documents/LaTeX/) 
 
+[sys-src](sys-src) beinhaltet die Implementierung der Webanwendung und kann folgendermaßen unterteilt werden:
+* [Frontend](sys-src/ngMedPlanner/) mit Docker
+* [Backend](sys-src/djangoMedPlanner/) mit Docker
+
+&rightarrow; Außerdem befindet sich eine [Anleitung](sys-src/README.md) im Ordner, für das Starten des Projekts mit Docker

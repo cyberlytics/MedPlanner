@@ -45,7 +45,7 @@ export class AppointmentModel {
             case 'Hoch': return Priority.HIGH;
             case 'Mittel': return Priority.MEDIUM;
             case 'Niedrig': return Priority.LOW;
-            default: return Priority.MEDIUM;
+            default: return Priority.LOW;
         }
     }
 

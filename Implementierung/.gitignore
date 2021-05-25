@@ -1,5 +1,0 @@
-/.project
-djangoMedPlanner/medplanner/migrations/__pycache__/
-djangoMedPlanner/.idea/*
-djangoMedPlanner/.vscode/*
-djangoMedPlanner/medplanner/api/__pycache__/*

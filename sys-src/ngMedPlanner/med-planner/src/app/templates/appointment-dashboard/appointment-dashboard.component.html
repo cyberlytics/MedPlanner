@@ -1,0 +1,10 @@
+
+
+<div class="main-block">
+    <div *ngFor="let appointment of appointments">
+        <app-appointment-card-component
+            [appointment]="appointment"
+            (onDetailsClick)="onDetailsClick($event)"
+        ></app-appointment-card-component>
+    </div>
+</div>

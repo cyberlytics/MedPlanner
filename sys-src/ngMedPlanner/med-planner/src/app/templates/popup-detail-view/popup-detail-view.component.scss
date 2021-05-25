@@ -1,0 +1,64 @@
+
+
+.popup-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    border: 2px solid rgba(0, 0, 0, 1);
+    border-radius: 8px;
+}
+
+.header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+
+    width: 100%;
+}
+
+.header-block span {
+    margin: 1em;
+}
+
+.content-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding: 1em;
+}
+
+.content-block .info-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.content-block .info-row span {
+    margin-left: 0.5em;
+}
+
+.button-edit {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    width: 100%;
+}
+
+.button-close {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    width: 100%;
+}

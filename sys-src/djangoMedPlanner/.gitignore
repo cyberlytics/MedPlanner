@@ -1,0 +1,7 @@
+data/*
+app/__pycache__/*
+medplanner/__pycache__/*
+medplanner/api/__pycache__/*
+venv/
+.idea/
+.vscode/

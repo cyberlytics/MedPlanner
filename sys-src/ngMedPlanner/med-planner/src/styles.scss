@@ -1,0 +1,81 @@
+@import './colors.scss';
+@import './fonts.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.regular-font {
+    font-family: QuattrocentoSans-Regular;
+}
+
+.italic-font {
+    font-family: QuattrocentoSans-Italic;
+}
+
+.bold-font {
+    font-family: QuattrocentoSans-Bold;
+}
+
+.bold-italic-font {
+    font-family: QuattrocentoSans-BoldItalic;
+}
+
+.base-shadow {
+    box-shadow: 0 0 4px 2px rgba(180, 180, 180, 0.3);
+}
+
+.bottom-shadow {
+    box-shadow: 0 4px 4px -2px rgba(149, 149, 149, 0.4);
+}
+
+.primary-background {
+    background-color: rgba($color: map-get($custom-colors, primary), $alpha: 1.0);
+    color: map-get($contrast-colors, primary);
+}
+
+.primary-border {
+    border: 2px solid rgba($color: map-get($custom-colors, primary), $alpha: .8);
+}
+
+.primary-dark-background {
+    background-color: rgba($color: map-get($custom-colors, primary-dark), $alpha: 1.0);
+    color: map-get($contrast-colors, primary-dark);
+}
+
+.secondary-border {
+    border: 2px solid rgba($color: map-get($custom-colors, secondary), $alpha: .8);
+}
+
+.secondary-background {
+    background-color: rgba($color: map-get($custom-colors, secondary), $alpha: 1.0);
+    color: map-get($contrast-colors, secondary);
+}
+
+.secondary-button {
+    border: 2px solid rgba($color: map-get($custom-colors, secondary), $alpha: 1);
+    background-color: rgba($color: map-get($custom-colors, secondary), $alpha: 1);
+    color: map-get($contrast-colors, secondary);
+}
+
+.secondary-button:hover {
+    border: 2px solid rgba($color: map-get($custom-colors, secondary-dark), $alpha: 1);
+    background-color: rgba($color: map-get($custom-colors, secondary-dark), $alpha: 1);
+    color: map-get($contrast-colors, secondary-dark);
+}
+
+.base-button-shape {
+    border-radius: 24px;
+    transition: .8s;
+    cursor: pointer;
+}
+
+.base-button-shape:hover {
+    border-radius: 0 24px 0 24px;
+    transition: .8s;
+}
+
+.base-button {
+    padding: .6em;
+    font-size: 1.2em;
+    font-family: QuattrocentoSans-Regular;
+}

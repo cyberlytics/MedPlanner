@@ -1,0 +1,29 @@
+version: "3.3"
+   
+services:
+  #db:
+    #image: postgres
+    #volumes:
+      #- ./djangoMedPlanner/data/db:/var/lib/postgresql/data
+    #environment:
+      #- POSTGRES_DB=postgres
+      #- POSTGRES_USER=postgres
+      #- POSTGRES_PASSWORD=postgres
+  backend:
+    build: ./djangoMedPlanner/
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./djangoMedPlanner:/django
+    ports:
+      - "8000:8000"
+    #depends_on:
+      #- db
+  frontend:
+      image: ng:10.0
+      container_name: MedPlanner
+      working_dir: /angular
+      volumes:
+        - ./ngMedPlanner/med-planner:/angular
+      ports:
+        - "4220:4220"
+      command: ng serve --host 0.0.0.0 --port 4220

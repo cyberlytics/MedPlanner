@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { AppointmentModel, Priority } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 
 @Component({
   selector: 'app-appointment-card-component',

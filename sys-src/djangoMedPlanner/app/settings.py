@@ -26,10 +26,7 @@ SECRET_KEY = 'django-insecure-i0i2a@=u3k*i-5sd4qep+y%k@tugw()p(+%t1279j6k)q0g1im
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '192.168.2.111',
-    'localhost'
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -147,8 +144,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4220',
-    'http://192.168.2.111:4220'
+    'http://localhost:4220'
 ]
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
@@ -158,8 +154,7 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:4220',
-    'http://192.168.2.111:4220'
+    'http://localhost:4220'
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

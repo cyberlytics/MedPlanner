@@ -1,9 +1,9 @@
 from django.db import models
-from django.utils import timezone
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from datetime import datetime
 
 
 # Models: the models that can be used as a ForeignKey must be placed before
@@ -27,7 +27,7 @@ class User(models.Model):
 class Appointment(models.Model):
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     user_id   = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_time = models.DateTimeField()
+    date_time = models.DateTimeField(default=datetime.now, blank=True)
     notes     = models.TextField()
 
 class Specialization(models.Model):
@@ -37,8 +37,8 @@ class Surgery(models.Model):
     location         = models.CharField(max_length=100)
     street           = models.CharField(max_length=100)
     description      = models.CharField(max_length=100)
-    telephone_number = models.IntegerField(max_length=100)
-    website          = models.CharField(max_length = 100)
+    telephone_number = models.IntegerField()
+    website          = models.CharField(max_length=100)
 
 class Tag(models.Model):
     description = models.CharField(max_length=100)

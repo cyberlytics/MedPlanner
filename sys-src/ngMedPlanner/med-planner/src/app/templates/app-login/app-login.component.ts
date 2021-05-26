@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
 import { LoginResult } from 'src/app/services/user-services/login.service';
@@ -77,7 +78,8 @@ export class AppLoginComponent implements OnInit {
   constructor(
     headerState: AppHeaderStateService,
     private userState: UserStateService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
 
     this._emailFormControl = new FormControl(
@@ -107,7 +109,6 @@ export class AppLoginComponent implements OnInit {
   public async onLogInClick(_email: string, _password: string): Promise<void> {
     this.enableLoading();
 
-    // Now called as mock serice
     const loggedIn = await this.userState.login(_email, _password);
 
     this.handleLoginResult(loggedIn);
@@ -116,10 +117,9 @@ export class AppLoginComponent implements OnInit {
   }
 
   private handleLoginResult(_loginResult: LoginResult): void {
-    console.log('login result', _loginResult.toString());
     switch (_loginResult) {
       case LoginResult.LOGIN_SUCCESFULL: {
-        this.router.navigate(['appointment-dashboard']);
+        this.handleLoginSuccesfull();
         break;
       }
       case LoginResult.USER_DOES_NOT_EXIST: {
@@ -130,7 +130,19 @@ export class AppLoginComponent implements OnInit {
         this.handleWrongPasswordError();
         break;
       }
+      case LoginResult.SERVER_ERROR: {
+        this.handleServerError();
+        break;
+      }
+      case LoginResult.UNKNOWN_ERROR: {
+        this.handleUnknownError();
+        break;
+      }
     }
+  }
+
+  private handleLoginSuccesfull(): void {
+    this.router.navigate(['appointment-dashboard']);
   }
 
   private handleUserDoesNotExistError(): void {
@@ -143,6 +155,22 @@ export class AppLoginComponent implements OnInit {
     PasswordValidator.enableError();
     this._passwordFormControl.updateValueAndValidity();
     PasswordValidator.disableError();
+  }
+
+  private handleServerError(): void {
+    this.snackBar.open('Server Error!', 'Ok', {
+      duration: 4000,
+      verticalPosition: 'bottom',
+      panelClass: ['secondary-background']
+    });
+  }
+
+  private handleUnknownError(): void {
+    this.snackBar.open('Unknown Error!', 'Ok', {
+      duration: 4000,
+      verticalPosition: 'bottom',
+      panelClass: ['secondary-background']
+    });
   }
 
   private enableLoading(): void {

@@ -97,12 +97,32 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MaterialModule {
 
+  public static readonly ICON_APP_LOGO: string = 'app-logo';
+
+  public static readonly ICON_PRI_HIGH: string = 'priority-high';
+  public static readonly ICON_PRI_MEDIUM: string = 'priority-medium';
+  public static readonly ICON_PRI_LOW: string = 'priority-low';
+
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 
     // app logo
     iconRegistry.addSvgIcon(
-      'app-logo',
+      MaterialModule.ICON_APP_LOGO,
       sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/logo.svg')
+    );
+
+    // priority icons
+    iconRegistry.addSvgIcon(
+      MaterialModule.ICON_PRI_HIGH,
+      sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/priority_high.svg')
+    );
+    iconRegistry.addSvgIcon(
+      MaterialModule.ICON_PRI_MEDIUM,
+      sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/priority_medium.svg')
+    );
+    iconRegistry.addSvgIcon(
+      MaterialModule.ICON_PRI_LOW,
+      sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/priority_low.svg')
     );
   }
 

@@ -1,15 +1,21 @@
 
 <div class="main-block">
     <div class="card-block base-shadow primary-border">
-        <div>
-            <span id="appointment-date">{{dateTime}}</span>
-            <span id="appointment-time">{{time}}</span>
+        <!-- Priority, Date and Time block -->
+        <div class="pri-datetime-block">
+            <app-priority [priority]="appointment?.priority"></app-priority>
+            <div class="datetime-block">
+                <span class="regular-font" id="appointment-date">{{dateTime}}</span>
+                <span class="regular-font" id="appointment-time">{{time}}</span>
+            </div>
         </div>
-        <div>
-            <span id="appointment-medic-name">{{doctorName}}</span>
+        <!-- Doctor name -->
+        <div class="doctor-block">
+            <span class="italic-font" id="appointment-medic-name">{{doctorName}}</span>
         </div>
-        <div>
-            <span id="appointment-title">{{title}}</span>
+        <!-- Appointment name -->
+        <div class="appointment-name-block">
+            <span class="bold-font" id="appointment-title">{{title}}</span>
         </div>
     </div>
     

@@ -20,6 +20,9 @@ export class HttpService {
     public static readonly LOGIN_URL = `http://${HttpService.serverHost}:8000/api/login`;
     public static readonly LOGOUT_URL = `http://${HttpService.serverHost}:8000/api/logout`;
     public static readonly REGISTER_NEW_USER_URL = `http://${HttpService.serverHost}:8000/api/new-user`;
+    public static readonly DOCTOR_DETAILS = `http://${HttpService.serverHost}:8000/api/doctor-detail`;
+    public static readonly ALL_DOCTORS = `http://${HttpService.serverHost}:8000/api/all-doctors`;
+    public static readonly DOCTOR_UPDATE = `http://${HttpService.serverHost}:8000/api/doctor-update`;
 
     constructor(private http: HttpClient) {}
 
@@ -57,6 +60,21 @@ export class HttpService {
     async postMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
         console.log('URL', _url);
         const promise = this.http.post<T>(
+            _url,
+            $.param(body),
+            {
+                responseType: 'json',
+                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
+            }
+        )
+        .toPromise();
+
+        return promise;
+    }
+
+    async putMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
+        // console.log('URL', _url);
+        const promise = this.http.put<T>(
             _url,
             $.param(body),
             {

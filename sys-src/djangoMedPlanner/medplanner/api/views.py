@@ -3,46 +3,54 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from medplanner.models import Doctor, User, Appointment
 from medplanner.api.serializers import DoctorSerializer
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
 
 
-@api_view(['GET', ])
+
+@api_view(['POST', ])
 def api_all_doctors_view(request):
     try:
         doctor = Doctor.objects.all()
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == "GET":
+    if request.method == "POST":
         serializer = DoctorSerializer(doctor, many=True)
         return Response(serializer.data)
 
 
-@api_view(['GET', ])
-def api_detail_doctor_view(request, pk):
+@api_view(['POST', ])
+def api_detail_doctor_view(request):
+    pk = request.POST.get('pk')
     try:
         doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == "GET":
+    if request.method == "POST":
         serializer = DoctorSerializer(doctor)
         return Response(serializer.data)
 
 
-@api_view(['PUT', ])
-def api_update_doctor_view(request, pk):
+@api_view(['POST', ])
+def api_update_doctor_view(request):
+    pk = request.POST.get('pk')
+    first_name = request.POST.get('doctor_first_name')
+    last_name = request.POST.get('doctor_last_name')
+    print(first_name)
     try:
         doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == "PUT":
-        serializer = DoctorSerializer(doctor, data=request.data)
+    if request.method == "POST":
+        serializer = DoctorSerializer(doctor, data=request.POST.get('data'))
         data = {}
         if serializer.is_valid():
             serializer.save()
             data["success"] = "update successful"
-            return Response(data=data)
+            return Response(data=data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

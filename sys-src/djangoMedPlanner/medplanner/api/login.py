@@ -9,44 +9,34 @@ from rest_framework import status
 # user login ; request is the http request in rest framework
 @api_view(['POST'])
 def login(request):
-    if request.user.is_authenticated:
-        return Response({"result": "is authenticated"})
-
     username = request.POST.get('username')
     password = request.POST.get('password')
-    
     try:
         login_user = User.objects.get(username=username)
     except:
-        return Response({"error": "User does not exist"})
+        return Response(status=status.HTTP_404_NOT_FOUND)
     
     check = login_user.check_password(password)
     if (check is True) & login_user.is_active:
         user = auth.authenticate(username=username, password=password)
         auth.login(request, user)
         new_token, created = Token.objects.get_or_create(user=user)
-        return Response({"ok": str(new_token)})
+        return Response(data={"result": str(new_token)}, status=status.HTTP_200_OK)
     else:
-        return Response({"error": "Password is wrong"})
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 # user logout ; request is the http request in rest framework
 @api_view(['POST'])
 def logout(request):
     username = request.POST.get('username')
-    logout_user = User.objects.get(username=username)
+    try:
+        logout_user = User.objects.get(username=username)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
     auth.logout(request)
     logout_user.auth_token.delete()
-    return Response(True)
-
-
-# get users
-def get_all_users():
-    return User.objects.all()
-
-
-def find_user(user_name):
-    return User.objects.get(username=user_name)
+    return Response(status=status.HTTP_200_OK)
 
 
 # create a new user
@@ -55,10 +45,17 @@ def create_user(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')
-    # TODO: check if username exists
-    new_user = User.objects.create_user(username, email, password)
-    new_user.save()
-    return Response(True)
+    try:
+        user = User.objects.get(username=username)
+        if user is not None:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    except:
+        try:
+            new_user = User.objects.create_user(username, email, password)
+            new_user.save()
+        except:
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    return Response(status=status.HTTP_200_OK)
 
 
 # update user profile

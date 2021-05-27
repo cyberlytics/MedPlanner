@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 
 @Component({

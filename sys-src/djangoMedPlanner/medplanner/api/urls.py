@@ -7,11 +7,11 @@ from medplanner.api.login import create_user, login, logout, change_user_passwor
 app_name = 'medplanner'
 
 urlpatterns = [
-    path('doctors', api_all_doctors_view),
-    path('doctor-detail/<pk>/', api_detail_doctor_view, name='detail'),
+    path('all-doctors', api_all_doctors_view),
+    path('doctor-detail', api_detail_doctor_view, name='detail'),
     path('new-doctor', api_create_doctor_view, name='create'),
-    path('doctor-delete/<pk>/', api_delete_doctor_view, name='delete'),
-    path('doctor-update/<pk>/', api_update_doctor_view, name='update'),
+    path('doctor-delete', api_delete_doctor_view, name='delete'),
+    path('doctor-update', api_update_doctor_view, name='update'),
     path('new-user', create_user, name='register'),
     path('login', login, name='login'),
     path('logout', logout, name='logout'),

@@ -23,6 +23,7 @@ export class AppComponent implements AfterViewInit {
     // this.requestLogin();
     // this.requestLogout();
     // this.registerNewUser();
+    this.getDoctor();
   }
 
   public onHeaderHeightInit(_headerHeight: number): void {
@@ -63,6 +64,18 @@ export class AppComponent implements AfterViewInit {
         password: 'HGh', // 'HZ86IH7zg98t5ouuo7', // 6787ZVIBU75FTHg5456ftzvbu
         is_superuser: false,
         is_staff: false
+      }
+    );
+    console.log('response', response);
+  }
+
+  private async getDoctor(): Promise<void> {
+    const response = await this.httpService.postMessage(
+      HttpService.DOCTOR_UPDATE,
+      {
+        pk: '1',
+        data: {doctor_first_name: 'TestName',
+        doctor_last_name: ''}
       }
     );
     console.log('response', response);

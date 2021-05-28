@@ -40,9 +40,9 @@ class Surgery(models.Model):
     telephone_number = models.IntegerField(max_length=100)
     website          = models.CharField(max_length = 100)
 
-class Tag(models.Model):
-    description = models.CharField(max_length=100)
-    colour      = models.CharField(max_length=100)
+#class Tag(models.Model):
+#   description = models.CharField(max_length=100)
+#   colour      = models.CharField(max_length=100)
 
     #posted = model.DateTimeField(auto_now=True) #it will update the `posted` field every time when it was modified 
     #posted = model.DateTimeField(auto_now_add=True) # ... when it was created

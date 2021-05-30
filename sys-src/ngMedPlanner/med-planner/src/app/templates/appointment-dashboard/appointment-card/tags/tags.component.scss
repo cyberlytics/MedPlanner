@@ -1,0 +1,8 @@
+@import '../../../../../styles.scss';
+
+.mat-chip-tag {
+    @extend .bold-font;
+    padding: 1em 1.3em;
+    color: white;
+    opacity: 0.9;
+}

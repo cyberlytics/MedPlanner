@@ -1,4 +1,5 @@
 import { DoctorModel } from '../doctors-dashboard/doctor-model';
+import { TagModel } from '../tags/tag-model';
 
 
 export class AppointmentModel {
@@ -31,6 +32,10 @@ export class AppointmentModel {
         return this.data.note;
     }
 
+    get tags(): Array<TagModel> | undefined {
+        return this.data.tags;
+    }
+
     constructor(private data: {
         id: number;
         title: string;
@@ -38,6 +43,7 @@ export class AppointmentModel {
         doctor: DoctorModel | null;
         priority: Priority;
         note: string;
+        tags?: Array<TagModel>;
     }) {}
 
     public static getPriorityByName(_name: string): Priority {

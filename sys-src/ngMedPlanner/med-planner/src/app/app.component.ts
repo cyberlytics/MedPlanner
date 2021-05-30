@@ -58,9 +58,9 @@ export class AppComponent implements AfterViewInit {
     const response = await this.httpService.postMessage(
       HttpService.REGISTER_NEW_USER_URL,
       {
-        username: 'test2@user.de', // 'user@mail.com',
-        email: 'test2@user.de', // 'user@mail.com',         // ex@gmail.com
-        password: 'HGh', // 'HZ86IH7zg98t5ouuo7', // 6787ZVIBU75FTHg5456ftzvbu
+        username:  'user@mail.com',
+        email: 'user@mail.com',         // ex@gmail.com
+        password: 'HZ86IH7zg98t5ouuo7', // 6787ZVIBU75FTHg5456ftzvbu
         is_superuser: false,
         is_staff: false
       }

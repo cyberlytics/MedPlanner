@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../http-service/http.service';
 import { DataServiceBasic } from './data-basic.service';
 
-import { AppointmentMock } from '../data-interfaces/data-interfaces';
+import { AppointmentData } from '../data-interfaces/data-interfaces';
 
 @Injectable({
     providedIn: 'root',
@@ -21,5 +21,5 @@ export class AppointmentsDataService extends DataServiceBasic<AppointmentsData> 
 }
 
 interface AppointmentsData {
-    appointments: Array<AppointmentMock>;
+    appointments: Array<AppointmentData>;
 }

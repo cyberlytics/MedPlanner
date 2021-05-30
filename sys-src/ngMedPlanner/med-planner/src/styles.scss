@@ -63,6 +63,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: map-get($contrast-colors, secondary-dark);
 }
 
+.card-shape {
+    border-radius: 0 24px 0 0;
+}
+
 .base-button-shape {
     border-radius: 24px;
     transition: .8s;

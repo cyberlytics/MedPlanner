@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DoctorMock } from '../data-interfaces/data-interfaces';
+import { DoctorData } from '../data-interfaces/data-interfaces';
 import { HttpService } from '../http-service/http.service';
 import { DataServiceBasic } from './data-basic.service';
 
@@ -20,5 +20,5 @@ export class DoctorDataService extends DataServiceBasic<Doctors> {
 }
 
 export interface Doctors {
-    doctors: Array<DoctorMock>;
+    doctors: Array<DoctorData>;
 }

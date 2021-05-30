@@ -2,6 +2,7 @@ import { AppointmentModel } from './appointment-model';
 import { Injectable } from '@angular/core';
 import { AppointmentsDataService } from '../../data/appointments-data.service';
 import { DoctorsDashboardStateService } from '../doctors-dashboard/doctors-dashboard-state.service';
+import { TagsStateService } from '../tags/tags-state.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ export class AppointmentsDashboardStateService {
 
     constructor(
         private appointmentsData: AppointmentsDataService,
-        private doctorsState: DoctorsDashboardStateService
+        private doctorsState: DoctorsDashboardStateService,
+        private tagsState: TagsStateService
     ) {}
 
     public async getAppointments(): Promise<Array<AppointmentModel>> {
@@ -37,7 +39,8 @@ export class AppointmentsDashboardStateService {
                         datetime: appointment.datetime,
                         doctor: await this.doctorsState.getDoctorById(appointment.doc_id),
                         priority: AppointmentModel.getPriorityByName(appointment.priority),
-                        note: appointment.note
+                        note: appointment.note,
+                        tags: await this.tagsState.getTagListByIds(appointment.tags)
                     }
                 )
             );

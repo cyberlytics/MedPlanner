@@ -37,7 +37,7 @@ class Surgery(models.Model):
     location         = models.CharField(max_length=100)
     street           = models.CharField(max_length=100)
     description      = models.CharField(max_length=100)
-    telephone_number = models.IntegerField()
+    telephone_number = models.CharField(max_length=100)
     website          = models.CharField(max_length=100)
 
 class Tag(models.Model):

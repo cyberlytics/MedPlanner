@@ -1,0 +1,34 @@
+
+<div class="main-block">
+    <div class="card-block card-shape base-shadow primary-border">
+        <!-- Priority, Date and Time block -->
+        <div class="pri-datetime-block">
+            <app-priority [priority]="appointment?.priority"></app-priority>
+            <div class="datetime-block">
+                <span class="regular-font" id="appointment-date">{{dateTime}}</span>
+                <span class="regular-font" id="appointment-time">{{time}}</span>
+            </div>
+        </div>
+        <!-- Doctor name -->
+        <div class="doctor-block">
+            <span class="italic-font" id="appointment-medic-name">{{doctorName}}</span>
+        </div>
+        <!-- Appointment name -->
+        <div class="appointment-name-block">
+            <span class="bold-font" id="appointment-title">{{title}}</span>
+        </div>
+        <!-- Tags -->
+        <div class="appointment-name-block">
+            <app-tags
+                [tags]="appointment?.tags"
+            ></app-tags>
+        </div>
+    </div>
+    
+    <div class="detail-button">
+        <button class="base-button base-button-shape secondary-button" id="appointment-button"
+        (click)="onDetailsButtonClick()">
+            Details
+        </button>
+    </div>
+</div>

@@ -18,7 +18,7 @@ urlpatterns = [
     path('logout', logout, name="logout"),
 
     path('appointment',              api_all_appointments_view),
-    path('appointment-detail/<pk>/', api_detail_appointment_view, name="all-appointment"),
+    path('appointment-detail/<pk>/', api_detail_appointment_view, name="detail-appointment"),
     path('new-appointment',          api_create_appointment_view, name="create-appointment"),
     path('appointment-delete/<pk>/', api_delete_appointment_view, name="delete-appointment"),
     path('appointment-update/<pk>/', api_update_appointment_view, name="update-appointment"),

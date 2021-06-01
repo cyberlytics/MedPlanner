@@ -23,7 +23,7 @@ export class HttpService {
     public static readonly DOCTOR_DETAILS = `http://${HttpService.serverHost}:8000/api/doctor-detail`;
     public static readonly ALL_DOCTORS = `http://${HttpService.serverHost}:8000/api/all-doctors`;
     public static readonly DOCTOR_UPDATE = `http://${HttpService.serverHost}:8000/api/doctor-update`;
-
+    public static readonly NEW_DOCTOR = `http://${HttpService.serverHost}:8000/api/new-doctor`;
     constructor(private http: HttpClient) {}
 
     async requestData<T>(_url: string, body?: any): Promise<T> {
@@ -62,6 +62,7 @@ export class HttpService {
         const promise = this.http.post<T>(
             _url,
             $.param(body),
+            // JSON.stringify(body),
             {
                 responseType: 'json',
                 headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})

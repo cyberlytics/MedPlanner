@@ -4,7 +4,6 @@ from rest_framework.decorators import api_view
 from medplanner.models import Doctor, User, Appointment
 from medplanner.api.serializers import DoctorSerializer
 from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
 
 
 
@@ -38,7 +37,6 @@ def api_update_doctor_view(request):
     pk = request.POST.get('pk')
     first_name = request.POST.get('doctor_first_name')
     last_name = request.POST.get('doctor_last_name')
-    print(first_name)
     try:
         doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
@@ -56,7 +54,6 @@ def api_update_doctor_view(request):
 
 @api_view(['DELETE', ])
 def api_delete_doctor_view(request, pk):
-    print('delete')
     try:
         doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:

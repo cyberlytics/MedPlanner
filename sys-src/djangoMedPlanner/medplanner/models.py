@@ -35,10 +35,10 @@ class Surgery(models.Model):
 
 
 class Doctor(models.Model):
-    doctor_first_name = models.CharField(max_length=100)
+    doctor_first_name = models.CharField(max_length=100, blank=True)
     doctor_last_name  = models.CharField(max_length=100)
     specializations   = models.ManyToManyField(Specialization, blank=True)
-    surgery_id = models.ForeignKey(Surgery, on_delete=models.CASCADE, related_name='surgery', default='', null=True,
+    surgery_id        = models.ForeignKey(Surgery, on_delete=models.CASCADE, related_name='surgery', default='', null=True,
                                    blank=True)
     def __str__(self):
         return self.doctor_first_name + '' + self.doctor_last_name
@@ -52,7 +52,7 @@ class Tag(models.Model):
 class Appointment(models.Model):
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
     user_id   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    date_time = models.DateTimeField(default=datetime.now, blank=True)
+    date_time = models.DateTimeField(default=datetime.now)
     notes     = models.TextField(blank=True)
     tags      = models.ManyToManyField(Tag, blank=True)
 

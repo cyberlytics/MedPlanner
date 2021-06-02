@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 from .models import (
     Appointment, 
@@ -10,7 +11,7 @@ from .models import (
 )
 
 admin.site.register(Doctor)
-admin.site.register(UserProfile)
+admin.site.register(UserProfile, UserAdmin)
 admin.site.register(Appointment)
 admin.site.register(Specialization)
 admin.site.register(Surgery)

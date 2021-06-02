@@ -57,13 +57,14 @@ class Tag(models.Model):
 class Appointment(models.Model):
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
     #! related_name must not be the same as the referred field names 
-    user      = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='usr')
+    #! default is admin?
+    user      = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='usr', to_field='username', default="awe_user")
     date_time = models.DateTimeField(verbose_name='appointment date', default=now)
     notes     = models.TextField(blank=True)
     tags      = models.ManyToManyField(Tag, blank=True)
 
 
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+@receiver(post_save, sender=UserProfile)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     # Creates a token by registrating a new user
     if created:

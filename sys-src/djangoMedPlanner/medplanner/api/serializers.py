@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from medplanner.models import User, Doctor, Appointment
+from medplanner.models import Doctor, Appointment
 
 
 class DoctorSerializer(serializers.ModelSerializer):

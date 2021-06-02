@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from medplanner.models import Doctor, User, Appointment
+from medplanner.models import Doctor, UserProfile, Appointment
 from medplanner.api.serializers import DoctorSerializer
 from rest_framework.parsers import JSONParser
 

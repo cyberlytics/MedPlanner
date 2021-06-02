@@ -1,7 +1,15 @@
 from django.urls import path
-from medplanner.api.views import api_create_doctor_view, api_delete_doctor_view, api_all_doctors_view, \
-    api_update_doctor_view, api_detail_doctor_view
-from medplanner.api.login import create_user, login, logout, change_user_password, deactivate_user, activate_user
+from medplanner.api.views import (
+    api_create_doctor_view, api_delete_doctor_view, 
+    api_all_doctors_view, api_update_doctor_view, 
+    api_detail_doctor_view
+)
+from medplanner.api.login import (
+    create_user, 
+    login, logout, 
+    change_user_password, 
+    deactivate_user, activate_user
+)
 
 
 app_name = 'medplanner'

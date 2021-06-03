@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserMock } from '../data-interfaces/data-interfaces';
 import { HttpService } from '../http-service/http.service';
 
 @Injectable({

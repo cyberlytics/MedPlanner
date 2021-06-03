@@ -44,9 +44,9 @@ class Doctor(models.Model):
         return self.doctor_first_name + '' + self.doctor_last_name
 
 
-class Tag(models.Model):
-    description = models.CharField(max_length=100)
-    colour      = models.CharField(max_length=100)
+#class Tag(models.Model):
+#   description = models.CharField(max_length=100)
+#   colour      = models.CharField(max_length=100)
 
 
 class Appointment(models.Model):

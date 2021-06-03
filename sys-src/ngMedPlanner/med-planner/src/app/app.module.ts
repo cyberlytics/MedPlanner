@@ -13,6 +13,7 @@ import { MaterialModule } from './material/material.module';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppLoginComponent } from './templates/app-login/app-login.component';
 import { PriorityComponent } from './templates/appointment-card/priority/priority.component';
+import { AppSignInComponent } from './templates/app-sign-in/app-sign-in.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PriorityComponent } from './templates/appointment-card/priority/priorit
     PopupDetailViewComponent,
     AppHeaderComponent,
     AppLoginComponent,
-    PriorityComponent
+    PriorityComponent,
+    AppSignInComponent
   ],
   imports: [
     BrowserModule,

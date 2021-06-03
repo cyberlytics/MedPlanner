@@ -1,17 +1,17 @@
 from django.urls import path
-from medplanner.api.views import api_create_doctor_view, api_delete_doctor_view, api_all_doctors_view, \
-    api_update_doctor_view, api_detail_doctor_view
+from medplanner.api import views
 from medplanner.api.login import create_user, login, logout, change_user_password, deactivate_user, activate_user
 
 
 app_name = 'medplanner'
 
 urlpatterns = [
-    path('all-doctors', api_all_doctors_view),
-    path('doctor-detail', api_detail_doctor_view, name='detail'),
-    path('new-doctor', api_create_doctor_view, name='create'),
-    path('doctor-delete', api_delete_doctor_view, name='delete'),
-    path('doctor-update', api_update_doctor_view, name='update'),
+    path('doctor-list', views.doctor_list, name='doctor-list'),
+    path('doctor-detail/<str:pk>', views.doctor_detail, name='doctor-detail'),
+    path('doctor-create', views.doctor_create, name='doctor-create'),
+    path('doctor-update/<str:pk>', views.doctor_update, name='doctor-update'),
+    path('doctor-delete/<str:pk>', views.doctor_delete, name='doctor-delete'),
+
     path('new-user', create_user, name='register'),
     path('login', login, name='login'),
     path('logout', logout, name='logout'),

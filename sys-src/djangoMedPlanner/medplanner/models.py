@@ -41,7 +41,7 @@ class Doctor(models.Model):
     surgery_id        = models.ForeignKey(Surgery, on_delete=models.CASCADE, related_name='surgery', default='', null=True,
                                    blank=True)
     def __str__(self):
-        return self.doctor_first_name + '' + self.doctor_last_name
+        return self.doctor_last_name
 
 
 class Tag(models.Model):

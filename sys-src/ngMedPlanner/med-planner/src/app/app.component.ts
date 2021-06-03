@@ -23,6 +23,7 @@ export class AppComponent implements AfterViewInit {
     // this.requestLogin();
     // this.requestLogout();
     // this.registerNewUser();
+    // this.getDoctor();
   }
 
   public onHeaderHeightInit(_headerHeight: number): void {
@@ -58,12 +59,26 @@ export class AppComponent implements AfterViewInit {
     const response = await this.httpService.postMessage(
       HttpService.REGISTER_NEW_USER_URL,
       {
-        username:  'user@mail.com',
-        email: 'user@mail.com',         // ex@gmail.com
-        password: 'HZ86IH7zg98t5ouuo7', // 6787ZVIBU75FTHg5456ftzvbu
+        username: 'test4@user.de', // 'user@mail.com',
+        email: 'test4@user.de', // 'user@mail.com',         // ex@gmail.com
+        password: 'HGdthsrzah', // 'HZ86IH7zg98t5ouuo7', // 6787ZVIBU75FTHg5456ftzvbu
         is_superuser: false,
         is_staff: false
       }
+    );
+    console.log('response', response);
+  }
+
+  private async getDoctor(): Promise<void> {
+    const data = {
+      doctor_first_name: 'max',
+      doctor_last_name: 'mustermann',
+      specializations: 'spec',
+      surgery_id: null
+    };
+    const response = await this.httpService.postMessage(
+      HttpService.NEW_DOCTOR,
+      data
     );
     console.log('response', response);
   }

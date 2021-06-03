@@ -19,6 +19,10 @@ export class DoctorModel {
         return this.data.specialization;
     }
 
+    get specializationColor(): string | null | undefined {
+        return this.data.specialization?.color;
+    }
+
     get surgery(): null {
         return null;
     }

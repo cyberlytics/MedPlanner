@@ -51,6 +51,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: map-get($contrast-colors, secondary);
 }
 
+.primary-button {
+    border: 2px solid rgba($color: map-get($custom-colors, primary), $alpha: 1);
+    background-color: rgba($color: map-get($custom-colors, primary), $alpha: 1);
+    color: map-get($contrast-colors, primary);
+}
+
+.primary-button:hover {
+    border: 2px solid rgba($color: map-get($custom-colors, primary-dark), $alpha: 1);
+    background-color: rgba($color: map-get($custom-colors, primary-dark), $alpha: 1);
+    color: map-get($contrast-colors, primary-dark);
+}
+
 .secondary-button {
     border: 2px solid rgba($color: map-get($custom-colors, secondary), $alpha: 1);
     background-color: rgba($color: map-get($custom-colors, secondary), $alpha: 1);

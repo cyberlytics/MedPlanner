@@ -1,9 +1,6 @@
 <div class="main-block">
-    <mat-chip-list>
-        <mat-chip *ngFor="let tag of tags" class="mat-chip-tag"
-        [style.background-color]="tag.color">
-            {{tag.description}}
-        </mat-chip>
-    </mat-chip-list>
-    
+    <div *ngFor="let tag of tags" class="tag"
+    [style.border-color]="tag.color">
+        {{tag.description}}
+    </div>
 </div>

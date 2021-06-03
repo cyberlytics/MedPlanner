@@ -59,26 +59,45 @@ def create_user(request):
 
 
 # update user profile
-def update_user(user_name, new_password, is_superuser, is_staff):
-    user = User.objects.get(username=user_name)
-    user.set_password(new_password)
-    user.is_superuser = is_superuser
-    user.is_staff = is_staff
-    user.save()
+@api_view(['POST'])
+def change_user_password(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    try:
+        user = User.objects.get(username=username)
+        user.set_password(password)
+        user.save()
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_200_OK)
 
 
 # deactivate / activate user
 # not recommend the delete behavior for users, so we use deactivate instead
-def deactivate_user(user_name, is_active):
-    user = User.objects.get(username=user_name)
-    user.is_active = is_active
-    user.save()
+@api_view(['POST'])
+def deactivate_user(request):
+    user_name = request.POST.get('username')
+    is_active = request.POST.get('is_active')
+    try:
+        user = User.objects.get(username=user_name)
+        user.is_active = is_active
+        user.save()
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_200_OK)
 
 
-def activate_user(user_name, is_active):
-    user = User.objects.get(username=user_name)
-    user.is_active = is_active
-    user.save()
+@api_view(['POST'])
+def activate_user(request):
+    user_name = request.POST.get('username')
+    is_active = request.POST.get('is_active')
+    try:
+        user = User.objects.get(username=user_name)
+        user.is_active = is_active
+        user.save()
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_200_OK)
 
 
 

@@ -20,10 +20,12 @@ export class HttpService {
     public static readonly LOGIN_URL = `http://${HttpService.serverHost}:8000/api/login`;
     public static readonly LOGOUT_URL = `http://${HttpService.serverHost}:8000/api/logout`;
     public static readonly REGISTER_NEW_USER_URL = `http://${HttpService.serverHost}:8000/api/new-user`;
-    public static readonly DOCTOR_DETAILS = `http://${HttpService.serverHost}:8000/api/doctor-detail`;
-    public static readonly ALL_DOCTORS = `http://${HttpService.serverHost}:8000/api/all-doctors`;
-    public static readonly DOCTOR_UPDATE = `http://${HttpService.serverHost}:8000/api/doctor-update`;
-    public static readonly NEW_DOCTOR = `http://${HttpService.serverHost}:8000/api/new-doctor`;
+
+    public static readonly DOCTOR_LIST = `http://${HttpService.serverHost}:8000/api/doctor-list`;
+    public static readonly DOCTOR_DETAIL = `http://${HttpService.serverHost}:8000/api/doctor-detail/`;
+    public static readonly DOCTOR_UPDATE = `http://${HttpService.serverHost}:8000/api/doctor-update/`;
+    public static readonly DOCTOR_CREATE = `http://${HttpService.serverHost}:8000/api/doctor-create`;
+    public static readonly DOCTOR_DELETE = `http://${HttpService.serverHost}:8000/api/doctor-delete/`;
     constructor(private http: HttpClient) {}
 
     async requestData<T>(_url: string, body?: any): Promise<T> {

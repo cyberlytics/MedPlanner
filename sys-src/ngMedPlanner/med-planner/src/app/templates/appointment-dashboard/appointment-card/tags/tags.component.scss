@@ -1,8 +1,19 @@
 @import '../../../../../styles.scss';
 
-.mat-chip-tag {
-    @extend .bold-font;
-    padding: 1em 1.3em;
-    color: white;
-    opacity: 0.9;
+.main-block {
+    @extend .regular-font;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: .05em .5em;
+    color: black;
+    opacity: 0.6;
+
+    margin-left: .5em;
+    margin-top: .25em;
+
+    border-radius: 24px;
+    border: solid 2px;
 }

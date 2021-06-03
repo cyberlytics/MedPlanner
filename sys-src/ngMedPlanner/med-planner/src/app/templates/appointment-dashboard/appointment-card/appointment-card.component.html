@@ -1,6 +1,7 @@
 
 <div class="main-block">
-    <div class="card-block card-shape base-shadow primary-border">
+    <div class="card-block card-shape base-shadow primary-border"
+    [style.border-color]="appointment?.doctorSpecializationColor">
         <!-- Priority, Date and Time block -->
         <div class="pri-datetime-block">
             <app-priority [priority]="appointment?.priority"></app-priority>
@@ -10,8 +11,8 @@
             </div>
         </div>
         <!-- Doctor name -->
-        <div class="doctor-block">
-            <span class="italic-font" id="appointment-medic-name">{{doctorName}}</span>
+        <div class="doctor-block" [style.border-color]="appointment?.doctorSpecializationColor">
+            <span class="italic-font" id="appointment-medic-name">Dr. {{doctorName}}</span>
         </div>
         <!-- Appointment name -->
         <div class="appointment-name-block">

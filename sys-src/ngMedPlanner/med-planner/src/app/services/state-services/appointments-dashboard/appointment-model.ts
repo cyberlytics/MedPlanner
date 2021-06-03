@@ -24,6 +24,10 @@ export class AppointmentModel {
         return `${this.data.doctor?.firstName} ${this.data.doctor?.surname}`;
     }
 
+    get doctorSpecializationColor(): string | null | undefined {
+        return this.data.doctor?.specializationColor;
+    }
+
     get priority(): Priority {
         return this.data.priority;
     }

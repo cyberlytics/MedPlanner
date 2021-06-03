@@ -20,6 +20,7 @@ services:
       #- db
   frontend:
       image: ng:10.0
+      build: ./ngMedPlanner/
       container_name: MedPlanner
       working_dir: /angular
       volumes:

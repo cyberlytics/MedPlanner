@@ -9,7 +9,6 @@ import { TagModel } from 'src/app/services/state-services/tags/tag-model';
 export class TagsComponent implements OnInit {
 
   @Input() set tags(value: Array<TagModel> | undefined) {
-    console.log('tags', value);
     this._tags = value;
 
     this.changeDet.detectChanges();

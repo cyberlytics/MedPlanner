@@ -1,40 +1,16 @@
 import { Injectable } from '@angular/core';
 import { TagsDataService } from '../../data/tags-data.service';
+import { UserStateService } from '../../user-services/user-state.service';
+import { BaseStateService } from '../base-state.service';
 import { TagModel } from './tag-model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TagsStateService {
+export class TagsStateService extends BaseStateService<TagModel> {
 
-    private _tags: Array<TagModel> | null = null;
-
-    constructor(private tagsDataService: TagsDataService) {}
-
-    public async getTags(): Promise<Array<TagModel>> {
-
-        if (this._tags === null) {
-            await this.initTags();
-        }
-
-        return this._tags as Array<TagModel>;
-    }
-
-    /**
-     * Returns tag by id value or null if not found.
-     * @param id Id of tag to find.
-     * @returns tag of type TagModel or null.
-     */
-    public async getTagById(id: number): Promise<TagModel | null> {
-        const tags = await this.getTags();
-
-        for (const tag of tags) {
-            if (tag.id === id) {
-                return tag;
-            }
-        }
-
-        return null;
+    constructor(private tagsDataService: TagsDataService, userState: UserStateService) {
+        super(userState);
     }
 
     /**
@@ -50,7 +26,7 @@ export class TagsStateService {
         const tags = new Array<TagModel>();
 
         for (const id of ids) {
-            const tag = await this.getTagById(id);
+            const tag = await this.getModelById(id);
 
             if (tag !== null) {
                 tags.push(tag);
@@ -64,13 +40,11 @@ export class TagsStateService {
         return tags;
     }
 
-    private async initTags(): Promise<void> {
+    protected async initStateData(): Promise<void> {
         const tagsData = await this.tagsDataService.getData();
 
-        this._tags = new Array<TagModel>();
-
         for (const tagData of tagsData.tags) {
-            this._tags.push(
+            this.addData(
                 new TagModel(
                     {
                         id: tagData.id,

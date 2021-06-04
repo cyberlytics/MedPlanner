@@ -1,22 +1,23 @@
 # Admin mode
-To get the admin mode put in the browser `localhost:8000/admin`
+Um in den Admin-Mode zu gelangen: `localhost:8000/admin`
 
 ## Admin Login:
-+ user: awe_user
++ admin_user: awe_user@admin.com
 + password: Z?D76.u(6756
 
 ## Trouble shooting
-If login errors are occuring try the following:<br>
-1. Execute the following command while `docker-compose up` is running in another shell <br>
+Falls es Schwierigkeiten beim Admin-Login gibt, ist vermutlich noch kein superuser erzeugt<br>
+1. Während `docker-compose up` läuft, erzeugt man in einer anderen Shell einen neuen Admin <br>
 ```
 docker exec -it sys-src_backend_1 python manage.py createsuperuser
 ```
-2. Fill in the asked elements, e.g.:
+2. Eingabe der erforderlichen Ferlder, e.g.:
 ```
-Benutzername:
-E-Mail-Adresse: [you can it leave blank]
-Password: 
-Password (again): 
+E-Mail-Adresse: <admin_user>
+Password: <password>
+Password (again): <password>
 ```
 
-3. This will successfully create the superuser. Now you can try admin mode again.
+**Anmerkung:** Der Default-User von Django verlangt eigentlich verpflichtend einen Benutzernamen statt einer Email-Adresse. Da wir bei der Registierung bzw. beim Login ausschließlich mit der E-Mail arbeiten, wurde das model entsprechend angepasst.
+
+3. Danach sollte man wie gewohnt in den Admin-Mode gelangen können.

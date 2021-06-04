@@ -11,7 +11,8 @@ from .models import (
 )
 
 admin.site.register(Doctor)
-admin.site.register(UserProfile, UserAdmin)
+#admin.site.register(UserProfile)
+admin.site.register(UserProfile , UserAdmin)
 admin.site.register(Appointment)
 admin.site.register(Specialization)
 admin.site.register(Surgery)

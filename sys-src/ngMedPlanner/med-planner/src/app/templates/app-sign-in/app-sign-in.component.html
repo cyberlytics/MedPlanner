@@ -32,10 +32,11 @@
 
             <mat-form-field appearance="outline"  >
                 <mat-label>Passwort</mat-label>
-                <input matInput [formControl]="registerPasswordFormControl" required>
+                <input matInput [formControl]="registerPasswordFormControl" required 
+                [type]="hidePassword ? 'password' : 'text'">
                 
-                <button mat-icon-button matSuffix >
-                    <mat-icon></mat-icon>
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
         
                <mat-error *ngIf="registerPasswordFormControl.invalid">{{passwordErrorMessage}}</mat-error>
@@ -44,10 +45,10 @@
             <mat-form-field appearance="outline"  >
                 <mat-label>Passwort bestätigen</mat-label>
                 <input matInput [formControl]="confirmPasswordFormControl" required
-                #RegPasswordValue>
+                #RegPasswordValue [type]="hidePassword ? 'password' : 'text'">
                 
-                <button mat-icon-button matSuffix >
-                    <mat-icon></mat-icon>
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
         
                <mat-error *ngIf="confirmPasswordFormControl.invalid">{{passwordErrorMessage}}</mat-error>

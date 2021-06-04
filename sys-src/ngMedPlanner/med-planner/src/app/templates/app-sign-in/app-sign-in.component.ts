@@ -76,6 +76,14 @@ export class AppSignInComponent implements OnInit {
   private _confirmPasswordFormControl: FormControl;
 
 
+  set hidePassword(value: boolean) {
+    this._hidePassword = value;
+  }
+  get hidePassword(): boolean {
+    return this._hidePassword;
+  }
+  private _hidePassword: boolean;
+
   constructor(
     
     private router: Router,
@@ -98,6 +106,8 @@ export class AppSignInComponent implements OnInit {
       '',
       [Validators.required, RegPasswordValidator.differentPasswords] 
     );
+
+    this._hidePassword = true;
 
   } 
 

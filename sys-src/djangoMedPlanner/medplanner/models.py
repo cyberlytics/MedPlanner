@@ -10,9 +10,12 @@ from django.utils.timezone import now
 # Models: the models that can be used as a ForeignKey must be placed before
 # the model that uses the ForeignKeys
 class UserProfile(AbstractUser):
-    user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     username   = models.CharField(max_length=100, unique=True)
-    user_email = models.EmailField(unique=True)
+    email      = models.EmailField(unique=True)
+
+    USERNAME_FIELD = 'username'
+    #REQUIRED_FIELDS= ['email']
 
     #TODO password
     #password   =
@@ -56,16 +59,17 @@ class Tag(models.Model):
 
 class Appointment(models.Model):
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
-    #! related_name must not be the same as the referred field names 
-    #! default is admin?
-    user      = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='usr', to_field='username', default="awe_user")
+    #! related_name should not be the same as the referred field names 
+    #user      = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='usr', to_field='username', default="awe_user")
+    user      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='usr')
     date_time = models.DateTimeField(verbose_name='appointment date', default=now)
     notes     = models.TextField(blank=True)
     tags      = models.ManyToManyField(Tag, blank=True)
 
 
-@receiver(post_save, sender=UserProfile)
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     # Creates a token by registrating a new user
     if created:
         Token.objects.create(user=instance)
+

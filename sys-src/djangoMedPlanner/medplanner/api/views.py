@@ -82,26 +82,3 @@ def api_create_doctor_view(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#@login_required
-@api_view(['POST', ])
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
-        if form.is_valid():
-            user = form.save()
-            #update_session_auth_hash(request, form.user)  # Important!
-            #! print messages later: from django.contrib import messages
-            #messages.success(request, 'Your password was successfully updated!')
-            
-        else:
-            return Response({"error:" f"Form is not valid {form}"})
-    else:
-        form = PasswordChangeForm(request.user)
-        args = {"form": form}
-        return Response({"error:" f"No POST request: {form}"})
-
-#@login_required
-#def profile(request):
-#    # if user is logged in, data can be changed
-#    pass

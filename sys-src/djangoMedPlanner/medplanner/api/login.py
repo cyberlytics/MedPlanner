@@ -5,6 +5,7 @@ from medplanner.models import UserProfile as User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.contrib.auth.hashers import check_password
 
 
 # user login ; request is the http request in rest framework
@@ -60,6 +61,8 @@ def create_user(request):
 
 
 # update user profile
+#! Funktioniert generell, aber überschreibt ohne jegliche Prüfung
+# message fenster anzeigen, falls erfolgreich oder hinweis-fenster, falls nicht erfolgreich
 @api_view(['POST'])
 def change_user_password(request):
     username = request.POST.get('username')
@@ -68,9 +71,44 @@ def change_user_password(request):
         user = User.objects.get(username=username)
         user.set_password(password)
         user.save()
+        response = {
+                    'status': 'success',
+                    'code': status.HTTP_200_OK,
+                    'message': 'Password updated successfully',
+                    'data': password
+                }
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    return Response(status=status.HTTP_200_OK)
+    return Response(response)
+
+
+#! Testing Purposes
+@api_view(['POST'])
+def changepassword(request):
+    #curr_pass = request.user.password
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    try:
+        user = User.objects.get(username=username)
+        #user.set_password(password)
+        #user.save()
+        matchcheck = check_password(user.password, password)
+        response = {
+                    'status': 'success',
+                    'code': status.HTTP_200_OK,
+                    'message': 'Password updated successfully',
+                    'data': f'{matchcheck} <- password'
+                }
+    except:
+        response = {
+                    'status': 'nope',
+                    'code': status.HTTP_400_BAD_REQUEST,
+                    'message': 'Password updated successfully',
+                    'data': f'{user.password}\n {password}'
+                    }
+        #return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(response)
+    return Response(response)
 
 
 # deactivate / activate user

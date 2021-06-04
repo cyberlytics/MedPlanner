@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserMock } from '../data-interfaces/data-interfaces';
 import { HttpService } from '../http-service/http.service';
 
 @Injectable({
@@ -42,40 +41,33 @@ export class LoginService implements Login {
      * Sends user login request to sever.
      * @param _email Email to login.
      * @param _password Password to login.
-     * @param _mockCall Is call local mock json data?
      * @returns Promise with call result.
      */
     public async login(_email: string, _password: string): Promise<LoginResult> {
-        // return this.loginMockCall(_email, _password);
+        try {
+            const response = await this.httpService.postMessage<{result: string}>(
+                HttpService.LOGIN_URL,
+                {
+                  username: _email,
+                  password: _password
+                }
+            );
 
-        const response = await this.httpService.postMessage<any>(
-            HttpService.LOGIN_URL,
-            {
-              username: _email,
-              password: _password
-            }
-        ).catch( (result) => {
-            console.error(result);
-            return LoginResult.SERVER_ERROR;
-        });
-
-        // TODO: Rewrite logic, now is just pseude checking.
-        console.log('response', response);
-
-        if (response.result) {
             this.storeToken(response.result);
-            return LoginResult.LOGIN_SUCCESFULL;
+        } catch (error) {
+
+            if (error.status === HttpService.HTTP_403_FORBIDDEN) {
+                return LoginResult.PASSWORD_IS_WRONG;
+            }
+
+            if (error.status === HttpService.HTTP_404_NOT_FOUND) {
+                return LoginResult.USER_DOES_NOT_EXIST;
+            }
+
+            return LoginResult.SERVER_ERROR;
         }
 
-        if (response.error === 'User does not exist') {
-            return LoginResult.USER_DOES_NOT_EXIST;
-        }
-
-        if (response.error === 'Password is wrong') {
-            return LoginResult.PASSWORD_IS_WRONG;
-        }
-
-        return LoginResult.UNKNOWN_ERROR;
+        return LoginResult.LOGIN_SUCCESFULL;
     }
     /**
      * Logs out the user from app.

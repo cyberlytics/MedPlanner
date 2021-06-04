@@ -31,9 +31,7 @@ export class AppointmentDashboardComponent implements OnInit {
   }
 
   private async loadAppointments(): Promise<void> {
-    this._appointments = await this.appointmentsState.getAppointments();
-
-    console.log(this._appointments);
+    this._appointments = await this.appointmentsState.getStateData();
 
     this.changeDet.detectChanges();
   }

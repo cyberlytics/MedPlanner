@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
+import { TagData } from '../data-interfaces/data-interfaces';
 import { HttpService } from '../http-service/http.service';
-import { DataServiceBasic } from './data-basic.service';
-
-import { AppointmentData } from '../data-interfaces/data-interfaces';
 import { UserStateService } from '../user-services/user-state.service';
+import { DataServiceBasic } from './data-basic.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AppointmentsDataService extends DataServiceBasic<AppointmentsData> {
+export class TagsDataService extends DataServiceBasic<TagsData> {
 
     constructor(httpService: HttpService, userState: UserStateService) {
         super(
             httpService,
             {
-                requestURL: HttpService.APPOINTMENTS_URL
+                requestURL: HttpService.TAGS_URL
             },
             userState
         );
@@ -22,6 +21,6 @@ export class AppointmentsDataService extends DataServiceBasic<AppointmentsData> 
 
 }
 
-interface AppointmentsData {
-    appointments: Array<AppointmentData>;
+interface TagsData {
+    tags: Array<TagData>;
 }

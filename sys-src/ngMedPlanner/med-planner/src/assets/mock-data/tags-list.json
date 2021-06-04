@@ -1,0 +1,35 @@
+{
+    "tags": 
+    [
+        {
+            "id": 1,
+            "description": "Tag 1",
+            "color": "#ff7043"
+        },
+        {
+            "id": 2,
+            "description": "Tag 2",
+            "color": "#00796b"
+        },
+        {
+            "id": 3,
+            "description": "Tag 3",
+            "color": "#1976d2"
+        },
+        {
+            "id": 4,
+            "description": "Tag 4",
+            "color": "#4527a0"
+        },
+        {
+            "id": 5,
+            "description": "Tag 5",
+            "color": "#ad1457"
+        },
+        {
+            "id": 6,
+            "description": "Tag 6",
+            "color": "#6d4c41"
+        }
+    ]
+}

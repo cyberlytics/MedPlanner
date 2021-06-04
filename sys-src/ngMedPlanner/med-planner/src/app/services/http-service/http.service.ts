@@ -10,7 +10,13 @@ export class HttpService {
 
     private static readonly serverHost: string = environment.serverHost;
 
+    public static readonly HTTP_403_FORBIDDEN = 403;
+    public static readonly HTTP_404_NOT_FOUND = 404;
+    public static readonly HTTP_200_OK = 200;
+    public static readonly HTTP_500_INTERNAL_SERVER_ERROR = 500;
+
     public static readonly APPOINTMENTS_URL = 'assets/mock-data/appointments-list.json';
+    public static readonly TAGS_URL = 'assets/mock-data/tags-list.json';
     public static readonly DOCTORS_URL = 'assets/mock-data/doctors_list.json';
     public static readonly SURGERIES_URL = 'assets/mock-data/surgery-list.json';
     public static readonly SPECIALIZATIONS_URL = 'assets/mock-data/specialization-list.json';
@@ -43,7 +49,6 @@ export class HttpService {
     }
 
     async getMessage<T>(_url: string, options?: any): Promise<T> {
-        console.log('URL', _url);
         const promise = this.http.get<T>(
             _url,
             {
@@ -60,7 +65,6 @@ export class HttpService {
     }
 
     async postMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
-        console.log('URL', _url);
         const promise = this.http.post<T>(
             _url,
             $.param(body),

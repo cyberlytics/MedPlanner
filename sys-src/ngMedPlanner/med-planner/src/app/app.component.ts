@@ -82,7 +82,7 @@ export class AppComponent implements AfterViewInit {
         method: 'GET',
         headers: {
           'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          // 'Authorization': `Token ${this.token}`
         }
       }
     )

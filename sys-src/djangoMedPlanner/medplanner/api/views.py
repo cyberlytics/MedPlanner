@@ -4,6 +4,10 @@ from rest_framework.decorators import api_view
 from medplanner.models import Doctor, UserProfile, Appointment
 from medplanner.api.serializers import DoctorSerializer
 from rest_framework.parsers import JSONParser
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from rest_framework.generics import UpdateAPIView
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -79,3 +83,25 @@ def api_create_doctor_view(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#@login_required
+@api_view(['POST', ])
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            user = form.save()
+            #update_session_auth_hash(request, form.user)  # Important!
+            #! print messages later: from django.contrib import messages
+            #messages.success(request, 'Your password was successfully updated!')
+            
+        else:
+            return Response({"error:" f"Form is not valid {form}"})
+    else:
+        form = PasswordChangeForm(request.user)
+        args = {"form": form}
+        return Response({"error:" f"No POST request: {form}"})
+
+#@login_required
+#def profile(request):
+#    # if user is logged in, data can be changed
+#    pass

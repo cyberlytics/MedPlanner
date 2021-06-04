@@ -1,19 +1,19 @@
 @import '../../../../../styles.scss';
 
 .main-block {
-    @extend .regular-font;
+    @extend .bold-font;
     display: flex;
     flex-wrap: wrap;
 }
 
 .tag {
-    padding: .05em .5em;
+    padding: .05em .25em;
     color: black;
-    opacity: 0.6;
+    opacity: 0.8;
 
     margin-left: .5em;
     margin-top: .25em;
 
-    border-radius: 24px;
-    border: solid 2px;
+    /* border-radius: 24px;
+    border: solid 2px; */
 }

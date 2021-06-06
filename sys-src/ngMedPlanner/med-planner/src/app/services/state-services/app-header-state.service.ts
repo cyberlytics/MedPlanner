@@ -6,8 +6,8 @@ import { Subscription, Subject } from 'rxjs';
 })
 export class AppHeaderStateService {
 
-    private _onFilterClickSubject: Subject<void>;
-    private _onMenuClickSubject: Subject<void>;
+    private _onFilterClickSubject: Subject<DrawerAction>;
+    private _onMenuClickSubject: Subject<DrawerAction>;
 
     get headerTitle(): string {
         return this._headerTitle;
@@ -23,8 +23,8 @@ export class AppHeaderStateService {
         this._headerTitle = '<< none >>';
         this._headerSubTitle = '<< none >>';
 
-        this._onFilterClickSubject = new Subject<void>();
-        this._onMenuClickSubject = new Subject<void>();
+        this._onFilterClickSubject = new Subject<DrawerAction>();
+        this._onMenuClickSubject = new Subject<DrawerAction>();
     }
 
     public setHeaderTitle(value: string): void {
@@ -35,28 +35,33 @@ export class AppHeaderStateService {
         this._headerSubTitle = value;
     }
 
-    public clickOnFilter(): void {
-        this._onFilterClickSubject.next();
+    public clickOnFilter(action: DrawerAction): void {
+        this._onFilterClickSubject.next(action);
     }
 
-    public setOnFilterClickListener(listener: () => void): Subscription {
+    public setOnFilterClickListener(listener: (action: DrawerAction) => void): Subscription {
         return this._onFilterClickSubject.subscribe({
-            next: () => {
-                listener();
+            next: (action: DrawerAction) => {
+                listener(action);
             }
         });
     }
 
-    public clickOnMenu(): void {
-        this._onMenuClickSubject.next();
+    public clickOnMenu(action: DrawerAction): void {
+        this._onMenuClickSubject.next(action);
     }
 
-    public setOnMenuClickListener(listener: () => void): Subscription {
+    public setOnMenuClickListener(listener: (action: DrawerAction) => void): Subscription {
         return this._onMenuClickSubject.subscribe({
-            next: () => {
-                listener();
+            next: (action: DrawerAction) => {
+                listener(action);
             }
         });
     }
 
+}
+
+export enum DrawerAction {
+    OPEN,
+    CLOSE
 }

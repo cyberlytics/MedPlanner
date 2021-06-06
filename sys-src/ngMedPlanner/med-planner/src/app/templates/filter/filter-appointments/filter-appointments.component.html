@@ -1,1 +1,57 @@
-<p>filter-appointments works!</p>
+<div class="main-block">
+
+    <!-- Title of the filter settings -->
+    <div class="title bold-font">
+        Termine Filtern
+    </div>
+
+    <!-- Divider line between title and settings -->
+    <mat-divider></mat-divider>
+
+    <!-- Priority option -->
+    <div class="option-block">
+        <div class="title regular-font">
+            Priorität
+        </div>
+        <div class="checkbox-option">
+            <mat-checkbox [(ngModel)]="highPriority"></mat-checkbox>
+            <span class="description">Hoch</span>
+            <mat-icon svgIcon="priority-high"></mat-icon>
+        </div>
+        <div class="checkbox-option">
+            <mat-checkbox [(ngModel)]="mediumPriority"></mat-checkbox>
+            <span class="description">Mittel</span>
+            <mat-icon svgIcon="priority-medium"></mat-icon>
+        </div>
+        <div class="checkbox-option">
+            <mat-checkbox [(ngModel)]="lowPriority"></mat-checkbox>
+            <span class="description">Niedrig</span>
+            <mat-icon svgIcon="priority-low"></mat-icon>
+        </div>
+    </div>
+
+    <!-- Doctors' specialization  -->
+    <!-- <mat-option *ngFor="let specialization of specializationsList" [value]="specialization.id">
+        {{specialization.description}}
+    </mat-option> -->
+    <!-- <form>
+        <mat-form-field>
+            <input
+                placeholder="New fruit..."
+                [formControl]="specializationControl">
+            <mat-autocomplete>
+                
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+     -->
+
+    <!-- Divider line between settings and apply/cancel buttons -->
+    <!-- <mat-divider></mat-divider>
+    <div class="apply-buttons">
+        <button mat-button color="accent" class="bold-font" (click)="onCancelClick()">Zurück</button>
+        <mat-divider vertical style="height:1.5em"></mat-divider>
+        <button mat-button color="primary-dark" class="bold-font" (click)="onApplyClick()">Bestätigen</button>
+    </div> -->
+
+</div>

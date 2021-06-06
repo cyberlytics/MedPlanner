@@ -1,0 +1,65 @@
+
+
+.main-block {
+    padding: 1em;
+    font-size: 2em;
+}
+
+.title {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+}
+
+.option-block {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.option-block .title {
+    opacity: .8;
+    font-size: .9em;
+}
+
+mat-checkbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-bottom: .5em;
+
+    width: 60%;
+}
+
+.checkbox-option .description {
+    margin: 0 .5em;
+    font-size: .6em;
+    text-align: center;
+}
+
+.checkbox-option mat-icon {
+    transform: scale(.9);
+}
+
+.apply-buttons {
+    margin-top: .4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.apply-buttons button {
+    font-size: .8em;
+    margin: .2em;
+}

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
-import { AppHeaderStateService } from '../services/state-services/app-header-state.service';
+import { AppHeaderStateService, DrawerAction } from '../services/state-services/app-header-state.service';
 import { AppStateService } from '../services/state-services/app-state.service';
 import { UserStateService } from '../services/user-services/user-state.service';
 
@@ -52,7 +52,7 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
   }
 
   public onFilterClick(): void {
-    this.headerState.clickOnFilter();
+    this.headerState.clickOnFilter(DrawerAction.OPEN);
   }
 
   public logout(): void {

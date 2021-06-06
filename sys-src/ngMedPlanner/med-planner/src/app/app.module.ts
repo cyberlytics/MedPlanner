@@ -16,6 +16,9 @@ import { PriorityComponent } from './templates/appointment-dashboard/appointment
 import { TagsComponent } from './templates/appointment-dashboard/appointment-card/tags/tags.component';
 import { DoctorDashboardComponent } from './templates/doctor-dashboard/doctor-dashboard.component';
 import { DoctorCardComponent } from './templates/doctor-dashboard/doctor-card/doctor-card.component';
+import { FilterComponent } from './templates/filter/filter.component';
+import { FilterAppointmentsComponent } from './templates/filter/filter-appointments/filter-appointments.component';
+import { FilterDoctorsComponent } from './templates/filter/filter-doctors/filter-doctors.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { DoctorCardComponent } from './templates/doctor-dashboard/doctor-card/do
     PriorityComponent,
     TagsComponent,
     DoctorDashboardComponent,
-    DoctorCardComponent
+    DoctorCardComponent,
+    FilterComponent,
+    FilterAppointmentsComponent,
+    FilterDoctorsComponent
   ],
   imports: [
     BrowserModule,

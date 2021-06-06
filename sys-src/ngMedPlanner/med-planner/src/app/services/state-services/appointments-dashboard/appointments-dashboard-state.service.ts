@@ -2,42 +2,38 @@ import { AppointmentModel } from './appointment-model';
 import { Injectable } from '@angular/core';
 import { AppointmentsDataService } from '../../data/appointments-data.service';
 import { DoctorsDashboardStateService } from '../doctors-dashboard/doctors-dashboard-state.service';
+import { TagsStateService } from '../tags/tags-state.service';
+import { BaseStateService } from '../base-state.service';
+import { UserStateService } from '../../user-services/user-state.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AppointmentsDashboardStateService {
-
-    private _appointments: Array<AppointmentModel> | null = null;
+export class AppointmentsDashboardStateService extends BaseStateService<AppointmentModel> {
 
     constructor(
         private appointmentsData: AppointmentsDataService,
-        private doctorsState: DoctorsDashboardStateService
-    ) {}
-
-    public async getAppointments(): Promise<Array<AppointmentModel>> {
-        if (this._appointments === null) {
-            await this.initAppointments();
-        }
-
-        return this._appointments as Array<AppointmentModel>;
+        private doctorsState: DoctorsDashboardStateService,
+        private tagsState: TagsStateService,
+        userState: UserStateService
+    ) {
+        super(userState);
     }
 
-    private async initAppointments(): Promise<void> {
+    protected async initStateData(): Promise<void> {
         const appointmentsData = await this.appointmentsData.getData();
 
-        this._appointments = new Array<AppointmentModel>();
-
         for (const appointment of appointmentsData.appointments) {
-            this._appointments.push(
+            this.addData(
                 new AppointmentModel(
                     {
                         id: appointment.id,
                         title: appointment.title,
                         datetime: appointment.datetime,
-                        doctor: await this.doctorsState.getDoctorById(appointment.doc_id),
+                        doctor: await this.doctorsState.getModelById(appointment.doc_id),
                         priority: AppointmentModel.getPriorityByName(appointment.priority),
-                        note: appointment.note
+                        note: appointment.note,
+                        tags: await this.tagsState.getTagListByIds(appointment.tags)
                     }
                 )
             );

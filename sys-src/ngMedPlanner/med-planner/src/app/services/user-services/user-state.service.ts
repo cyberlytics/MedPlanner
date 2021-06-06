@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { HttpService } from '../http-service/http.service';
 import { LoginResult, LoginService, Login } from './login.service';
 
@@ -7,7 +8,7 @@ import { LoginResult, LoginService, Login } from './login.service';
 })
 export class UserStateService implements Login {
 
-    private readonly USER_TOKEN_KEY = 'user_token';
+    private _onLogout: Subject<void>;
 
     get userEmail(): string | null {
         return this._userEmail;
@@ -22,7 +23,9 @@ export class UserStateService implements Login {
         return this.loginService.isLoggedIn;
     }
 
-    constructor(private httpService: HttpService, private loginService: LoginService) {}
+    constructor(private httpService: HttpService, private loginService: LoginService) {
+        this._onLogout = new Subject<void>();
+    }
 
     /**
      * Checks if user logged in. If logged in, then navigates to dashboard.
@@ -49,7 +52,21 @@ export class UserStateService implements Login {
      * @returns Promise with logout result.
      */
     public async logout(): Promise<boolean> {
-        return this.loginService.logout();
+        const result = await this.loginService.logout();
+
+        if (result) {
+            this._onLogout.next();
+        }
+
+        return result;
+    }
+
+    public setOnLogoutListener(listener: () => void): Subscription {
+        return this._onLogout.subscribe({
+            next: () => {
+                listener();
+            }
+        });
     }
 
 }

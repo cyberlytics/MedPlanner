@@ -1,3 +1,4 @@
+import { SpecializationModel } from '../specialization/specialization-model';
 
 
 export class DoctorModel {
@@ -14,8 +15,12 @@ export class DoctorModel {
         return this.data.surname;
     }
 
-    get specialization(): null {
-        return null;
+    get specialization(): SpecializationModel | null {
+        return this.data.specialization;
+    }
+
+    get specializationColor(): string | null | undefined {
+        return this.data.specialization?.color;
     }
 
     get surgery(): null {
@@ -26,7 +31,7 @@ export class DoctorModel {
         id: number;
         first_name: string;
         surname: string;
-        specialization_id: number;
+        specialization: SpecializationModel | null;
         surgery_id: number;
     }) {
 

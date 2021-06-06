@@ -5,3 +5,4 @@ medplanner/api/__pycache__/*
 venv/
 .idea/
 .vscode/
+db.sqlite3/*

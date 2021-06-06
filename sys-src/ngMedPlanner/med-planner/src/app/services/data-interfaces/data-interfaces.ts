@@ -5,7 +5,7 @@ export interface UserMock {
 }
 
 // from appointments-list.json
-export interface AppointmentMock {
+export interface AppointmentData {
     id: number;
     title: string;
     datetime: string;
@@ -13,10 +13,17 @@ export interface AppointmentMock {
     user_id: number;
     priority: string;
     note: string;
+    tags: Array<number> | undefined;
+}
+
+export interface TagData {
+    id: number;
+    description: string;
+    color: string;
 }
 
 
-export interface DoctorMock {
+export interface DoctorData {
     id: number;
     first_name: string;
     surname: string;
@@ -25,13 +32,13 @@ export interface DoctorMock {
 }
 
 
-export interface SpecializationMock {
+export interface SpecializationData {
     id: number;
     description: string;
 }
 
 
-export interface SurgeryMock {
+export interface SurgeryData {
     id: number;
     city: string;
     address: string;

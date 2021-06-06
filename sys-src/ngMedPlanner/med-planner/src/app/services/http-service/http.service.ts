@@ -10,7 +10,13 @@ export class HttpService {
 
     private static readonly serverHost: string = environment.serverHost;
 
+    public static readonly HTTP_403_FORBIDDEN = 403;
+    public static readonly HTTP_404_NOT_FOUND = 404;
+    public static readonly HTTP_200_OK = 200;
+    public static readonly HTTP_500_INTERNAL_SERVER_ERROR = 500;
+
     public static readonly APPOINTMENTS_URL = 'assets/mock-data/appointments-list.json';
+    public static readonly TAGS_URL = 'assets/mock-data/tags-list.json';
     public static readonly DOCTORS_URL = 'assets/mock-data/doctors_list.json';
     public static readonly SURGERIES_URL = 'assets/mock-data/surgery-list.json';
     public static readonly SPECIALIZATIONS_URL = 'assets/mock-data/specialization-list.json';
@@ -21,6 +27,11 @@ export class HttpService {
     public static readonly LOGOUT_URL = `http://${HttpService.serverHost}:8000/api/logout`;
     public static readonly REGISTER_NEW_USER_URL = `http://${HttpService.serverHost}:8000/api/new-user`;
 
+    public static readonly DOCTOR_LIST = `http://${HttpService.serverHost}:8000/api/doctor-list`;
+    public static readonly DOCTOR_DETAIL = `http://${HttpService.serverHost}:8000/api/doctor-detail/`;
+    public static readonly DOCTOR_UPDATE = `http://${HttpService.serverHost}:8000/api/doctor-update/`;
+    public static readonly DOCTOR_CREATE = `http://${HttpService.serverHost}:8000/api/doctor-create`;
+    public static readonly DOCTOR_DELETE = `http://${HttpService.serverHost}:8000/api/doctor-delete/`;
     constructor(private http: HttpClient) {}
 
     async requestData<T>(_url: string, body?: any): Promise<T> {
@@ -38,7 +49,6 @@ export class HttpService {
     }
 
     async getMessage<T>(_url: string, options?: any): Promise<T> {
-        console.log('URL', _url);
         const promise = this.http.get<T>(
             _url,
             {
@@ -55,8 +65,23 @@ export class HttpService {
     }
 
     async postMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
-        console.log('URL', _url);
         const promise = this.http.post<T>(
+            _url,
+            $.param(body),
+            // JSON.stringify(body),
+            {
+                responseType: 'json',
+                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
+            }
+        )
+        .toPromise();
+
+        return promise;
+    }
+
+    async putMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
+        // console.log('URL', _url);
+        const promise = this.http.put<T>(
             _url,
             $.param(body),
             {

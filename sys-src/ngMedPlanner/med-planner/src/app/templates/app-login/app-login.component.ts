@@ -97,7 +97,7 @@ export class AppLoginComponent implements OnInit {
     this._isLoading = false;
 
     headerState.setHeaderTitle('Hallo!');
-    headerState.setHeaderSubTitle('Melden Sie sich bitte an.');
+    headerState.setHeaderSubTitle('Melden Sie sich bitte ein.');
   }
 
   ngOnInit(): void {}

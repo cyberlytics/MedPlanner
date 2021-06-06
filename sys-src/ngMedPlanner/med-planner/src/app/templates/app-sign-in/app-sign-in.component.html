@@ -32,7 +32,7 @@
 
             <mat-form-field appearance="outline"  >
                 <mat-label>Passwort</mat-label>
-                <input matInput [formControl]="registerPasswordFormControl" required 
+                <input matInput [formControl]="registerPasswordFormControl" required  
                 [type]="hidePassword ? 'password' : 'text'">
                 
                 <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
@@ -44,10 +44,10 @@
 
             <mat-form-field appearance="outline"  >
                 <mat-label>Passwort bestätigen</mat-label>
-                <input matInput [formControl]="confirmPasswordFormControl" required
+                <input matInput [formControl]="confirmPasswordFormControl" required (blur)="handleDifferentPassword()"
                 #RegPasswordValue [type]="hidePassword ? 'password' : 'text'">
                 
-                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" >
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
         

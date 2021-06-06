@@ -4,7 +4,7 @@ from medplanner.api.login import (
     create_user, 
     login, logout, 
     change_user_password, 
-    deactivate_user, activate_user
+    deactivate_user, activate_user, delete_user
 )
 from medplanner.api.views import api_create_appointment_view,api_delete_appointment_view, api_all_appointments_view, api_update_appointment_view, api_detail_appointment_view
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path('change-password', change_user_password, name='change-password'),
     path('deactivate-user', deactivate_user, name='deactivate'),
     path('activate-user', activate_user, name='activate'),
+    path('delete-user', delete_user, name='user-delete'),
 
     path('appointment',              api_all_appointments_view),
     path('appointment-detail/<pk>/', api_detail_appointment_view, name="detail-appointment"),

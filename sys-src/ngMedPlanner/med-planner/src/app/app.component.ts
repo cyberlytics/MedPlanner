@@ -4,7 +4,7 @@ import { UserStateService } from './services/user-services/user-state.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AppStateService, Dashbord } from './services/state-services/app-state.service';
 import { Subscription } from 'rxjs';
-import { AppHeaderStateService } from './services/state-services/app-header-state.service';
+import { AppHeaderStateService, DrawerAction } from './services/state-services/app-header-state.service';
 
 @Component({
   selector: 'app-root',
@@ -50,12 +50,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     );
 
     this._onFilterClick = this.appHeaderState.setOnFilterClickListener(
-      () => { this.drawer?.open(); }
+      (action: DrawerAction) => {
+        this.onDrawerAction(action);
+      }
     );
 
     this._onMenuClick = this.appHeaderState.setOnMenuClickListener(
-      () => {
-        // TODO
+      (action: DrawerAction) => {
+        this.onDrawerAction(action);
       }
     );
   }
@@ -74,8 +76,19 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  public onDashboardSwitch(dashboard: Dashbord): void {
+  private onDashboardSwitch(dashboard: Dashbord): void {
     // TODO
+  }
+
+  private onDrawerAction(action: DrawerAction): void {
+    switch (action) {
+      case DrawerAction.OPEN:
+        this.drawer?.open();
+        break;
+      case DrawerAction.CLOSE:
+        this.drawer?.close();
+        break;
+    }
   }
 
   private async requestLogin(): Promise<void> {

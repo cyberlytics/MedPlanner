@@ -1,6 +1,6 @@
 from django.urls import path
 from medplanner.api import views
-from medplanner.api.login import (
+from medplanner.api.user_view import (
     create_user, 
     login, logout, 
     change_user_password, 

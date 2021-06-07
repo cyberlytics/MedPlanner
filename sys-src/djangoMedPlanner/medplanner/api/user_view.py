@@ -1,5 +1,6 @@
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication
 #from django.contrib.auth.models import User
 from medplanner.models import UserProfile as User
 from rest_framework.decorators import api_view

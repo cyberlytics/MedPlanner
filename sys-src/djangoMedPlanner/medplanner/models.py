@@ -103,11 +103,12 @@ class Appointment(models.Model):
     tags      = models.ManyToManyField(Tag, blank=True)
 
 
-# This signal creates Auth Tokens for Users
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
-    # Creates a token by registrating a new user
+    """
+    Create an authentification token if none is existing for a user.
+    In our case it will be created during registration or login, if the user was logged out before.
+    """
     if created:
-        # TODO: create token for every login
         Token.objects.create(user=instance)
 

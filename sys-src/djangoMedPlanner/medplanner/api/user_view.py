@@ -116,7 +116,7 @@ def deactivate_user(request):
         check = user.check_password(password)
         if check:
             #user.is_active = is_active
-            user.is_active = True
+            user.is_active = False
             user.save()
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Current password did not match. Cannot update password"})

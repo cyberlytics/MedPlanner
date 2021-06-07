@@ -10,9 +10,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-# user login ; request is the http request in rest framework
 @api_view(['POST'])
 def login(request):
+    """
+    Login of an existing user
+    """
     email = request.POST.get('email')
     password = request.POST.get('password')
     try:
@@ -30,8 +32,8 @@ def login(request):
         return Response(data={"message": f"Wrong password for User '{email}' or not activated"}, status=status.HTTP_403_FORBIDDEN)
 
 
-# user logout ; request is the http request in rest framework
-@login_required
+# TODO check token
+#@login_required
 @api_view(['POST'])
 def logout(request):
     """
@@ -71,6 +73,7 @@ def create_user(request):
 
 
 #? TODO: change password only if logged in?
+# TODO check token
 #@login_required
 @api_view(['POST'])
 def change_user_password(request):
@@ -97,6 +100,7 @@ def change_user_password(request):
 
 
 #? TODO only if user is logged in, he should be able to deactivate the account
+# TODO check token
 #@login_required
 @api_view(['POST'])
 def deactivate_user(request):
@@ -141,7 +145,8 @@ def activate_user(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"Activated account of '{email}'"})
 
 
-@login_required
+# TODO check token
+#@login_required
 @api_view(['POST'])
 def delete_user(request):
     """

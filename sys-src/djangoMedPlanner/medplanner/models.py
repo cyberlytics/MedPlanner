@@ -46,8 +46,7 @@ class UserManager(BaseUserManager):
 # the model that uses the ForeignKeys
 class UserProfile(AbstractUser):
     user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    #username   = models.CharField(max_length=100, unique=True)
-    # remove username at all
+    # only use email instead of username
     username   = None
     email      = models.EmailField(_('email address'), unique=True)
 
@@ -108,5 +107,6 @@ class Appointment(models.Model):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     # Creates a token by registrating a new user
     if created:
+        # TODO: create token for every login
         Token.objects.create(user=instance)
 

@@ -8,6 +8,14 @@
     <!-- Divider line between title and settings -->
     <mat-divider></mat-divider>
 
+    <!-- Drop filter button -->
+    <button 
+        *ngIf="!isFilterEmpty"
+        mat-button color="primary-dark"
+        class="bold-font"
+        (click)="dropFilter()"
+    >Filtern löschen</button>
+
     <!-- Priority option -->
     <div class="option-block">
         <div class="title regular-font">

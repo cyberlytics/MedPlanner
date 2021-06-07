@@ -12,6 +12,10 @@ import {FormControl} from '@angular/forms';
 })
 export class FilterAppointmentsComponent implements OnInit {
 
+  get isFilterEmpty(): boolean {
+    return this.filterAppointment.isFilterEmpty;
+  }
+
   set highPriority(value: boolean) {
     this.filterAppointment.isHighPrioritySelected = value;
   }
@@ -55,6 +59,10 @@ export class FilterAppointmentsComponent implements OnInit {
 
   private async loadSpecilizationsList(): Promise<void> {
     this._specializationsList = await this.specializationsState.getStateData();
+  }
+
+  public dropFilter(): void {
+    this.filterAppointment.dropFilter();
   }
 
   public onApplyClick(): void {

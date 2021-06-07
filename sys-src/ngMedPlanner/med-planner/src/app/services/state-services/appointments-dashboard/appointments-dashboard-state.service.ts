@@ -67,6 +67,14 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
     }
 
     private isMatchByPriority(appointment: AppointmentModel): boolean {
+        if (
+            !this.appointmentFilter.isHighPrioritySelected &&
+            !this.appointmentFilter.isMediumPrioritySelected &&
+            !this.appointmentFilter.isLowPrioritySelected
+        ) {
+            return true;
+        }
+
         switch (appointment.priority) {
             case Priority.HIGH:
                 return this.appointmentFilter.isHighPrioritySelected;
@@ -75,8 +83,6 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
             case Priority.LOW:
                 return this.appointmentFilter.isLowPrioritySelected;
         }
-
-        return false;
     }
 
 }

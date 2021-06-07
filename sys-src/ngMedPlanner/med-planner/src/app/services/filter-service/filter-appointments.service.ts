@@ -64,10 +64,18 @@ export class FilterAppointmentsService {
 
     private enableEmptyFilter(): void {
         this._isFilterEmpty = true;
+
+        this.dropPriority();
     }
 
     private disableEmptyFilter(): void {
         this._isFilterEmpty = false;
+    }
+
+    private dropPriority(): void {
+        for (const priorityKey of this._prioritySelection.keys()) {
+            this._prioritySelection.set(priorityKey, false);
+        }
     }
 
 }

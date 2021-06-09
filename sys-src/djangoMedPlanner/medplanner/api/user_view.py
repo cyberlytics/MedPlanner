@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-@api_view(['POST', ])
+@api_view(['POST'])
 def login(request):
     """
     Login of an existing user
@@ -20,20 +20,20 @@ def login(request):
     try:
         login_user = User.objects.get(email=email)
     except:
-        return Response(data={"message": f"User '{email}' not found"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"message": f"User '{email}' not found"})
 
     check = login_user.check_password(password)
     if (check is True) & login_user.is_active:
         user = auth.authenticate(username=email, password=password)
         auth.login(request, user)
         new_token, created = Token.objects.get_or_create(user=user)
-        return Response(data={"token": str(new_token), "email": f"{email}"}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK, data={"token": str(new_token), "email": f"{email}"})
     else:
-        return Response(data={"message": f"Wrong password for User '{email}' or not activated"}, status=status.HTTP_403_FORBIDDEN)
+        return Response(status=status.HTTP_403_FORBIDDEN, data={"message": f"Wrong password for User '{email}' or not activated"})
 
 
 #@login_required
-@api_view(['POST', ])
+@api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def logout(request):
     """
@@ -52,7 +52,7 @@ def logout(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"User is logged out {logout_user.email}"})
 
 
-@api_view(['POST', ])
+@api_view(['POST'])
 def create_user(request):
     """
     Registration of a new user.
@@ -73,9 +73,8 @@ def create_user(request):
     return Response(status=status.HTTP_200_OK, data= {"message": f"User account for '{email}' is created"})
 
 
-# TODO check token
 #@login_required
-@api_view(['POST', ])
+@api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def change_user_password(request):
     """
@@ -100,7 +99,7 @@ def change_user_password(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"Password updated successfully for user '{user.email}'"})
 
 
-#? TODO only if user is logged in, he should be able to deactivate the account
+#? only if user is logged in, he should be able to deactivate the account?
 #@login_required
 @api_view(['POST', ])
 @permission_classes((IsAuthenticated, ))
@@ -123,11 +122,11 @@ def deactivate_user(request):
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Cannot deactivate account of '{user.email}'. Password does not match"})
 
-    # TODO if needed logout user and delete token
+    #TODO if needed logout user and delete token
     return Response(status=status.HTTP_200_OK, data={"message": f"Deactivated account of '{user.email}'"})
 
 
-#TODO send email to user for account activation and reset of password?
+#? send email to user for account activation and reset of password?
 @api_view(['POST', ])
 def activate_user(request):
     """
@@ -144,9 +143,8 @@ def activate_user(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"Activated account of '{user.email}'"})
 
 
-# TODO check token
 #@login_required
-@api_view(['POST', ])
+@api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def delete_user(request):
     """
@@ -167,5 +165,5 @@ def delete_user(request):
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    # TODO if needed logout user and delete token
+    #TODO if needed logout user and delete token
     return Response(status=status.HTTP_200_OK, data={"message": f"Successfully deleted account of '{user.email}'"})

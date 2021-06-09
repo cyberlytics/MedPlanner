@@ -45,7 +45,7 @@ class UserManager(BaseUserManager):
 # Models: the models that can be used as a ForeignKey must be placed before
 # the model that uses the ForeignKeys
 class UserProfile(AbstractUser):
-    user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    user       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     # only use email instead of username
     username   = None
     email      = models.EmailField(_('email address'), unique=True)

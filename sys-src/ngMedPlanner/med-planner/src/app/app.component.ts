@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit {
     // this.userState.checkLogin();
     // this.requestLogin();
     // this.requestLogout();
-    // this.registerNewUser();
+    this.registerNewUser();
     // this.createDoctor();
     // this.updateDoctor();
     // this.detailDoctor();

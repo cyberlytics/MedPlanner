@@ -1,1 +1,15 @@
 @import '../filter-appointments.component.scss';
+@import 'src/colors.scss';
+
+.mat-chip.mat-standard-chip  {
+    background-color: rgba(0, 0, 0, 0);
+    // border: 2px solid;
+}
+
+.mat-chip.mat-standard-chip mat-icon {
+    color: rgba($color: map-get($map: $custom-colors, $key: primary-dark), $alpha: 1.0);
+}
+
+.label-icon {
+    transform: scale(0.6);
+}

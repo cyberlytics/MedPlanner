@@ -4,6 +4,16 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@keyframes appearance {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.appearance-animation {
+    animation-name: appearance;
+    animation-duration: 1s;
+}
+
 .regular-font {
     font-family: QuattrocentoSans-Regular;
 }

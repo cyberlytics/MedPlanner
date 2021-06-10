@@ -48,13 +48,19 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
   }
 
   private async loadAppointments(): Promise<void> {
-    this._appointments = await this.appointmentsState.filteredAppointments;
+    this._appointments = new Array<AppointmentModel>();
+    this.changeDet.detectChanges();
 
+    this._appointments = await this.appointmentsState.filteredAppointments;
     this.changeDet.detectChanges();
   }
 
   public onDetailsClick(appointmentId: number | null): void {
     console.log(`clicked on appointment with id: ${appointmentId}`);
+  }
+
+  public dropFilter(): void {
+    this.appointmentsFilter.dropFilter();
   }
 
 }

@@ -8,8 +8,11 @@
         ></app-appointment-card-component>
     </div>
 
-    <div class="bottom-shadow tip-text-block" *ngIf="appointments.length === 0 && !isFilterEmpty">
+    <div class="bottom-shadow tip-text-block appearance-animation" *ngIf="appointments.length === 0 && !isFilterEmpty">
         <span class="bold-font">Keine Termine gefunden</span>
+        <button mat-flat-button color="accent" class="bold-font" (click)="dropFilter()">
+            Filtern löschen
+        </button>
     </div>
 
     <div class="bottom-shadow tip-text-block" *ngIf="appointments.length === 0 && isFilterEmpty">

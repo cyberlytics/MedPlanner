@@ -13,7 +13,7 @@ export class SignUpService{
   constructor(private httpService: HttpService, private router: Router) { }
 
   public async signup(_email: string, _password: string): Promise<RegisterResult> {
-    //console.log(_email,_password);
+    console.log(_email,_password);
     try{
       const response = await this.httpService.postMessage<any>(
         HttpService.REGISTER_NEW_USER_URL,
@@ -21,7 +21,7 @@ export class SignUpService{
           username: _email,
           password: _password
         });
-    }catch (error){
+    } catch (error){
       console.log(error);
       if (error.status === HttpService.HTTP_403_FORBIDDEN) { 
         console.log("gibt es schon");

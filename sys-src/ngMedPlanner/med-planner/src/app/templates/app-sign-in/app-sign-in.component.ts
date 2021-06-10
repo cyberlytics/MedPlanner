@@ -129,7 +129,7 @@ export class AppSignInComponent implements OnInit {
   }
 
   public async onSignUpClick(_email: string, _password: string): Promise<void>{
-    //console.log("you clicked register");
+    
     const signedUp = await this.signupState.signup(_email, _password);
 
     this.handleLoginResult(signedUp);

@@ -132,7 +132,7 @@ export class AppSignInComponent implements OnInit {
     //console.log("you clicked register");
     const signedUp = await this.signupState.signup(_email, _password);
 
-    this.router.navigate(['login']);
+    this.handleLoginResult(signedUp);
 
   }  
 
@@ -155,6 +155,7 @@ export class AppSignInComponent implements OnInit {
 
 
   private handleLoginResult(_signupResult: RegisterResult): void {
+    console.log(_signupResult);
     switch (_signupResult) {
       case RegisterResult.SIGNUP_SUCCESFULL: {
         this.handleSignUpSuccesfull();

@@ -23,7 +23,7 @@ export class SignUpService{
         });
     }catch (error){
       console.log(error);
-      if (error.status === HttpService.HTTP_403_FORBIDDEN) { //403
+      if (error.status === HttpService.HTTP_403_FORBIDDEN) { 
         console.log("gibt es schon");
         return RegisterResult.EMAIL_ALREADY_EXIST; 
       }
@@ -33,11 +33,6 @@ export class SignUpService{
         return RegisterResult.SERVER_ERROR;
       }
   
-      if (error.status === HttpService.HTTP_500_INTERNAL_SERVER_ERROR) {
-        console.log("Server fehler");
-        return RegisterResult.SERVER_ERROR;
-      }
-
     }
 
     return RegisterResult.SIGNUP_SUCCESFULL;
@@ -50,7 +45,6 @@ export class SignUpService{
 export enum RegisterResult {
   SIGNUP_SUCCESFULL,
   EMAIL_ALREADY_EXIST,
-  FEHLENDE_DATEN,
   SERVER_ERROR,
   UNKNOWN_ERROR
 }

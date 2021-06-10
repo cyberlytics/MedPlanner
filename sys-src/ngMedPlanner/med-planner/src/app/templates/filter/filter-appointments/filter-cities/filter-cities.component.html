@@ -1,0 +1,35 @@
+<div class="option-block">
+    <div class="title regular-font">
+        Orts
+    </div>
+    <form class="picker-form">
+        <mat-form-field class="picker-form-field">
+            <mat-label>Stadt oder Ort</mat-label>
+            <mat-chip-list #chipList>
+                <mat-chip
+                  *ngFor="let cityModel of selectedCites"
+                  [removable]="true"
+                  (removed)="removeCity(cityModel)">
+                  {{cityModel.city}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input type="text"
+                    placeholder="Tippen Sie diese ein"
+                    aria-label="Number"
+                    matInput
+                    [formControl]="citiesControl"
+                    [matChipInputFor]="chipList"
+                    [matAutocomplete]="autoCities"
+                    #inputCity>
+            </mat-chip-list>
+           
+            <mat-autocomplete 
+                autoActiveFirstOption #autoCities
+                (optionSelected)="selectedCityFilter($event)">
+                <mat-option *ngFor="let option of filteredCitiesList | async" [value]="option">
+                {{option.city}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</div>

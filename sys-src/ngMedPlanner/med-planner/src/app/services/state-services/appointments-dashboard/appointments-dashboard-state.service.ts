@@ -60,6 +60,18 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
                 continue;
             }
 
+            if (!this.isMatchByDoctorSpecialization(appointment)) {
+                continue;
+            }
+
+            if (!this.isMatchByCity(appointment)) {
+                continue;
+            }
+
+            if (!this.isMatchByTag(appointment)) {
+                continue;
+            }
+
             filteredAppointments.push(appointment);
         }
 
@@ -85,5 +97,51 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         }
     }
 
+    private isMatchByDoctorSpecialization(appointment: AppointmentModel): boolean {
+        if (this.appointmentFilter.specializationSelection.length === 0) {
+            return true;
+        }
+
+        const doctor = appointment.doctor;
+
+        if (!doctor) {
+            return false;
+        }
+
+        if (doctor.specialization === null) {
+            return false;
+        }
+
+        return this.appointmentFilter.isSpecializationSelected(doctor.specialization);
+    }
+
+    private isMatchByCity(appointment: AppointmentModel): boolean {
+        if (this.appointmentFilter.citySelection.length === 0) {
+            return true;
+        }
+
+        for (const cityModel of this.appointmentFilter.citySelection) {
+            if (appointment.doctor?.isInCity(cityModel)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private isMatchByTag(appointment: AppointmentModel): boolean {
+        if (this.appointmentFilter.tagsSelection.length === 0) {
+            return true;
+        }
+
+        for (const tagModel of this.appointmentFilter.tagsSelection) {
+            if (appointment.hasTag(tagModel)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
+
 

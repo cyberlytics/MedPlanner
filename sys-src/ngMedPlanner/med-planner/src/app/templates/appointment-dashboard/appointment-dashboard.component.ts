@@ -12,6 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class AppointmentDashboardComponent implements OnInit, OnDestroy {
 
+  get isFilterEmpty(): boolean {
+    return this.appointmentsFilter.isFilterEmpty;
+  }
+
   get appointments(): ReadonlyArray<AppointmentModel> {
     return this._appointments;
   }

@@ -1,0 +1,31 @@
+@import '../filter-appointments.component.scss';
+
+mat-checkbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-bottom: .5em;
+
+    width: 60%;
+}
+
+.checkbox-option .description {
+    margin: 0 .5em;
+    font-size: .6em;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.checkbox-option mat-icon {
+    transform: scale(.9);
+}

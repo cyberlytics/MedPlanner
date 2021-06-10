@@ -59,6 +59,14 @@ export class AppointmentModel {
         }
     }
 
+    public hasTag(tag: TagModel): boolean {
+        if (!this.data.tags) {
+            return false;
+        }
+
+        return this.data.tags.includes(tag);
+    }
+
 }
 
 export enum Priority {

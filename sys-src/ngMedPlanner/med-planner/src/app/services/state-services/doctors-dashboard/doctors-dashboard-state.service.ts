@@ -3,6 +3,7 @@ import { DoctorDataService } from '../../data/doctor-data.service';
 import { UserStateService } from '../../user-services/user-state.service';
 import { BaseStateService } from '../base-state.service';
 import { SpecializationStateService } from '../specialization/specialization-state.service';
+import { SurgeryStateService } from '../surgery/surgery-state.service';
 import { DoctorModel } from './doctor-model';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class DoctorsDashboardStateService extends BaseStateService<DoctorModel> 
     constructor(
         private doctorsData: DoctorDataService,
         private specializaitonState: SpecializationStateService,
+        private surgeryState: SurgeryStateService,
         userState: UserStateService
     ) {
         super(userState);
@@ -28,7 +30,7 @@ export class DoctorsDashboardStateService extends BaseStateService<DoctorModel> 
                         id: doctorData.id,
                         first_name: doctorData.first_name,
                         surname: doctorData.surname,
-                        surgery_id: doctorData.surgery_id,
+                        surgery: await this.surgeryState.getModelById(doctorData.surgery_id),
                         specialization: await this.specializaitonState.getModelById(doctorData.specialization_id)
                     }
                 )

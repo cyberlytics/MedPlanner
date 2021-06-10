@@ -1,4 +1,6 @@
 import { SpecializationModel } from '../specialization/specialization-model';
+import { CityModel } from '../surgery/city-model';
+import { SurgeryModel } from '../surgery/surgery-model';
 
 
 export class DoctorModel {
@@ -23,8 +25,8 @@ export class DoctorModel {
         return this.data.specialization?.color;
     }
 
-    get surgery(): null {
-        return null;
+    get surgery(): SurgeryModel | null {
+        return this.data.surgery;
     }
 
     constructor(private data: {
@@ -32,9 +34,13 @@ export class DoctorModel {
         first_name: string;
         surname: string;
         specialization: SpecializationModel | null;
-        surgery_id: number;
+        surgery: SurgeryModel | null;
     }) {
 
+    }
+
+    public isInCity(city: CityModel): boolean {
+        return this.data.surgery?.city === city;
     }
 
 }

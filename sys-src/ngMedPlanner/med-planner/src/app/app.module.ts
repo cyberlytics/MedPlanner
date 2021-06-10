@@ -19,6 +19,11 @@ import { DoctorCardComponent } from './templates/doctor-dashboard/doctor-card/do
 import { FilterComponent } from './templates/filter/filter.component';
 import { FilterAppointmentsComponent } from './templates/filter/filter-appointments/filter-appointments.component';
 import { FilterDoctorsComponent } from './templates/filter/filter-doctors/filter-doctors.component';
+import { FilterPriorityComponent } from './templates/filter/filter-appointments/filter-priority/filter-priority.component';
+import { FilterSpecializationsComponent } from './templates/filter/filter-appointments/filter-specializations/filter-specializations.component';
+import { FilterCitiesComponent } from './templates/filter/filter-appointments/filter-cities/filter-cities.component';
+import { FilterPeriodComponent } from './templates/filter/filter-appointments/filter-period/filter-period.component';
+import { FilterTagsComponent } from './templates/filter/filter-appointments/filter-tags/filter-tags.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,12 @@ import { FilterDoctorsComponent } from './templates/filter/filter-doctors/filter
     DoctorCardComponent,
     FilterComponent,
     FilterAppointmentsComponent,
-    FilterDoctorsComponent
+    FilterDoctorsComponent,
+    FilterPriorityComponent,
+    FilterSpecializationsComponent,
+    FilterCitiesComponent,
+    FilterPeriodComponent,
+    FilterTagsComponent
   ],
   imports: [
     BrowserModule,

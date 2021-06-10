@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Priority } from '../state-services/appointments-dashboard/appointment-model';
 import { Subject, Subscription } from 'rxjs';
+import { SpecializationModel } from '../state-services/specialization/specialization-model';
+import { CityModel } from '../state-services/surgery/city-model';
+import { TagModel } from '../state-services/tags/tag-model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class FilterAppointmentsService {
 
+    /** Priority */
     set isHighPrioritySelected(value: boolean) {
         this._prioritySelection.set(Priority.HIGH, value);
         this.applyFilter();
@@ -32,6 +36,26 @@ export class FilterAppointmentsService {
     }
 
     private _prioritySelection: Map<Priority, boolean>;
+
+    /** Specialization */
+    get specializationSelection(): ReadonlyArray<SpecializationModel> {
+        return this._specializationSelection.selection;
+    }
+    private _specializationSelection: FilterSelection<SpecializationModel>;
+
+    /** City */
+    get citySelection(): ReadonlyArray<CityModel> {
+        return this._citySelection.selection;
+    }
+    private _citySelection: FilterSelection<CityModel>;
+
+    /** Tags */
+    get tagsSelection(): ReadonlyArray<TagModel> {
+        return this._tagsSelection.selection;
+    }
+    private _tagsSelection: FilterSelection<TagModel>;
+
+
     private _onFilterApplySubject: Subject<void>;
 
     get isFilterEmpty(): boolean {
@@ -41,7 +65,26 @@ export class FilterAppointmentsService {
 
     constructor() {
         this._prioritySelection = new Map<Priority, boolean>();
+
+        this._specializationSelection = new FilterSelection( () => { this.applyFilter(); } );
+        this._citySelection = new FilterSelection( () => { this.applyFilter(); } );
+        this._tagsSelection = new FilterSelection( () => { this.applyFilter(); } );
+
         this._onFilterApplySubject = new Subject<void>();
+    }
+
+    /** General functions */
+    private enableEmptyFilter(): void {
+        this._isFilterEmpty = true;
+
+        this.dropPriority();
+        this.dropSpecializations();
+        this.dropCites();
+        this.dropTags();
+    }
+
+    private disableEmptyFilter(): void {
+        this._isFilterEmpty = false;
     }
 
     public applyFilter(): void {
@@ -62,20 +105,105 @@ export class FilterAppointmentsService {
         this._onFilterApplySubject.next();
     }
 
-    private enableEmptyFilter(): void {
-        this._isFilterEmpty = true;
-
-        this.dropPriority();
-    }
-
-    private disableEmptyFilter(): void {
-        this._isFilterEmpty = false;
-    }
-
+    /** Priority functions */
     private dropPriority(): void {
         for (const priorityKey of this._prioritySelection.keys()) {
             this._prioritySelection.set(priorityKey, false);
         }
     }
 
+    /** Specialization functions */
+    public selectSpecialization(specialization: SpecializationModel): void {
+        this._specializationSelection.select(specialization);
+    }
+
+    public unselectSpecialization(specialization: SpecializationModel): void {
+        this._specializationSelection.unselect(specialization);
+    }
+
+    public isSpecializationSelected(specialization: SpecializationModel): boolean {
+        return this._specializationSelection.isSelected(specialization);
+    }
+
+    private dropSpecializations(): void {
+        this._specializationSelection.drop();
+    }
+
+    /** Cites functions */
+    public selectCity(city: CityModel): void {
+        this._citySelection.select(city);
+    }
+
+    public unselectCity(city: CityModel): void {
+        this._citySelection.unselect(city);
+    }
+
+    public isCitySelected(city: CityModel): boolean {
+        return this._citySelection.isSelected(city);
+    }
+
+    private dropCites(): void {
+        this._citySelection.drop();
+    }
+
+    /** Tags functions */
+    public selectTag(tag: TagModel): void {
+        this._tagsSelection.select(tag);
+    }
+
+    public unselectTag(tag: TagModel): void {
+        this._tagsSelection.unselect(tag);
+    }
+
+    public isTagSelected(tag: TagModel): boolean {
+        return this._tagsSelection.isSelected(tag);
+    }
+
+    private dropTags(): void {
+        this._tagsSelection.drop();
+    }
+
 }
+
+class FilterSelection<T> {
+
+    get selection(): ReadonlyArray<T> {
+        return this._selection;
+    }
+    private _selection: Array<T>;
+
+    constructor(private applyFilter: () => void) {
+        this._selection = new Array<T>();
+    }
+
+    public select(model: T): void {
+        if (this.isSelected(model)) {
+            return;
+        }
+
+        this._selection.push(model);
+
+        this.applyFilter();
+    }
+
+    public unselect(model: T): void {
+        if (!this.isSelected(model)) {
+            return;
+        }
+
+        const index = this._selection.indexOf(model);
+        this._selection.splice(index, 1);
+
+        this.applyFilter();
+    }
+
+    public isSelected(model: T): boolean {
+        return this._selection.includes(model);
+    }
+
+    public drop(): void {
+        this._selection.length = 0;
+    }
+
+}
+

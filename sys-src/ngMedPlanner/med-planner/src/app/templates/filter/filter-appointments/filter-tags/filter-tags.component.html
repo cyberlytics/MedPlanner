@@ -7,11 +7,12 @@
             <mat-label>Tag</mat-label>
             <mat-chip-list #chipList>
                 <mat-chip
-                  *ngFor="let tagModel of selectedTags"
-                  [removable]="true"
-                  (removed)="removeTag(tagModel)"
-                  [style.color]="tagModel.color"
-                  [style.border-color]="tagModel.color">
+                    class="appearance-animation-fast"
+                    *ngFor="let tagModel of selectedTags"
+                    [removable]="true"
+                    (removed)="removeTag(tagModel)"
+                    [style.color]="tagModel.color"
+                    [style.border-color]="tagModel.color">
                   <mat-icon [style.color]="tagModel.color" class="label-icon">local_offer</mat-icon>
                   {{tagModel.description}}
                   <mat-icon matChipRemove>cancel</mat-icon>

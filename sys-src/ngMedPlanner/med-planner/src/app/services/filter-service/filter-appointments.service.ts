@@ -55,6 +55,17 @@ export class FilterAppointmentsService {
     }
     private _tagsSelection: FilterSelection<TagModel>;
 
+    /** Date range */
+    get startDate(): Date | null {
+        return this._startDate;
+    }
+    private _startDate: Date | null = null;
+
+    get endDate(): Date | null {
+        return this._endDate;
+    }
+    private _endDate: Date | null = null;
+
 
     private _onFilterApplySubject: Subject<void>;
 
@@ -81,6 +92,7 @@ export class FilterAppointmentsService {
         this.dropSpecializations();
         this.dropCites();
         this.dropTags();
+        this.dropDateRange();
     }
 
     private disableEmptyFilter(): void {
@@ -161,6 +173,52 @@ export class FilterAppointmentsService {
 
     private dropTags(): void {
         this._tagsSelection.drop();
+    }
+
+    /** Date range functions */
+    public selectStartDate(date: Date): void {
+        this._startDate = date;
+
+        if (!this.isEndDateSelected()) {
+            return;
+        }
+
+        this.applyFilter();
+    }
+    public unselectStartDate(): void {
+        this._startDate = null;
+
+        this.applyFilter();
+    }
+    public isStartDateSelected(): boolean {
+        return this._startDate !== null;
+    }
+
+    public selectEndDate(date: Date): void {
+        this._endDate = date;
+
+        if (!this.isStartDateSelected()) {
+            return;
+        }
+
+        this.applyFilter();
+    }
+    public unselectEndDate(): void {
+        this._endDate = null;
+
+        this.applyFilter();
+    }
+    public isEndDateSelected(): boolean {
+        return this._endDate !== null;
+    }
+
+    public isDateRangeSelected(): boolean {
+        return this.isStartDateSelected() && this.isEndDateSelected();
+    }
+
+    private dropDateRange(): void {
+        this._startDate = null;
+        this._endDate = null;
     }
 
 }

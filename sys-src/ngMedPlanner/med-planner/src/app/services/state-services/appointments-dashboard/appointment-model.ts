@@ -67,6 +67,23 @@ export class AppointmentModel {
         return this.data.tags.includes(tag);
     }
 
+    public isInDateRange(startDate: Date | null, endDate: Date | null): boolean {
+        if (startDate === null) {
+            return false;
+        }
+
+        if (endDate === null) {
+            return false;
+        }
+
+        const appointmentDate = new Date(this.data.datetime);
+
+        return (
+            startDate.getTime() < appointmentDate.getTime() &&
+            appointmentDate.getTime() < endDate.getTime()
+        );
+    }
+
 }
 
 export enum Priority {

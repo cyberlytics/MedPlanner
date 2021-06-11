@@ -72,6 +72,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
                 continue;
             }
 
+            if (!this.isMatchByDateRange(appointment)) {
+                continue;
+            }
+
             filteredAppointments.push(appointment);
         }
 
@@ -141,6 +145,14 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         }
 
         return false;
+    }
+
+    private isMatchByDateRange(appointment: AppointmentModel): boolean {
+        if (!this.appointmentFilter.isDateRangeSelected()) {
+            return true;
+        }
+
+        return appointment.isInDateRange(this.appointmentFilter.startDate, this.appointmentFilter.endDate);
     }
 }
 

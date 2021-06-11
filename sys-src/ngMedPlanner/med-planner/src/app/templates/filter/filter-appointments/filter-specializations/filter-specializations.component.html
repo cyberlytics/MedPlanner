@@ -7,12 +7,13 @@
         <mat-form-field class="picker-form-field">
             <mat-label>Dr.'s Spezialisierung</mat-label>
             <mat-chip-list #chipList>
-                <mat-chip
-                  *ngFor="let specialization of selectedSpecializations"
-                  [removable]="true"
-                  (removed)="removeSpecialization(specialization)"
-                  [style.background]="specialization.color">
-                  {{specialization.description}}
+                <mat-chip 
+                    class="appearance-animation-fast"
+                    *ngFor="let specialization of selectedSpecializations"
+                    [removable]="true"
+                    (removed)="removeSpecialization(specialization)"
+                    [style.background]="specialization.color">
+                    {{specialization.description}}
                   <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>
                 <input type="text"

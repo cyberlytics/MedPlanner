@@ -14,6 +14,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     animation-duration: 1s;
 }
 
+.appearance-animation-very-slow {
+    animation-name: appearance;
+    animation-duration: 1.75s;
+}
+
+.appearance-animation-less-slow {
+    animation-name: appearance;
+    animation-duration: 1.25s;
+}
+
+.appearance-animation-slow {
+    animation-name: appearance;
+    animation-duration: 1.5s;
+}
+
+.appearance-animation-very-fast {
+    animation-name: appearance;
+    animation-duration: .25s;
+}
+
+.appearance-animation-fast {
+    animation-name: appearance;
+    animation-duration: .5s;
+}
+
+.appearance-animation-less-fast {
+    animation-name: appearance;
+    animation-duration: .75s;
+}
+
 .regular-font {
     font-family: QuattrocentoSans-Regular;
 }

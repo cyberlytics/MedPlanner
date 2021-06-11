@@ -7,9 +7,10 @@
             <mat-label>Stadt oder Ort</mat-label>
             <mat-chip-list #chipList>
                 <mat-chip
-                  *ngFor="let cityModel of selectedCites"
-                  [removable]="true"
-                  (removed)="removeCity(cityModel)">
+                    class="appearance-animation-fast"
+                    *ngFor="let cityModel of selectedCites"
+                    [removable]="true"
+                    (removed)="removeCity(cityModel)">
                   {{cityModel.city}}
                   <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>

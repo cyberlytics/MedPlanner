@@ -16,7 +16,6 @@ def login(request):
     email = request.POST.get('email')
     password = request.POST.get('password')
     try:
-        print(User.objects.all())
         login_user = User.objects.get(email=email)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"message": f"User '{email}' not found"})

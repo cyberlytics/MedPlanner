@@ -48,7 +48,7 @@ export class LoginService implements Login {
             const response = await this.httpService.postMessage<{result: string}>(
                 HttpService.LOGIN_URL,
                 {
-                  username: _email,
+                  email: _email,
                   password: _password
                 }
             );

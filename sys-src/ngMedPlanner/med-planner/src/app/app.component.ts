@@ -12,7 +12,7 @@ export class AppComponent implements AfterViewInit {
 
   title = 'med-planner';
 
-  private token = '8c4bf13d40022c6c6a3ec6e4f1b38420a61fe1d9';
+  private token = '36bdfd6351f97a7019b2299ba9b11a574d7d88bc';
 
   constructor(private userState: UserStateService, private httpService: HttpService) {
     this.routerBlockDiv = new ElementRef(null);
@@ -26,10 +26,15 @@ export class AppComponent implements AfterViewInit {
     // this.requestLogout();
     // this.registerNewUser();
     // this.createDoctor();
+    // this.createAppointment();
     // this.updateDoctor();
+    // this.updateAppointment();
     // this.detailDoctor();
+    // this.detailAppointment();
     // this.deleteDoctor();
-    this.getDoctor();
+    // this.deleteAppointment();
+    // this.getDoctor();
+    // this.getAppointment();
   }
 
   public onHeaderHeightInit(_headerHeight: number): void {
@@ -65,9 +70,8 @@ export class AppComponent implements AfterViewInit {
     const response = await this.httpService.postMessage(
       HttpService.REGISTER_NEW_USER_URL,
       {
-        username: 'test4@user.de', // 'user@mail.com',
-        email: 'test4@user.de', // 'user@mail.com',         // ex@gmail.com
-        password: 'HGdthsrzah', // 'HZ86IH7zg98t5ouuo7', // 6787ZVIBU75FTHg5456ftzvbu
+        email: 'test4@user.de',
+        password: 'HGdthsrzah',
         is_superuser: false,
         is_staff: false
       }
@@ -82,13 +86,30 @@ export class AppComponent implements AfterViewInit {
         method: 'GET',
         headers: {
           'Content-type':'application/json',
-          // 'Authorization': `Token ${this.token}`
+          'Authorization': `Token ${this.token}`
         }
       }
     )
     .then((resp) => resp.json())
     .then(function(data){
-      console.log('Data', data);
+      console.log('List of doctors: ', data);
+    });
+  }
+
+  private async getAppointment(): Promise<void> {
+    fetch(
+      HttpService.APPOINTMENT_LIST,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        }
+      }
+    )
+    .then((resp) => resp.json())
+    .then(function(data){
+      console.log('List of appointments: ', data);
     });
   }
 
@@ -107,6 +128,31 @@ export class AppComponent implements AfterViewInit {
           "surgery_id": 1,
           "specializations": [
               1
+          ]
+        })
+      }
+    )
+    .then(function(response){
+      console.log('Response', response)
+    });
+  }
+
+  private async createAppointment(): Promise<void> {
+    fetch(
+      HttpService.APPOINTMENT_CREATE,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        },
+        body:JSON.stringify({
+          "doctor_id": 58,
+          "user": 10,
+          "date_time": "2021-11-27 15:15:00",
+          "notes": "kjhgfde56zujko9876tfdse5tzhjko",
+          "tags": [
+            1
           ]
         })
       }
@@ -141,6 +187,32 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
+  private async updateAppointment(): Promise<void> {
+    const id = '2';
+    fetch(
+      HttpService.APPOINTMENT_UPDATE + id,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        },
+        body:JSON.stringify({
+          "doctor_id": 59,
+          "user": 10,
+          "date_time": "2021-12-01 15:15:00",
+          "notes": "here is a text",
+          "tags": [
+            1
+          ]
+        })
+      }
+    )
+    .then(function(response){
+      console.log('Response', response)
+    });
+  }
+
   private async detailDoctor(): Promise<void> {
     const id = '12';
     fetch(
@@ -159,10 +231,45 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
+  private async detailAppointment(): Promise<void> {
+    const id = '2';
+    fetch(
+      HttpService.APPOINTMENT_DETAIL + id,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        }
+      }
+    )
+    .then((resp) => resp.json())
+    .then(function(data){
+      console.log('Response', data)
+    });
+  }
+
   private async deleteDoctor(): Promise<void> {
     const id = '10';
     fetch(
       HttpService.DOCTOR_DELETE + id,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        }
+      }
+    )
+    .then(function(response){
+      console.log('Response', response)
+    });
+  }
+
+  private async deleteAppointment(): Promise<void> {
+    const id = '2';
+    fetch(
+      HttpService.APPOINTMENT_DELETE + id,
       {
         method: 'DELETE',
         headers: {

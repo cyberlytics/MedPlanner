@@ -49,7 +49,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',)
 }
 
 MIDDLEWARE = [
@@ -92,12 +91,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        #'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'postgres',
-        #'USER': 'postgres',
-        #'PASSWORD': 'postgres',
-        #'HOST': 'db',
-        #'PORT': 5432,
     }
 }
 
@@ -117,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
          'OPTIONS': {
             'min_length': 3,
-        }
+         }
 
     },
     {
@@ -136,7 +129,6 @@ AUTH_USER_MODEL = 'medplanner.UserProfile'
 
 LANGUAGE_CODE = 'de-de'
 
-#TIME_ZONE = 'UTC'
 TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True

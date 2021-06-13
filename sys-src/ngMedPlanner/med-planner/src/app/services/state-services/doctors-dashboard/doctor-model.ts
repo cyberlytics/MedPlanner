@@ -29,6 +29,18 @@ export class DoctorModel {
         return this.data.surgery;
     }
 
+    get city(): string | undefined {
+        return this.data.surgery?.city.city;
+    }
+
+    get address(): string | undefined {
+        return this.data.surgery?.address;
+    }
+
+    get phoneNumber(): string | undefined {
+        return this.data.surgery?.telephoneNumber;
+    }
+
     constructor(private data: {
         id: number;
         first_name: string;

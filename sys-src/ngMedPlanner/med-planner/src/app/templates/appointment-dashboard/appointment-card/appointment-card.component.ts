@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
+import {MatDialog} from '@angular/material/dialog';
+import { AppointmentDetailViewComponent } from './appointment-detail-view/appointment-detail-view.component';
 
 @Component({
   selector: 'app-appointment-card-component',
@@ -8,14 +10,8 @@ import { AppointmentModel } from 'src/app/services/state-services/appointments-d
 })
 export class AppointmentCardComponent implements OnInit {
 
-  private static readonly LOCALE_DE = 'de-DE';
-
   @Input() set appointment(value: AppointmentModel | null) {
     this._appointment = value;
-
-    if (value !== null) {
-      this._date = new Date(value.datetime);
-    }
   }
   get appointment(): AppointmentModel | null {
     return this._appointment;
@@ -39,22 +35,12 @@ export class AppointmentCardComponent implements OnInit {
   }
   private _tag: Tag | undefined;
 
-
-  private _date: Date;
-
-  get time(): string {
-    return this._date.toLocaleTimeString(AppointmentCardComponent.LOCALE_DE, {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  get time(): string | undefined {
+    return this.appointment?.timeString;
   }
 
-  get dateTime(): string {
-    return this._date.toLocaleDateString(AppointmentCardComponent.LOCALE_DE, {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+  get dateTime(): string | undefined {
+    return this.appointment?.dateString;
   }
 
   @Output('onDetailsClick') get onDetailsClickEmmiter(): EventEmitter<number | null> {
@@ -63,9 +49,9 @@ export class AppointmentCardComponent implements OnInit {
   private _onDetailsClickEmmiter: EventEmitter<number | null>;
 
 
-  constructor() {
-    this._date = new Date();
-
+  constructor(
+    private dialog: MatDialog
+  ) {
     this._onDetailsClickEmmiter = new EventEmitter<number | null>();
   }
 
@@ -73,6 +59,20 @@ export class AppointmentCardComponent implements OnInit {
 
   public onDetailsButtonClick(): void {
     this._onDetailsClickEmmiter.emit(this._appointment?.id);
+
+    const dialogHeight = window.innerWidth < 576 ? '100vh' : 'auto';
+
+    const dialogRef = this.dialog.open(AppointmentDetailViewComponent, {
+      maxHeight: '95vh',
+      maxWidth: '95vw',
+      width: '40em',
+      height: 'auto',
+      data: this._appointment,
+      autoFocus: false,
+      panelClass: 'appointment-dialog',
+      disableClose: true
+    });
+
   }
 
 }

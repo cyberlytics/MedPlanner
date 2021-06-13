@@ -1,0 +1,79 @@
+@import 'src/colors.scss';
+@import 'src/styles.scss';
+
+.header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 1.5em;
+}
+
+.dialog-title {
+    font-size: 1.6em;
+    margin-top: .5em;
+}
+
+.dialog-content-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    border-radius: ($shape-border-radius * .8) ($shape-border-radius * .8) 0 0;
+
+    background-color: white;
+    color: rgba($color: map-get($contrast-colors, primary), $alpha: .8);
+
+    padding: 24px;
+
+    height: 100%;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    margin-top: 1.5em;
+}
+
+.info-row .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.3em;
+}
+
+.info-row .title button {
+    margin-left: .5em;
+}
+
+.info-row .title button mat-icon {
+    transform: scale(.9);
+}
+
+.info-row .info {
+    margin-top: .5em;
+    font-size: 1.1em;
+}
+
+.info-row .info span {
+    margin-right: 1em;
+}
+
+.buttons-block {
+    margin-top: 2em;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    width: 100%;
+
+    color: rgba($color: map-get($contrast-colors, primary), $alpha: 1);
+}

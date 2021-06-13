@@ -103,6 +103,8 @@ export class MaterialModule {
   public static readonly ICON_PRI_MEDIUM: string = 'priority-medium';
   public static readonly ICON_PRI_LOW: string = 'priority-low';
 
+  public static readonly ICON_DOCTORS_MENU: string = 'doctors-menu';
+
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 
     // app logo
@@ -123,6 +125,12 @@ export class MaterialModule {
     iconRegistry.addSvgIcon(
       MaterialModule.ICON_PRI_LOW,
       sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/priority_low.svg')
+    );
+
+    // doctors menu icon
+    iconRegistry.addSvgIcon(
+      MaterialModule.ICON_DOCTORS_MENU,
+      sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/doctors.svg')
     );
   }
 

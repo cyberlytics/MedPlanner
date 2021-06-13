@@ -4,6 +4,10 @@ mat-toolbar {
     top: 0;
 }
 
+button {
+    margin-right: 1em;
+}
+
 .toolbar-spacer {
     flex: 1 1 auto;
 }
@@ -32,4 +36,8 @@ mat-toolbar {
 .subtitle {
     margin: 0.8em 0;
     font-size: 1.2em;
+}
+
+.doctors-menu-icon {
+    transform: scale(1.2);
 }

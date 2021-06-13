@@ -1,11 +1,5 @@
 
-
-.templates-test {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-
-    margin-top: 10rem;
-    padding: 1em;
+.router-block {
+    min-height: 100vh;
+    overflow-y: hidden;
 }

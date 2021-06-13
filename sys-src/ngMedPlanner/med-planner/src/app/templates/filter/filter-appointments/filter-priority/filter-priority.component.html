@@ -1,0 +1,20 @@
+<div class="option-block">
+    <div class="title regular-font">
+        Priorität
+    </div>
+    <div class="checkbox-option">
+        <mat-checkbox [(ngModel)]="highPriority"></mat-checkbox>
+        <span class="description" (click)="clickHigh()">Hoch</span>
+        <mat-icon svgIcon="priority-high"></mat-icon>
+    </div>
+    <div class="checkbox-option">
+        <mat-checkbox [(ngModel)]="mediumPriority"></mat-checkbox>
+        <span class="description" (click)="clickMedium()">Mittel</span>
+        <mat-icon svgIcon="priority-medium"></mat-icon>
+    </div>
+    <div class="checkbox-option">
+        <mat-checkbox [(ngModel)]="lowPriority" #low></mat-checkbox>
+        <span class="description" (click)="clickLow()">Niedrig</span>
+        <mat-icon svgIcon="priority-low"></mat-icon>
+    </div>
+</div>

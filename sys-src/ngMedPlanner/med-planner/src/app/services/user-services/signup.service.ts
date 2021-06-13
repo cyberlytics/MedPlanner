@@ -18,7 +18,7 @@ export class SignUpService{
       const response = await this.httpService.postMessage<any>(
         HttpService.REGISTER_NEW_USER_URL,
         {
-          username: _email,
+          email: _email,
           password: _password
         });
     } catch (error){

@@ -1,19 +1,13 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from medplanner.models import Doctor, UserProfile, Appointment
+from medplanner.models import Doctor, Appointment
 from medplanner.api.serializers import DoctorSerializer, AppointmentSerializer
-from rest_framework.parsers import JSONParser
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from rest_framework.generics import UpdateAPIView
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 
-# Doctor
-
-
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def doctor_list(request):
     try:
         doctors = Doctor.objects.all()
@@ -25,6 +19,7 @@ def doctor_list(request):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def doctor_detail(request, pk):
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -36,6 +31,7 @@ def doctor_detail(request, pk):
 
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def doctor_create(request):
     serializer = DoctorSerializer(data=request.data)
     if serializer.is_valid():
@@ -46,6 +42,7 @@ def doctor_create(request):
 
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def doctor_update(request, pk):
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -61,6 +58,7 @@ def doctor_update(request, pk):
 
 
 @api_view(['DELETE'])
+@permission_classes((IsAuthenticated, ))
 def doctor_delete(request, pk):
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -74,6 +72,7 @@ def doctor_delete(request, pk):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def appointment_list(request):
     try:
         appointments = Appointment.objects.all()
@@ -85,6 +84,7 @@ def appointment_list(request):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def appointment_detail(request, pk):
     try:
         appointment = Appointment.objects.get(id=pk)
@@ -96,6 +96,7 @@ def appointment_detail(request, pk):
 
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def appointment_update(request, pk):
     try:
         appointment = Appointment.objects.get(id=pk)
@@ -111,6 +112,7 @@ def appointment_update(request, pk):
 
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def appointment_create(request):
     serializer = AppointmentSerializer(data=request.data)
     if serializer.is_valid():
@@ -121,6 +123,7 @@ def appointment_create(request):
 
 
 @api_view(['DELETE'])
+@permission_classes((IsAuthenticated, ))
 def appointment_delete(request, pk):
     try:
         appointment = Appointment.objects.get(id=pk)

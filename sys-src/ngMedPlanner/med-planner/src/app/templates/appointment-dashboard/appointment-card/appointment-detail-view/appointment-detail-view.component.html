@@ -1,0 +1,69 @@
+<div class="header-block">
+    <app-priority [priority]="priority"></app-priority>
+    <h2 class="bold-font dialog-title">{{title}}</h2>
+</div>
+
+<mat-dialog-content class="dialog-content-block">
+    <div class="info-row">
+        <div class="title">
+            <span>Wann</span>
+        </div>
+        <div class="info regular-font" *ngIf="!editMode">
+            <span>{{date}}</span>
+            <span>{{time}}</span>
+        </div>
+        <div class="info regular-font" *ngIf="editMode">
+            <mat-form-field appearance="outline">
+                <mat-label>Datum eingeben</mat-label>
+                <input 
+                    matInput 
+                    [matDatepicker]="picker"
+                    (dateChange)="onDateChange($event)"
+                    [formControl]="dateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-error *ngIf="dateFormControl.hasError('matDateInvalid')">Ungültiges Datum</mat-error>
+        </div>
+    </div>
+
+    <div class="info-row">
+        <div class="title">
+            <span>Wo</span>
+        </div>
+        <div class="info regular-font">
+            <span>{{city}},</span>
+            <span>{{address}}</span>
+        </div>
+    </div>
+    
+    <div class="info-row">
+        <div class="title">
+            <span>Arzt</span>
+        </div>
+        <div class="info regular-font">
+            <span>Dr. {{doctorName}}</span><br>
+            <span *ngIf="doctorsPhoneNumber">Rufnummer: {{doctorsPhoneNumber}}</span>
+        </div>
+    </div>
+
+    <div class="info-row">
+        <div class="title">
+            <span>Notizen</span>
+        </div>
+        <div class="info regular-font">
+            <span *ngIf="note" class="italic-font">{{note}}</span>
+            <span *ngIf="!note" class="italic-font">keine</span>
+        </div>
+    </div>
+
+    <div class="buttons-block">
+        <button class="bold-font appearance-animation-fast" mat-button (click)="activateEditMode()" *ngIf="!editMode">Bearbeiten</button>
+        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()" *ngIf="!editMode">Ok</button>
+
+        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()" *ngIf="editMode">Cancel</button>
+        <button class="bold-font appearance-animation-fast" mat-button (click)="saveChanges()" *ngIf="editMode">Save</button>
+    </div>
+</mat-dialog-content>
+

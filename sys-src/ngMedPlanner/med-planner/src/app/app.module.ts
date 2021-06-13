@@ -8,7 +8,7 @@ import { AppointmentCardComponent } from './templates/appointment-dashboard/appo
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppointmentDashboardComponent } from './templates/appointment-dashboard/appointment-dashboard.component';
-import { PopupDetailViewComponent } from './templates/popup-detail-view/popup-detail-view.component';
+import { AppointmentDetailViewComponent } from './templates/appointment-dashboard/appointment-card/appointment-detail-view/appointment-detail-view.component';
 import { MaterialModule } from './material/material.module';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppLoginComponent } from './templates/app-login/app-login.component';
@@ -30,7 +30,7 @@ import { FilterTagsComponent } from './templates/filter/filter-appointments/filt
     AppComponent,
     AppointmentCardComponent,
     AppointmentDashboardComponent,
-    PopupDetailViewComponent,
+    AppointmentDetailViewComponent,
     AppHeaderComponent,
     AppLoginComponent,
     PriorityComponent,

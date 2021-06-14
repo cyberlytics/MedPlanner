@@ -1,8 +1,13 @@
-from rest_framework             import status
-from rest_framework.response    import Response
-from rest_framework.decorators  import api_view
-from medplanner.models          import Doctor, User, Appointment
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from medplanner.models import Doctor, UserProfile, Appointment
 from medplanner.api.serializers import DoctorSerializer, AppointmentSerializer
+from rest_framework.parsers import JSONParser
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from rest_framework.generics import UpdateAPIView
+from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])

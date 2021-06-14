@@ -48,13 +48,15 @@ export class LoginService implements Login {
             const response = await this.httpService.postMessage<{result: string}>(
                 HttpService.LOGIN_URL,
                 {
-                  username: _email,
+                  email: _email,
                   password: _password
                 }
             );
 
             this.storeToken(response.result);
         } catch (error) {
+
+            console.log(error);
 
             if (error.status === HttpService.HTTP_403_FORBIDDEN) {
                 return LoginResult.PASSWORD_IS_WRONG;

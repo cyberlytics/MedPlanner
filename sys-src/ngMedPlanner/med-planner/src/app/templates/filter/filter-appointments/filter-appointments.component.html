@@ -1,0 +1,31 @@
+<div class="main-block">
+
+    <!-- Title of the filter settings -->
+    <div class="title bold-font">
+        Termine Filtern
+    </div>
+
+    <!-- Divider line between title and settings -->
+    <mat-divider></mat-divider>
+
+    <!-- Drop filter button -->
+    <button
+        *ngIf="!isFilterEmpty"
+        mat-button color="primary-dark"
+        class="bold-font appearance-animation-less-fast"
+        (click)="dropFilter()"
+    >Filter löschen</button>
+
+    <app-filter-priority></app-filter-priority>
+    
+    <app-filter-specializations></app-filter-specializations>
+    
+    <app-filter-cities></app-filter-cities>
+
+    <app-filter-tags></app-filter-tags>
+
+    <app-filter-period></app-filter-period>
+
+    
+
+</div>

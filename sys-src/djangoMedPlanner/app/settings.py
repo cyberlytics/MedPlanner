@@ -107,6 +107,9 @@ DATABASES = {
 
 
 #? added min len: https://docs.djangoproject.com/en/3.2/topics/auth/passwords/
+
+#? https://dev.to/klementomeri/better-passwords-with-angular-and-django-1g1c
+# pw validation
 #TODO: change to higher min_length later
 
 AUTH_PASSWORD_VALIDATORS = [

@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   title = 'med-planner';
 
-  private token = '36bdfd6351f97a7019b2299ba9b11a574d7d88bc';
+  private token = '65e9a58a48fb46b31d169e52b66e96cef3ee2f52';
 
   private _onDashboardSwitcher: Subscription | undefined;
   private _onFilterClick: Subscription | undefined;
@@ -49,7 +49,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     // this.deleteAppointment();
     // this.getDoctor();
     // this.getAppointment();
-    // this.getDoctor();
 
     this._onDashboardSwitcher = this.appState.setOnDashboardSwitchListener(
       (dashboard: Dashbord) => { this.onDashboardSwitch(dashboard); }
@@ -175,8 +174,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           'Authorization': `Token ${this.token}`
         },
         body:JSON.stringify({
-          "doctor_first_name": "Harry",
-          "doctor_last_name": "Potter",
+          "first_name": "Harry",
+          "surname": "Potter",
           "surgery_id": 1,
           "specializations": [
               1
@@ -199,10 +198,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           'Authorization': `Token ${this.token}`
         },
         body:JSON.stringify({
-          "doctor_id": 58,
-          "user": 10,
-          "date_time": "2021-11-27 15:15:00",
-          "notes": "kjhgfde56zujko9876tfdse5tzhjko",
+          "title": "termin beim augenarzt",
+          "doc_id": 1,
+          "user_id": 1,
+          "datetime": "2021-11-27 15:15:00",
+          "priority": "Hoch",
+          "note": "kjhgfde56zujko9876tfdse5tzhjko",
           "tags": [
             1
           ]
@@ -225,8 +226,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           'Authorization': `Token ${this.token}`
         },
         body:JSON.stringify({
-          "doctor_first_name": "Mad",
-          "doctor_last_name": "Max",
+          "first_name": "Mad",
+          "surname": "Max",
           "surgery_id": 1,
           "specializations": [
               1
@@ -250,10 +251,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           'Authorization': `Token ${this.token}`
         },
         body:JSON.stringify({
-          "doctor_id": 59,
-          "user": 10,
-          "date_time": "2021-12-01 15:15:00",
-          "notes": "here is a text",
+          "title": "termin 1.1",
+          "doc_id": 1,
+          "user_id": 1,
+          "datetime": "2021-12-01 15:15:00",
+          "priority": "Mittel",
+          "note": "here is a text",
           "tags": [
             1
           ]
@@ -266,7 +269,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private async detailDoctor(): Promise<void> {
-    const id = '12';
+    const id = '1';
     fetch(
       HttpService.DOCTOR_DETAIL + id,
       {
@@ -284,7 +287,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private async detailAppointment(): Promise<void> {
-    const id = '2';
+    const id = '1';
     fetch(
       HttpService.APPOINTMENT_DETAIL + id,
       {
@@ -302,7 +305,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private async deleteDoctor(): Promise<void> {
-    const id = '10';
+    const id = '11';
     fetch(
       HttpService.DOCTOR_DELETE + id,
       {
@@ -319,7 +322,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private async deleteAppointment(): Promise<void> {
-    const id = '2';
+    const id = '5';
     fetch(
       HttpService.APPOINTMENT_DELETE + id,
       {

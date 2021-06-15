@@ -13,11 +13,11 @@ import { UserStateService } from 'src/app/services/user-services/user-state.serv
 })
 export class AppLoginComponent implements OnInit {
 
-  private readonly EMAIL_REQUIRED_MESSAGE = 'Ein Email erforderlich!';
-  private readonly EMAIL_WRONG_MESSAGE = 'Ein gültiges Email erforderlich!';
-  private readonly EMAIL_DOESNT_EXIST_MESSAGE = 'Es gibt kein Benutzer mit solchem Email';
+  private readonly EMAIL_REQUIRED_MESSAGE = 'EMail-Adresse erforderlich!';
+  private readonly EMAIL_WRONG_MESSAGE = 'Gültige EMail-Adresse erforderlich!';
+  private readonly EMAIL_DOESNT_EXIST_MESSAGE = 'Es existiert kein Benutzer mit dieser EMail-Adresse';
 
-  private readonly PASSWORD_REQUIRED_MESSAGE = 'Ein Passwort erforderlich!';
+  private readonly PASSWORD_REQUIRED_MESSAGE = 'Passwort erforderlich!';
   private readonly WRONG_PASSWORD_MESSAGE = 'Das Passwort ist falsch';
 
   get emailErrorMessage(): string {

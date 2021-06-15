@@ -71,37 +71,43 @@ class Specialization(models.Model):
 class Surgery(models.Model):
     address = models.CharField(max_length=100)
     zipcode = models.CharField(max_length=5)
-    location = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
     description = models.CharField(max_length=100, blank=True)
-    telephone_number = models.CharField(max_length=100)
+    telephone_num = models.CharField(max_length=100)
     website = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return self.address + ', ' + self.zipcode + ' ' + self.location
+        return self.address + ', ' + self.zipcode + ' ' + self.city
 
 
 class Doctor(models.Model):
-    doctor_first_name = models.CharField(max_length=100, blank=True)
-    doctor_last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, blank=True)
+    surname = models.CharField(max_length=100)
     specializations = models.ManyToManyField(Specialization, blank=True)
     surgery_id = models.ForeignKey(Surgery, on_delete=models.CASCADE, related_name='surgery', default='', null=True,
                                    blank=True)
 
     def __str__(self):
-        return self.doctor_last_name
+        return self.surname
 
 
 class Tag(models.Model):
     description = models.CharField(max_length=100)
-    colour = models.CharField(max_length=100)
+    color = models.CharField(max_length=100)
 
 
 class Appointment(models.Model):
+    class AppointmentsPriority(models.TextChoices):
+        HIGH = 'Hoch'
+        MIDDLE = 'Mittel'
+        LOW = 'Niedrig'
+
     title = models.CharField(max_length=100)
-    doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='usr')
-    date_time = models.DateTimeField(verbose_name='appointment date', default=now, unique=True)
-    notes = models.TextField(blank=True)
+    doc_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='usr')
+    datetime = models.DateTimeField(verbose_name='appointment date', default=now, unique=True)
+    priority = models.CharField(max_length=7, choices=AppointmentsPriority.choices, default=AppointmentsPriority.MIDDLE)
+    note = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):

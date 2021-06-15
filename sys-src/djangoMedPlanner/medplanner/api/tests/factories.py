@@ -18,12 +18,3 @@ class UserProfileFactory(django.DjangoModelFactory):
     class Meta:
         model = User
 
-
-'''class AppointmentFactory(django.DjangoModelFactory):
-    doctor_id = Doctor.objects.create(doctor_last_name=Faker('last_name'))
-    # user = User.objects.create_user(email='mmmm@otp.de')
-    date_time = Faker('date_time')
-    notes = Faker('ascii_email')
-
-    class Meta:
-        model = Appointment'''

@@ -70,13 +70,14 @@ class Specialization(models.Model):
 
 class Surgery(models.Model):
     location = models.CharField(max_length=100)
-    street = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    zipcode = models.CharField(max_length=5)
     description = models.CharField(max_length=100, blank=True)
     telephone_number = models.CharField(max_length=100)
     website = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return self.location + '' + self.street
+        return self.street + ', ' + self.zipcode + ' ' + self.location
 
 
 class Doctor(models.Model):
@@ -96,17 +97,15 @@ class Tag(models.Model):
 
 
 class Appointment(models.Model):
+    title = models.CharField(max_length=100)
     doctor_id = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
-    # related_name should not be the same as the referred field names
-    # user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,
-    # related_name='usr', to_field='username', default="awe_user")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='usr')
-    date_time = models.DateTimeField(verbose_name='appointment date', default=now)
+    date_time = models.DateTimeField(verbose_name='appointment date', default=now, unique=True)
     notes = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
-        return str(self.date_time)
+        return self.title
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

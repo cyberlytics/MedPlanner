@@ -69,15 +69,15 @@ class Specialization(models.Model):
 
 
 class Surgery(models.Model):
-    location = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     zipcode = models.CharField(max_length=5)
+    location = models.CharField(max_length=100)
     description = models.CharField(max_length=100, blank=True)
     telephone_number = models.CharField(max_length=100)
     website = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return self.street + ', ' + self.zipcode + ' ' + self.location
+        return self.address + ', ' + self.zipcode + ' ' + self.location
 
 
 class Doctor(models.Model):

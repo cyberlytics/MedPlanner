@@ -11,7 +11,7 @@
     {
       "id": 2,
       "city": "Schwandorf",
-      "zipcode": "92224",
+      "zipcode": "92421",
       "address": "Kreativstraße 14",
       "description": "Im Parkhaus parken",
       "telephone_num": "09431/12345",
@@ -20,7 +20,7 @@
     {
       "id": 3,
       "city": "Regensburg",
-      "zipcode": "92224",
+      "zipcode": "93047",
       "address": "Höhengasse 20",
       "description": "",
       "telephone_num": "12345/45900",
@@ -29,7 +29,7 @@
     {
       "id": 4,
       "city": "Amberg-Sulzbach",
-      "zipcode": "92224",
+      "zipcode": "92237",
       "address": "Pseudoweg 3",
       "description": "",
       "telephone_num": "57800/4350",

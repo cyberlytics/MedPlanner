@@ -27,7 +27,7 @@ export interface DoctorData {
     id: number;
     first_name: string;
     surname: string;
-    specialization_id: number;
+    specializations: Array<number> | null;
     surgery_id: number;
 }
 

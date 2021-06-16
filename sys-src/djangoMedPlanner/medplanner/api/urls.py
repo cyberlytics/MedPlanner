@@ -26,4 +26,15 @@ urlpatterns = [
     path('activate-user', user_view.activate_user, name='activate'),
     path('delete-user', user_view.delete_user, name='user-delete'),
 
+    path('tag-delete/<str:pk>', views.tag_delete, name="tag-delete"),
+    path('tag-update/<str:pk>', views.tag_update, name="tag-update"),
+    path('tag-create', views.tag_create, name="tag-create"),
+    path('tag-list', views.tag_list, name='tag-list'),
+
+    path('surgery-delete/<str:pk>', views.surgery_delete, name="surgery-delete"),
+    path('surgery-update/<str:pk>', views.surgery_update, name="surgery-update"),
+    path('surgery-create', views.tag_create, name="surgery-create"),
+    path('surgery-list', views.surgery_list, name="surgery-list"),
+
+    path('specialization-list', views.specialization_list, name="specialization-list"),
 ]

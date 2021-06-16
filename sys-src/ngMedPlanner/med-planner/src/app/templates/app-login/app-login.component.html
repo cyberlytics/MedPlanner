@@ -28,7 +28,33 @@
         
                 <mat-error *ngIf="passwordFormControl.invalid">{{passwordErrorMessage}}</mat-error>
             </mat-form-field>
+            <!-- TODO add to registration when merged-->
+            <!-- Password Strength -->     
+            <div>
+                <mat-password-strength
+                    #passwordComponent
+                    [password]="passwordValue.value"
+                    [enableLengthRule]="true"
+                    [enableDigitRule]="true"
+                    [enableLowerCaseLetterRule]="true"
+                    [enableUpperCaseLetterRule]="true"
+                    [enableSpecialCharRule]="true"
+                >
+                </mat-password-strength>
+
+                <!-- Customizable information content -->
+                <mat-password-strength-info
+                    [passwordComponent]="passwordComponent"
+                    [lowerCaseCriteriaMsg]="'enthält mindestens einen Kleinbuchstaben'"
+                    [upperCaseCriteriaMsg]="'enthält mindestens einen Großbuchstaben'"
+                    [digitsCriteriaMsg]="'enthält mindestens eine Ziffer'"
+                    [minCharsCriteriaMsg]="'enthält mindestens 8 Zeichen'"
+                    [specialCharsCriteriaMsg]="'enthält mindestens ein Sonderzeichen'"
+                >
+                </mat-password-strength-info>
+            </div>       
         </form>
+        
         
         <!-- Sign up block -->
         <div class="sing-up-block">

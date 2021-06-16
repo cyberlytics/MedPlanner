@@ -5,8 +5,6 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth.hashers import check_password
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
@@ -29,10 +27,11 @@ def login(request):
         new_token, created = Token.objects.get_or_create(user=user)
         return Response(status=status.HTTP_200_OK, data={"token": str(new_token), "email": f"{email}"})
     else:
-        return Response(status=status.HTTP_403_FORBIDDEN, data={"message": f"Wrong password for User '{email}' or not activated"})
+        return Response(status=status.HTTP_403_FORBIDDEN,
+                        data={"message": f"Wrong password for User '{email}' or not activated"})
 
 
-#@login_required
+# @login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def logout(request):
@@ -40,7 +39,7 @@ def logout(request):
     Only logout a user if he was logged in. Otherwise redirect to Login page.
     Otherwise it will lead to HTTP 404 Not Found.
     Only the correct authentication token in the request header is required to logout the user.
-    Django automatically tests the authentification - no extra code is needed.
+    Django automatically tests the authentication - no extra code is needed.
     """
     try:
         logout_user = request.user
@@ -62,7 +61,8 @@ def create_user(request):
     try:
         user = User.objects.get(email=email)
         if user is not None:
-            return Response(status=status.HTTP_403_FORBIDDEN, data= {"message": f"User with email '{email}' is already existing"})
+            return Response(status=status.HTTP_403_FORBIDDEN,
+                            data={"message": f"User with email '{email}' is already existing"})
     except:
         try:
             new_user = User.objects.create_user(email, password)
@@ -70,17 +70,18 @@ def create_user(request):
         except:
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    return Response(status=status.HTTP_200_OK, data= {"message": f"User account for '{email}' is created"})
+    return Response(status=status.HTTP_200_OK,
+                    data={"message": f"User account for '{email}' is created"})
 
 
-#@login_required
+# @login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def change_user_password(request):
     """
     Change user password only if the current one is typed in correctly.
     """
-    #email = request.POST.get('email')
+    # email = request.POST.get('email')
     curr_password = request.POST.get('password')
     new_password = request.POST.get('password_new')
     try:
@@ -90,7 +91,8 @@ def change_user_password(request):
             user.set_password(new_password)
             user.save()
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Current password did not match. Cannot update password"})
+            return Response(status=status.HTTP_400_BAD_REQUEST,
+                            data={"message": f"Current password did not match. Cannot update password"})
 
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -99,8 +101,8 @@ def change_user_password(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"Password updated successfully for user '{user.email}'"})
 
 
-#? only if user is logged in, he should be able to deactivate the account?
-#@login_required
+# ? only if user is logged in, he should be able to deactivate the account?
+# @login_required
 @api_view(['POST', ])
 @permission_classes((IsAuthenticated, ))
 def deactivate_user(request):
@@ -108,7 +110,7 @@ def deactivate_user(request):
     Instead of deleting the user account, it is better to only deactivate it.
     In this way the user has the chance to activate it again and can access his data.
     """
-    #email = request.POST.get('email')
+    # email = request.POST.get('email')
     password = request.POST.get('password')
     try:
         user = request.user
@@ -117,16 +119,18 @@ def deactivate_user(request):
             user.is_active = False
             user.save()
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Current password did not match. Cannot update password"})
+            return Response(status=status.HTTP_400_BAD_REQUEST,
+                            data={"message": f"Current password did not match. Cannot update password"})
 
     except:
-        return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Cannot deactivate account of '{user.email}'. Password does not match"})
+        return Response(status=status.HTTP_400_BAD_REQUEST,
+                        data={"message": f"Cannot deactivate account of '{user.email}'. Password does not match"})
 
-    #TODO if needed logout user and delete token
+    # TODO if needed logout user and delete token
     return Response(status=status.HTTP_200_OK, data={"message": f"Deactivated account of '{user.email}'"})
 
 
-#? send email to user for account activation and reset of password?
+# ? send email to user for account activation and reset of password?
 @api_view(['POST', ])
 def activate_user(request):
     """
@@ -143,14 +147,14 @@ def activate_user(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"Activated account of '{user.email}'"})
 
 
-#@login_required
+# @login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def delete_user(request):
     """
     Completely delete the user account.
     """
-    #email = request.POST.get('email')
+    # email = request.POST.get('email')
     password = request.POST.get('password')
     try:
         user = request.user
@@ -158,12 +162,13 @@ def delete_user(request):
         if check:
             user.delete()
             messages.info(request, 'Your account has been deleted.')
-            #return to specific page, e.g. registration screen
+            # return to specific page, e.g. registration screen
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Current password did not match. Cannot update password"})
+            return Response(status=status.HTTP_400_BAD_REQUEST,
+                            data={"message": f"Current password did not match. Cannot update password"})
         
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    #TODO if needed logout user and delete token
+    # TODO if needed logout user and delete token
     return Response(status=status.HTTP_200_OK, data={"message": f"Successfully deleted account of '{user.email}'"})

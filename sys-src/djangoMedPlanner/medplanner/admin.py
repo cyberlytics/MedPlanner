@@ -11,7 +11,7 @@ from .models import (
     Tag
 )
 
-#@admin.register(UserProfile)
+
 class MedplannerUserAdmin(UserAdmin):
     """
     Define admin model for custom User model with no username field.
@@ -47,9 +47,9 @@ class MedplannerUserAdmin(UserAdmin):
 
 
 admin.site.register(Doctor)
-#admin.site.unregister(UserProfile)
-admin.site.register(UserProfile , MedplannerUserAdmin)
-#admin.site.register(UserProfile , UserAdmin)
+# admin.site.unregister(UserProfile)
+admin.site.register(UserProfile, MedplannerUserAdmin)
+# admin.site.register(UserProfile , UserAdmin)
 admin.site.register(Appointment)
 admin.site.register(Specialization)
 admin.site.register(Surgery)

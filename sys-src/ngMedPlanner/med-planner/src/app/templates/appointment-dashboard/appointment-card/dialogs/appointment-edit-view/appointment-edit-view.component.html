@@ -52,7 +52,14 @@
             <mat-form-field appearance="outline">
                 <mat-label>Zeit auswählen</mat-label>
                 <input class="regular-font"
-                    matInput type="time" color="primary" [formControl]="timeFormControl">
+                    [matTimepicker]="timepicker"
+                    matInput
+                    [format]="24"
+                    type="time" 
+                    color="primary"
+                    [formControl]="timeFormControl">
+                <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
+                <mat-timepicker #timepicker></mat-timepicker>
             </mat-form-field>
 
             <mat-error *ngIf="dateFormControl.hasError('matDateInvalid')">Ungültiges Datum</mat-error>

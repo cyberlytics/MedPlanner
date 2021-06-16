@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +56,9 @@ import { AppointmentEditViewComponent } from './templates/appointment-dashboard/
     HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 import {MatDialog} from '@angular/material/dialog';
-import { AppointmentDetailViewComponent } from './appointment-detail-view/appointment-detail-view.component';
+import { AppointmentDetailViewComponent } from './dialogs/appointment-detail-view/appointment-detail-view.component';
+import { AppointmentEditViewComponent } from './dialogs/appointment-edit-view/appointment-edit-view.component';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-appointment-card-component',
@@ -43,36 +45,35 @@ export class AppointmentCardComponent implements OnInit {
     return this.appointment?.dateString;
   }
 
-  @Output('onDetailsClick') get onDetailsClickEmmiter(): EventEmitter<number | null> {
-    return this._onDetailsClickEmmiter;
-  }
-  private _onDetailsClickEmmiter: EventEmitter<number | null>;
-
-
-  constructor(
-    private dialog: MatDialog
-  ) {
-    this._onDetailsClickEmmiter = new EventEmitter<number | null>();
-  }
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
-  public onDetailsButtonClick(): void {
-    this._onDetailsClickEmmiter.emit(this._appointment?.id);
+  public async onDetailsButtonClick(): Promise<void> {
+    const dialogRef = this.dialog.open<AppointmentDetailViewComponent, any, MatDialogRef<AppointmentEditViewComponent>>(
+      AppointmentDetailViewComponent,
+      {
+        maxHeight: '95vh',
+        maxWidth: '95vw',
+        width: '40em',
+        height: 'auto',
+        data: this._appointment,
+        autoFocus: false,
+        panelClass: 'appointment-dialog',
+        disableClose: true
+      }
+    );
 
-    const dialogHeight = window.innerWidth < 576 ? '100vh' : 'auto';
-
-    const dialogRef = this.dialog.open(AppointmentDetailViewComponent, {
-      maxHeight: '95vh',
-      maxWidth: '95vw',
-      width: '40em',
-      height: 'auto',
-      data: this._appointment,
-      autoFocus: false,
-      panelClass: 'appointment-dialog',
-      disableClose: true
-    });
-
+    // wait for closing of appointment dialog
+    const closeDetailResult = await dialogRef.afterClosed().toPromise();
+    if (closeDetailResult === undefined) {
+      // closing after exit button clicked
+      return;
+    }
+    // wait for closing of editing dialog
+    await closeDetailResult.afterClosed().toPromise();
+    // reopen appointment detail dialog
+    this.onDetailsButtonClick();
   }
 
 }

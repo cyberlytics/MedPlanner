@@ -15,10 +15,3 @@ class UserProfileTestCase(TestCase):
         user = UserProfileFactory()
         self.assertEqual(str(user), user.email)
 
-
-'''class AppointmentTestCase(TestCase):
-    def test_str(self):
-        """Test for string representation."""
-        print("!!!!!!!!!!!!!")
-        appointment = AppointmentFactory()
-        self.assertEqual(str(appointment), str(appointment.date_time))'''

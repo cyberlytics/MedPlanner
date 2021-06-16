@@ -47,6 +47,14 @@ $button-border-radius: 18px;
     animation-duration: .75s;
 }
 
+.text-color-dark {
+    color: map-get($contrast-colors, primary-dark);
+}
+
+.text-color-light {
+    color: map-get($contrast-colors, primary-light);
+}
+
 .regular-font {
     font-family: QuattrocentoSans-Regular;
 }
@@ -146,12 +154,7 @@ $button-border-radius: 18px;
     background: rgba($color: map-get($custom-colors, primary-dark), $alpha: 1);
     color: rgba($color: map-get($contrast-colors, primary-dark), $alpha: .8);
 
-    padding-bottom: 0;
-}
+    overflow: hidden;
 
-// Small devices (landscape phones, 576px and up)
-@media screen and (max-width: 576px) {
-    .appointment-dialog .mat-dialog-container {
-        // border-radius: 0;
-    }
+    padding-bottom: 0;
 }

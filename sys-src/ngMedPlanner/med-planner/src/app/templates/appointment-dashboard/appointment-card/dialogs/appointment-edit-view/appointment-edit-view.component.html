@@ -1,0 +1,112 @@
+<div class="dialog-header-block">
+    <h2 class="bold-font dialog-title">Termin bearbeiten</h2>
+</div>
+
+<mat-dialog-content class="dialog-content-block">
+    <!-- Priority selection -->
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Priorität</span>
+        </div>
+        <mat-form-field appearance="outline" color="accent">
+            <mat-label>Auswählen</mat-label>
+            <mat-select [formControl]="priorityFormControl" class="regular-font text-color-light">
+              <mat-option value="high" class="regular-font text-color-light">Hoch</mat-option>
+              <mat-option value="medium" class="regular-font text-color-light">Mittel</mat-option>
+              <mat-option value="low" class="regular-font text-color-light">Niedrig</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <!-- Title input -->
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Titel</span>
+        </div>
+        <mat-form-field appearance="outline" color="accent" class="width-100-percent">
+            <mat-label>Eingeben</mat-label>
+            <input
+                class="bold-font"
+                matInput
+                [formControl]="titleFormControl">
+            <mat-error *ngIf="titleFormControl.invalid">Ein Titel erforderlich</mat-error>
+        </mat-form-field>
+    </div>
+    <!-- Date input -->
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Wann</span>
+        </div>
+        <div class="info regular-font">
+            <!-- Date picker -->
+            <mat-form-field appearance="outline">
+                <mat-label>Datum auswählen</mat-label>
+                <input
+                    class="regular-font"
+                    matInput 
+                    [matDatepicker]="picker"
+                    [formControl]="dateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <!-- Time picker -->
+            <mat-form-field appearance="outline">
+                <mat-label>Zeit auswählen</mat-label>
+                <input [format]="24" class="regular-font"
+                    matInput type="time" color="primary" [formControl]="timeFormControl">
+            </mat-form-field>
+
+            <mat-error *ngIf="dateFormControl.hasError('matDateInvalid')">Ungültiges Datum</mat-error>
+        </div>
+    </div>
+    <!-- Address info -->
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Wo</span>
+        </div>
+        <div class="info regular-font" *ngIf="doctorsFormControl.value">
+            <span>{{doctorsFormControl.value.city}},</span>
+            <span>{{doctorsFormControl.value.address}}</span>
+        </div>
+    </div>
+    <!-- Doctor selection -->
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Arzt</span>
+        </div>
+        <mat-form-field appearance="outline" color="accent">
+            <mat-label>Auswählen</mat-label>
+            <mat-select class="regular-font text-color-light" [formControl]="doctorsFormControl">
+                <mat-option
+                    class="regular-font text-color-light"
+                    *ngFor="let doctor of doctors"
+                    [value]="doctor"
+                    >Dr. {{doctor.firstName}} {{doctor.surname}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <!-- Notes input -->
+    <div class="dialog-info-row width-100-percent">
+        <div class="title">
+            <span>Notizen</span>
+        </div>
+        <div class="info regular-font width-100-percent">
+            <mat-form-field class="width-100-percent" appearance="outline">
+                <mat-label>Text</mat-label>
+                <textarea matInput [formControl]="notesFormControl" class="width-100-percent regular-font"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- Buttons Save/Cancel -->
+    <div class="dialog-buttons-block">
+        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()">Cancel</button>
+        <button
+            class="bold-font appearance-animation-fast"
+            mat-button (click)="saveChanges()"
+            [disabled]="titleFormControl.invalid ||
+                        dateFormControl.invalid ||
+                        doctorsFormControl.invalid ||
+                        timeFormControl.invalid"
+            >Save</button>
+    </div>
+</mat-dialog-content>

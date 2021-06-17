@@ -4,6 +4,11 @@ import { AppHeaderStateService, DrawerAction } from '../services/state-services/
 import { AppStateService } from '../services/state-services/app-state.service';
 import { UserStateService } from '../services/user-services/user-state.service';
 
+
+//LÖSCHEN/////
+import { Router } from '@angular/router';
+////////
+
 @Component({
   selector: 'app-header-component',
   templateUrl: './app-header.component.html',
@@ -35,7 +40,14 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
   constructor(
     private appState: AppStateService,
     private headerState: AppHeaderStateService,
-    private userState: UserStateService
+    private userState: UserStateService,
+
+    //LÖSCHEN///
+    private router: Router
+    /////////
+
+
+
   ) {
     this.headerElement = new ElementRef(null);
     this._headerHeightInit = new EventEmitter<number>();
@@ -73,5 +85,16 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
       console.error(e);
     }
   }
+
+ 
+  //LÖSCHEN ;navigate to Doctor Dashboard
+  public docDashboard() : void{
+    this.router.navigate(['doctor-dashboard']);
+  }
+
+
+
+
+
 
 }

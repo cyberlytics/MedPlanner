@@ -1,3 +1,4 @@
+
 .main-block {
     width: 100%;
     display: flex;
@@ -6,13 +7,22 @@
     align-items: center;
 }
 
-.login-block {
+.register-block {
     margin: 2em;
     border-radius: 24px 24px 0 0;
     padding: 2em;
 }
 
-.sing-in-text-block {
+.register-block span {
+    margin-right: 0.3em;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-text-block {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,21 +32,22 @@
 
     height: auto;
 }
-.sing-in-text-block span {
+
+.register-text-block span {
     font-size: 1.5em
 }
 
-.sing-in-text-block mat-icon {
+.register-text-block p{
+    font-size: 1.2em
+}
+
+
+.register-text-block mat-icon {
     height: 7em;
     transform: scale(4);
 }
 
-.login-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.sing-up-block {
+.log-in-block {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -45,22 +56,18 @@
     margin-bottom: 1em;
 }
 
-.sing-up-block span {
-    margin-left: 0.5em;
-}
-
-#sing-up-now-text {
+#log-in-now-text {
     color: royalblue;
     text-decoration: underline;
 
     cursor: pointer;
 }
 
-#sing-up-now-text:hover {
+#log-in-now-text:hover {
     opacity: 0.8;
 }
 
-.login-button-block {
+.register-button-block {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -72,28 +79,32 @@
 
 // Small devices (landscape phones, 576px and up)
 @media screen and  (min-width: 576px) {
-    .login-block {
+    .register-block {
         width: 70%;
     }
+    
 }
 
 // Medium devices (tablets, 768px and up)
 @media screen and  (min-width: 768px) {
-    .login-block {
+    .register-block {
         width: 30em;
     }
+
+    
 }
 
 // Large devices (desktops, 992px and up)
 @media screen and  (min-width: 992px) {
-    .login-block {
+    .register-block {
         width: 30em;
     }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media screen and  (min-width: 1200px) {
-    .login-block {
+    .register-block {
         width: 30em;
     }
 }
+

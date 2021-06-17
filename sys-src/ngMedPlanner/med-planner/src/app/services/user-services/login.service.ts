@@ -56,6 +56,8 @@ export class LoginService implements Login {
             this.storeToken(response.result);
         } catch (error) {
 
+            console.log(error);
+
             if (error.status === HttpService.HTTP_403_FORBIDDEN) {
                 return LoginResult.PASSWORD_IS_WRONG;
             }

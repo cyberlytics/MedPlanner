@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
+import{CityModel} from 'src/app/services/state-services/surgery/city-model';
 @Component({
   selector: 'app-doctor-card',
   templateUrl: './doctor-card.component.html',
@@ -11,5 +12,44 @@ export class DoctorCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @Input() set doctor(value: DoctorModel | null) {
+    this._doctor = value;
+
+  }
+  get doctor(): DoctorModel | null {
+    return this._doctor;
+  }
+  private _doctor: DoctorModel | null = null;
+
+  get doctorName(): string | undefined{
+    return this._doctor?.surname;
+   
+  } 
+
+  get location(): CityModel | undefined{
+    return this._doctor?.surgery?.city;
+  
+  } 
+
+  get postcode(): string | undefined{
+    return ;
+  
+  } 
+
+  get address(): string | undefined{
+    return this._doctor?.surgery?.address;
+ 
+  } 
+
+  get telephone(): string | undefined{
+    return this._doctor?.surgery?.telephoneNumber;
+
+  } 
+
+  get website(): string | undefined{
+    return this._doctor?.surgery?.website;
+  
+  } 
 
 }

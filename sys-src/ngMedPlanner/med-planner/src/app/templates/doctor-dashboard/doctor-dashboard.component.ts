@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
+import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
+import { DoctorsDashboardStateService } from 'src/app/services/state-services/doctors-dashboard/doctors-dashboard-state.service';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -7,8 +10,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorDashboardComponent implements OnInit {
 
-  constructor() { }
+  get doctors(): ReadonlyArray<DoctorModel> {
+    return this._doctors;
+  }
+  private _doctors: ReadonlyArray<DoctorModel>;
 
-  ngOnInit(): void {}
+  constructor(
+    headerState: AppHeaderStateService,
+    //private doctorssState: DoctorsDashboardStateService,
+  
+    private changeDet: ChangeDetectorRef
+  ) {
+    this._doctors = new Array<DoctorModel>();
+
+    headerState.setHeaderTitle('Hallo Maximilian!');
+    headerState.setHeaderSubTitle('');
+   }
+
+  ngOnInit(): void {
+    this.loadDoctors();
+  }
+
+
+
+  private async loadDoctors(): Promise<void> {
+    this._doctors = new Array<DoctorModel>();
+    this.changeDet.detectChanges();
+  }
+
+
 
 }

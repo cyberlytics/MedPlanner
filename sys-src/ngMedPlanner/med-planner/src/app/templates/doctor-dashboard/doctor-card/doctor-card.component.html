@@ -1,1 +1,63 @@
-<p>doctor-card works!</p>
+<div class="main-block">
+    <div class="card-block card-shape base-shadow primary-border">
+
+        <!-- Name -->
+        <div class="doctornameblock">
+            <span class="bold-font" id="doctor-name">Dr. {{doctorName}} </span>
+            <span class="regular-font" id="doctor-discipline">Zahnarzt</span>
+        </div>
+
+        <div class ="docCardbody">
+
+            <div class ="docCardlabels">
+ 
+                <!--Adresse-->
+                <div class="doctoraddress">
+                    <span class="bold-font" >Stadt:</span>
+                    <span class="bold-font" >Postleitzahl:</span>
+                    <span class="bold-font" >Straße:</span>
+                </div>
+        
+                <!--Telefonnummer-->
+                <div class="doctelephone">
+                    <span class="bold-font" >Telefonnummer: </span>
+                </div>
+
+                <!--Website-->
+                <div class="website">
+                    <span class="bold-font" >Webseite: </span>
+                </div>
+                
+            </div>
+    
+    
+            <div class="docCardvalues">
+                <!--Adresse-->
+                <div class="doctoraddress">
+                    <span class="regular-font" id="city">{{location}}</span>
+                    <span class="regular-font" id="postcode">{{postcode}}</span>
+                    <span class="regular-font" id="street">{{address}}</span>
+                </div>
+    
+                <!--Telefonnummer-->
+                <div class="doctelephone">
+                    <span class="regular-font" id="phonenumber">{{telephone}}</span>
+                </div>
+
+                <!--Website-->
+                <div class="website">
+                    <span class="regular-font" >{{website}} </span>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="detail-button">
+        <button class="base-button base-button-shape secondary-button" id="doctor-button"
+        >
+            Details
+        </button>
+    </div>
+</div>

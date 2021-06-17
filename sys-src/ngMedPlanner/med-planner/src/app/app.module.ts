@@ -17,6 +17,14 @@ import { PriorityComponent } from './templates/appointment-dashboard/appointment
 import { TagsComponent } from './templates/appointment-dashboard/appointment-card/tags/tags.component';
 import { DoctorDashboardComponent } from './templates/doctor-dashboard/doctor-dashboard.component';
 import { DoctorCardComponent } from './templates/doctor-dashboard/doctor-card/doctor-card.component';
+import { FilterComponent } from './templates/filter/filter.component';
+import { FilterAppointmentsComponent } from './templates/filter/filter-appointments/filter-appointments.component';
+import { FilterDoctorsComponent } from './templates/filter/filter-doctors/filter-doctors.component';
+import { FilterPriorityComponent } from './templates/filter/filter-appointments/filter-priority/filter-priority.component';
+import { FilterSpecializationsComponent } from './templates/filter/filter-appointments/filter-specializations/filter-specializations.component';
+import { FilterCitiesComponent } from './templates/filter/filter-appointments/filter-cities/filter-cities.component';
+import { FilterPeriodComponent } from './templates/filter/filter-appointments/filter-period/filter-period.component';
+import { FilterTagsComponent } from './templates/filter/filter-appointments/filter-tags/filter-tags.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +38,15 @@ import { DoctorCardComponent } from './templates/doctor-dashboard/doctor-card/do
     AppSignInComponent,
     TagsComponent,
     DoctorDashboardComponent,
-    DoctorCardComponent
+    DoctorCardComponent,
+    FilterComponent,
+    FilterAppointmentsComponent,
+    FilterDoctorsComponent,
+    FilterPriorityComponent,
+    FilterSpecializationsComponent,
+    FilterCitiesComponent,
+    FilterPeriodComponent,
+    FilterTagsComponent
   ],
   imports: [
     BrowserModule,

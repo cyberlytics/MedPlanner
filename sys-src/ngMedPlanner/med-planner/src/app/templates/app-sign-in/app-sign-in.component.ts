@@ -33,7 +33,6 @@ export class AppSignInComponent implements OnInit {
       return this.EMAIL_ALREADY_EXIST_MESSAGE;
     }
 
-
     return '';
   }
 
@@ -46,21 +45,12 @@ export class AppSignInComponent implements OnInit {
     if (this._registerPasswordFormControl.hasError('differentPasswords')) {
       return this.DIFFERENT_PASSWORDS_MESSAGE;
     }
-
-    if(this._confirmPasswordFormControl.hasError('required')){
-      return this.PASSWORD_REQUIRED_MESSAGE;
-    }
-
     if (this._confirmPasswordFormControl.hasError('differentPasswords')) {
       return this.DIFFERENT_PASSWORDS_MESSAGE;
     }
 
     return '';
   }
-
-
-
-
 
 
   get registerEmailFormControl(): FormControl {
@@ -94,7 +84,6 @@ export class AppSignInComponent implements OnInit {
     
     private router: Router,
     private snackBar: MatSnackBar,
-    //???
     private signupState: SignUpService,
   ){
 
@@ -122,9 +111,9 @@ export class AppSignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //Verknüpfung mit Log-in-Componente
+  //Connection to Log-in-Component
   public onLogInClick(): void {
-    //console.log("zum login");
+  
     this.router.navigate(['login']);
   }
 
@@ -137,7 +126,7 @@ export class AppSignInComponent implements OnInit {
   }  
 
 
-  //function called by blur in html-template
+  //function called by "(blur)" in html-template
   public handleDifferentPassword(): void {
 
     if(this._confirmPasswordFormControl.value != this._registerPasswordFormControl.value) {
@@ -148,7 +137,7 @@ export class AppSignInComponent implements OnInit {
 
   }
 
-  //wenn Passwort und E-Mail richtig, dann zum Login
+ 
   private handleSignUpSuccesfull(): void {
     this.router.navigate(['login']);
   }
@@ -198,9 +187,7 @@ export class AppSignInComponent implements OnInit {
     });
   }
 
-  
 }
-
 
 
 /**

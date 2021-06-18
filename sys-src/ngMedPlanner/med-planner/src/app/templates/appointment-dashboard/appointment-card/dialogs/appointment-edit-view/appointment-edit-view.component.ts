@@ -28,12 +28,26 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   }
   private _dateFormControl: FormControl = new FormControl(this.appointment.date);
 
-  get timeFormControl(): FormControl {
-    return this._timeFormControl;
+  get hourFormControl(): FormControl {
+    return this._hourFormControl;
   }
-  private _timeFormControl: FormControl = new FormControl(
-    this.appointment.timeString
+  private _hourFormControl: FormControl = new FormControl(
+    this.appointment.hourString
   );
+  public readonly hourSelections = [
+    '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+    '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'
+  ];
+
+  get minutesFormControl(): FormControl {
+    return this._minutesFormControl;
+  }
+  private _minutesFormControl: FormControl = new FormControl(
+    this.appointment.minuteString
+  );
+  public readonly minutesSelections = [
+    '00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'
+  ];
 
   get notesFormControl(): FormControl {
     return this._notesFormControl;
@@ -59,7 +73,8 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
 
     this._titleFormControl.setValidators([Validators.required]);
     this._dateFormControl.setValidators([Validators.required]);
-    this._timeFormControl.setValidators([Validators.required]);
+    this._hourFormControl.setValidators([Validators.required]);
+    this._minutesFormControl.setValidators([Validators.required]);
     this._doctorsFormControl.setValidators([Validators.required]);
 
     this._doctors = new Array();
@@ -120,8 +135,8 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
 
   private getDate(): Date {
     const date = new Date(this._dateFormControl.value);
-    date.setHours(this._timeFormControl.value.split(':')[0]);
-    date.setMinutes(this._timeFormControl.value.split(':')[1]);
+    date.setHours(this._hourFormControl.value);
+    date.setMinutes(this._minutesFormControl.value);
 
     return date;
   }

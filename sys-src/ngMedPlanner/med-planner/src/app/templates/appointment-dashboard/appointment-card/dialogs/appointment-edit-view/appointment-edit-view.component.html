@@ -48,14 +48,27 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <!-- Time picker -->
-            <mat-form-field appearance="outline">
-                <mat-label>Zeit auswählen</mat-label>
-                <input class="regular-font"
-                    matInput
-                    type="time" 
-                    color="primary"
-                    [formControl]="timeFormControl">
+            <!-- Hour picker -->
+            <mat-form-field appearance="outline" class="time-input">
+                <mat-label>Stunden</mat-label>
+                <mat-select [formControl]="hourFormControl" class="regular-font text-color-light">
+                    <mat-option
+                        *ngFor="let hour of hourSelections"
+                        [value]="hour"
+                        class="regular-font text-color-light"
+                        >{{ hour }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- Minutes picker -->
+            <mat-form-field appearance="outline" class="time-input">
+                <mat-label>Minuten</mat-label>
+                <mat-select [formControl]="minutesFormControl" class="regular-font text-color-light">
+                    <mat-option
+                        *ngFor="let minutes of minutesSelections"
+                        [value]="minutes"
+                        class="regular-font text-color-light"
+                        >{{minutes}}</mat-option>
+                </mat-select>
             </mat-form-field>
 
             <mat-error *ngIf="dateFormControl.hasError('matDateInvalid')">Ungültiges Datum</mat-error>
@@ -69,6 +82,7 @@
         <div class="info regular-font" *ngIf="doctorsFormControl.value">
             <span>{{doctorsFormControl.value.city}},</span>
             <span>{{doctorsFormControl.value.address}}</span>
+            <span class="italic-font">(kann nur bei Arzt geändert werden)</span>
         </div>
     </div>
     <!-- Doctor selection -->
@@ -109,7 +123,8 @@
             [disabled]="titleFormControl.invalid ||
                         dateFormControl.invalid ||
                         doctorsFormControl.invalid ||
-                        timeFormControl.invalid"
+                        hourFormControl.invalid || 
+                        minutesFormControl.invalid"
             >Save</button>
     </div>
 </mat-dialog-content>

@@ -13,6 +13,7 @@ import { AppointmentDetailViewComponent } from './templates/appointment-dashboar
 import { MaterialModule } from './material/material.module';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppLoginComponent } from './templates/app-login/app-login.component';
+import { AppSignInComponent } from './templates/app-sign-in/app-sign-in.component';
 import { PriorityComponent } from './templates/appointment-dashboard/appointment-card/priority/priority.component';
 import { TagsComponent } from './templates/appointment-dashboard/appointment-card/tags/tags.component';
 import { DoctorDashboardComponent } from './templates/doctor-dashboard/doctor-dashboard.component';
@@ -36,6 +37,7 @@ import { AppointmentEditViewComponent } from './templates/appointment-dashboard/
     AppHeaderComponent,
     AppLoginComponent,
     PriorityComponent,
+    AppSignInComponent,
     TagsComponent,
     DoctorDashboardComponent,
     DoctorCardComponent,

@@ -45,4 +45,5 @@ export interface SurgeryData {
     description: string;
     telephone_num: string;
     website: string;
+    zipcode: string;
 }

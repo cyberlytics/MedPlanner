@@ -32,6 +32,13 @@ export class HttpService {
     public static readonly DOCTOR_UPDATE = `http://${HttpService.serverHost}:8000/api/doctor-update/`;
     public static readonly DOCTOR_CREATE = `http://${HttpService.serverHost}:8000/api/doctor-create`;
     public static readonly DOCTOR_DELETE = `http://${HttpService.serverHost}:8000/api/doctor-delete/`;
+
+    public static readonly APPOINTMENT_LIST = `http://${HttpService.serverHost}:8000/api/appointment-list`;
+    public static readonly APPOINTMENT_DETAIL = `http://${HttpService.serverHost}:8000/api/appointment-detail/`;
+    public static readonly APPOINTMENT_UPDATE = `http://${HttpService.serverHost}:8000/api/appointment-update/`;
+    public static readonly APPOINTMENT_CREATE = `http://${HttpService.serverHost}:8000/api/appointment-create`;
+    public static readonly APPOINTMENT_DELETE = `http://${HttpService.serverHost}:8000/api/appointment-delete/`;
+
     constructor(private http: HttpClient) {}
 
     async requestData<T>(_url: string, body?: any): Promise<T> {

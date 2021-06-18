@@ -31,7 +31,15 @@ export class AppointmentModel {
           hour: '2-digit',
           minute: '2-digit'
         });
-      }
+    }
+
+    get hourString(): string {
+        return this.timeString.split(':')[0];
+    }
+
+    get minuteString(): string {
+        return this.timeString.split(':')[1];
+    }
 
     get doctor(): DoctorModel | null {
         return this.data.doctor;

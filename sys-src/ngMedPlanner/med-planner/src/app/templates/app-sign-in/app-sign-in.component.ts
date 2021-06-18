@@ -12,12 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AppSignInComponent implements OnInit {
 
-  
-  private readonly EMAIL_REQUIRED_MESSAGE = 'Eine Email ist erforderlich!';
-  private readonly EMAIL_WRONG_MESSAGE = 'Eine gültige Email ist erforderlich!';
+
+  private readonly EMAIL_REQUIRED_MESSAGE = 'EMail-Adresse erforderlich!';
+  private readonly EMAIL_WRONG_MESSAGE = 'Gültige Email-Adresse erforderlich!';
   private readonly EMAIL_ALREADY_EXIST_MESSAGE = 'Diese Email existiert bereits!';
 
-  private readonly PASSWORD_REQUIRED_MESSAGE = 'Ein Passwort ist erforderlich!';
+  private readonly PASSWORD_REQUIRED_MESSAGE = 'Passwort ist erforderlich!';
   private readonly DIFFERENT_PASSWORDS_MESSAGE = 'Die Passwörter stimmen nicht überein!';
 
 
@@ -57,7 +57,7 @@ export class AppSignInComponent implements OnInit {
     return this._registerEmailFormControl;
   }
   private _registerEmailFormControl: FormControl;
-  
+
 
 
   get registerPasswordFormControl(): FormControl {
@@ -68,7 +68,7 @@ export class AppSignInComponent implements OnInit {
 
   get confirmPasswordFormControl(): FormControl{
     return this._confirmPasswordFormControl;
-  } 
+  }
   private _confirmPasswordFormControl: FormControl;
 
 
@@ -81,7 +81,7 @@ export class AppSignInComponent implements OnInit {
   private _hidePassword: boolean;
 
   constructor(
-    
+
     private router: Router,
     private snackBar: MatSnackBar,
     private signupState: SignUpService,
@@ -97,39 +97,39 @@ export class AppSignInComponent implements OnInit {
       '',
       [Validators.required, RegPasswordValidator.differentPasswords]
     );
-    
+
 
     this._confirmPasswordFormControl = new FormControl(
       '',
-      [Validators.required, RegPasswordValidator.differentPasswords] 
+      [Validators.required, RegPasswordValidator.differentPasswords]
     );
 
     this._hidePassword = true;
 
-  } 
+  }
 
   ngOnInit(): void {
   }
 
-  //Connection to Log-in-Component
+  // Connection to Log-in-Component
   public onLogInClick(): void {
-  
+
     this.router.navigate(['login']);
   }
 
   public async onSignUpClick(_email: string, _password: string): Promise<void>{
-    
+
     const signedUp = await this.signupState.signup(_email, _password);
 
     this.handleLoginResult(signedUp);
 
-  }  
+  }
 
 
-  //function called by "(blur)" in html-template
+  // function called by "(blur)" in html-template
   public handleDifferentPassword(): void {
 
-    if(this._confirmPasswordFormControl.value != this._registerPasswordFormControl.value) {
+    if (this._confirmPasswordFormControl.value != this._registerPasswordFormControl.value) {
       RegPasswordValidator.enableError();
       this._confirmPasswordFormControl.updateValueAndValidity();
       RegPasswordValidator.disableError();
@@ -137,7 +137,7 @@ export class AppSignInComponent implements OnInit {
 
   }
 
- 
+
   private handleSignUpSuccesfull(): void {
     this.router.navigate(['login']);
   }

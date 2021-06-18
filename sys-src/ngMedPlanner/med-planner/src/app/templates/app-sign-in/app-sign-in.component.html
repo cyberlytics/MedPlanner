@@ -18,7 +18,7 @@
                 <mat-error *ngIf="registerEmailFormControl.invalid">{{emailErrorMessage}}</mat-error>
             </mat-form-field>
             
-            <mat-form-field appearance="outline"  >
+            <mat-form-field appearance="outline">
                 <mat-label>Passwort</mat-label>
                 <input matInput [formControl]="registerPasswordFormControl" required  
                 #passwordValue
@@ -32,9 +32,10 @@
             </mat-form-field>
 
             <!-- Password Strength -->
-            <div>
-                <mat-password-strength
+            <div class="password-strength">
+                <mat-password-strength 
                     #passwordComponentWithValidation
+                    
                     [password]="passwordValue.value"
                     [enableLengthRule]="true"
                     [enableDigitRule]="true"
@@ -45,7 +46,7 @@
                 </mat-password-strength>
 
                 <!-- Customizable information content -->
-                <mat-password-strength-info
+                <mat-password-strength-info 
                     [passwordComponent]="passwordComponentWithValidation"
                     [lowerCaseCriteriaMsg]="'enthält mindestens einen Kleinbuchstaben'"
                     [upperCaseCriteriaMsg]="'enthält mindestens einen Großbuchstaben'"
@@ -85,8 +86,7 @@
             color="primary">
                 Registrieren
                 <mat-icon matSuffix>accessibility_new</mat-icon>
-            </button>
-            <mat-spinner diameter="35"></mat-spinner>
+            </button> 
         </div>
     </div>
 </div>

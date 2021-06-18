@@ -2,6 +2,7 @@
     {
       "id": 1,
       "city": "Amberg",
+      "zipcode": "92224",
       "address": "Straßenname 4",
       "description": "",
       "telephone_num": "89458/23454",
@@ -10,6 +11,7 @@
     {
       "id": 2,
       "city": "Schwandorf",
+      "zipcode": "92421",
       "address": "Kreativstraße 14",
       "description": "Im Parkhaus parken",
       "telephone_num": "09431/12345",
@@ -18,6 +20,7 @@
     {
       "id": 3,
       "city": "Regensburg",
+      "zipcode": "93047",
       "address": "Höhengasse 20",
       "description": "",
       "telephone_num": "12345/45900",
@@ -26,6 +29,7 @@
     {
       "id": 4,
       "city": "Amberg-Sulzbach",
+      "zipcode": "92237",
       "address": "Pseudoweg 3",
       "description": "",
       "telephone_num": "57800/4350",

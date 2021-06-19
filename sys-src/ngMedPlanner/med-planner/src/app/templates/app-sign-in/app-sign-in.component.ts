@@ -18,6 +18,7 @@ export class AppSignInComponent implements OnInit {
   private readonly EMAIL_ALREADY_EXIST_MESSAGE = 'Diese Email existiert bereits!';
 
   private readonly PASSWORD_REQUIRED_MESSAGE = 'Passwort ist erforderlich!';
+  private readonly PASSWORD_NOT_MATCHING_MESSAGE = 'Passwort zu unsicher!';
   private readonly DIFFERENT_PASSWORDS_MESSAGE = 'Die Passwörter stimmen nicht überein!';
 
 
@@ -42,12 +43,17 @@ export class AppSignInComponent implements OnInit {
       return this.PASSWORD_REQUIRED_MESSAGE;
     }
 
+    if (this._registerPasswordFormControl.hasError('passwordStrengthCheck')) {
+      return this.PASSWORD_NOT_MATCHING_MESSAGE;
+    }
     if (this._registerPasswordFormControl.hasError('differentPasswords')) {
       return this.DIFFERENT_PASSWORDS_MESSAGE;
     }
     if (this._confirmPasswordFormControl.hasError('differentPasswords')) {
       return this.DIFFERENT_PASSWORDS_MESSAGE;
     }
+
+
 
     return '';
   }
@@ -84,7 +90,7 @@ export class AppSignInComponent implements OnInit {
 
     private router: Router,
     private snackBar: MatSnackBar,
-    private signupState: SignUpService,
+    private signupState: SignUpService
   ){
 
     this._registerEmailFormControl = new FormControl(
@@ -95,7 +101,7 @@ export class AppSignInComponent implements OnInit {
 
     this._registerPasswordFormControl = new FormControl(
       '',
-      [Validators.required, RegPasswordValidator.differentPasswords]
+      [Validators.required, RegPasswordValidator.differentPasswords, RegPasswordValidator.passwordStrengthCheck]
     );
 
 
@@ -125,12 +131,33 @@ export class AppSignInComponent implements OnInit {
 
   }
 
+  public handlePasswordStrength(): void {
+
+    const passwordRegex = new RegExp(
+      '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[\w]).{8,}'
+    );
+    // const passwordRegex = new RegExp('^[+ 0-9]{5}$');
+
+    if (passwordRegex.test(this._registerPasswordFormControl.value) == false) {
+      RegPasswordValidator.strengthCheckInValid();
+      this._registerPasswordFormControl.updateValueAndValidity();
+      RegPasswordValidator.disableError2();
+
+      this.handleDifferentPassword();
+    }
+
+    console.log('check value with pattern');
+    console.log(passwordRegex.test(this._registerPasswordFormControl.value));
+    console.log(this._registerPasswordFormControl.value)
+    // Validators.pattern('^(?=.*[a-zäöüß])(?=.*[A-ZÄÖÜ])(?=.*[0-9])(?=.*[!@#$%^&.*])(?=.{8,})')
+  }
+
 
   // function called by "(blur)" in html-template
   public handleDifferentPassword(): void {
-
     if (this._confirmPasswordFormControl.value != this._registerPasswordFormControl.value) {
       RegPasswordValidator.enableError();
+      this._registerPasswordFormControl.updateValueAndValidity();
       this._confirmPasswordFormControl.updateValueAndValidity();
       RegPasswordValidator.disableError();
     }
@@ -214,6 +241,7 @@ export class AppSignInComponent implements OnInit {
  */
  class RegPasswordValidator {
   private static isWrong = false;
+  private static isWrong2 = false;
 
   static enableError(): void {
     this.isWrong = true;
@@ -223,7 +251,22 @@ export class AppSignInComponent implements OnInit {
     this.isWrong = false;
   }
 
+  /**
+   * 
+   */
+  static strengthCheckInValid(): void {
+    this.isWrong2 = true;
+  }
+
+  static disableError2(): void {
+    this.isWrong2 = false;
+  }
+
   static differentPasswords(control: AbstractControl): ValidationErrors | null {
     return RegPasswordValidator.isWrong ? { differentPasswords: true } : null;
+  }
+
+  static passwordStrengthCheck(control: AbstractControl): ValidationErrors | null {
+    return RegPasswordValidator.isWrong2 ? { passwordStrengthCheck: true } : null;
   }
 }

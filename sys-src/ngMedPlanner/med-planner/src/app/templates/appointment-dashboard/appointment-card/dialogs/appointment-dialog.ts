@@ -10,6 +10,10 @@ export abstract class AppointmentDialog {
         return this.appointment.city;
     }
 
+    get postcode(): string | undefined {
+        return this.appointment.postcode;
+    }
+
     get address(): string | undefined {
         return this.appointment.address;
     }

@@ -73,6 +73,10 @@ export class AppointmentModel {
         return this.doctor?.city;
     }
 
+    get postcode(): string | undefined {
+        return this.doctor?.postcode;
+    }
+
     get address(): string | undefined {
         return this.doctor?.address;
     }

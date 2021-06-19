@@ -34,7 +34,11 @@ export class DoctorModel {
     }
 
     get city(): string | undefined {
-        return this.data.surgery?.city.city;
+        return this.data.surgery?.city;
+    }
+
+    get postcode(): string | undefined {
+        return this.data.surgery?.postcode;
     }
 
     get address(): string | undefined {
@@ -56,7 +60,7 @@ export class DoctorModel {
     }
 
     public isInCity(city: CityModel): boolean {
-        return this.data.surgery?.city === city;
+        return this.data.surgery?.cityModel === city;
     }
 
 }

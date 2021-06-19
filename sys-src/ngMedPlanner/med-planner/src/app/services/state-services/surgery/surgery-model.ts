@@ -7,8 +7,16 @@ export class SurgeryModel {
         return this.data.id;
     }
 
-    get city(): CityModel {
-        return this.data.city;
+    get cityModel(): CityModel {
+        return this.data.cityModel;
+    }
+
+    get city(): string {
+        return this.data.cityModel.city;
+    }
+
+    get postcode(): string {
+        return this.data.cityModel.postcode;
     }
 
     get address(): string {
@@ -29,7 +37,7 @@ export class SurgeryModel {
 
     constructor(private data: {
         id: number,
-        city: CityModel,
+        cityModel: CityModel,
         address: string,
         telephoneNumber: string,
         website: string,

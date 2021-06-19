@@ -17,30 +17,50 @@ export class DoctorModel {
         return this.data.surname;
     }
 
-    get specialization(): SpecializationModel | null {
-        return this.data.specialization;
+    get specializations(): Array<SpecializationModel | null> | null {
+        return this.data.specializations;
     }
 
     get specializationColor(): string | null | undefined {
-        return this.data.specialization?.color;
+        if (this.data.specializations?.length === 1) {
+            return this.data.specializations[0]?.color;
+        }
+
+        return null;
     }
 
     get surgery(): SurgeryModel | null {
         return this.data.surgery;
     }
 
+    get city(): string | undefined {
+        return this.data.surgery?.city;
+    }
+
+    get postcode(): string | undefined {
+        return this.data.surgery?.postcode;
+    }
+
+    get address(): string | undefined {
+        return this.data.surgery?.address;
+    }
+
+    get phoneNumber(): string | undefined {
+        return this.data.surgery?.telephoneNumber;
+    }
+
     constructor(private data: {
         id: number;
         first_name: string;
         surname: string;
-        specialization: SpecializationModel | null;
+        specializations: Array<SpecializationModel | null> | null;
         surgery: SurgeryModel | null;
     }) {
 
     }
 
     public isInCity(city: CityModel): boolean {
-        return this.data.surgery?.city === city;
+        return this.data.surgery?.cityModel === city;
     }
 
 }

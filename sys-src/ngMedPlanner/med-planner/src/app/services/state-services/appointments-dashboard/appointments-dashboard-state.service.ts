@@ -78,7 +78,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
 
             filteredAppointments.push(appointment);
         }
-
+        for (const appoint of filteredAppointments) {
+            console.log(appoint.date.getTime());
+        }
+        
         return filteredAppointments;
     }
 

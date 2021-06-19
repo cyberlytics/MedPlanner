@@ -18,7 +18,6 @@ export class DoctorDashboardComponent implements OnInit {
   constructor(
     headerState: AppHeaderStateService,
     private doctorssState: DoctorsDashboardStateService,
-  
     private changeDet: ChangeDetectorRef
   ) {
     this._doctors = new Array<DoctorModel>();
@@ -34,13 +33,10 @@ export class DoctorDashboardComponent implements OnInit {
 
 
   private async loadDoctors(): Promise<void> {
-    this._doctors = new Array<DoctorModel>();
-    console.log(this._doctors);
     this.changeDet.detectChanges();
 
     this._doctors = await this.doctorssState.getStateData();
+    // console.log(this._doctors);
   }
-
-
-
+  
 }

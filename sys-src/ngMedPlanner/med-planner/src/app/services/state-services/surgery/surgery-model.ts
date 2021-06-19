@@ -10,7 +10,7 @@ export class SurgeryModel {
     get city(): CityModel {
         return this.data.city;
     }
-
+   
     get address(): string {
         return this.data.address;
     }

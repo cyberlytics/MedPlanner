@@ -42,7 +42,7 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     private headerState: AppHeaderStateService,
     private userState: UserStateService,
 
-    //LÖSCHEN///
+    ////JUST TEMPORARY UNTIL CONNECTION TO APPOINTMENT_DAHSBOARD WORKS?
     private router: Router
     /////////
 
@@ -87,7 +87,7 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
   }
 
  
-  //LÖSCHEN ;navigate to Doctor Dashboard
+  //////JUST TEMPORARY UNTIL CONNECTION TO APPOINTMENT_DAHSBOARD WORKS?;navigate to Doctor Dashboard
   public docDashboard() : void{
     this.router.navigate(['doctor-dashboard']);
   }

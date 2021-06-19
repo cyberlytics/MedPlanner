@@ -20,7 +20,7 @@
             
             <mat-form-field appearance="outline">
                 <mat-label>Passwort</mat-label>
-                <input matInput [formControl]="registerPasswordFormControl" required  
+                <input matInput [formControl]="registerPasswordFormControl" required (blur)="handlePasswordStrength()"
                 #passwordValue
                 [type]="hidePassword ? 'password' : 'text'">    
 
@@ -34,8 +34,7 @@
             <!-- Password Strength -->
             <div class="password-strength">
                 <mat-password-strength 
-                    #passwordComponentWithValidation
-                    
+                    #strength
                     [password]="passwordValue.value"
                     [enableLengthRule]="true"
                     [enableDigitRule]="true"
@@ -47,7 +46,7 @@
 
                 <!-- Customizable information content -->
                 <mat-password-strength-info 
-                    [passwordComponent]="passwordComponentWithValidation"
+                    [passwordComponent]="strength"
                     [lowerCaseCriteriaMsg]="'enthält mindestens einen Kleinbuchstaben'"
                     [upperCaseCriteriaMsg]="'enthält mindestens einen Großbuchstaben'"
                     [digitsCriteriaMsg]="'enthält mindestens eine Ziffer'"
@@ -81,7 +80,7 @@
         <!-- Sign up button -->
         <div class="register-button-block">
             <button mat-raised-button color="primary" id="sing-up-button"
-            [disabled]="confirmPasswordFormControl.invalid || registerEmailFormControl.invalid"
+            [disabled]="confirmPasswordFormControl.invalid || registerEmailFormControl.invalid || registerPasswordFormControl.invalid"
             (click)="onSignUpClick(RegEmailValue.value, RegPasswordValue.value)"
             color="primary">
                 Registrieren

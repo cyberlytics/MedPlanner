@@ -24,3 +24,11 @@
 .tip-text-block button {
     margin-top: 1em;
 }
+
+.add-fab-button {
+    position: fixed;
+    z-index: 10;
+
+    left: 50%;
+    bottom: 2em;
+}

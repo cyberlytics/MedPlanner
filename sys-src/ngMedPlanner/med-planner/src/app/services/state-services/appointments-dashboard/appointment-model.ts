@@ -7,7 +7,7 @@ export class AppointmentModel {
     private static readonly LOCALE_DE = 'de-DE';
 
     get id(): number {
-        return this.data.id;
+        return this.data.id ? this.data.id : -1;
     }
 
     get title(): string {
@@ -73,8 +73,8 @@ export class AppointmentModel {
         return this.doctor?.city;
     }
 
-    get postcode(): string | undefined {
-        return this.doctor?.postcode;
+    get zipcode(): string | undefined {
+        return this.doctor?.zipcode;
     }
 
     get address(): string | undefined {
@@ -84,7 +84,7 @@ export class AppointmentModel {
     private _date: Date;
 
     constructor(private data: {
-        id: number;
+        id: number | null;
         title: string;
         datetime: string;
         doctor: DoctorModel | null;
@@ -102,6 +102,14 @@ export class AppointmentModel {
             case 'Niedrig': return Priority.LOW;
             default: return Priority.LOW;
         }
+    }
+
+    public resetIdAfterSave(id: number): void {
+        if (this.data.id !== null) {
+            return;
+        }
+
+        this.data.id = id;
     }
 
     public hasTag(tag: TagModel): boolean {

@@ -17,4 +17,8 @@
     <div class="bottom-shadow tip-text-block appearance-animation" *ngIf="appointments.length === 0 && isFilterEmpty">
         <span class="bold-font">Fügen Sie einen Termin hinzu</span>
     </div>
+
+    <button mat-fab color="accent" class="add-fab-button" (click)="addNewAppointment()">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

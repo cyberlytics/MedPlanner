@@ -65,14 +65,14 @@ export class SurgeryStateService extends BaseStateService<SurgeryModel> {
         }
     }
 
-    private createNewOrGetExistedCityByName(cityName: string, postcode: string): CityModel {
+    private createNewOrGetExistedCityByName(cityName: string, zipcode: string): CityModel {
         const existedCity = this.getCityByName(cityName);
 
         if (existedCity !== null) {
             return existedCity;
         }
 
-        const newCity = new CityModel({ city: cityName, postcode });
+        const newCity = new CityModel({ city: cityName, zipcode });
         this._cities.push(newCity);
 
         return newCity;

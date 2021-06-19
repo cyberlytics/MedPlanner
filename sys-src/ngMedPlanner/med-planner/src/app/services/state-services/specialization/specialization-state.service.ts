@@ -16,6 +16,20 @@ export class SpecializationStateService extends BaseStateService<SpecializationM
         super(userState);
     }
 
+    public async getSpecializationsByIds(ids: Array<number> | null): Promise<Array<SpecializationModel | null> | null> {
+        if (ids === null) {
+            return null;
+        }
+
+        const specializations = new Array<SpecializationModel | null>();
+        for (const id of ids) {
+            specializations.push(await this.getModelById(id));
+        }
+
+        return specializations;
+    }
+
+
     protected async initStateData(): Promise<void> {
         const specializationsData = await this.specializationsData.getData();
 

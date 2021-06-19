@@ -1,5 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
+import {MatDialog} from '@angular/material/dialog';
+import { AppointmentDetailViewComponent } from './dialogs/appointment-detail-view/appointment-detail-view.component';
+import { AppointmentEditViewComponent } from './dialogs/appointment-edit-view/appointment-edit-view.component';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-appointment-card-component',
@@ -8,14 +12,8 @@ import { AppointmentModel } from 'src/app/services/state-services/appointments-d
 })
 export class AppointmentCardComponent implements OnInit {
 
-  private static readonly LOCALE_DE = 'de-DE';
-
   @Input() set appointment(value: AppointmentModel | null) {
     this._appointment = value;
-
-    if (value !== null) {
-      this._date = new Date(value.datetime);
-    }
   }
   get appointment(): AppointmentModel | null {
     return this._appointment;
@@ -39,40 +37,43 @@ export class AppointmentCardComponent implements OnInit {
   }
   private _tag: Tag | undefined;
 
-
-  private _date: Date;
-
-  get time(): string {
-    return this._date.toLocaleTimeString(AppointmentCardComponent.LOCALE_DE, {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  get time(): string | undefined {
+    return this.appointment?.timeString;
   }
 
-  get dateTime(): string {
-    return this._date.toLocaleDateString(AppointmentCardComponent.LOCALE_DE, {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+  get dateTime(): string | undefined {
+    return this.appointment?.dateString;
   }
 
-  @Output('onDetailsClick') get onDetailsClickEmmiter(): EventEmitter<number | null> {
-    return this._onDetailsClickEmmiter;
-  }
-  private _onDetailsClickEmmiter: EventEmitter<number | null>;
-
-
-  constructor() {
-    this._date = new Date();
-
-    this._onDetailsClickEmmiter = new EventEmitter<number | null>();
-  }
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
-  public onDetailsButtonClick(): void {
-    this._onDetailsClickEmmiter.emit(this._appointment?.id);
+  public async onDetailsButtonClick(): Promise<void> {
+    const dialogRef = this.dialog.open<AppointmentDetailViewComponent, any, MatDialogRef<AppointmentEditViewComponent>>(
+      AppointmentDetailViewComponent,
+      {
+        maxHeight: '95vh',
+        maxWidth: '95vw',
+        width: '40em',
+        height: 'auto',
+        data: this._appointment,
+        autoFocus: false,
+        panelClass: 'appointment-dialog',
+        disableClose: true
+      }
+    );
+
+    // wait for closing of appointment dialog
+    const closeDetailResult = await dialogRef.afterClosed().toPromise();
+    if (closeDetailResult === undefined) {
+      // closing after exit button clicked
+      return;
+    }
+    // wait for closing of editing dialog
+    await closeDetailResult.afterClosed().toPromise();
+    // reopen appointment detail dialog
+    this.onDetailsButtonClick();
   }
 
 }

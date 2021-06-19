@@ -80,8 +80,9 @@
             <span>Wo</span>
         </div>
         <div class="info regular-font" *ngIf="doctorsFormControl.value">
-            <span>{{doctorsFormControl.value.city}},</span>
-            <span>{{doctorsFormControl.value.address}}</span>
+            <span>{{doctorsFormControl.value.address}},</span>
+            <span>{{doctorsFormControl.value.postcode}}</span>
+            <span>{{doctorsFormControl.value.city}}</span>
             <span class="italic-font">(kann nur bei Arzt geändert werden)</span>
         </div>
     </div>

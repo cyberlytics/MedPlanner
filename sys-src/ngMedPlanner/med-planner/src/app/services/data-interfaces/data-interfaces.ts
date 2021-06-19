@@ -27,7 +27,7 @@ export interface DoctorData {
     id: number;
     first_name: string;
     surname: string;
-    specialization_id: number;
+    specializations: Array<number> | null;
     surgery_id: number;
 }
 
@@ -45,4 +45,5 @@ export interface SurgeryData {
     description: string;
     telephone_num: string;
     website: string;
+    zipcode: string;
 }

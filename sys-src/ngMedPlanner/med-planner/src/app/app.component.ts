@@ -38,7 +38,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     // this.userState.checkLogin();
     // this.requestLogin();
     // this.requestLogout();
-    this.registerNewUser();
+    // this.registerNewUser();
     // this.createDoctor();
     // this.createAppointment();
     // this.updateDoctor();

@@ -55,10 +55,6 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
     this.changeDet.detectChanges();
   }
 
-  public onDetailsClick(appointmentId: number | null): void {
-    console.log(`clicked on appointment with id: ${appointmentId}`);
-  }
-
   public dropFilter(): void {
     this.appointmentsFilter.dropFilter();
   }

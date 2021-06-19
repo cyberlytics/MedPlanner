@@ -140,7 +140,7 @@ def appointment_delete(request, pk):
 def tag_delete(request, pk):
     try:
         tag = Tag.objects.get(id=pk)
-    except Appointment.DoesNotExist:
+    except Tag.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     tag.delete()

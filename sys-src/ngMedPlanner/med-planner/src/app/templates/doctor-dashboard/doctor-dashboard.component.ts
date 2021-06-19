@@ -10,10 +10,10 @@ import { DoctorsDashboardStateService } from 'src/app/services/state-services/do
 })
 export class DoctorDashboardComponent implements OnInit {
 
-  get doctors(): ReadonlyArray<DoctorModel> {
+  get doctors(): Array<DoctorModel> {
     return this._doctors;
   }
-  private _doctors: ReadonlyArray<DoctorModel>;
+  private _doctors: Array<DoctorModel>;
 
   constructor(
     headerState: AppHeaderStateService,
@@ -35,8 +35,8 @@ export class DoctorDashboardComponent implements OnInit {
   private async loadDoctors(): Promise<void> {
     this.changeDet.detectChanges();
 
-    this._doctors = await this.doctorssState.getStateData();
-    // console.log(this._doctors);
+    const doctors = await this.doctorssState.getStateData();
+    this._doctors = this.doctorssState.sortDoctorsAlphabetically(doctors);
   }
   
 }

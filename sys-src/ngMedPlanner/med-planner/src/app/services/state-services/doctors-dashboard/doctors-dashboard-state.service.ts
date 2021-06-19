@@ -36,6 +36,17 @@ export class DoctorsDashboardStateService extends BaseStateService<DoctorModel> 
                 )
             );
         }
+        this.sortDoctorsAlphabetically();
+    }
+
+    private async sortDoctorsAlphabetically(): Promise<Array<DoctorModel>> {
+        const doctors = await this.getStateData();
+        for (const doctor of doctors) {
+            console.log('doctor', doctor);
+        }
+       
+        return doctors;
+    
     }
 
 }

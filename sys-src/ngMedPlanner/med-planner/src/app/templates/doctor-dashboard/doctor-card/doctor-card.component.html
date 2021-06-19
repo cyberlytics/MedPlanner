@@ -1,10 +1,11 @@
 <div class="main-block">
-    <div class="card-block card-shape base-shadow primary-border">
+    <div class="card-block card-shape base-shadow primary-border"
+    [style.border-color]="doctor?.specializationColor">
 
         <!-- Name -->
         <div class="doctornameblock">
             <span class="bold-font" id="doctor-name">Dr. {{doctorName}} </span>
-            <span class="regular-font" id="doctor-discipline">Zahnarzt</span>
+        
         </div>
 
         <div class ="docCardbody">
@@ -46,7 +47,10 @@
 
                 <!--Website-->
                 <div class="website">
-                    <span class="regular-font" >{{website}} </span>
+        
+                    <span class="regular-font" >
+                        <a href="{{website}}"> {{website}}</a> 
+                    </span>
                 </div>
                 
             </div>

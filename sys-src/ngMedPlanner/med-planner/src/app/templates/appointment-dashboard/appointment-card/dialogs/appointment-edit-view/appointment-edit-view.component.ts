@@ -65,7 +65,7 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   private _doctors: Array<DoctorModel>;
 
   constructor(
-    private dialogRef: MatDialogRef<AppointmentEditViewComponent>,
+    private dialogRef: MatDialogRef<AppointmentEditViewComponent, EditingResult>,
     @Inject(MAT_DIALOG_DATA) appointment: AppointmentModel,
     private doctorsState: DoctorsDashboardStateService
   ) {
@@ -126,11 +126,14 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
       note: this._notesFormControl.value
     });
 
-    this.closeDialog();
+    this.closeDialog({
+      isSaveClicked: true,
+      appointmentToSave: this.appointment
+    });
   }
 
-  public closeDialog(): void {
-    this.dialogRef.close();
+  public closeDialog(result?: EditingResult): void {
+    this.dialogRef.close(result);
   }
 
   private getDate(): Date {
@@ -141,4 +144,9 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
     return date;
   }
 
+}
+
+export interface EditingResult {
+  isSaveClicked: boolean;
+  appointmentToSave?: AppointmentModel;
 }

@@ -26,6 +26,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         super(userState);
     }
 
+    public addNewAppointment(appointment: AppointmentModel): void {
+        this.addData(appointment);
+    }
+
     protected async initStateData(): Promise<void> {
         const appointmentsData = await this.appointmentsData.getData();
 

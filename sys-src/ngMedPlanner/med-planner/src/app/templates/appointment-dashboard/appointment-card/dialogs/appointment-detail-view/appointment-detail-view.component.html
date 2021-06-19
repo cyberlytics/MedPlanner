@@ -1,0 +1,53 @@
+<div class="dialog-header-block">
+    <app-priority [priority]="priority"></app-priority>
+    <h2 class="bold-font dialog-title">{{title}}</h2>
+</div>
+
+<mat-dialog-content class="dialog-content-block">
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Wann</span>
+        </div>
+        <div class="info regular-font">
+            <span>{{date}}</span>
+            <span>{{time}}</span>
+        </div>
+    </div>
+
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Wo</span>
+        </div>
+        <div class="info regular-font">
+            <span>{{address}},</span>
+            <span>{{zipcode}}</span>
+            <span>{{city}}</span>
+        </div>
+    </div>
+    
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Arzt</span>
+        </div>
+        <div class="info regular-font">
+            <span>Dr. {{doctorName}}</span><br>
+            <span *ngIf="doctorsPhoneNumber">Rufnummer: {{doctorsPhoneNumber}}</span>
+        </div>
+    </div>
+
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Notizen</span>
+        </div>
+        <div class="info regular-font">
+            <span *ngIf="note" class="italic-font">{{note}}</span>
+            <span *ngIf="!note" class="italic-font">keine</span>
+        </div>
+    </div>
+
+    <div class="dialog-buttons-block">
+        <button class="bold-font appearance-animation-fast" mat-button (click)="activateEditMode()">Bearbeiten</button>
+        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()">Ok</button>
+    </div>
+</mat-dialog-content>
+

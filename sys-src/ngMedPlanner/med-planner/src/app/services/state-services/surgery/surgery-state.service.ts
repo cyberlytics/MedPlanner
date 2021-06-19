@@ -38,7 +38,7 @@ export class SurgeryStateService extends BaseStateService<SurgeryModel> {
         }
 
         for (const surgery of await this.getStateData()) {
-            if (surgery.city === city) {
+            if (surgery.cityModel === city) {
                 surgeries.push(surgery);
             }
         }
@@ -54,7 +54,7 @@ export class SurgeryStateService extends BaseStateService<SurgeryModel> {
                 new SurgeryModel(
                     {
                         id: surgery.id,
-                        city: this.createNewOrGetExistedCityByName(surgery.city),
+                        cityModel: this.createNewOrGetExistedCityByName(surgery.city, surgery.zipcode),
                         address: surgery.address,
                         telephoneNumber: surgery.telephone_num,
                         website: surgery.website,
@@ -65,14 +65,14 @@ export class SurgeryStateService extends BaseStateService<SurgeryModel> {
         }
     }
 
-    private createNewOrGetExistedCityByName(cityName: string): CityModel {
+    private createNewOrGetExistedCityByName(cityName: string, zipcode: string): CityModel {
         const existedCity = this.getCityByName(cityName);
 
         if (existedCity !== null) {
             return existedCity;
         }
 
-        const newCity = new CityModel({ city: cityName });
+        const newCity = new CityModel({ city: cityName, zipcode });
         this._cities.push(newCity);
 
         return newCity;

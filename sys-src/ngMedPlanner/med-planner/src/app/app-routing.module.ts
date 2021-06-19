@@ -9,10 +9,9 @@ import { AppSignInComponent  } from './templates/app-sign-in/app-sign-in.compone
 const routes: Routes = [
   { path: 'login', component: AppLoginComponent },
   { path: 'appointment-dashboard', component: AppointmentDashboardComponent },
-
-  //wird benötigt?
-  { path: 'doctor-dashboard', component: DoctorDashboardComponent },
-  { path: 'signup', component: AppSignInComponent }
+  { path: 'signup', component: AppSignInComponent },
+  //JUST TEMPORARY UNTIL CONNECTION TO APPOINTMENT_DAHSBOARD WORKS
+  { path: 'doctor-dashboard', component: DoctorDashboardComponent }
 ];
 
 @NgModule({

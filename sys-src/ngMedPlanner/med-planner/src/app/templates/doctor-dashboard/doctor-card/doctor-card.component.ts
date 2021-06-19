@@ -34,7 +34,7 @@ export class DoctorCardComponent implements OnInit {
   } 
 
   get postcode(): string | undefined{
-    return this._doctor?.surgery?.city.postcode;
+    return this._doctor?.surgery?.city.zipcode;
   } 
 
   get address(): string | undefined{

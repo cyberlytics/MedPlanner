@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,10 +9,11 @@ import { AppointmentCardComponent } from './templates/appointment-dashboard/appo
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppointmentDashboardComponent } from './templates/appointment-dashboard/appointment-dashboard.component';
-import { PopupDetailViewComponent } from './templates/popup-detail-view/popup-detail-view.component';
+import { AppointmentDetailViewComponent } from './templates/appointment-dashboard/appointment-card/dialogs/appointment-detail-view/appointment-detail-view.component';
 import { MaterialModule } from './material/material.module';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppLoginComponent } from './templates/app-login/app-login.component';
+import { AppSignInComponent } from './templates/app-sign-in/app-sign-in.component';
 import { PriorityComponent } from './templates/appointment-dashboard/appointment-card/priority/priority.component';
 import { TagsComponent } from './templates/appointment-dashboard/appointment-card/tags/tags.component';
 import { DoctorDashboardComponent } from './templates/doctor-dashboard/doctor-dashboard.component';
@@ -24,16 +26,18 @@ import { FilterSpecializationsComponent } from './templates/filter/filter-appoin
 import { FilterCitiesComponent } from './templates/filter/filter-appointments/filter-cities/filter-cities.component';
 import { FilterPeriodComponent } from './templates/filter/filter-appointments/filter-period/filter-period.component';
 import { FilterTagsComponent } from './templates/filter/filter-appointments/filter-tags/filter-tags.component';
+import { AppointmentEditViewComponent } from './templates/appointment-dashboard/appointment-card/dialogs/appointment-edit-view/appointment-edit-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppointmentCardComponent,
     AppointmentDashboardComponent,
-    PopupDetailViewComponent,
+    AppointmentDetailViewComponent,
     AppHeaderComponent,
     AppLoginComponent,
     PriorityComponent,
+    AppSignInComponent,
     TagsComponent,
     DoctorDashboardComponent,
     DoctorCardComponent,
@@ -44,7 +48,8 @@ import { FilterTagsComponent } from './templates/filter/filter-appointments/filt
     FilterSpecializationsComponent,
     FilterCitiesComponent,
     FilterPeriodComponent,
-    FilterTagsComponent
+    FilterTagsComponent,
+    AppointmentEditViewComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,9 @@ import { FilterTagsComponent } from './templates/filter/filter-appointments/filt
     HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

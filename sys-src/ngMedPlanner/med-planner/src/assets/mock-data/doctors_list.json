@@ -4,42 +4,42 @@
       "id": 1,
       "first_name": "Jeff",
       "surname": "Wilcox",
-      "specialization_id": 3,
+      "specializations": [ 3, 2, 5 ],
       "surgery_id": 1
     },
     {
       "id": 2,
       "first_name": "Keith",
       "surname": "Guy",
-      "specialization_id": 5,
+      "specializations": [ 5 ],
       "surgery_id": 2
     },
     {
       "id": 3,
       "first_name": "Sara",
       "surname": "Leblanc",
-      "specialization_id": 2,
+      "specializations": [ 2 ],
       "surgery_id": 2
     },
     {
       "id": 4,
       "first_name": "Chandra",
       "surname": "Young",
-      "specialization_id": 4,
+      "specializations": [ 4 ],
       "surgery_id": 3
     },
     {
       "id": 5,
       "first_name": "Madeline",
       "surname": "Barker",
-      "specialization_id": 1,
+      "specializations": [ 1 ],
       "surgery_id": 4
     },
     {
       "id": 6,
       "first_name": "Chris",
       "surname": "Browning",
-      "specialization_id": 6,
+      "specializations": [ 6 ],
       "surgery_id": 3
     }
   ]

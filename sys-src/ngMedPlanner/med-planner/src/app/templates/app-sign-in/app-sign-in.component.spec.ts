@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PopupDetailViewComponent } from './popup-detail-view.component';
+import { AppSignInComponent } from './app-sign-in.component';
 
-describe('PopupDetailViewComponent', () => {
-  let component: PopupDetailViewComponent;
-  let fixture: ComponentFixture<PopupDetailViewComponent>;
+describe('AppSignInComponent', () => {
+  let component: AppSignInComponent;
+  let fixture: ComponentFixture<AppSignInComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PopupDetailViewComponent ]
+      declarations: [ AppSignInComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PopupDetailViewComponent);
+    fixture = TestBed.createComponent(AppSignInComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

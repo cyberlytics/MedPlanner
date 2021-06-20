@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
@@ -104,6 +104,8 @@ export class AppLoginComponent implements OnInit {
 
   public onSignUpClick(): void {
     // TODO (called on sign up text clicked)
+    this.router.navigate(['signup']);
+
   }
 
   public async onLogInClick(_email: string, _password: string): Promise<void> {

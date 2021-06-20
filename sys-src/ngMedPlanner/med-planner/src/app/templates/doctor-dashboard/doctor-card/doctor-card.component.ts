@@ -1,5 +1,8 @@
 import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
+import { DoctorDetailViewComponent } from 'src/app/templates/doctor-dashboard/doctor-card/dialogs/doctor-detail-view/doctor-detail-view.component';
+import {MatDialog} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-doctor-card',
@@ -8,7 +11,6 @@ import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/d
 })
 export class DoctorCardComponent implements OnInit {
 
-  constructor() { }
 
   ngOnInit(): void {
   }
@@ -50,5 +52,27 @@ export class DoctorCardComponent implements OnInit {
     return this._doctor?.surgery?.website;
   
   } 
+
+
+  constructor(
+    private dialog: MatDialog,
+    ) {};
+
+  public async onDetailsButtonClick(): Promise<void> {
+    const dialogRef = this.dialog.open<DoctorDetailViewComponent, any, MatDialogRef<DoctorDetailViewComponent>>(
+      DoctorDetailViewComponent,
+      {
+        maxHeight: '95vh',
+        maxWidth: '95vw',
+        width: '40em',
+        height: 'auto',
+        data: this._doctor,
+        autoFocus: false,
+        panelClass: 'appointment-dialog',
+        disableClose: true
+      }
+    );
+  }
+
 
 }

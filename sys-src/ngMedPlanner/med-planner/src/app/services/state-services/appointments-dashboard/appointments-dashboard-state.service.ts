@@ -1,11 +1,12 @@
 import { AppointmentModel, Priority } from './appointment-model';
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef } from '@angular/core';
 import { AppointmentsDataService } from '../../data/appointments-data.service';
 import { DoctorsDashboardStateService } from '../doctors-dashboard/doctors-dashboard-state.service';
 import { TagsStateService } from '../tags/tags-state.service';
 import { BaseStateService } from '../base-state.service';
 import { UserStateService } from '../../user-services/user-state.service';
 import { FilterAppointmentsService } from '../../filter-service/filter-appointments.service';
+import { HttpService } from '../../http-service/http.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,17 +18,42 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
     }
 
     constructor(
+        private httpService: HttpService,
         private appointmentsData: AppointmentsDataService,
         private doctorsState: DoctorsDashboardStateService,
         private tagsState: TagsStateService,
         private appointmentFilter: FilterAppointmentsService,
-        userState: UserStateService
+        private userState: UserStateService
     ) {
         super(userState);
     }
 
-    public addNewAppointment(appointment: AppointmentModel): void {
+    public async addNewAppointment(appointment: AppointmentModel): Promise<CreateAppontmentResult> {
+        const result = await this.httpService.postMessage<{ id: number | undefined }, CreateAppointmentRequestData>(
+            HttpService.APPOINTMENT_CREATE,
+            {
+                title: appointment.title,
+                doc_id: appointment.doctor?.id,
+                user_id: 1,
+                datetime: appointment.dateISOString,
+                priority: appointment.priority,
+                tags: []
+            },
+            this.userState.token
+        );
+
+        if (!result.id) {
+            return CreateAppontmentResult.NOT_CREATED;
+        }
+
+        appointment.resetIdAfterSave(result.id);
         this.addData(appointment);
+
+        return CreateAppontmentResult.CREATED;
+    }
+
+    public async deleteAppointment(appointment: AppointmentModel): Promise<void> {
+
     }
 
     protected async initStateData(): Promise<void> {
@@ -174,4 +200,18 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
     }
 }
 
+interface CreateAppointmentRequestData {
+    title: string;
+    doc_id: number | undefined;
+    user_id: number;
+    datetime: string;
+    priority: 'Hoch' | 'Mittel' | 'Niedrig';
+    note?: string;
+    tags?: Array<number>;
+}
+
+enum CreateAppontmentResult {
+    CREATED,
+    NOT_CREATED
+}
 

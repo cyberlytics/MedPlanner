@@ -63,7 +63,6 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
   }
 
   public async addNewAppointment(): Promise<void> {
-    console.log('Add new appointment');
 
     const dialogRef = this.dialog.open<AppointmentEditViewComponent, AppointmentModel, EditingResult>(
       AppointmentEditViewComponent,
@@ -100,7 +99,7 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.appointmentsState.addNewAppointment(editingResult.appointmentToSave);
+    const createdResult = await this.appointmentsState.addNewAppointment(editingResult.appointmentToSave);
   }
 
 }

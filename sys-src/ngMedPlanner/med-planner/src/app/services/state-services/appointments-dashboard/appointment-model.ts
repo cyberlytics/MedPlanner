@@ -93,6 +93,8 @@ export class AppointmentModel {
         datetime: string;
         doctor: DoctorModel | null;
         priority: Priority;
+        onAppointmentUpdate?: (appointment: AppointmentModel) => void,
+        onAppointmentDelete?: (appointment: AppointmentModel) => void,
         note?: string;
         tags?: Array<TagModel>;
     }) {
@@ -139,17 +141,13 @@ export class AppointmentModel {
         );
     }
 
-    public updateAppointment(dataToUpdate?: {
-        title?: string;
-        datetime?: string;
-        date?: Date;
-        doctor?: DoctorModel;
-        priority?: Priority;
-        note?: string;
-        tags?: Array<TagModel>;
-    }): void {
+    public update(dataToUpdate?: AppointmentUpdateData): void {
+        if (this.data.onAppointmentUpdate === undefined) {
+            return;
+        }
+
         if (dataToUpdate === undefined) {
-            // TODO: trigger server to update appointment
+            this.data.onAppointmentUpdate(this);
             return;
         }
 
@@ -182,7 +180,22 @@ export class AppointmentModel {
             this.data.tags = dataToUpdate.tags;
         }
 
-        // TODO: trigger server to update appointment
+        this.data.onAppointmentUpdate(this);
+    }
+
+    public setOnUpdateListener(listener: (model: AppointmentModel) => void): void {
+        this.data.onAppointmentUpdate = listener;
+    }
+
+    public delete(): void {
+        if (this.data.onAppointmentDelete === undefined) {
+            return;
+        }
+        this.data.onAppointmentDelete(this);
+    }
+
+    public setOnDeleteListener(listener: (model: AppointmentModel) => void): void {
+        this.data.onAppointmentDelete = listener;
     }
 
 }
@@ -191,4 +204,14 @@ export enum Priority {
     HIGH = 'Hoch',
     MEDIUM = 'Mittel',
     LOW = 'Niedrig'
+}
+
+export interface AppointmentUpdateData {
+    title?: string;
+    datetime?: string;
+    date?: Date;
+    doctor?: DoctorModel;
+    priority?: Priority;
+    note?: string;
+    tags?: Array<TagModel>;
 }

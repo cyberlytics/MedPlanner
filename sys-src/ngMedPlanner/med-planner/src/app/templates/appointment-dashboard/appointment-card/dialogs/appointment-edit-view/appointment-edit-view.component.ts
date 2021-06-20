@@ -119,8 +119,7 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   }
 
   public saveChanges(): void {
-
-    this.appointment.updateAppointment({
+    this.appointment.update({
       priority: this.getPriorityFromSelector(),
       title: this._titleFormControl.value,
       doctor: this._doctorsFormControl.value,
@@ -135,7 +134,7 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   }
 
   public deleteAppointment(): void {
-    this.appointmentState.deleteAppointment(this.appointment);
+    this.appointment.delete();
     this.closeDialog({
       buttonClicked: ButtonClicked.REMOVE
     });

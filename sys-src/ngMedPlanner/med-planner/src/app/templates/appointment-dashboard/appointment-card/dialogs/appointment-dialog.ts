@@ -42,5 +42,9 @@ export abstract class AppointmentDialog {
         return this.appointment.note;
     }
 
+    get id(): number | -1 {
+        return this.appointment.id;
+    }
+
     constructor(protected appointment: AppointmentModel) {}
 }

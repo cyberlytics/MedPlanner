@@ -8,13 +8,13 @@ import { UserStateService } from '../user-services/user-state.service';
 @Injectable({
     providedIn: 'root',
 })
-export class AppointmentsDataService extends DataServiceBasic<AppointmentsData> {
+export class AppointmentsDataService extends DataServiceBasic<Array<AppointmentData>> {
 
     constructor(httpService: HttpService, userState: UserStateService) {
         super(
             httpService,
             {
-                requestURL: HttpService.APPOINTMENTS_URL
+                requestURL: HttpService.APPOINTMENT_LIST
             },
             userState
         );

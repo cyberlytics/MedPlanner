@@ -41,7 +41,17 @@ export abstract class BaseStateService <T extends Model> {
         return null;
     }
 
-    protected addData(data: T): void {
+    protected async removeModelById(id: number): Promise<void> {
+        const dataList = await this.getStateData();
+
+        for (const data of dataList) {
+            if (data.id === id) {
+                this._stateData?.splice(dataList.indexOf(data), 1);
+            }
+        }
+    }
+
+    protected addModel(data: T): void {
         this._stateData?.push(data);
     }
 

@@ -47,20 +47,28 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         }
 
         appointment.resetIdAfterSave(result.id);
-        this.addData(appointment);
+        this.addModel(appointment);
 
         return CreateAppontmentResult.CREATED;
     }
 
     public async deleteAppointment(appointment: AppointmentModel): Promise<void> {
+        const responce = await this.httpService.delete(
+            HttpService.APPOINTMENT_DELETE + appointment.id,
+            null,
+            this.userState.token
+        );
 
+        if (responce.ok) {
+            this.removeModelById(appointment.id);
+        }
     }
 
     protected async initStateData(): Promise<void> {
         const appointmentsData = await this.appointmentsData.getData();
 
         for (const appointment of appointmentsData) {
-            this.addData(
+            this.addModel(
                 new AppointmentModel(
                     {
                         id: appointment.id,

@@ -117,7 +117,18 @@
 
     <!-- Buttons Save/Cancel -->
     <div class="dialog-buttons-block">
-        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog({ isSaveClicked: false })">Abbrechen</button>
+        <button 
+            *ngIf="appointment.id"
+            class="bold-font appearance-animation-fast remove-button"
+            mat-icon-button
+            (click)="deleteAppointment()"
+            ><mat-icon>delete</mat-icon>
+        </button>
+        <button
+            class="bold-font appearance-animation-fast"
+            mat-button
+            (click)="closeDialog({ buttonClicked: 'cancel' })"
+            >Abbrechen</button>
         <button
             class="bold-font appearance-animation-fast"
             mat-button (click)="saveChanges()"

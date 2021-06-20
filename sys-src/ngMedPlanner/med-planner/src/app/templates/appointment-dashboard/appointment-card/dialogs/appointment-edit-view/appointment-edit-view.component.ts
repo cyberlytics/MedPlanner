@@ -140,6 +140,12 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
     });
   }
 
+  public cancelEditing(): void {
+    this.closeDialog({
+      buttonClicked: ButtonClicked.CANCEL
+    });
+  }
+
   public closeDialog(result: EditingResult): void {
     this.dialogRef.close(result);
   }

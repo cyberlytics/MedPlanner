@@ -18,7 +18,8 @@ export abstract class BaseStateService <T extends Model> {
     public async getStateData(): Promise<Array<T>> {
         if (this._stateData === null) {
             this._stateData = new Array<T>();
-            await this.initStateData();
+            try { await this.initStateData(); }
+            catch (e) { console.error(e); }
         }
 
         return this._stateData as Array<T>;

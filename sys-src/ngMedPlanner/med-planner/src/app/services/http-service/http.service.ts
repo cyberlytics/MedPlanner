@@ -60,7 +60,7 @@ export class HttpService {
         return new Promise<T>( (resolve) => { resolve(data as T); } );
     }
 
-    async postMessage<T, R = any>(url: string, body: R, token?: string | null): Promise<T> {
+    async postMessage<T = any, R = any>(url: string, body: R, token: string | null): Promise<T> {
         const responce = await fetch(
             url,
             {
@@ -71,6 +71,23 @@ export class HttpService {
                     Authorization: `Token ${token}`
                 },
                 body: JSON.stringify(body)
+            }
+        );
+
+        const data = await responce.json();
+
+        return new Promise<T>( (resolve) => { resolve(data as T); });
+    }
+
+    async postUnauthorizedMessage<T extends ResponseData>(url: string, body: any): Promise<T> {
+        const responce = await fetch(
+            url,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:  JSON.stringify(body)
             }
         );
 
@@ -111,11 +128,8 @@ export class HttpService {
 
 }
 
-interface HttpOptions {
-    headers?: HttpHeaders | {[header: string]: string | string[]};
-    observe?: 'body' | 'events' | 'response';
-    params?: HttpParams|{[param: string]: string | string[]};
-    reportProgress?: boolean;
-    responseType?: 'arraybuffer'|'blob'|'json'|'text';
-    withCredentials?: boolean;
+
+interface ResponseData {
+    message: string;
+    status: number;
 }

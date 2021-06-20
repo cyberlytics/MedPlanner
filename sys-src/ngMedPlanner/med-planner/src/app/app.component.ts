@@ -36,9 +36,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // this.userState.checkLogin();
-    // this.requestLogin();
-    // this.requestLogout();
-    // this.registerNewUser();
     // this.createDoctor();
     // this.createAppointment();
     // this.updateDoctor();
@@ -94,40 +91,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.drawer?.close();
         break;
     }
-  }
-
-  private async requestLogin(): Promise<void> {
-    const response = await this.httpService.postMessage(
-      HttpService.LOGIN_URL,
-      {
-        username: 'test_user_2',
-        password: 'Yxcvb56789'
-      }
-    );
-    console.log('response', response);
-  }
-
-  private async requestLogout(): Promise<void> {
-    const response = await this.httpService.postMessage(
-      HttpService.LOGOUT_URL,
-      {
-        username: 'test_user_2'
-      }
-    );
-    console.log('response', response);
-  }
-
-  private async registerNewUser(): Promise<void> {
-    const response = await this.httpService.postMessage(
-      HttpService.REGISTER_NEW_USER_URL,
-      {
-        email: 'test4@user.de',
-        password: 'HGdthsrzah',
-        is_superuser: false,
-        is_staff: false
-      }
-    );
-    console.log('response', response);
   }
 
   private async getDoctor(): Promise<void> {

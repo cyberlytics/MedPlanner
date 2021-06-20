@@ -31,7 +31,7 @@ export class DoctorsDashboardStateService extends BaseStateService<DoctorModel> 
                         first_name: doctorData.first_name,
                         surname: doctorData.surname,
                         surgery: await this.surgeryState.getModelById(doctorData.surgery_id),
-                        specialization: await this.specializaitonState.getModelById(doctorData.specialization_id)
+                        specializations: await this.specializaitonState.getSpecializationsByIds(doctorData.specializations)
                     }
                 )
             );

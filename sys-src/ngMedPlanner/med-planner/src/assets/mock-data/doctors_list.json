@@ -4,7 +4,7 @@
       "id": 1,
       "first_name": "Jeff",
       "surname": "Wilcox",
-      "specializations": [ 3 ],
+      "specializations": [ 3, 2, 5 ],
       "surgery_id": 1
     },
     {

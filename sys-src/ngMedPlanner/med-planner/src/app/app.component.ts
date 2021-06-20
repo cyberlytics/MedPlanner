@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   title = 'med-planner';
 
-  private token = '8c4bf13d40022c6c6a3ec6e4f1b38420a61fe1d9';
+  private token = '65e9a58a48fb46b31d169e52b66e96cef3ee2f52';
 
   private _onDashboardSwitcher: Subscription | undefined;
   private _onFilterClick: Subscription | undefined;
@@ -40,10 +40,15 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     // this.requestLogout();
     // this.registerNewUser();
     // this.createDoctor();
+    // this.createAppointment();
     // this.updateDoctor();
+    // this.updateAppointment();
     // this.detailDoctor();
+    // this.detailAppointment();
     // this.deleteDoctor();
+    // this.deleteAppointment();
     // this.getDoctor();
+    // this.getAppointment();
 
     this._onDashboardSwitcher = this.appState.setOnDashboardSwitchListener(
       (dashboard: Dashbord) => { this.onDashboardSwitch(dashboard); }
@@ -116,9 +121,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     const response = await this.httpService.postMessage(
       HttpService.REGISTER_NEW_USER_URL,
       {
-        username: 'test4@user.de', // 'user@mail.com',
-        email: 'test4@user.de', // 'user@mail.com',         // ex@gmail.com
-        password: 'HGdthsrzah', // 'HZ86IH7zg98t5ouuo7', // 6787ZVIBU75FTHg5456ftzvbu
+        email: 'test4@user.de',
+        password: 'HGdthsrzah',
         is_superuser: false,
         is_staff: false
       }
@@ -138,8 +142,25 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       }
     )
     .then((resp) => resp.json())
-    .then( (data) => {
-      console.log('Data', data);
+    .then(function(data){
+      console.log('List of doctors: ', data);
+    });
+  }
+
+  private async getAppointment(): Promise<void> {
+    fetch(
+      HttpService.APPOINTMENT_LIST,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        }
+      }
+    )
+    .then((resp) => resp.json())
+    .then(function(data){
+      console.log('List of appointments: ', data);
     });
   }
 
@@ -153,11 +174,38 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           'Authorization': `Token ${this.token}`
         },
         body:JSON.stringify({
-          "doctor_first_name": "Harry",
-          "doctor_last_name": "Potter",
+          "first_name": "Harry",
+          "surname": "Potter",
           "surgery_id": 1,
           "specializations": [
               1
+          ]
+        })
+      }
+    )
+    .then(function(response){
+      console.log('Response', response)
+    });
+  }
+
+  private async createAppointment(): Promise<void> {
+    fetch(
+      HttpService.APPOINTMENT_CREATE,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        },
+        body:JSON.stringify({
+          "title": "termin beim augenarzt",
+          "doc_id": 1,
+          "user_id": 1,
+          "datetime": "2021-11-27 15:15:00",
+          "priority": "Hoch",
+          "note": "kjhgfde56zujko9876tfdse5tzhjko",
+          "tags": [
+            1
           ]
         })
       }
@@ -178,8 +226,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           'Authorization': `Token ${this.token}`
         },
         body:JSON.stringify({
-          "doctor_first_name": "Mad",
-          "doctor_last_name": "Max",
+          "first_name": "Mad",
+          "surname": "Max",
           "surgery_id": 1,
           "specializations": [
               1
@@ -192,8 +240,36 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  private async updateAppointment(): Promise<void> {
+    const id = '2';
+    fetch(
+      HttpService.APPOINTMENT_UPDATE + id,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        },
+        body:JSON.stringify({
+          "title": "termin 1.1",
+          "doc_id": 1,
+          "user_id": 1,
+          "datetime": "2021-12-01 15:15:00",
+          "priority": "Mittel",
+          "note": "here is a text",
+          "tags": [
+            1
+          ]
+        })
+      }
+    )
+    .then(function(response){
+      console.log('Response', response)
+    });
+  }
+
   private async detailDoctor(): Promise<void> {
-    const id = '12';
+    const id = '1';
     fetch(
       HttpService.DOCTOR_DETAIL + id,
       {
@@ -210,10 +286,45 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  private async detailAppointment(): Promise<void> {
+    const id = '1';
+    fetch(
+      HttpService.APPOINTMENT_DETAIL + id,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        }
+      }
+    )
+    .then((resp) => resp.json())
+    .then(function(data){
+      console.log('Response', data)
+    });
+  }
+
   private async deleteDoctor(): Promise<void> {
-    const id = '10';
+    const id = '11';
     fetch(
       HttpService.DOCTOR_DELETE + id,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-type':'application/json',
+          'Authorization': `Token ${this.token}`
+        }
+      }
+    )
+    .then(function(response){
+      console.log('Response', response)
+    });
+  }
+
+  private async deleteAppointment(): Promise<void> {
+    const id = '5';
+    fetch(
+      HttpService.APPOINTMENT_DELETE + id,
       {
         method: 'DELETE',
         headers: {

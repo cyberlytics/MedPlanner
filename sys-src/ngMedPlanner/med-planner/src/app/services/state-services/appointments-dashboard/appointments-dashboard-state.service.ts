@@ -112,11 +112,21 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
             return false;
         }
 
-        if (doctor.specialization === null) {
+        if (doctor.specializations === null) {
             return false;
         }
 
-        return this.appointmentFilter.isSpecializationSelected(doctor.specialization);
+        for (const specialization of doctor.specializations) {
+            if (specialization === null) {
+                continue;
+            }
+
+            if (this.appointmentFilter.isSpecializationSelected(specialization)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private isMatchByCity(appointment: AppointmentModel): boolean {

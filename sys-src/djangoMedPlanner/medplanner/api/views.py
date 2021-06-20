@@ -1,16 +1,14 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from medplanner.models import Doctor, UserProfile, Appointment
-from medplanner.api.serializers import DoctorSerializer, AppointmentSerializer
-from rest_framework.parsers import JSONParser
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from rest_framework.generics import UpdateAPIView
+from medplanner.models import Doctor, Appointment, Tag, Surgery, Specialization
+from medplanner.api.serializers import DoctorSerializer, AppointmentSerializer, TagSerializer, SurgerySerializer, \
+     SpecializationSerializer
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def doctor_list(request):
     try:
         doctors = Doctor.objects.all()
@@ -22,6 +20,7 @@ def doctor_list(request):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def doctor_detail(request, pk):
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -33,6 +32,7 @@ def doctor_detail(request, pk):
 
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def doctor_create(request):
     serializer = DoctorSerializer(data=request.data)
     if serializer.is_valid():
@@ -43,6 +43,7 @@ def doctor_create(request):
 
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def doctor_update(request, pk):
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -58,6 +59,7 @@ def doctor_update(request, pk):
 
 
 @api_view(['DELETE'])
+@permission_classes((IsAuthenticated, ))
 def doctor_delete(request, pk):
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -67,74 +69,173 @@ def doctor_delete(request, pk):
     doctor.delete()
     return Response(status=status.HTTP_200_OK)
 
+# Appointment
 
-#Appointment:________________________________________________________________________
 
-@api_view(['GET', ])
-def api_all_appointments_view(request):
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def appointment_list(request):
     try:
-        appointment = Appointment.objects.all()
+        appointments = Appointment.objects.all()
     except Appointment.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == "GET":
-        serializer = AppointmentSerializer(appointment, many=True)
-        return Response(serializer.data)
+    serializer = AppointmentSerializer(appointments, many=True)
+    return Response(serializer.data)
 
 
-@api_view(['GET', ])
-def api_detail_appointment_view(request, pk):
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def appointment_detail(request, pk):
     try:
-        appointment = Appointment.objects.get(pk=pk)
+        appointment = Appointment.objects.get(id=pk)
     except Appointment.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == "GET":
-        serializer = AppointmentSerializer(appointment)
-        return Response(serializer.data)
+    serializer = AppointmentSerializer(appointment, many=False)
+    return Response(serializer.data)
 
 
-@api_view(['PUT', ])
-def api_update_appointment_view(request, pk):
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def appointment_update(request, pk):
     try:
-        appointment = Appointment.objects.get(pk=pk)
+        appointment = Appointment.objects.get(id=pk)
     except Appointment.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == "PUT":
-        serializer = AppointmentSerializer(appointment, data=request.data)
-        data = {}
-        if serializer.is_valid():
-            serializer.save()
-            data["success"] = "update successful"
-            return Response(data=data)
+    serializer = AppointmentSerializer(instance=appointment, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['DELETE', ])
-def api_delete_appointment_view(request, pk):
-    print('delete')
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def appointment_create(request):
+    serializer = AppointmentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated, ))
+def appointment_delete(request, pk):
     try:
-        appointment = Appointment.objects.get(pk=pk)
+        appointment = Appointment.objects.get(id=pk)
     except Appointment.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'DELETE':
-        operations = appointment.delete()
-        data = {}
-        if operations:
-            data["success"] = "delete successful"
-        else:
-            data["failure"] = "delete failed"
-        return Response(data=data)
+    appointment.delete()
+    return Response(status=status.HTTP_200_OK)
 
+#________________________________________________________________________
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated, ))
+def tag_delete(request, pk):
+    try:
+        tag = Tag.objects.get(id=pk)
+    except Tag.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['POST', ])
-def api_create_appointment_view(request):
-    appointment = Appointment()
-    if request.method == 'POST':
-        serializer = AppointmentSerializer(appointment, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    tag.delete()
+    return Response(status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def tag_update(request, pk):
+    try:
+        tag = Tag.objects.get(id=pk)
+    except Tag.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = TagSerializer(instance=tag, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def tag_create(request):
+    serializer = TagSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['READ'])
+@permission_classes((IsAuthenticated, ))
+def tag_list(request):
+    try:
+        tags = Tag.objects.all()
+    except Tag.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = TagSerializer(tags, many=True)
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated, ))
+def surgery_delete(request, pk):
+    try:
+        surgery = Surgery.objects.get(id=pk)
+    except Surgery.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    surgery.delete()
+    return Response(status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def surgery_update(request, pk):
+    try:
+        surgery = Surgery.objects.get(id=pk)
+    except Surgery.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = SurgerySerializer(instance=surgery, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def surgery_create(request):
+    serializer = SurgerySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['READ'])
+@permission_classes((IsAuthenticated, ))
+def surgery_list(request):
+    try:
+        surgerys = Surgery.objects.all()
+    except Surgery.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = SurgerySerializer(surgerys, many=True)
+    return Response(serializer.data)
+
+@api_view(['READ'])
+@permission_classes((IsAuthenticated, ))
+def specialization_list(request):
+    try:
+        specializations = Specialization.objects.all()
+    except Specialization.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = SpecializationSerializer(specializations, many=True)
+    return Response(serializer.data)

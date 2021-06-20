@@ -6,13 +6,13 @@ export class CityModel {
         return this.data.city;
     }
 
-    get postcode(): string | undefined {
+    get postcode(): string {
         return this.data.postcode;
     }
 
     constructor(private data: {
         city: string,
-        postcode?: string
+        postcode: string
     }) {}
 
 }

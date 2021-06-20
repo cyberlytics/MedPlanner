@@ -36,10 +36,10 @@ def doctor_detail(request, pk):
 def doctor_create(request):
     serializer = DoctorSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        doctor = serializer.save()
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(data={'id': doctor.id}, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST'])
@@ -166,10 +166,11 @@ def tag_update(request, pk):
 def tag_create(request):
     serializer = TagSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        tag = serializer.save()
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(data={'id': tag.id}, status=status.HTTP_201_CREATED)
+    
 
 @api_view(['READ'])
 @permission_classes((IsAuthenticated, ))
@@ -213,10 +214,10 @@ def surgery_update(request, pk):
 def surgery_create(request):
     serializer = SurgerySerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        surgery = serializer.save()
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(data={'id': surgery.id}, status=status.HTTP_201_CREATED)
 
 @api_view(['READ'])
 @permission_classes((IsAuthenticated, ))

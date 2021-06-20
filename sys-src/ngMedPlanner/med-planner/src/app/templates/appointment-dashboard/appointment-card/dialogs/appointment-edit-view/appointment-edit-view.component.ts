@@ -5,6 +5,7 @@ import { AppointmentDialog } from '../appointment-dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { DoctorsDashboardStateService } from 'src/app/services/state-services/doctors-dashboard/doctors-dashboard-state.service';
+import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 
 @Component({
   selector: 'app-appointment-edit-view',
@@ -67,7 +68,8 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   constructor(
     private dialogRef: MatDialogRef<AppointmentEditViewComponent, EditingResult>,
     @Inject(MAT_DIALOG_DATA) appointment: AppointmentModel,
-    private doctorsState: DoctorsDashboardStateService
+    private doctorsState: DoctorsDashboardStateService,
+    private appointmentState: AppointmentsDashboardStateService
   ) {
     super(appointment);
 
@@ -127,12 +129,19 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
     });
 
     this.closeDialog({
-      isSaveClicked: true,
+      buttonClicked: ButtonClicked.SAVE,
       appointmentToSave: this.appointment
     });
   }
 
-  public closeDialog(result?: EditingResult): void {
+  public deleteAppointment(): void {
+    this.appointmentState.deleteAppointment(this.appointment);
+    this.closeDialog({
+      buttonClicked: ButtonClicked.REMOVE
+    });
+  }
+
+  public closeDialog(result: EditingResult): void {
     this.dialogRef.close(result);
   }
 
@@ -147,6 +156,12 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
 }
 
 export interface EditingResult {
-  isSaveClicked: boolean;
+  buttonClicked: ButtonClicked;
   appointmentToSave?: AppointmentModel;
+}
+
+export enum ButtonClicked {
+  SAVE = 'save',
+  CANCEL = 'cancel',
+  REMOVE = 'remove'
 }

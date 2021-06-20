@@ -5,7 +5,7 @@ import { AppointmentModel, Priority } from 'src/app/services/state-services/appo
 import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 import { Subscription } from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import { AppointmentEditViewComponent, EditingResult } from './appointment-card/dialogs/appointment-edit-view/appointment-edit-view.component';
+import { AppointmentEditViewComponent, ButtonClicked, EditingResult } from './appointment-card/dialogs/appointment-edit-view/appointment-edit-view.component';
 
 @Component({
   selector: 'app-appointment-dashboard-component',
@@ -91,7 +91,7 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (!editingResult.isSaveClicked) {
+    if (editingResult.buttonClicked === ButtonClicked.CANCEL) {
       return;
     }
 

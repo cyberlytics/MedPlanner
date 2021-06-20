@@ -50,7 +50,7 @@ export class SurgeryStateService extends BaseStateService<SurgeryModel> {
         const surgeriesData = await this.surgeriesData.getData();
 
         for (const surgery of surgeriesData) {
-            this.addData(
+            this.addModel(
                 new SurgeryModel(
                     {
                         id: surgery.id,

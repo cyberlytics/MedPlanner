@@ -41,9 +41,9 @@ export class HttpService {
 
     constructor(private http: HttpClient) {}
 
-    async getData<T>(_url: string, token: string | null, body?: any): Promise<T> {
+    async getData<T>(url: string, token: string | null, body?: any): Promise<T> {
         const response = await fetch(
-            _url,
+            url,
             {
                 method: 'GET',
                 headers:
@@ -60,9 +60,9 @@ export class HttpService {
         return new Promise<T>( (resolve) => { resolve(data as T); } );
     }
 
-    async postMessage<T, R = any>(_url: string, body: R, token?: string | null): Promise<T> {
+    async postMessage<T, R = any>(url: string, body: R, token?: string | null): Promise<T> {
         const responce = await fetch(
-            _url,
+            url,
             {
                 method: 'POST',
                 headers:
@@ -77,6 +77,21 @@ export class HttpService {
         const data = await responce.json();
 
         return new Promise<T>( (resolve) => { resolve(data as T); });
+    }
+
+    async delete<R = any>(url: string, body: R, token: string | null): Promise<Response> {
+        return fetch(
+            url,
+            {
+                method: 'DELETE',
+                headers:
+                {
+                    'Content-Type':  'application/json',
+                    Authorization: `Token ${token}`
+                },
+                body: JSON.stringify(body)
+            }
+        );
     }
 
     async putMessage<T>(_url: string, body: any, headers?: any): Promise<T> {

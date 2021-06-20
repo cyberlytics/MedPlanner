@@ -34,7 +34,7 @@ export class SpecializationStateService extends BaseStateService<SpecializationM
         const specializationsData = await this.specializationsData.getData();
 
         for (const specialization of specializationsData.specializations) {
-            this.addData(
+            this.addModel(
                 new SpecializationModel(
                     {
                         id: specialization.id,

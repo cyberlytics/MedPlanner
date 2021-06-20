@@ -53,6 +53,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
     private async filterAppointments(): Promise<Array<AppointmentModel>> {
         const allAppointments = await this.getStateData();
 
+        allAppointments.sort((a, b) => {
+            return a.date.getTime() - b.date.getTime();
+        });
+
         if (this.appointmentFilter.isFilterEmpty) {
             return allAppointments;
         }

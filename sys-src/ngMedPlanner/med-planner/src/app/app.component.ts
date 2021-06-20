@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   title = 'med-planner';
 
-  private token = '65e9a58a48fb46b31d169e52b66e96cef3ee2f52';
+  private token = '73142089d71cc8149d902f9d1d422a2182117289';
 
   private _onDashboardSwitcher: Subscription | undefined;
   private _onFilterClick: Subscription | undefined;
@@ -201,18 +201,20 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           "title": "termin beim augenarzt",
           "doc_id": 1,
           "user_id": 1,
-          "datetime": "2021-11-27 15:15:00",
+          "datetime": "2021-11-28 15:15:00",
           "priority": "Hoch",
           "note": "kjhgfde56zujko9876tfdse5tzhjko",
           "tags": [
-            1
+            
           ]
         })
       }
     )
-    .then(function(response){
-      console.log('Response', response)
-    });
+    .then(function (response) {
+      return response.text()
+    }).then(function (data) {
+      console.log(data)
+    }).catch(console.error)
   }
 
   private async updateDoctor(): Promise<void> {

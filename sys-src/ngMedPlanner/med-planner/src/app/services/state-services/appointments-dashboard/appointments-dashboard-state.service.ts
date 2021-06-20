@@ -33,7 +33,7 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
     protected async initStateData(): Promise<void> {
         const appointmentsData = await this.appointmentsData.getData();
 
-        for (const appointment of appointmentsData.appointments) {
+        for (const appointment of appointmentsData) {
             this.addData(
                 new AppointmentModel(
                     {

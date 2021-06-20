@@ -41,12 +41,34 @@ export class HttpService {
 
     constructor(private http: HttpClient) {}
 
-    async requestData<T>(_url: string, body?: any): Promise<T> {
-        const promise = this.http.get<T>(
+    async getData<T>(_url: string, token: string | null, body?: any): Promise<T> {
+        const response = await fetch(
             _url,
             {
+                method: 'GET',
+                headers:
+                {
+                    'Content-type': 'application/json',
+                    Authorization: `Token ${token}`
+                },
+                body
+            }
+        );
+
+        const data = await response.json();
+
+        return new Promise<T>( (resolve) => { resolve(data as T); } );
+    }
+
+    async requestData<T>(url: string, token: string | null): Promise<T> {
+        const promise = this.http.get<T>(
+            url,
+            {
                 responseType: 'json',
-                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
+                headers: new HttpHeaders({
+                    'Content-Type':  'application/json',
+                    Authorization: `Token ${token}`
+                })
             }
         )
         .toPromise()

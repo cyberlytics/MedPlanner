@@ -45,7 +45,7 @@ export class LoginService implements Login {
      */
     public async login(_email: string, _password: string): Promise<LoginResult> {
         try {
-            const response = await this.httpService.postMessage<{result: string}>(
+            const response = await this.httpService.postMessage<{token: string}>(
                 HttpService.LOGIN_URL,
                 {
                   email: _email,
@@ -53,7 +53,7 @@ export class LoginService implements Login {
                 }
             );
 
-            this.storeToken(response.result);
+            this.storeToken(response.token);
         } catch (error) {
 
             console.log(error);

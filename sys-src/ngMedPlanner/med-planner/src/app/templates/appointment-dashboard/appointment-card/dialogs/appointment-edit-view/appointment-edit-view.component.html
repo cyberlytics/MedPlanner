@@ -118,7 +118,7 @@
     <!-- Buttons Save/Cancel -->
     <div class="dialog-buttons-block">
         <button 
-            *ngIf="appointment.id"
+            *ngIf="id !== -1"
             class="bold-font appearance-animation-fast remove-button"
             mat-icon-button
             (click)="deleteAppointment()"

@@ -1,5 +1,5 @@
-import { AppointmentModel, Priority } from './appointment-model';
-import { Injectable, ChangeDetectorRef } from '@angular/core';
+import { AppointmentModel, AppointmentUpdateData, Priority } from './appointment-model';
+import { Injectable } from '@angular/core';
 import { AppointmentsDataService } from '../../data/appointments-data.service';
 import { DoctorsDashboardStateService } from '../doctors-dashboard/doctors-dashboard-state.service';
 import { TagsStateService } from '../tags/tags-state.service';
@@ -47,21 +47,15 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         }
 
         appointment.resetIdAfterSave(result.id);
+        appointment.setOnUpdateListener( (model: AppointmentModel) => {
+            this.updateAppointment(model);
+        });
+        appointment.setOnDeleteListener( (model: AppointmentModel) => {
+            this.deleteAppointment(model);
+        });
         this.addModel(appointment);
 
         return CreateAppontmentResult.CREATED;
-    }
-
-    public async deleteAppointment(appointment: AppointmentModel): Promise<void> {
-        const responce = await this.httpService.delete(
-            HttpService.APPOINTMENT_DELETE + appointment.id,
-            null,
-            this.userState.token
-        );
-
-        if (responce.ok) {
-            this.removeModelById(appointment.id);
-        }
     }
 
     protected async initStateData(): Promise<void> {
@@ -77,11 +71,41 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
                         doctor: await this.doctorsState.getModelById(appointment.doc_id),
                         priority: AppointmentModel.getPriorityByName(appointment.priority),
                         note: appointment.note,
-                        tags: await this.tagsState.getTagListByIds(appointment.tags)
+                        tags: await this.tagsState.getTagListByIds(appointment.tags),
+                        onAppointmentUpdate: (model: AppointmentModel) => { this.updateAppointment(model); },
+                        onAppointmentDelete: (model: AppointmentModel) => { this.deleteAppointment(model); }
                     }
                 )
             );
         }
+    }
+
+    private async deleteAppointment(appointment: AppointmentModel): Promise<void> {
+        const responce = await this.httpService.delete(
+            HttpService.APPOINTMENT_DELETE + appointment.id,
+            null,
+            this.userState.token
+        );
+
+        if (responce.ok) {
+            this.removeModelById(appointment.id);
+        }
+    }
+
+    private async updateAppointment(appointment: AppointmentModel): Promise<void> {
+        const updateResult = await this.httpService.postMessage<any, CreateAppointmentRequestData>(
+            HttpService.APPOINTMENT_UPDATE + appointment.id,
+            {
+                priority: appointment.priority,
+                title: appointment.title,
+                doc_id: appointment.doctor?.id,
+                datetime: appointment.dateISOString,
+                user_id: 1,
+                note: appointment.note,
+                tags: []
+            },
+            this.userState.token
+        );
     }
 
     private async filterAppointments(): Promise<Array<AppointmentModel>> {

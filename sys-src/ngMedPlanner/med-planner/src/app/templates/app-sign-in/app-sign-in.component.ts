@@ -132,7 +132,7 @@ export class AppSignInComponent implements OnInit {
    * Method to check user input password with RegEx
    */
   public handlePasswordStrength(): void {
-    const passwordRegex = new RegExp('^(?=.*[a-zöäüß])(?=.*[A-ZÖÄÜ])(?=.*[0-9])(?=.*[\W\.\_])(?=.{8,})');
+    const passwordRegex = new RegExp('^(?=.*[a-zöäüß])(?=.*[A-ZÖÄÜ])(?=.*[0-9])(?=.*[\W\.\_:;}{}\)\(\/!@#\$%\^&-\?])(?=.{8,})');
 
     if (passwordRegex.test(this._registerPasswordFormControl.value) == false) {
       RegPasswordValidator.strengthCheckInValid();

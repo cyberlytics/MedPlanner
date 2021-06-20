@@ -60,52 +60,23 @@ export class HttpService {
         return new Promise<T>( (resolve) => { resolve(data as T); } );
     }
 
-    async requestData<T>(url: string, token: string | null): Promise<T> {
-        const promise = this.http.get<T>(
-            url,
+    async postMessage<T, R = any>(_url: string, body: R, token?: string | null): Promise<T> {
+        const responce = await fetch(
+            _url,
             {
-                responseType: 'json',
-                headers: new HttpHeaders({
+                method: 'POST',
+                headers:
+                {
                     'Content-Type':  'application/json',
                     Authorization: `Token ${token}`
-                })
+                },
+                body: JSON.stringify(body)
             }
-        )
-        .toPromise()
-        .catch();
+        );
 
-        return promise;
-    }
+        const data = await responce.json();
 
-    async getMessage<T>(_url: string, options?: any): Promise<T> {
-        const promise = this.http.get<T>(
-            _url,
-            {
-                responseType: 'json',
-                headers: new HttpHeaders({
-                    'Access-Control-Allow-Headers':  $.param(options)
-                })
-            }
-        )
-        .toPromise()
-        .catch();
-
-        return promise;
-    }
-
-    async postMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
-        const promise = this.http.post<T>(
-            _url,
-            $.param(body),
-            // JSON.stringify(body),
-            {
-                responseType: 'json',
-                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
-            }
-        )
-        .toPromise();
-
-        return promise;
+        return new Promise<T>( (resolve) => { resolve(data as T); });
     }
 
     async putMessage<T>(_url: string, body: any, headers?: any): Promise<T> {

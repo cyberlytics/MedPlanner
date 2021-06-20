@@ -18,6 +18,10 @@ export class AppointmentModel {
         return this._date;
     }
 
+    get dateISOString(): string {
+        return this._date.toISOString();
+    }
+
     get dateString(): string {
         return this._date.toLocaleDateString(AppointmentModel.LOCALE_DE, {
           day: '2-digit',
@@ -95,12 +99,12 @@ export class AppointmentModel {
         this._date = new Date(data.datetime);
     }
 
-    public static getPriorityByName(_name: string): Priority {
+    public static getPriorityByName(_name: 'Hoch' | 'Mittel' | 'Niedrig'): Priority {
         switch (_name) {
             case 'Hoch': return Priority.HIGH;
             case 'Mittel': return Priority.MEDIUM;
             case 'Niedrig': return Priority.LOW;
-            default: return Priority.LOW;
+            default: return Priority.MEDIUM;
         }
     }
 
@@ -184,7 +188,7 @@ export class AppointmentModel {
 }
 
 export enum Priority {
-    HIGH,
-    MEDIUM,
-    LOW
+    HIGH = 'Hoch',
+    MEDIUM = 'Mittel',
+    LOW = 'Niedrig'
 }

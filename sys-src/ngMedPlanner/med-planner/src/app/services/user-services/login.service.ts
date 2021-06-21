@@ -8,11 +8,17 @@ import { HttpService } from '../http-service/http.service';
 export class LoginService implements Login {
 
     private readonly USER_TOKEN_KEY = 'user_token';
+    private readonly USER_ID_KEY = 'user_id';
 
     get token(): string | null {
         return this._token;
     }
     private _token: string | null = null;
+
+    get userId(): number | null {
+        return this._userId;
+    }
+    private _userId: number | null = null;
 
     get isLoggedIn(): boolean {
         return this._token !== null;
@@ -20,7 +26,9 @@ export class LoginService implements Login {
 
     constructor(private httpService: HttpService, private router: Router) {
         const storedToken = localStorage.getItem(this.USER_TOKEN_KEY);
+        const storedUserId = localStorage.getItem(this.USER_ID_KEY);
         this._token = storedToken ? storedToken : null;
+        this._userId = storedUserId ? parseFloat(storedUserId) : null;
     }
 
     /**
@@ -47,6 +55,7 @@ export class LoginService implements Login {
         const response = await this.httpService.postUnauthorizedMessage<{
             token: string;
             message: string;
+            id: number;
             status: number;
         }>(
             HttpService.LOGIN_URL,
@@ -66,6 +75,7 @@ export class LoginService implements Login {
 
         if (response.status === HttpService.HTTP_200_OK) {
             this.storeToken(response.token);
+            this.storeToken(response.id.toString());
             return LoginResult.LOGIN_SUCCESFULL;
         }
 
@@ -87,6 +97,7 @@ export class LoginService implements Login {
         }
 
         this.removeToken();
+        this.removeUserId();
         await this.router.navigate(['login']);
 
         return true;
@@ -102,10 +113,21 @@ export class LoginService implements Login {
         localStorage.removeItem(this.USER_TOKEN_KEY);
     }
 
+    private storeUserId(userId: number): void {
+        this._userId = userId;
+        localStorage.setItem(this.USER_ID_KEY, this._userId.toString());
+    }
+
+    private removeUserId(): void {
+        this._userId = null;
+        localStorage.removeItem(this.USER_ID_KEY);
+    }
+
 }
 
 export interface Login {
     token: string | null;
+    userId: number | null;
     isLoggedIn: boolean;
 
     login(_email: string, _password: string): Promise<LoginResult>;

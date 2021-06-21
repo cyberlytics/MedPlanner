@@ -25,7 +25,7 @@ def login(request):
         user = auth.authenticate(username=email, password=password)
         auth.login(request, user)
         new_token, created = Token.objects.get_or_create(user=user)
-        return Response(data={"token": str(new_token), "email": f"{email}",  "status": status.HTTP_200_OK})
+        return Response(data={"token": str(new_token), "email": f"{email}", "id": login_user.id,  "status": status.HTTP_200_OK})
     else:
         return Response(data={"message": f"Wrong password for User '{email}' or not activated", "status": status.HTTP_403_FORBIDDEN})
 

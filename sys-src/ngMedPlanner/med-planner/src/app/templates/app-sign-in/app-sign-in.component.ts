@@ -1,6 +1,6 @@
-import { Component, OnInit, ɵɵtrustConstantResourceUrl } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbstractControl, Form, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import {SignUpService} from 'src/app/services/user-services/signup.service';
 import { RegisterResult } from 'src/app/services/user-services/signup.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,13 +12,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AppSignInComponent implements OnInit {
 
-  private readonly EMAIL_REQUIRED_MESSAGE = 'Eine Email ist erforderlich!';
-  private readonly EMAIL_WRONG_MESSAGE = 'Eine gültige Email ist erforderlich!';
+  private readonly EMAIL_REQUIRED_MESSAGE = 'EMail-Adresse erforderlich!';
+  private readonly EMAIL_WRONG_MESSAGE = 'Gültige Email-Adresse erforderlich!';
   private readonly EMAIL_ALREADY_EXIST_MESSAGE = 'Diese Email existiert bereits!';
 
-  private readonly PASSWORD_REQUIRED_MESSAGE = 'Ein Passwort ist erforderlich!';
+  private readonly PASSWORD_REQUIRED_MESSAGE = 'Passwort ist erforderlich!';
+  private readonly PASSWORD_NOT_MATCHING_MESSAGE = 'Passwort zu unsicher!';
   private readonly DIFFERENT_PASSWORDS_MESSAGE = 'Die Passwörter stimmen nicht überein!';
-
 
   get emailErrorMessage(): string {
     if (this._registerEmailFormControl.hasError('required')) {
@@ -41,6 +41,9 @@ export class AppSignInComponent implements OnInit {
       return this.PASSWORD_REQUIRED_MESSAGE;
     }
 
+    if (this._registerPasswordFormControl.hasError('passwordStrengthCheck')) {
+      return this.PASSWORD_NOT_MATCHING_MESSAGE;
+    }
     if (this._registerPasswordFormControl.hasError('differentPasswords')) {
       return this.DIFFERENT_PASSWORDS_MESSAGE;
     }
@@ -81,7 +84,7 @@ export class AppSignInComponent implements OnInit {
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
-    private signupState: SignUpService,
+    private signupState: SignUpService
   ){
 
     this._registerEmailFormControl = new FormControl(
@@ -92,16 +95,15 @@ export class AppSignInComponent implements OnInit {
 
     this._registerPasswordFormControl = new FormControl(
       '',
-      [Validators.required, RegPasswordValidator.differentPasswords]
+      [Validators.required, RegPasswordValidator.differentPasswords, RegPasswordValidator.passwordStrengthCheck]
     );
 
     this._confirmPasswordFormControl = new FormControl(
-      '',
+      {value: '', disabled: true},
       [Validators.required, RegPasswordValidator.differentPasswords]
     );
 
     this._hidePassword = true;
-
   }
 
   ngOnInit(): void {
@@ -113,16 +115,36 @@ export class AppSignInComponent implements OnInit {
   }
 
   public async onSignUpClick(_email: string, _password: string): Promise<void>{
-    const signedUp = await this.signupState.signup(_email, _password);
+    // only add user if passwords match
+    this.handleDifferentPassword();
+    if (this._confirmPasswordFormControl.value === this.registerPasswordFormControl.value) {
+      const signedUp = await this.signupState.signup(_email, _password);
 
-    this.handleLoginResult(signedUp);
+      this.handleLoginResult(signedUp);
+    }
+  }
 
+  /**
+   * Method to check user input password with RegEx
+   */
+  public handlePasswordStrength(): void {
+    const passwordRegex = new RegExp('^(?=.*[a-zöäüß])(?=.*[A-ZÖÄÜ])(?=.*[0-9])(?=.*[\W\.\_:;}{}\)\(\/!@#\$%\^&-\?])(?=.{8,})');
+
+    if (passwordRegex.test(this._registerPasswordFormControl.value) === false) {
+      RegPasswordValidator.strengthCheckInValid();
+      this._registerPasswordFormControl.updateValueAndValidity();
+      RegPasswordValidator.strengthCheckValid();
+      this._confirmPasswordFormControl.disable();
+    }
+    else{
+      // enable confirm password input only if regex matches
+      this._confirmPasswordFormControl.enable();
+    }
   }
 
 
   // function called by "(blur)" in html-template
   public handleDifferentPassword(): void {
-
     if (this._confirmPasswordFormControl.value !== this._registerPasswordFormControl.value) {
       RegPasswordValidator.enableError();
       this._confirmPasswordFormControl.updateValueAndValidity();
@@ -179,7 +201,6 @@ export class AppSignInComponent implements OnInit {
       panelClass: ['secondary-background']
     });
   }
-
 }
 
 
@@ -207,6 +228,7 @@ export class AppSignInComponent implements OnInit {
  */
  class RegPasswordValidator {
   private static isWrong = false;
+  private static isWeak = false;
 
   static enableError(): void {
     this.isWrong = true;
@@ -216,7 +238,25 @@ export class AppSignInComponent implements OnInit {
     this.isWrong = false;
   }
 
+  /**
+   * Method is called if password is too weak
+   */
+  static strengthCheckInValid(): void {
+    this.isWeak = true;
+  }
+
+  /**
+   * Method is called if password matches RegEx
+   */
+  static strengthCheckValid(): void {
+    this.isWeak = false;
+  }
+
   static differentPasswords(control: AbstractControl): ValidationErrors | null {
     return RegPasswordValidator.isWrong ? { differentPasswords: true } : null;
+  }
+
+  static passwordStrengthCheck(control: AbstractControl): ValidationErrors | null {
+    return RegPasswordValidator.isWeak ? { passwordStrengthCheck: true } : null;
   }
 }

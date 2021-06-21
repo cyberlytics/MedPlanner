@@ -1,6 +1,6 @@
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { SpecializationModel } from 'src/app/services/state-services/specialization/specialization-model';
-import { SpecializationStateService } from 'src/app/services/state-services/specialization/specialization-state.service';
+//import { SpecializationStateService } from 'src/app/services/state-services/specialization/specialization-state.service';
 
 
 export abstract class DoctorDialog {
@@ -46,6 +46,5 @@ export abstract class DoctorDialog {
     
       constructor(
         protected doctor: DoctorModel,
-        private specializationState: SpecializationStateService,
         ) {}
 } 

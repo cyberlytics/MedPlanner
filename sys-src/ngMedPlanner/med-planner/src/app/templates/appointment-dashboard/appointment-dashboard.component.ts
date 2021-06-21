@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { FilterAppointmentsService } from 'src/app/services/filter-service/filter-appointments.service';
 import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
-import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
+import { AppointmentModel, Priority } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 import { Subscription } from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import { AppointmentEditViewComponent, ButtonClicked, EditingResult } from './appointment-card/dialogs/appointment-edit-view/appointment-edit-view.component';
 
 @Component({
   selector: 'app-appointment-dashboard-component',
@@ -27,7 +29,8 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
     headerState: AppHeaderStateService,
     private appointmentsState: AppointmentsDashboardStateService,
     private appointmentsFilter: FilterAppointmentsService,
-    private changeDet: ChangeDetectorRef
+    private changeDet: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {
     this._appointments = new Array<AppointmentModel>();
 
@@ -57,6 +60,46 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
 
   public dropFilter(): void {
     this.appointmentsFilter.dropFilter();
+  }
+
+  public async addNewAppointment(): Promise<void> {
+
+    const dialogRef = this.dialog.open<AppointmentEditViewComponent, AppointmentModel, EditingResult>(
+      AppointmentEditViewComponent,
+      {
+        maxHeight: '95vh',
+        maxWidth: '95vw',
+        width: '40em',
+        data: new AppointmentModel(
+          {
+            id: null,
+            title: '',
+            datetime: Date.now().toLocaleString(),
+            doctor: null,
+            priority: Priority.MEDIUM
+          }
+        ),
+        autoFocus: false,
+        panelClass: 'appointment-dialog',
+        disableClose: true
+      }
+    );
+
+    const editingResult = await dialogRef.afterClosed().toPromise();
+
+    if (editingResult === undefined) {
+      return;
+    }
+
+    if (editingResult.buttonClicked === ButtonClicked.CANCEL) {
+      return;
+    }
+
+    if (!editingResult.appointmentToSave) {
+      return;
+    }
+
+    const createdResult = await this.appointmentsState.addNewAppointment(editingResult.appointmentToSave);
   }
 
 }

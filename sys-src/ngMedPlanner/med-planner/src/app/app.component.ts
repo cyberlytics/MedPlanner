@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   title = 'med-planner';
 
-  private token = '65e9a58a48fb46b31d169e52b66e96cef3ee2f52';
+  private token = '73142089d71cc8149d902f9d1d422a2182117289';
 
   private _onDashboardSwitcher: Subscription | undefined;
   private _onFilterClick: Subscription | undefined;
@@ -36,9 +36,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // this.userState.checkLogin();
-    // this.requestLogin();
-    // this.requestLogout();
-    // this.registerNewUser();
     // this.createDoctor();
     // this.createAppointment();
     // this.updateDoctor();
@@ -94,40 +91,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.drawer?.close();
         break;
     }
-  }
-
-  private async requestLogin(): Promise<void> {
-    const response = await this.httpService.postMessage(
-      HttpService.LOGIN_URL,
-      {
-        username: 'test_user_2',
-        password: 'Yxcvb56789'
-      }
-    );
-    console.log('response', response);
-  }
-
-  private async requestLogout(): Promise<void> {
-    const response = await this.httpService.postMessage(
-      HttpService.LOGOUT_URL,
-      {
-        username: 'test_user_2'
-      }
-    );
-    console.log('response', response);
-  }
-
-  private async registerNewUser(): Promise<void> {
-    const response = await this.httpService.postMessage(
-      HttpService.REGISTER_NEW_USER_URL,
-      {
-        email: 'test4@user.de',
-        password: 'HGdthsrzah',
-        is_superuser: false,
-        is_staff: false
-      }
-    );
-    console.log('response', response);
   }
 
   private async getDoctor(): Promise<void> {
@@ -201,18 +164,20 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           "title": "Termin beim Augenarzt",
           "doc_id": 1,
           "user_id": 1,
-          "datetime": "2021-11-27 15:15:00",
+          "datetime": "2021-11-28 15:15:00",
           "priority": "Hoch",
           "note": "Nach Augentropfen fragen",
           "tags": [
-            1
+            
           ]
         })
       }
     )
-    .then(function(response){
-      console.log('Response', response)
-    });
+    .then(function (response) {
+      return response.text()
+    }).then(function (data) {
+      console.log(data)
+    }).catch(console.error)
   }
 
   private async updateDoctor(): Promise<void> {

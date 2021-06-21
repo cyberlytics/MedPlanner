@@ -198,12 +198,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           'Authorization': `Token ${this.token}`
         },
         body:JSON.stringify({
-          "title": "termin beim augenarzt",
+          "title": "Termin beim Augenarzt",
           "doc_id": 1,
           "user_id": 1,
           "datetime": "2021-11-27 15:15:00",
           "priority": "Hoch",
-          "note": "kjhgfde56zujko9876tfdse5tzhjko",
+          "note": "Nach Augentropfen fragen",
           "tags": [
             1
           ]

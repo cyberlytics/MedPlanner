@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import * as $ from 'jquery';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -39,7 +37,7 @@ export class HttpService {
     public static readonly APPOINTMENT_CREATE = `http://${HttpService.serverHost}:8000/api/appointment-create`;
     public static readonly APPOINTMENT_DELETE = `http://${HttpService.serverHost}:8000/api/appointment-delete/`;
 
-    constructor(private http: HttpClient) {}
+    constructor() {}
 
     async getData<T>(url: string, token: string | null, body?: any): Promise<T> {
         const response = await fetch(
@@ -109,21 +107,6 @@ export class HttpService {
                 body: JSON.stringify(body)
             }
         );
-    }
-
-    async putMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
-        // console.log('URL', _url);
-        const promise = this.http.put<T>(
-            _url,
-            $.param(body),
-            {
-                responseType: 'json',
-                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
-            }
-        )
-        .toPromise();
-
-        return promise;
     }
 
 }

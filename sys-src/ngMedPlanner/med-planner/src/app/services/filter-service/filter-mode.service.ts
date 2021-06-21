@@ -24,6 +24,9 @@ export class FilterModeService {
     }
 
     public switchToDoctors(): void {
+        return;
+
+        // TODO: For second release: enable filter for doctors.
         this._currentFilterMode = FilterMode.DOCTORS;
     }
 

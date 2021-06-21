@@ -179,7 +179,7 @@ export class FilterAppointmentsService {
     public selectStartDate(date: Date): void {
         this._startDate = date;
 
-        if (!this.isEndDateSelected()) {
+        if (!this.isDateRangeSelected()) {
             return;
         }
 
@@ -197,7 +197,7 @@ export class FilterAppointmentsService {
     public selectEndDate(date: Date): void {
         this._endDate = date;
 
-        if (!this.isStartDateSelected()) {
+        if (!this.isDateRangeSelected()) {
             return;
         }
 

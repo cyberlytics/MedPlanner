@@ -23,7 +23,7 @@ export class UserStateService implements Login {
         return this.loginService.isLoggedIn;
     }
 
-    constructor(private httpService: HttpService, private loginService: LoginService) {
+    constructor(private loginService: LoginService) {
         this._onLogout = new Subject<void>();
     }
 

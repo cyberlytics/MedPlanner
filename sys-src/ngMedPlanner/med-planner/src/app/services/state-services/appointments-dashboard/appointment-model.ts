@@ -142,12 +142,8 @@ export class AppointmentModel {
     }
 
     public update(dataToUpdate?: AppointmentUpdateData): void {
-        if (this.data.onAppointmentUpdate === undefined) {
-            return;
-        }
-
         if (dataToUpdate === undefined) {
-            this.data.onAppointmentUpdate(this);
+            this.updateAppointment();
             return;
         }
 
@@ -155,12 +151,8 @@ export class AppointmentModel {
             this.data.title = dataToUpdate.title;
         }
 
-        if (dataToUpdate.datetime !== undefined) {
-            this.data.datetime = dataToUpdate.datetime;
-            this._date = new Date(dataToUpdate.datetime);
-        }
-
         if (dataToUpdate.date !== undefined) {
+            console.log(dataToUpdate.date);
             this._date = dataToUpdate.date;
         }
 
@@ -180,7 +172,7 @@ export class AppointmentModel {
             this.data.tags = dataToUpdate.tags;
         }
 
-        this.data.onAppointmentUpdate(this);
+        this.updateAppointment();
     }
 
     public setOnUpdateListener(listener: (model: AppointmentModel) => void): void {
@@ -198,6 +190,14 @@ export class AppointmentModel {
         this.data.onAppointmentDelete = listener;
     }
 
+    private updateAppointment(): void {
+        if (this.data.onAppointmentUpdate === undefined) {
+            return;
+        }
+
+        this.data.onAppointmentUpdate(this);
+    }
+
 }
 
 export enum Priority {
@@ -208,7 +208,6 @@ export enum Priority {
 
 export interface AppointmentUpdateData {
     title?: string;
-    datetime?: string;
     date?: Date;
     doctor?: DoctorModel;
     priority?: Priority;

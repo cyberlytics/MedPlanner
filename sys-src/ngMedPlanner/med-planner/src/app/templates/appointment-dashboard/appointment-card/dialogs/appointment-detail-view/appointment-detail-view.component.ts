@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AppointmentModel, Priority } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
+import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 import {MatDialog} from '@angular/material/dialog';
 import { AppointmentEditViewComponent } from '../appointment-edit-view/appointment-edit-view.component';
 import { AppointmentDialog } from '../appointment-dialog';

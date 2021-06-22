@@ -37,8 +37,8 @@ export class DoctorModel {
         return this.data.surgery?.city;
     }
 
-    get postcode(): string | undefined {
-        return this.data.surgery?.postcode;
+    get zipcode(): string | undefined {
+        return this.data.surgery?.zipcode;
     }
 
     get address(): string | undefined {

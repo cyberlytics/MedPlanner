@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import * as $ from 'jquery';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -39,75 +37,82 @@ export class HttpService {
     public static readonly APPOINTMENT_CREATE = `http://${HttpService.serverHost}:8000/api/appointment-create`;
     public static readonly APPOINTMENT_DELETE = `http://${HttpService.serverHost}:8000/api/appointment-delete/`;
 
-    constructor(private http: HttpClient) {}
+    constructor() {}
 
-    async requestData<T>(_url: string, body?: any): Promise<T> {
-        const promise = this.http.get<T>(
-            _url,
+    async getData<T>(url: string, token: string | null, body?: any): Promise<T> {
+        const response = await fetch(
+            url,
             {
-                responseType: 'json',
-                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
+                method: 'GET',
+                headers:
+                {
+                    'Content-type': 'application/json',
+                    Authorization: `Token ${token}`
+                },
+                body
             }
-        )
-        .toPromise()
-        .catch();
+        );
 
-        return promise;
+        const data = await response.json();
+
+        return new Promise<T>( (resolve) => { resolve(data as T); } );
     }
 
-    async getMessage<T>(_url: string, options?: any): Promise<T> {
-        const promise = this.http.get<T>(
-            _url,
+    async postMessage<T = any, R = any>(url: string, body: R, token: string | null): Promise<T> {
+        const responce = await fetch(
+            url,
             {
-                responseType: 'json',
-                headers: new HttpHeaders({
-                    'Access-Control-Allow-Headers':  $.param(options)
-                })
+                method: 'POST',
+                headers:
+                {
+                    'Content-Type':  'application/json',
+                    Authorization: `Token ${token}`
+                },
+                body: JSON.stringify(body)
             }
-        )
-        .toPromise()
-        .catch();
+        );
 
-        return promise;
+        const data = await responce.json();
+
+        return new Promise<T>( (resolve) => { resolve(data as T); });
     }
 
-    async postMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
-        const promise = this.http.post<T>(
-            _url,
-            $.param(body),
-            // JSON.stringify(body),
+    async postUnauthorizedMessage<T extends ResponseData>(url: string, body: any): Promise<T> {
+        const responce = await fetch(
+            url,
             {
-                responseType: 'json',
-                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:  JSON.stringify(body)
             }
-        )
-        .toPromise();
+        );
 
-        return promise;
+        const data = await responce.json();
+
+        return new Promise<T>( (resolve) => { resolve(data as T); });
     }
 
-    async putMessage<T>(_url: string, body: any, headers?: any): Promise<T> {
-        // console.log('URL', _url);
-        const promise = this.http.put<T>(
-            _url,
-            $.param(body),
+    async delete<R = any>(url: string, body: R, token: string | null): Promise<Response> {
+        return fetch(
+            url,
             {
-                responseType: 'json',
-                headers: new HttpHeaders({ 'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'})
+                method: 'DELETE',
+                headers:
+                {
+                    'Content-Type':  'application/json',
+                    Authorization: `Token ${token}`
+                },
+                body: JSON.stringify(body)
             }
-        )
-        .toPromise();
-
-        return promise;
+        );
     }
 
 }
 
-interface HttpOptions {
-    headers?: HttpHeaders | {[header: string]: string | string[]};
-    observe?: 'body' | 'events' | 'response';
-    params?: HttpParams|{[param: string]: string | string[]};
-    reportProgress?: boolean;
-    responseType?: 'arraybuffer'|'blob'|'json'|'text';
-    withCredentials?: boolean;
+
+interface ResponseData {
+    message: string;
+    status: number;
 }

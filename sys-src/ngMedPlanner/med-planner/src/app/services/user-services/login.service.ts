@@ -44,38 +44,48 @@ export class LoginService implements Login {
      * @returns Promise with call result.
      */
     public async login(_email: string, _password: string): Promise<LoginResult> {
-        try {
-            const response = await this.httpService.postMessage<{result: string}>(
-                HttpService.LOGIN_URL,
-                {
-                  email: _email,
-                  password: _password
-                }
-            );
-
-            this.storeToken(response.result);
-        } catch (error) {
-
-            console.log(error);
-
-            if (error.status === HttpService.HTTP_403_FORBIDDEN) {
-                return LoginResult.PASSWORD_IS_WRONG;
+        const response = await this.httpService.postUnauthorizedMessage<{
+            token: string;
+            message: string;
+            status: number;
+        }>(
+            HttpService.LOGIN_URL,
+            {
+                email: _email,
+                password: _password
             }
+        );
 
-            if (error.status === HttpService.HTTP_404_NOT_FOUND) {
-                return LoginResult.USER_DOES_NOT_EXIST;
-            }
-
-            return LoginResult.SERVER_ERROR;
+        if (response.status === HttpService.HTTP_403_FORBIDDEN) {
+            return LoginResult.PASSWORD_IS_WRONG;
         }
 
-        return LoginResult.LOGIN_SUCCESFULL;
+        if (response.status === HttpService.HTTP_404_NOT_FOUND) {
+            return LoginResult.USER_DOES_NOT_EXIST;
+        }
+
+        if (response.status === HttpService.HTTP_200_OK) {
+            this.storeToken(response.token);
+            return LoginResult.LOGIN_SUCCESFULL;
+        }
+
+        return LoginResult.SERVER_ERROR;
     }
     /**
      * Logs out the user from app.
      * @returns Promise with logout result.
      */
     public async logout(): Promise<boolean> {
+        const logoutResult = await this.httpService.postMessage(
+            HttpService.LOGOUT_URL,
+            null,
+            this._token
+        );
+
+        if (logoutResult.status === HttpService.HTTP_404_NOT_FOUND) {
+            return false;
+        }
+
         this.removeToken();
         await this.router.navigate(['login']);
 

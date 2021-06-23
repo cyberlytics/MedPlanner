@@ -117,11 +117,12 @@ Die vorher benannten Qualitätsziele wurden bei MedPlanner folgendermaßen berü
 \subsection{Technologie-Stack}
 Im Frontend nutzt Medplanner Angular, im Backend das Framework Django in Kombination mit Django REST, um WEB-APIs für das Frontend bereitzustellen und somit eine Verknüpfung zwischen Django und Angular zu ermöglichen. Für die Speicherung der Daten wird die relationale Datenbank SQLite verwendet. 
 
-TODO: besser den Stack visualisieren.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{./figures/medplanner_stack}
+	\caption{Verwendeter Technologie-Stack für MedPlanner}
+\end{figure}
 % TODO https://www.simform.com/nodejs-vs-django/#section5 was für ein webserver
-
-% TODO Alternative darstellung: https://www.google.com/url?sa=i&url=https%3A%2F%2Fhackernoon.com%2Fmean-stack-development-for-developers-4d88c40c4103&psig=AOvVaw0PclUvkD28VrnFHHwdCIkS&ust=1624531662368000&source=images&cd=vfe&ved=0CAcQjRxqFwoTCKCIgpfKrfECFQAAAAAdAAAAABAP
-% TODO: nachschauen, was wir jetzt letztendlich für die Datenübertragung nutzen also für FETCH (ajax?)
 
 %\vfill
 %\pagebreak
@@ -130,15 +131,15 @@ TODO: besser den Stack visualisieren.
 Wie bereits vorher genannt, wird im Frontend das Framework Angular verwendet. Es stellt einen clientseitigen MVC dar, wodurch eine bessere User Experience mit kürzeren Reaktionszeiten ermöglicht wird. Als Programmiersprache wird TypeScript genutzt, was im Gegensatz zu JavaScript eine Typisierung zulässt und somit logische Typfehler beseitigt. Ein weiterer Grund für diese Entscheidung war die Modularität und Wiederverwendbarkeit. In Angular können Komponenten erstellt und in Module gruppiert werden, die an beliebigen Stellen wiederverwertbar sind. Für einzelne Komponenten ist zudem die Testabdeckung möglich.\\
 Für das Backend fiel die Entscheidung auf Django, da es in der Programmiersprache Python implementiert wird, welche vom gesamten Team gut beherrscht wird. Außerdem bietet Django einige Features an wie beispielsweise die Benutzerauthentifizierung oder die Administration der Inhalte über ein Interface.\\
 Mithilfe des Django REST Frameworks (DRF) können APIs in Django zur Verfügung gestellt werden, um den Datenaustausch zwischen Angular und Django zu realisieren.\\
-Für die Abspeicherung der Daten im Backend wird die relationale Datenbank SQLite verwendet, da die Einrichtung unkompliziert abläuft und die Datenbank trotz geringer Größe viele Funktionalitäten bietet~\cite{sqlite}, die ebenfalls in mächtigeren SQL-Datenbank-Managementsystemen wie MySQL enthalten sind. Im Zusammenhang mit RDBMS\\
-\pagebreak
+Für die Abspeicherung der Daten im Backend wird die relationale Datenbank SQLite verwendet, da die Einrichtung unkompliziert abläuft und die Datenbank trotz geringer Größe viele Funktionalitäten bietet~\cite{sqlite}, die ebenfalls in mächtigeren SQL-Datenbank-Managementsystemen wie MySQL enthalten sind. Im Zusammenhang mit RDBMS und Django ist zu erwähnen, dass das Python-Framework die Realisierung von \textit{n-n-Beziehungen}~\footnote{~Auch bekannt als many-to-many} erlaubt. Dadurch müssen die Entiäten nicht so überarbeitet werden, dass jeweils weitere Tabellen existieren, um one-to-many-Beziehungen zu gewährleisten. Vorteil von Djangos Umsetzung ist, dass in der Datenbank diese Attribute für eine Entität bereits als Liste abgespeichert werden, wodurch größere Anpassungen für die Nutzung und Darstellung im Frontend wegfallen.
+
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\columnwidth]{./figures/architecture_with_docker}
 	\caption{Überblick über das System}
 \end{figure}
-
 Für die Realisierung der Web-Anwendung wird eine Microservice-Architektur unter Verwendung von Docker genutzt. Dabei wird jeweils das Frontend sowie das Backend zusammen mit der Datenbank als Container entwickelt und bereitgestellt. Mittels Docker Compose werden die Container in einem Netzwerk verbunden und können so miteinander kommunizieren. Der Vorteil hierbei ist die schnelle Adaption neuer technologischer Trends: Das System kann ohne unnötigen Aufwand durch eine entsprechende Komposition auch mit anderen Webcontainer eingesetzt werden.
+\pagebreak
 
 \subsection{Struktur}\label{structure}
 \begin{figure}[!h]
@@ -146,12 +147,11 @@ Für die Realisierung der Web-Anwendung wird eine Microservice-Architektur unter
 	\includegraphics[width=0.68\columnwidth]{./figures/concepts}
 	\caption{Entity-Relationship-Modell}
 \end{figure}
-\textit{Django models} repräsentieren in der Datenbank die unterschiedlichen Entitäten. Dabei wird vom Framework bereits standardmäßig ein User model bereitgestellt, was beispielsweise Attribute wie Vor- und Nachname enthält.~\cite{django-default-user} Da in MedPlanner neben der EMail-Adresse und dem Password zu jetzigem Zeitpunkt keine weiteren Informationen benötigt werden, wurde ein angepasstes User model erstellt, was auf die Anforderungen von MedPlanner abgestimmt ist.\\
-Django bietet die Möglichkeit \textit{n-n-Beziehung}\footnote{~Auch bekannt als many-to-many} zu realisieren. Vorteil hiervon ist, dass in der Datenbank diese Attribute für eine Entität bereits als Liste vorhanden sind, wodurch größere Anpassungen für die Nutzung und Darstellung im Frontend wegfallen.
+\textit{Django models} repräsentieren in der Datenbank die unterschiedlichen Entitäten. Dabei wird vom Framework bereits standardmäßig ein User model bereitgestellt, was beispielsweise Attribute wie Vor- und Nachname enthält.~\cite{django-default-user} Da in MedPlanner neben der EMail-Adresse und dem Password zu jetzigem Zeitpunkt keine weiteren Informationen benötigt werden, wurde ein angepasstes User model erstellt, was auf die Anforderungen von MedPlanner abgestimmt ist.
 
+Für die Identifizierung der Benutzer wird bei MedPlanner die \textit{tokenbasierte Authentifizierung} eingesetzt: So wird bei jeder Registrierung bzw. bei jedem Login ein neues Token für den Benutzer erstellt, womit bestimmte Quellen ohne zusätzliche EMail- oder Passwortinformation abrufbar sind, so beispielsweise auch das Bearbeiten von Terminen. Allgemein werden die Tokens überall dort eingesetzt, wo eine Eingabe von EMail und Passwort nicht dringend benötigt werden.
 
-TODO: ER-Modell aktualisieren und einfügen\\
-TODO: Entscheidung über Token Authentifizierung
+%TODO: warum lieber token als session id
 
 \section{Risiken und Probleme}
 Im Abschnitt \ref{structure} wurde bereits die Anpassung des User models erwähnt. Standardmäßig wird für das Einfügen eines neuen Benutzers ein Benutzername abgefragt. Durch die Überschreibung des User models wird jedoch für eine Registrierung neben dem Passwort nur eine EMail-Adresse verlangt. Damit dieses Verhalten korrekt übernommen wird, muss zudem eine Überschreibung des Admin models vorgenommen werden, da sonst Konflikte entstehen im Backend entstehen. Nach dieser Abänderung ist eine Neuerzeugung der Datenbank erforderlich, um die Aktualisierungen einzupflegen. Aus diesem Grund ist es zwingend ratsam derartige Anpassungen in der Entwicklungsphase vorzunehmen, um größere Migrationsprobleme oder das Risiko für den Verlust von Nutzerdaten zu vermeiden.\\

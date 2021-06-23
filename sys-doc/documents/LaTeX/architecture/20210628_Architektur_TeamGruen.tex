@@ -141,6 +141,11 @@ Für die Abspeicherung der Daten im Backend wird die relationale Datenbank SQLit
 Für die Realisierung der Web-Anwendung wird eine Microservice-Architektur unter Verwendung von Docker genutzt. Dabei wird jeweils das Frontend sowie das Backend zusammen mit der Datenbank als Container entwickelt und bereitgestellt. Mittels Docker Compose werden die Container in einem Netzwerk verbunden und können so miteinander kommunizieren. Der Vorteil hierbei ist die schnelle Adaption neuer technologischer Trends: Das System kann ohne unnötigen Aufwand durch eine entsprechende Komposition auch mit anderen Webcontainer eingesetzt werden.
 
 \subsection{Struktur}\label{structure}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.68\columnwidth]{./figures/concepts}
+	\caption{Entity-Relationship-Modell}
+\end{figure}
 \textit{Django models} repräsentieren in der Datenbank die unterschiedlichen Entitäten. Dabei wird vom Framework bereits standardmäßig ein User model bereitgestellt, was beispielsweise Attribute wie Vor- und Nachname enthält.~\cite{django-default-user} Da in MedPlanner neben der EMail-Adresse und dem Password zu jetzigem Zeitpunkt keine weiteren Informationen benötigt werden, wurde ein angepasstes User model erstellt, was auf die Anforderungen von MedPlanner abgestimmt ist.\\
 Django bietet die Möglichkeit \textit{n-n-Beziehung}\footnote{~Auch bekannt als many-to-many} zu realisieren. Vorteil hiervon ist, dass in der Datenbank diese Attribute für eine Entität bereits als Liste vorhanden sind, wodurch größere Anpassungen für die Nutzung und Darstellung im Frontend wegfallen.
 

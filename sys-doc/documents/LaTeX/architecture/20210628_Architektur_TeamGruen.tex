@@ -131,11 +131,11 @@ Im Frontend nutzt Medplanner Angular, im Backend das Framework Django in Kombina
 Wie bereits vorher genannt, wird im Frontend das Framework Angular verwendet. Es stellt einen clientseitigen MVC dar, wodurch eine bessere User Experience mit kürzeren Reaktionszeiten ermöglicht wird. Als Programmiersprache wird TypeScript genutzt, was im Gegensatz zu JavaScript eine Typisierung zulässt und somit logische Typfehler beseitigt. Ein weiterer Grund für diese Entscheidung war die Modularität und Wiederverwendbarkeit. In Angular können Komponenten erstellt und in Module gruppiert werden, die an beliebigen Stellen wiederverwertbar sind. Für einzelne Komponenten ist zudem die Testabdeckung möglich.\\
 Für das Backend fiel die Entscheidung auf Django, da es in der Programmiersprache Python implementiert wird, welche vom gesamten Team gut beherrscht wird. Außerdem bietet Django einige Features an wie beispielsweise die Benutzerauthentifizierung oder die Administration der Inhalte über ein Interface.\\
 Mithilfe des Django REST Frameworks (DRF) können APIs in Django zur Verfügung gestellt werden, um den Datenaustausch zwischen Angular und Django zu realisieren.\\
-Für die Abspeicherung der Daten im Backend wird die relationale Datenbank SQLite verwendet, da die Einrichtung unkompliziert abläuft und die Datenbank trotz geringer Größe viele Funktionalitäten bietet~\cite{sqlite}, die ebenfalls in mächtigeren SQL-Datenbank-Managementsystemen wie MySQL enthalten sind. Im Zusammenhang mit RDBMS und Django ist zu erwähnen, dass das Python-Framework die Realisierung von \textit{n-n-Beziehungen}~\footnote{~Auch bekannt als many-to-many} erlaubt. Dadurch müssen die Entiäten nicht so überarbeitet werden, dass jeweils weitere Tabellen existieren, um one-to-many-Beziehungen zu gewährleisten. Vorteil von Djangos Umsetzung ist, dass in der Datenbank diese Attribute für eine Entität bereits als Liste abgespeichert werden, wodurch größere Anpassungen für die Nutzung und Darstellung im Frontend wegfallen.
+Für die Abspeicherung der Daten im Backend wird die relationale Datenbank SQLite verwendet, da die Einrichtung unkompliziert abläuft und die Datenbank trotz geringer Größe viele Funktionalitäten bietet~\cite{sqlite}, die ebenfalls in mächtigeren SQL-Datenbank-Managementsystemen wie MySQL enthalten sind. Im Zusammenhang mit RDBMS und Django ist zu erwähnen, dass das Python-Framework die Realisierung von \textit{n-n-Beziehungen}~\footnote{~Auch bekannt als many-to-many} erlaubt. Dadurch müssen die Entitäten nicht so überarbeitet werden, dass jeweils weitere Tabellen existieren, um one-to-many-Beziehungen zu gewährleisten. Vorteil von Djangos Umsetzung ist, dass in der Datenbank diese Attribute für eine Entität bereits als Liste abgespeichert werden, wodurch größere Anpassungen für die Nutzung und Darstellung im Frontend wegfallen.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\columnwidth]{./figures/architecture_with_docker}
+	\includegraphics[width=0.9\columnwidth]{./figures/architecture_with_docker}
 	\caption{Überblick über das System}
 \end{figure}
 Für die Realisierung der Web-Anwendung wird eine Microservice-Architektur unter Verwendung von Docker genutzt. Dabei wird jeweils das Frontend sowie das Backend zusammen mit der Datenbank als Container entwickelt und bereitgestellt. Mittels Docker Compose werden die Container in einem Netzwerk verbunden und können so miteinander kommunizieren. Der Vorteil hierbei ist die schnelle Adaption neuer technologischer Trends: Das System kann ohne unnötigen Aufwand durch eine entsprechende Komposition auch mit anderen Webcontainer eingesetzt werden.
@@ -154,21 +154,22 @@ Für die Identifizierung der Benutzer wird bei MedPlanner die \textit{tokenbasie
 %TODO: warum lieber token als session id
 
 \section{Risiken und Probleme}
-Im Abschnitt \ref{structure} wurde bereits die Anpassung des User models erwähnt. Standardmäßig wird für das Einfügen eines neuen Benutzers ein Benutzername abgefragt. Durch die Überschreibung des User models wird jedoch für eine Registrierung neben dem Passwort nur eine EMail-Adresse verlangt. Damit dieses Verhalten korrekt übernommen wird, muss zudem eine Überschreibung des Admin models vorgenommen werden, da sonst Konflikte entstehen im Backend entstehen. Nach dieser Abänderung ist eine Neuerzeugung der Datenbank erforderlich, um die Aktualisierungen einzupflegen. Aus diesem Grund ist es zwingend ratsam derartige Anpassungen in der Entwicklungsphase vorzunehmen, um größere Migrationsprobleme oder das Risiko für den Verlust von Nutzerdaten zu vermeiden.\\
-TODO: Wo sind zu wenig Tests, wodurch das System vielleicht abstürzt?
-Mögliche schädliche Ereignisse, die Einfluss auf die Softwarearchitektur haben (oder hatten) (als Auflistung)
+Im Abschnitt \ref{structure} wurde bereits die Anpassung des User models erwähnt. Standardmäßig wird für das Einfügen eines neuen Benutzers ein Benutzername abgefragt. Durch die Überschreibung des User models wird jedoch für eine Registrierung neben dem Passwort nur eine EMail-Adresse verlangt. Damit dieses Verhalten korrekt übernommen wird, muss zudem eine Überschreibung des Admin models vorgenommen werden, da sonst Konflikte im Backend entstehen. Nach dieser Abänderung ist eine Neuerzeugung der Datenbank erforderlich, um die Aktualisierungen einzupflegen. Aus diesem Grund ist es zwingend ratsam derartige Anpassungen in der Entwicklungsphase vorzunehmen, um größere Migrationsprobleme oder das Risiko für den Verlust von Nutzerdaten zu vermeiden.\\
+Die erzeugte SQLite-Datei konnte bei der Versionierung im Versionsverwaltungssystem Git nicht ausgeschlossen werden. Dies hat zur Folge, dass nach jedem Commit, das die Datenbank beeinflusst, Daten verloren gehen können.\\
+Für die Erinnerungsbenachrichtungen per EMail sollte \textit{Django Crontab} genutzt werden. Obwohl die Logik korrekt implementiert war und auch der \textit{Cron Job} aktiv war, konnte die erwartete zeitbasierte Ausführung der Funktionalität mithilfe von Django Crontab nicht realisiert werden. Die Probleme könnten auch auf die Verwendung von Docker zurückgeführt werden.
+
+
+\textbf{TODO: Wo sind zu wenig Tests, wodurch das System vielleicht abstürzt?
+	Mögliche schädliche Ereignisse, die Einfluss auf die Softwarearchitektur haben (oder hatten) (als Auflistung)}
 
 \section{Fazit und Ausblick}
 Zum aktuellen Stand bietet MedPlanner ein solides Selbstmanagement-Tool für die Verwaltung von Arztterminen sowie Kontaktinformationen für Arztpraxen. Es ist zudem möglich, direkt eine EMail-Benachrichtigung zu erhalten, sobald ein Patient einen neuen Termin bei MedPlanner erstellt.\\
 Für die Zukunft kann diese Benachrichtigungs-Funktionalität so erweitert werden, dass eine Benachrichtigung 24 Stunden vor Terminstart gesendet wird.\\
 Außerdem ist denkbar, dass sich Patienten neben geplanten Terminen in Zukunft auch Reminder in einer bestimmten Erinnerungs-Periode setzen zu können, um an das Vereinbaren eines Termins für Routineuntersuchungen erinnert zu werden.\\
-In zukünftigen Versionen könnte MedPlanner auch so ausgebaut werden, dass Patienten neben der Terminverwaltung auch ihre Arztbefunde sicher abspeichern können, um somit alle gesundheitlichen Angelegenheiten kompakt in einer Web-Anwendung strukturieren zu können.
-
-
-Welche optionalen Features sind noch zu realisieren? Wie könnte das System zukünftig weiter ausgebaut werden? (z.B für Ärzte)
-
-
-
+Zusätzlich könnten Termine neben der aktuellen Darstellung auch als Kalender-Einträge visualisiert werden. Somit hätte jeder Patient individuell die Möglichkeit seine bevorzugte Darstellung zu bestimmen.\\ 
+So wäre es ebenfalls möglich, bei einer EMail-Benachrichtigung eine Eintragung der Termine in eine externe Kalender-App, wie z.B. Google Kalender, bereitzustellen.\\
+In zukünftigen Versionen könnte MedPlanner auch so ausgebaut werden, dass Patienten neben der Terminverwaltung auch ihre Arztbefunde sicher abspeichern können, um somit alle gesundheitlichen Angelegenheiten kompakt in einer Web-Anwendung strukturieren zu können.\\
+Diese Entscheidungen sollten jedoch nicht ausschließlich von den Entwicklern selbst getroffen werden. Mithilfe von Umfragen, ähnlich der Methode des User-Centered-Designs~\footnote{Hierbei werden die späteren Benutzer von Anfang an einbezogen, wodurch Inhalt und Design des Endprodukts massgeblich den Bedürfnissen und Erwartungen der Benutzer gesteuert wird.}, können die gewünschten Erweiterungen erfasst werden.
 
 \begin{thebibliography}{00}
 \bibitem{sqlite} \url{https://sqlite.org/features.html}

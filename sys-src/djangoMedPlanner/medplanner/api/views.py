@@ -69,14 +69,13 @@ def doctor_delete(request, pk):
     doctor.delete()
     return Response(status=status.HTTP_200_OK)
 
-# Appointment
-
 
 @api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def appointment_list(request):
     try:
-        appointments = Appointment.objects.all()
+        user_id = request.user.id
+        appointments = Appointment.objects.filter(user_id=user_id)
     except Appointment.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -134,7 +133,7 @@ def appointment_delete(request, pk):
     appointment.delete()
     return Response(status=status.HTTP_200_OK)
 
-#________________________________________________________________________
+
 @api_view(['DELETE'])
 @permission_classes((IsAuthenticated, ))
 def tag_delete(request, pk):
@@ -145,6 +144,7 @@ def tag_delete(request, pk):
 
     tag.delete()
     return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
@@ -160,6 +160,7 @@ def tag_update(request, pk):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
@@ -183,6 +184,7 @@ def tag_list(request):
     serializer = TagSerializer(tags, many=True)
     return Response(serializer.data)
 
+
 @api_view(['DELETE'])
 @permission_classes((IsAuthenticated, ))
 def surgery_delete(request, pk):
@@ -193,6 +195,7 @@ def surgery_delete(request, pk):
 
     surgery.delete()
     return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
@@ -209,6 +212,7 @@ def surgery_update(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def surgery_create(request):
@@ -219,16 +223,18 @@ def surgery_create(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(data={'id': surgery.id}, status=status.HTTP_201_CREATED)
 
+
 @api_view(['READ'])
 @permission_classes((IsAuthenticated, ))
 def surgery_list(request):
     try:
-        surgerys = Surgery.objects.all()
+        surgeries = Surgery.objects.all()
     except Surgery.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = SurgerySerializer(surgerys, many=True)
+    serializer = SurgerySerializer(surgeries, many=True)
     return Response(serializer.data)
+
 
 @api_view(['READ'])
 @permission_classes((IsAuthenticated, ))

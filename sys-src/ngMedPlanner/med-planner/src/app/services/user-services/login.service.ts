@@ -75,7 +75,7 @@ export class LoginService implements Login {
 
         if (response.status === HttpService.HTTP_200_OK) {
             this.storeToken(response.token);
-            this.storeToken(response.id.toString());
+            this.storeUserId(response.id);
             return LoginResult.LOGIN_SUCCESFULL;
         }
 

@@ -144,6 +144,7 @@ def appointment_create(request):
     """
     Returns new appointment object
     """
+    print(request.data)
     serializer = AppointmentSerializer(data=request.data)
     if serializer.is_valid():
         appointment = serializer.save()

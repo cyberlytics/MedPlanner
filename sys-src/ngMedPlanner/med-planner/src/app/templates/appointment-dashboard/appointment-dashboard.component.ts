@@ -31,8 +31,8 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
   ) {
     this._appointments = new Array<AppointmentModel>();
 
-    headerState.setHeaderTitle('Hallo Maximilian!');
-    headerState.setHeaderSubTitle('');
+    headerState.setHeaderTitle('Willkommen!');
+    headerState.setHeaderSubTitle('Deine anstehenden Termine:');
   }
 
   ngOnInit(): void {

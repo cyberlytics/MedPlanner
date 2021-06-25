@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'login', component: AppLoginComponent },
   { path: 'appointment-dashboard', component: AppointmentDashboardComponent },
   { path: 'signup', component: AppSignInComponent },
-  //JUST TEMPORARY UNTIL CONNECTION TO APPOINTMENT_DAHSBOARD WORKS
   { path: 'doctor-dashboard', component: DoctorDashboardComponent }
 ];
 

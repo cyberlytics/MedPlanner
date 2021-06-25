@@ -53,7 +53,7 @@ export class DoctorCardComponent implements OnInit {
   
   } 
 
-
+  
   constructor(
     private dialog: MatDialog,
     ) {};

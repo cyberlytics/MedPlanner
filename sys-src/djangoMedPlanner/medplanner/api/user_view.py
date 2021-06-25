@@ -13,22 +13,21 @@ def login(request):
     """
     Login of an existing user
     """
-    email = request.POST.get('email')
-    password = request.POST.get('password')
+    email = request.data.get('email')
+    password = request.data.get('password')
     try:
         login_user = User.objects.get(email=email)
     except:
-        return Response(status=status.HTTP_404_NOT_FOUND, data={"message": f"User '{email}' not found"})
+        return Response(data={"message": f"User '{email}' not found", "status": status.HTTP_404_NOT_FOUND})
 
     check = login_user.check_password(password)
     if (check is True) & login_user.is_active:
         user = auth.authenticate(username=email, password=password)
         auth.login(request, user)
         new_token, created = Token.objects.get_or_create(user=user)
-        return Response(status=status.HTTP_200_OK, data={"token": str(new_token), "email": f"{email}"})
+        return Response(data={"token": str(new_token), "email": f"{email}",  "status": status.HTTP_200_OK})
     else:
-        return Response(status=status.HTTP_403_FORBIDDEN,
-                        data={"message": f"Wrong password for User '{email}' or not activated"})
+        return Response(data={"message": f"Wrong password for User '{email}' or not activated", "status": status.HTTP_403_FORBIDDEN})
 
 
 # @login_required
@@ -44,11 +43,11 @@ def logout(request):
     try:
         logout_user = request.user
     except:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(data={"message": f"Can not find user", "status": status.HTTP_404_NOT_FOUND})
 
     auth.logout(request)
     logout_user.auth_token.delete()
-    return Response(status=status.HTTP_200_OK, data={"message": f"User is logged out {logout_user.email}"})
+    return Response(data={"message": f"User is logged out {logout_user.email}", "status": status.HTTP_200_OK})
 
 
 @api_view(['POST'])
@@ -56,22 +55,20 @@ def create_user(request):
     """
     Registration of a new user.
     """
-    email = request.POST.get('email')
-    password = request.POST.get('password')
+    email = request.data.get('email')
+    password = request.data.get('password')
     try:
         user = User.objects.get(email=email)
         if user is not None:
-            return Response(status=status.HTTP_403_FORBIDDEN,
-                            data={"message": f"User with email '{email}' is already existing"})
+            return Response(data={"message": f"User with email '{email}' is already existing", "status": status.HTTP_403_FORBIDDEN})
     except:
         try:
             new_user = User.objects.create_user(email, password)
             new_user.save()
         except:
-            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(data={"message": f"Can not create user", "status": status.HTTP_500_INTERNAL_SERVER_ERROR})
 
-    return Response(status=status.HTTP_200_OK,
-                    data={"message": f"User account for '{email}' is created"})
+    return Response(data={"message": f"User account for '{email}' is created", "status": status.HTTP_200_OK})
 
 
 # @login_required

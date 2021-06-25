@@ -10,8 +10,8 @@ export abstract class AppointmentDialog {
         return this.appointment.city;
     }
 
-    get postcode(): string | undefined {
-        return this.appointment.postcode;
+    get zipcode(): string | undefined {
+        return this.appointment.zipcode;
     }
 
     get address(): string | undefined {
@@ -40,6 +40,10 @@ export abstract class AppointmentDialog {
 
     get note(): string | undefined {
         return this.appointment.note;
+    }
+
+    get id(): number | -1 {
+        return this.appointment.id;
     }
 
     constructor(protected appointment: AppointmentModel) {}

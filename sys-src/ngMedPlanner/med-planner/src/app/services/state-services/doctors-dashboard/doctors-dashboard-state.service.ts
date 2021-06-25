@@ -24,7 +24,7 @@ export class DoctorsDashboardStateService extends BaseStateService<DoctorModel> 
         const doctorsData = await this.doctorsData.getData();
 
         for (const doctorData of doctorsData.doctors) {
-            this.addData(
+            this.addModel(
                 new DoctorModel(
                     {
                         id: doctorData.id,

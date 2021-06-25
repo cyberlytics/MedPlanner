@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-extensions/password-strength": "^8.2.1",
     "@angular/animations": "~11.0.0",
     "@angular/cdk": "^11.2.12",
     "@angular/common": "~11.0.0",
@@ -21,9 +22,7 @@
     "@angular/platform-browser": "~11.0.0",
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
-    "@types/jquery": "^3.5.5",
     "exit": "^0.1.2",
-    "jquery": "^3.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

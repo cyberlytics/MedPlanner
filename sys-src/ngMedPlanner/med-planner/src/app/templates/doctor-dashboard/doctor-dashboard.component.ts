@@ -38,5 +38,5 @@ export class DoctorDashboardComponent implements OnInit {
     const doctors = await this.doctorssState.getStateData();
     this._doctors = this.doctorssState.sortDoctorsAlphabetically(doctors);
   }
-  
+
 }

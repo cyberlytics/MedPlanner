@@ -1,11 +1,16 @@
-<div class="dialog-header-block">
-    
+
+<div class="dialog-header-block" [ngStyle]="{'background-color': docColor}">
+ 
     <h2 class="bold-font dialog-title">Dr. {{firstname}} {{surname}}</h2>
+    <div class ="specWrapper">
+        <span *ngFor ="let specialization of specializations; let first = first;" [class.specfirst]="first"  class="specialization"> {{specialization?.description}} </span>
+    </div>
+    
 </div>
 
 <mat-dialog-content class="dialog-content-block">
    
-    <div class="dialog-info-row">
+    <div class="dialog-info-row" >
         <div class="title">
             <span>Adresse</span>
         </div>
@@ -22,7 +27,7 @@
         </div>
         <div class="info regular-font">
             <span >Rufnummer: {{telephone}}</span><br>
-            <span> Website:    
+            <span > Website:    
                 <a href="{{website}}"> {{website}} </a>
             </span>
         </div>

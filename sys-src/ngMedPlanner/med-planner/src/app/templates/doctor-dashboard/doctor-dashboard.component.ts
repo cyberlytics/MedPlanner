@@ -22,8 +22,8 @@ export class DoctorDashboardComponent implements OnInit {
   ) {
     this._doctors = new Array<DoctorModel>();
 
-    headerState.setHeaderTitle('Hallo Maximilian!');
-    headerState.setHeaderSubTitle('');
+    headerState.setHeaderTitle('Willkommen!');
+    headerState.setHeaderSubTitle('Deine Ärzte auf einen Blick:');
    }
 
   ngOnInit(): void {

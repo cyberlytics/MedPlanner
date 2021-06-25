@@ -14,6 +14,11 @@ export abstract class DoctorDialog {
         
       } 
 
+      get specialization(): string | null| undefined{
+        return this.doctor?.specialization;
+        
+      } 
+
       get location(): string | undefined{
         return this.doctor?.surgery?.city;
       
@@ -22,6 +27,15 @@ export abstract class DoctorDialog {
       get zipcode(): string | undefined{
         return this.doctor?.surgery?.zipcode;
     
+      } 
+
+      get docColor(): string | null | undefined{
+        return this.doctor?.specializationColor;
+      } 
+
+      get specializations() : Array<SpecializationModel | null> | null {
+
+          return this.doctor?.specializations;
       } 
     
       get address(): string | undefined{

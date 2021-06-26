@@ -140,7 +140,7 @@ Für die Realisierung der Web-Anwendung wird eine containerbasierte Architektur 
 \subsection{Struktur}\label{structure}
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.8\columnwidth]{./figures/concepts}
+	\includegraphics[width=0.9\columnwidth]{./figures/concepts}
 	\caption{Datenbankmodell für MedPlanner}
 \end{figure}
 \textit{Django models} repräsentieren in der Datenbank die unterschiedlichen Entitäten. Dabei wird vom Framework bereits standardmäßig ein User model bereitgestellt, was beispielsweise Attribute wie Vor- und Nachname enthält.~\cite{django-default-user} Da in MedPlanner neben der EMail-Adresse und dem Password zum jetzigen Zeitpunkt keine weiteren Informationen benötigt werden, wurde ein angepasstes User model erstellt, was auf die Anforderungen von MedPlanner abgestimmt ist.

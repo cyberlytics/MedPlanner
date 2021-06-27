@@ -1,0 +1,103 @@
+@import 'src/colors.scss';
+@import 'src/styles.scss';
+
+
+.dialog-header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 1.5em;
+
+    overflow: hidden;
+    padding-bottom: 0;
+
+    margin: -24px;
+    padding: 30px;
+}
+
+.dialog-title {
+    font-size: 1.6em;
+    margin-top: .5em;
+    margin-bottom: 0em;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.specialization{
+    font-size: 1em;
+    margin-bottom: .5em;
+    margin-left: 1.1em;
+} 
+
+.specfirst{
+    font-size: 1em;
+    margin-bottom: .5em;
+    margin-left: 0em;
+} 
+
+.specWrapper{
+    display: flex;
+    flex-direction: row;
+    color: rgba(0, 0, 0, 0.87);
+} 
+
+
+.dialog-content-block {
+    border-radius: ($shape-border-radius * .8) ($shape-border-radius * .8) 0 0;
+
+    background-color: white;
+    color: rgba($color: map-get($contrast-colors, primary), $alpha: .8);
+
+    padding: 24px;
+}
+
+.dialog-content-block::-webkit-scrollbar { width: 0 !important }
+
+.dialog-info-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    margin-top: 1.5em;
+}
+
+.dialog-info-row .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.3em;
+}
+
+.dialog-info-row .title button {
+    margin-left: .5em;
+}
+
+.dialog-info-row .title button mat-icon {
+    transform: scale(.9);
+}
+
+.dialog-info-row .info {
+    margin-top: .5em;
+    font-size: 1.1em;
+}
+
+.dialog-info-row .info span {
+    margin-right: 1em;
+}
+
+.dialog-buttons-block {
+    margin-top: 2em;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    width: 100%;
+
+    color: rgba($color: map-get($contrast-colors, primary), $alpha: 1);
+}
+

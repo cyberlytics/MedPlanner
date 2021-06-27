@@ -13,6 +13,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         model = Appointment
         fields = '__all__'
 
+
 class SpecializationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Specialization

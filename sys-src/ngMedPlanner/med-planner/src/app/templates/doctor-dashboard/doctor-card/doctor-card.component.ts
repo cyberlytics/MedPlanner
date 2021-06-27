@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { DoctorDetailViewComponent } from 'src/app/templates/doctor-dashboard/doctor-card/dialogs/doctor-detail-view/doctor-detail-view.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -11,9 +11,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class DoctorCardComponent implements OnInit {
 
-
-  ngOnInit(): void {
-  }
+  private _doctor: DoctorModel | null = null;
 
   @Input() set doctor(value: DoctorModel | null) {
     this._doctor = value;
@@ -22,41 +20,34 @@ export class DoctorCardComponent implements OnInit {
   get doctor(): DoctorModel | null {
     return this._doctor;
   }
-  private _doctor: DoctorModel | null = null;
 
   get doctorName(): string | undefined{
     return this._doctor?.surname;
-    
-  } 
+  }
 
   get location(): string | undefined{
     return this._doctor?.surgery?.city;
-  
-  } 
+  }
 
   get zipcode(): string | undefined{
     return this._doctor?.surgery?.zipcode;
-  } 
+  }
 
   get address(): string | undefined{
     return this._doctor?.surgery?.address;
- 
-  } 
+  }
 
   get telephone(): string | undefined{
     return this._doctor?.surgery?.telephoneNumber;
-
-  } 
+  }
 
   get website(): string | undefined{
     return this._doctor?.surgery?.website;
-  
-  } 
+  }
 
-  
-  constructor(
-    private dialog: MatDialog,
-    ) {};
+  constructor(private dialog: MatDialog) {}
+
+  ngOnInit(): void {}
 
   public async onDetailsButtonClick(): Promise<void> {
     const dialogRef = this.dialog.open<DoctorDetailViewComponent, any, MatDialogRef<DoctorDetailViewComponent>>(

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AppHeaderStateService } from 'src/app/services/state-services/app-header-state.service';
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { DoctorsDashboardStateService } from 'src/app/services/state-services/doctors-dashboard/doctors-dashboard-state.service';

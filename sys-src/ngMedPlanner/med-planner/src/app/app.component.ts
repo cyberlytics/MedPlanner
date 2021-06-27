@@ -5,6 +5,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { AppStateService, Dashbord } from './services/state-services/app-state.service';
 import { Subscription } from 'rxjs';
 import { AppHeaderStateService, DrawerAction } from './services/state-services/app-header-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private appState: AppStateService,
     private appHeaderState: AppHeaderStateService,
     private userState: UserStateService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private router: Router
   ) {
     this.routerBlockDiv = new ElementRef(null);
     this.userState.checkLogin();
@@ -82,7 +84,16 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private onDashboardSwitch(dashboard: Dashbord): void {
-    // TODO
+    switch (dashboard) {
+      case Dashbord.APPOINTMENTS: {
+        this.router.navigate(['appointment-dashboard']);
+        return;
+      }
+      case Dashbord.DOCTORS: {
+        this.router.navigate(['doctor-dashboard']);
+        return;
+      }
+    }
   }
 
   private onDrawerAction(action: DrawerAction): void {

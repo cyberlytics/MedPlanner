@@ -6,15 +6,9 @@
 
     <!-- Switcher between Appointments/Doctors -->
     <button mat-icon-button (click)="switchAppointmentDoctors()">
-        <mat-icon svgIcon="doctors-menu" class="doctors-menu-icon"></mat-icon>
+        <mat-icon [svgIcon]="getIcon" class="doctors-menu-icon"></mat-icon>
     </button>
 
-
-    <!--DELETE BUTTON; JUST TEMPORARY UNTIL CONNECTION TO APPOINTMENT_DAHSBOARD WORKS-->
-    <button mat-icon-button (click)="docDashboard()">
-        <mat-icon> contacts</mat-icon>
-    </button>
-    <!----------------------DELETE BUTTON--> 
 
 
 

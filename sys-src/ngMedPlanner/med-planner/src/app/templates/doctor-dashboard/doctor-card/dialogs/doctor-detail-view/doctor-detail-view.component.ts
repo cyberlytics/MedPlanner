@@ -15,13 +15,11 @@ export class DoctorDetailViewComponent extends DoctorDialog implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<DoctorDetailViewComponent, MatDialogRef<DoctorDetailViewComponent>>,
     @Inject(MAT_DIALOG_DATA) doctor: DoctorModel,
-  ) { 
+  ) {
     super(doctor);
   }
 
-  
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public closeDialog(editDialogRef?: MatDialogRef<DoctorDetailViewComponent>): void {
     this.dialogRef.close(editDialogRef);

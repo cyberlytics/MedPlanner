@@ -27,6 +27,7 @@ import { FilterCitiesComponent } from './templates/filter/filter-appointments/fi
 import { FilterPeriodComponent } from './templates/filter/filter-appointments/filter-period/filter-period.component';
 import { FilterTagsComponent } from './templates/filter/filter-appointments/filter-tags/filter-tags.component';
 import { AppointmentEditViewComponent } from './templates/appointment-dashboard/appointment-card/dialogs/appointment-edit-view/appointment-edit-view.component';
+import { DoctorDetailViewComponent } from './templates/doctor-dashboard/doctor-card/dialogs/doctor-detail-view/doctor-detail-view.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AppointmentEditViewComponent } from './templates/appointment-dashboard/
     FilterCitiesComponent,
     FilterPeriodComponent,
     FilterTagsComponent,
-    AppointmentEditViewComponent
+    AppointmentEditViewComponent,
+    DoctorDetailViewComponent
   ],
   imports: [
     BrowserModule,

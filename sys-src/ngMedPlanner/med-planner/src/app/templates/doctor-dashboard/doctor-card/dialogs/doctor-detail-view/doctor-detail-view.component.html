@@ -1,0 +1,52 @@
+
+<div class="dialog-header-block" [ngStyle]="{'background-color': docColor}">
+ 
+    <h2 class="bold-font dialog-title">Dr. {{firstname}} {{surname}}</h2>
+    <div class ="specWrapper">
+        <span *ngFor ="let specialization of specializations; let first = first;" 
+            [class.specfirst]="first"  class="specialization"> {{specialization?.description}} </span>
+    </div>
+    
+</div>
+
+<mat-dialog-content class="dialog-content-block">
+   
+    <div class="dialog-info-row" >
+        <div class="title">
+            <span>Adresse</span>
+        </div>
+        <div class="info regular-font">
+            <span>{{address}},</span>
+            <span>{{zipcode}}</span>
+            <span>{{location}}</span>
+        </div>
+    </div>
+    
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Kontaktdaten</span>
+        </div>
+        <div class="info regular-font">
+            <span >Rufnummer: {{telephone}}</span><br>
+            <span > Website:    
+                <a href="{{website}}"> {{website}} </a>
+            </span>
+        </div>
+    </div>
+
+    <div class="dialog-info-row">
+        <div class="title">
+            <span>Notizen</span>
+        </div>
+        <div class="info regular-font">
+            <span *ngIf="note" class="italic-font">{{note}}</span>
+            <span *ngIf="!note" class="italic-font">keine</span>
+        </div>
+    </div>
+
+    <div class="dialog-buttons-block">
+        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()">Ok</button>
+    </div>
+</mat-dialog-content>
+
+

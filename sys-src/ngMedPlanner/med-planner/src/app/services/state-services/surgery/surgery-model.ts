@@ -18,7 +18,7 @@ export class SurgeryModel {
     get zipcode(): string {
         return this.data.cityModel.zipcode;
     }
-
+   
     get address(): string {
         return this.data.address;
     }

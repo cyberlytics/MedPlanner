@@ -75,6 +75,7 @@ class Surgery(models.Model):
     description = models.CharField(max_length=100, blank=True)
     telephone_num = models.CharField(max_length=100)
     website = models.CharField(max_length=100, blank=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.address + ', ' + self.zipcode + ' ' + self.city
@@ -83,6 +84,7 @@ class Surgery(models.Model):
 class Doctor(models.Model):
     first_name = models.CharField(max_length=100, blank=True)
     surname = models.CharField(max_length=100)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     specializations = models.ManyToManyField(Specialization, blank=True)
     surgery_id = models.ForeignKey(Surgery, on_delete=models.CASCADE, related_name='surgery', default='', null=True,
                                    blank=True)
@@ -94,6 +96,7 @@ class Doctor(models.Model):
 class Tag(models.Model):
     description = models.CharField(max_length=100)
     color = models.CharField(max_length=100)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class Appointment(models.Model):

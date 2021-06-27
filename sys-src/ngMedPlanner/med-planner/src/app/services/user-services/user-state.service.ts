@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { HttpService } from '../http-service/http.service';
 import { LoginResult, LoginService, Login } from './login.service';
 
 @Injectable({
@@ -15,6 +14,9 @@ export class UserStateService implements Login {
     }
     private _userEmail: string | null = null;
 
+    get userId(): number | null {
+        return this.loginService.userId;
+    }
     get token(): string | null {
         return this.loginService.token;
     }

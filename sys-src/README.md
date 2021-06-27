@@ -1,22 +1,37 @@
-### Start project
-1. To start the project run `docker-compose up`
-2. If ng-image is already created, the step 1. can occur a problem (container conflicts). In that situation run `docker system prune`
-to remove all unused containers, images and volumes.
-3. Run again `docker-compose up`.
-4. That command creates images for Angular(frontend) and Django(backend) projects and for Postgres DB (already not used), installs 
-necessary libs and creates containers for the same projects. 
-4. When all containers are running, open Angular as `localhost:4220` and Django as `localhost:8000` in a browser.
+# Anleitung für Build und Run
 
-### Stop project
-1. In the terminal run `Strg+C`
-2. Run `exit`
+## Starten des Projekts
+1. In diesem Ordner `docker-compose-up`ausführen <br>
+&rightarrow;
+Auf diese Weise werden jeweils für Frontend(ngMedPlanner) und Backend (djangoMedPlanner) zusammen mit der Datenbank Images erzeugt, wichtige Bibliotheken installiert und Container gestartet.
 
-### Useful commands
-1. Show all existing images: `docker image ls`
-2. Remove an image: `docker image rm imade-id` (to get the image name, run `docker image ls` and find the image in the table)
-3. Show all existing containers: `docker container ls`
-4. Remove a container: `docker container rm container-id`
+2. Sofern das ng-image bereits existiert, kann in 1. ein Fehler aufgrund von Container-Konflikten entstehen. Mithilfe von `docker system prune`werden alle ungenutzen Container, Images und Volumes. Schritt 1 wiederholen.
+
+3. Wenn beide Container laufen (Im Terminal ersichtlich durch: Compiled Successfully) können die beiden Komponenten folgendermaßen im Browser aufgerufen werden:
+    * Angular: https://localhost:4220 
+    * Django: https://localhost:8000
+
+## Stoppen des Projekts
+1. Die Ausführung von Docker Compose mit `Strg+C` beenden.
+2. Ausführen von `exit`.
+
+
+TODO: nochmal allgemeine Installation von Docker erklären
+TODO: die Skripte für das setup von ngMedPlanner hier erwähnen und deren setup
+TODO: hier auch das Zeugs für Django config erklären sowie das anlegen eines superusers
+## Wichtige Befehle
+1. Anzeigen der existierenden Images: `docker image ls`
+2. Image entfernen: `docker image rm <imade-id>` <br>
+&rightarrow; Erhalten von Image-ID durch `docker image ls`
+3. Anzeigen der existierenden Container: `docker container ls`
+4. Container entfernen: `docker container rm container-id`
 
 ####
 1. More info about Django: https://docs.djangoproject.com/en/3.2/intro/tutorial01/ , https://medium.com/shot-code/running-django-postgresql-containers-and-persisting-data-with-docker-4dd8e4dd5361
 2. More info about Docker: https://docs.docker.com/samples/django/
+
+
+### Verwendete Versionen
+* Angular: 11.0.1
+
+TODO: Django und Python

@@ -23,7 +23,7 @@ export class DoctorsDashboardStateService extends BaseStateService<DoctorModel> 
     protected async initStateData(): Promise<void> {
         const doctorsData = await this.doctorsData.getData();
 
-        for (const doctorData of doctorsData.doctors) {
+        for (const doctorData of doctorsData) {
             this.addModel(
                 new DoctorModel(
                     {

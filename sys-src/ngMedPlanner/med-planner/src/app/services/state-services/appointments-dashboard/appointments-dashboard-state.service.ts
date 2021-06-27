@@ -37,7 +37,7 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
             {
                 title: appointment.title,
                 doc_id: appointment.doctor?.id,
-                user_id: 1,
+                user_id: this.userState.userId as number,
                 datetime: appointment.dateISOString,
                 priority: appointment.priority,
                 tags: []
@@ -111,7 +111,7 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
                 title: appointment.title,
                 doc_id: appointment.doctor?.id,
                 datetime: appointment.dateISOString,
-                user_id: 1,
+                user_id: this.userState.userId as number,
                 note: appointment.note,
                 tags: []
             },

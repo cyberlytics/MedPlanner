@@ -1,0 +1,165 @@
+.main-block {
+    margin-top: 1em;
+}
+
+.card-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 90%;
+
+    padding: 1em;
+}
+
+.docCardbody{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: 
+    center;
+} 
+
+.docCardvalues{
+    height: 100%;
+} 
+
+.detail-button {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-top: 0.5em;
+}
+
+.detail-button button {
+    position: relative;
+}
+
+.doctornameblock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 95%;
+} 
+
+.doctornameblock span {
+    margin-left: 0.5em;
+    font-size: 1.3em;
+}
+
+#doctor-discipline{
+    font-size: 0.9em;
+} 
+
+.doctoraddress {
+    margin-top: 1em;
+    margin-left: 0.7em;
+    font-size: 1em;
+    flex-direction: column;
+    display: flex;
+} 
+
+.doctoraddress span{
+    margin-left: 1em;
+    font-size: 1em;
+}
+
+//if span has no content fill with zero width space character
+span:before {
+    content: "\00a0"; // unicode zero width space character
+  }
+
+.doctelephone{
+    margin-top: 1em;
+    margin-left: 0.7em;
+    font-size: 1em;
+    flex-direction: column;
+} 
+
+.doctelephone span{
+    margin-top: 1em;
+    margin-left: 1em;
+    font-size: 1em;
+} 
+
+
+.website {
+   
+    margin-left: 0.7em;
+    font-size: 1em;
+    flex-direction: column;
+} 
+
+.website span{
+    margin-left: 1em;
+    font-size: 1em;
+} 
+
+#webseite{
+    font-size: 0.8em;
+}  
+
+@media screen and (max-width: 576px) {
+    .main-block {
+        width: 20em;
+    }
+
+    .detail-button button {
+        bottom: 2em;
+        right: -2em;
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media screen and (min-width: 576px) {
+    .main-block {
+        width: 25em;
+    }
+
+    .detail-button button {
+        bottom: 2em;
+        right: -2em;
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media screen and  (min-width: 768px) {
+    .main-block {
+        width: 30em;
+    }
+
+    .detail-button button {
+        bottom: 2em;
+        right: -1.5em;
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media screen and  (min-width: 992px) {
+    .main-block {
+        width: 35em;
+    }
+
+    .detail-button button {
+        bottom: 2em;
+        right: -1em;
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media screen and  (min-width: 1200px) {
+    .main-block {
+        width: 40em;
+    }
+
+    .detail-button button {
+        bottom: 2em;
+        right: -0.6em;
+    }
+}

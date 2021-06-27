@@ -28,7 +28,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         super(userState);
     }
 
-    public async addNewAppointment(appointment: AppointmentModel): Promise<CreateAppontmentResult> {
+    public async addNewAppointment(
+        appointment: AppointmentModel,
+        sendEmail = false
+    ): Promise<CreateAppontmentResult> {
         const result = await this.httpService.postMessage<{ id: number | undefined }, CreateAppointmentRequestData>(
             HttpService.APPOINTMENT_CREATE,
             {
@@ -55,8 +58,16 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         });
         this.addModel(appointment);
 
+        if (sendEmail) {
+
+        }
         return CreateAppontmentResult.CREATED;
     }
+
+  /*   private requireSendEmail(): Promise<void> {
+
+        return;
+    } */
 
     protected async initStateData(): Promise<void> {
         const appointmentsData = await this.appointmentsData.getData();

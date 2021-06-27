@@ -65,6 +65,8 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   }
   private _doctors: Array<DoctorModel>;
 
+  public cheched: boolean = false;
+
   constructor(
     private dialogRef: MatDialogRef<AppointmentEditViewComponent, EditingResult>,
     @Inject(MAT_DIALOG_DATA) appointment: AppointmentModel,

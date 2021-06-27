@@ -12,7 +12,7 @@ export abstract class DataServiceBasic<T> {
         {
             requestURL: string
         },
-        userState: UserStateService
+        private userState: UserStateService
     ) {
         userState.setOnLogoutListener( () => {
             this.onLogout();
@@ -28,7 +28,7 @@ export abstract class DataServiceBasic<T> {
     }
 
     private async loadDataFromServer(): Promise<T> {
-        return this.httpService.requestData<T>(this.data.requestURL);
+        return this.httpService.getData<T>(this.data.requestURL, this.userState.token);
     }
 
     private onLogout(): void {

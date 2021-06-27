@@ -5,6 +5,7 @@ import { AppointmentDialog } from '../appointment-dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { DoctorsDashboardStateService } from 'src/app/services/state-services/doctors-dashboard/doctors-dashboard-state.service';
+import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 
 @Component({
   selector: 'app-appointment-edit-view',
@@ -65,9 +66,10 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   private _doctors: Array<DoctorModel>;
 
   constructor(
-    private dialogRef: MatDialogRef<AppointmentEditViewComponent>,
+    private dialogRef: MatDialogRef<AppointmentEditViewComponent, EditingResult>,
     @Inject(MAT_DIALOG_DATA) appointment: AppointmentModel,
-    private doctorsState: DoctorsDashboardStateService
+    private doctorsState: DoctorsDashboardStateService,
+    private appointmentState: AppointmentsDashboardStateService
   ) {
     super(appointment);
 
@@ -117,8 +119,7 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   }
 
   public saveChanges(): void {
-
-    this.appointment.updateAppointment({
+    this.appointment.update({
       priority: this.getPriorityFromSelector(),
       title: this._titleFormControl.value,
       doctor: this._doctorsFormControl.value,
@@ -126,11 +127,27 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
       note: this._notesFormControl.value
     });
 
-    this.closeDialog();
+    this.closeDialog({
+      buttonClicked: ButtonClicked.SAVE,
+      appointmentToSave: this.appointment
+    });
   }
 
-  public closeDialog(): void {
-    this.dialogRef.close();
+  public deleteAppointment(): void {
+    this.appointment.delete();
+    this.closeDialog({
+      buttonClicked: ButtonClicked.REMOVE
+    });
+  }
+
+  public cancelEditing(): void {
+    this.closeDialog({
+      buttonClicked: ButtonClicked.CANCEL
+    });
+  }
+
+  public closeDialog(result: EditingResult): void {
+    this.dialogRef.close(result);
   }
 
   private getDate(): Date {
@@ -141,4 +158,15 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
     return date;
   }
 
+}
+
+export interface EditingResult {
+  buttonClicked: ButtonClicked;
+  appointmentToSave?: AppointmentModel;
+}
+
+export enum ButtonClicked {
+  SAVE = 'save',
+  CANCEL = 'cancel',
+  REMOVE = 'remove'
 }

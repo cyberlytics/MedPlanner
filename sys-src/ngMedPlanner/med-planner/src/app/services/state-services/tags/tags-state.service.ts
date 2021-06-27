@@ -44,7 +44,7 @@ export class TagsStateService extends BaseStateService<TagModel> {
         const tagsData = await this.tagsDataService.getData();
 
         for (const tagData of tagsData.tags) {
-            this.addData(
+            this.addModel(
                 new TagModel(
                     {
                         id: tagData.id,

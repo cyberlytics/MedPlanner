@@ -2,7 +2,11 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 import {MatDialog} from '@angular/material/dialog';
 import { AppointmentDetailViewComponent } from './dialogs/appointment-detail-view/appointment-detail-view.component';
-import { AppointmentEditViewComponent } from './dialogs/appointment-edit-view/appointment-edit-view.component';
+import {
+  AppointmentEditViewComponent,
+  ButtonClicked,
+  EditingResult
+} from './dialogs/appointment-edit-view/appointment-edit-view.component';
 import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
@@ -50,18 +54,20 @@ export class AppointmentCardComponent implements OnInit {
   ngOnInit(): void {}
 
   public async onDetailsButtonClick(): Promise<void> {
-    const dialogRef = this.dialog.open<AppointmentDetailViewComponent, any, MatDialogRef<AppointmentEditViewComponent>>(
-      AppointmentDetailViewComponent,
-      {
-        maxHeight: '95vh',
-        maxWidth: '95vw',
-        width: '40em',
-        height: 'auto',
-        data: this._appointment,
-        autoFocus: false,
-        panelClass: 'appointment-dialog',
-        disableClose: true
-      }
+    const dialogRef =
+      this.dialog.open<AppointmentDetailViewComponent, any, MatDialogRef<AppointmentEditViewComponent, EditingResult>>
+    (
+        AppointmentDetailViewComponent,
+        {
+          maxHeight: '95vh',
+          maxWidth: '95vw',
+          width: '40em',
+          height: 'auto',
+          data: this._appointment,
+          autoFocus: false,
+          panelClass: 'appointment-dialog',
+          disableClose: true
+        }
     );
 
     // wait for closing of appointment dialog
@@ -71,7 +77,10 @@ export class AppointmentCardComponent implements OnInit {
       return;
     }
     // wait for closing of editing dialog
-    await closeDetailResult.afterClosed().toPromise();
+    const closeEditResult = await closeDetailResult.afterClosed().toPromise();
+    if (closeEditResult?.buttonClicked === ButtonClicked.REMOVE) {
+      return;
+    }
     // reopen appointment detail dialog
     this.onDetailsButtonClick();
   }

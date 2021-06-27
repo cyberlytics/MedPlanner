@@ -104,6 +104,8 @@ export class MaterialModule {
   public static readonly ICON_PRI_LOW: string = 'priority-low';
 
   public static readonly ICON_DOCTORS_MENU: string = 'doctors-menu';
+  public static readonly ICON_APPOINTMENTS_MENU: string = 'appointments-menu';
+
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 
@@ -131,6 +133,11 @@ export class MaterialModule {
     iconRegistry.addSvgIcon(
       MaterialModule.ICON_DOCTORS_MENU,
       sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/doctors.svg')
+    );
+    // appointments menu icon
+    iconRegistry.addSvgIcon(
+      MaterialModule.ICON_APPOINTMENTS_MENU,
+      sanitizer.bypassSecurityTrustResourceUrl('assets/Icons/appointments.svg')
     );
   }
 

@@ -3,7 +3,8 @@
  
     <h2 class="bold-font dialog-title">Dr. {{firstname}} {{surname}}</h2>
     <div class ="specWrapper">
-        <span *ngFor ="let specialization of specializations; let first = first;" [class.specfirst]="first"  class="specialization"> {{specialization?.description}} </span>
+        <span *ngFor ="let specialization of specializations; let first = first;" 
+            [class.specfirst]="first"  class="specialization"> {{specialization?.description}} </span>
     </div>
     
 </div>
@@ -44,7 +45,6 @@
     </div>
 
     <div class="dialog-buttons-block">
-        <!--<button class="bold-font appearance-animation-fast" mat-button (click)="activateEditMode()">Bearbeiten</button>-->
         <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()">Ok</button>
     </div>
 </mat-dialog-content>

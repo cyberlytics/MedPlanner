@@ -95,13 +95,6 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
-
-#? added min len: https://docs.djangoproject.com/en/3.2/topics/auth/passwords/
-#TODO: change to higher min_length later
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -109,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
          'OPTIONS': {
-            'min_length': 3,
+            'min_length': 8,
          }
 
     },

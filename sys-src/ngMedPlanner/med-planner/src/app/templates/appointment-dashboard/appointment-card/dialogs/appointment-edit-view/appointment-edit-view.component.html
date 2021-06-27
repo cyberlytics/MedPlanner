@@ -81,7 +81,7 @@
         </div>
         <div class="info regular-font" *ngIf="doctorsFormControl.value">
             <span>{{doctorsFormControl.value.address}},</span>
-            <span>{{doctorsFormControl.value.postcode}}</span>
+            <span>{{doctorsFormControl.value.zipcode}}</span>
             <span>{{doctorsFormControl.value.city}}</span>
             <span class="italic-font">(kann nur bei Arzt geändert werden)</span>
         </div>
@@ -117,7 +117,18 @@
 
     <!-- Buttons Save/Cancel -->
     <div class="dialog-buttons-block">
-        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()">Cancel</button>
+        <button 
+            *ngIf="id !== -1"
+            class="bold-font appearance-animation-fast remove-button"
+            mat-icon-button
+            (click)="deleteAppointment()"
+            ><mat-icon>delete</mat-icon>
+        </button>
+        <button
+            class="bold-font appearance-animation-fast"
+            mat-button
+            (click)="cancelEditing()"
+            >Abbrechen</button>
         <button
             class="bold-font appearance-animation-fast"
             mat-button (click)="saveChanges()"
@@ -126,6 +137,6 @@
                         doctorsFormControl.invalid ||
                         hourFormControl.invalid || 
                         minutesFormControl.invalid"
-            >Save</button>
+            >Speichern</button>
     </div>
 </mat-dialog-content>

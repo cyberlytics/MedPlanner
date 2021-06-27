@@ -7,7 +7,7 @@ export class AppointmentModel {
     private static readonly LOCALE_DE = 'de-DE';
 
     get id(): number {
-        return this.data.id;
+        return this.data.id ? this.data.id : -1;
     }
 
     get title(): string {
@@ -16,6 +16,10 @@ export class AppointmentModel {
 
     get date(): Date {
         return this._date;
+    }
+
+    get dateISOString(): string {
+        return this._date.toISOString();
     }
 
     get dateString(): string {
@@ -84,24 +88,34 @@ export class AppointmentModel {
     private _date: Date;
 
     constructor(private data: {
-        id: number;
+        id: number | null;
         title: string;
         datetime: string;
         doctor: DoctorModel | null;
         priority: Priority;
+        onAppointmentUpdate?: (appointment: AppointmentModel) => void,
+        onAppointmentDelete?: (appointment: AppointmentModel) => void,
         note?: string;
         tags?: Array<TagModel>;
     }) {
         this._date = new Date(data.datetime);
     }
 
-    public static getPriorityByName(_name: string): Priority {
+    public static getPriorityByName(_name: 'Hoch' | 'Mittel' | 'Niedrig'): Priority {
         switch (_name) {
             case 'Hoch': return Priority.HIGH;
             case 'Mittel': return Priority.MEDIUM;
             case 'Niedrig': return Priority.LOW;
-            default: return Priority.LOW;
+            default: return Priority.MEDIUM;
         }
+    }
+
+    public resetIdAfterSave(id: number): void {
+        if (this.data.id !== null) {
+            return;
+        }
+
+        this.data.id = id;
     }
 
     public hasTag(tag: TagModel): boolean {
@@ -127,17 +141,9 @@ export class AppointmentModel {
         );
     }
 
-    public updateAppointment(dataToUpdate?: {
-        title?: string;
-        datetime?: string;
-        date?: Date;
-        doctor?: DoctorModel;
-        priority?: Priority;
-        note?: string;
-        tags?: Array<TagModel>;
-    }): void {
+    public update(dataToUpdate?: AppointmentUpdateData): void {
         if (dataToUpdate === undefined) {
-            // TODO: trigger server to update appointment
+            this.updateAppointment();
             return;
         }
 
@@ -145,12 +151,8 @@ export class AppointmentModel {
             this.data.title = dataToUpdate.title;
         }
 
-        if (dataToUpdate.datetime !== undefined) {
-            this.data.datetime = dataToUpdate.datetime;
-            this._date = new Date(dataToUpdate.datetime);
-        }
-
         if (dataToUpdate.date !== undefined) {
+            console.log(dataToUpdate.date);
             this._date = dataToUpdate.date;
         }
 
@@ -170,13 +172,45 @@ export class AppointmentModel {
             this.data.tags = dataToUpdate.tags;
         }
 
-        // TODO: trigger server to update appointment
+        this.updateAppointment();
+    }
+
+    public setOnUpdateListener(listener: (model: AppointmentModel) => void): void {
+        this.data.onAppointmentUpdate = listener;
+    }
+
+    public delete(): void {
+        if (this.data.onAppointmentDelete === undefined) {
+            return;
+        }
+        this.data.onAppointmentDelete(this);
+    }
+
+    public setOnDeleteListener(listener: (model: AppointmentModel) => void): void {
+        this.data.onAppointmentDelete = listener;
+    }
+
+    private updateAppointment(): void {
+        if (this.data.onAppointmentUpdate === undefined) {
+            return;
+        }
+
+        this.data.onAppointmentUpdate(this);
     }
 
 }
 
 export enum Priority {
-    HIGH,
-    MEDIUM,
-    LOW
+    HIGH = 'Hoch',
+    MEDIUM = 'Mittel',
+    LOW = 'Niedrig'
+}
+
+export interface AppointmentUpdateData {
+    title?: string;
+    date?: Date;
+    doctor?: DoctorModel;
+    priority?: Priority;
+    note?: string;
+    tags?: Array<TagModel>;
 }

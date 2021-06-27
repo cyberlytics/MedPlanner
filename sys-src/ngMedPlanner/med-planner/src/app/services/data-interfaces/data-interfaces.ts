@@ -11,7 +11,7 @@ export interface AppointmentData {
     datetime: string;
     doc_id: number;
     user_id: number;
-    priority: string;
+    priority: 'Hoch' | 'Mittel' | 'Niedrig';
     note: string;
     tags: Array<number> | undefined;
 }

@@ -5,8 +5,8 @@
     <span class="toolbar-spacer"></span>
 
     <!-- Switcher between Appointments/Doctors -->
-    <button mat-icon-button (click)="switchAppointmentDoctors()">
-        <mat-icon [svgIcon]="getIcon" class="doctors-menu-icon"></mat-icon>
+    <button mat-icon-button *ngIf="isLoggedIn" (click)="switchAppointmentDoctors()">
+        <mat-icon [svgIcon]="getIcon" class="dashboards-menu-icon"></mat-icon>
     </button>
 
 
@@ -14,8 +14,8 @@
 
 
     <!-- Filter -->
-    <button mat-icon-button (click)="onFilterClick()">
-        <mat-icon class="doctors-menu-icon">filter_alt</mat-icon>
+    <button mat-icon-button *ngIf="isLoggedIn" (click)="onFilterClick()">
+        <mat-icon class="dashboards-menu-icon">filter_alt</mat-icon>
     </button>
 
     <!-- Logout icon button -->

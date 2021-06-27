@@ -8,7 +8,7 @@
             <p>Jetzt registrieren!</p>
         </div>
         
-        <!-- register form -->
+        <!-- Register form -->
         <form class="register-form">
 
             <mat-form-field appearance="outline">
@@ -18,12 +18,12 @@
                 <mat-error *ngIf="registerEmailFormControl.invalid">{{emailErrorMessage}}</mat-error>
             </mat-form-field>
             
-
-            <mat-form-field appearance="outline"  >
+            <mat-form-field appearance="outline">
                 <mat-label>Passwort</mat-label>
-                <input matInput [formControl]="registerPasswordFormControl" required  
-                [type]="hidePassword ? 'password' : 'text'">
-                
+                <input matInput [formControl]="registerPasswordFormControl" required (blur)="handlePasswordStrength()"
+                #passwordValue
+                [type]="hidePassword ? 'password' : 'text'">    
+
                 <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
@@ -31,17 +31,44 @@
                <mat-error *ngIf="registerPasswordFormControl.invalid">{{passwordErrorMessage}}</mat-error>
             </mat-form-field>
 
+            <!-- Password Strength -->
+            <div class="password-strength">
+                <mat-password-strength 
+                    #strength
+                    [password]="passwordValue.value"
+                    [enableLengthRule]="true"
+                    [enableDigitRule]="true"
+                    [enableLowerCaseLetterRule]="true"
+                    [enableUpperCaseLetterRule]="true"
+                    [enableSpecialCharRule]="true"
+                >
+                </mat-password-strength>
+
+                <!-- Customizable information content -->
+                <mat-password-strength-info 
+                    [passwordComponent]="strength"
+                    [lowerCaseCriteriaMsg]="'enthält mindestens einen Kleinbuchstaben'"
+                    [upperCaseCriteriaMsg]="'enthält mindestens einen Großbuchstaben'"
+                    [digitsCriteriaMsg]="'enthält mindestens eine Ziffer'"
+                    [minCharsCriteriaMsg]="'enthält mindestens 8 Zeichen'"
+                    [specialCharsCriteriaMsg]="'enthält mindestens ein Sonderzeichen'"
+                >
+                </mat-password-strength-info> 
+            </div>  
+
             <mat-form-field appearance="outline"  >
                 <mat-label>Passwort bestätigen</mat-label>
                 <input matInput [formControl]="confirmPasswordFormControl" required (blur)="handleDifferentPassword()"
                 #RegPasswordValue [type]="hidePassword ? 'password' : 'text'">
                 
-                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" >
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
         
                <mat-error *ngIf="confirmPasswordFormControl.invalid">{{passwordErrorMessage}}</mat-error>
             </mat-form-field>
+
+            
         </form>
         
         <!-- Log in block -->
@@ -53,7 +80,7 @@
         <!-- Sign up button -->
         <div class="register-button-block">
             <button mat-raised-button color="primary" id="sing-up-button"
-            [disabled]="confirmPasswordFormControl.invalid || registerEmailFormControl.invalid"
+            [disabled]="confirmPasswordFormControl.invalid || registerEmailFormControl.invalid || registerPasswordFormControl.invalid"
             (click)="onSignUpClick(RegEmailValue.value, RegPasswordValue.value)"
             color="primary">
                 Registrieren

@@ -18,16 +18,27 @@ export class DoctorModel {
     }
 
     get specializations(): Array<SpecializationModel | null> | null {
+
         return this.data.specializations;
     }
 
     get specializationColor(): string | null | undefined {
-        if (this.data.specializations?.length === 1) {
+        if (this.data.specializations && this.data.specializations?.length >= 1) {
             return this.data.specializations[0]?.color;
         }
+        
 
         return null;
     }
+
+    get specialization(): string| null | undefined{
+        
+        if (this.data.specializations?.length === 1) {
+            return this.data.specializations[0]?.description;
+        }
+
+        return null;        
+    } 
 
     get surgery(): SurgeryModel | null {
         return this.data.surgery;

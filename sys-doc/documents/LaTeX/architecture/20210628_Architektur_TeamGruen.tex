@@ -73,8 +73,6 @@ Zu den wesentlichen Features gehört die Eintragung von Terminen, die man zusät
 		\bottomrule
 	\end{tabularx}
 \end{table}
-%\vfill
-\pagebreak
 
 \subsection{Kontextabgrenzung}
 Die folgende Darstellung visualisiert das zu beschreibende System als Blackbox und zeigt so die Interaktion mit Benutzern und Fremdsystemen auf.
@@ -88,7 +86,7 @@ Menschlicher Akteur ist neben dem Entwickler der Web-Anwendung auch der Admin, d
 
 \section{Lösungsstrategie}
 \subsection{Lösungsansätze}
-Die vorher benannten Qualitätsziele wurden bei MedPlanner folgendermaßen berücksichtigt.\\
+Die vorher benannten Qualitätsziele wurden bei MedPlanner folgendermaßen berücksichtigt.
 \begin{itemize}
 	\item \textbf{Benutzbarkeit}:
 	\begin{itemize}
@@ -141,28 +139,28 @@ Für die Realisierung der Web-Anwendung wird eine containerbasierte Architektur 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.9\columnwidth]{./figures/concepts}
+	\includegraphics[width=\columnwidth]{./figures/concepts}
 	\caption{Datenbankmodell für MedPlanner}
 \end{figure}
-
 \textit{Django models} repräsentieren in der Datenbank die unterschiedlichen Entitäten. Dabei wird vom Framework bereits standardmäßig ein User model bereitgestellt, was beispielsweise Attribute wie Vor- und Nachname enthält.~\cite{django-default-user} Da in MedPlanner neben der EMail-Adresse und dem Password zum jetzigen Zeitpunkt keine weiteren Informationen benötigt werden, wurde ein angepasstes User model erstellt, was auf die Anforderungen von MedPlanner abgestimmt ist.
 
 Für die Identifizierung der Benutzer wird bei MedPlanner die \textit{tokenbasierte Authentifizierung} eingesetzt: So wird bei jeder Registrierung bzw. bei jedem Login ein neues Token für den Benutzer erstellt, womit bestimmte Quellen ohne zusätzliche EMail- oder Passwortinformation abrufbar sind, so beispielsweise auch das Bearbeiten von Terminen. Allgemein werden die Tokens überall dort eingesetzt, wo eine Eingabe von EMail und Passwort nicht dringend benötigt werden.
+\pagebreak
 
 \section{Risiken und Probleme}
 Im Abschnitt \ref{structure} wurde bereits die Anpassung des User models erwähnt. Standardmäßig wird für das Einfügen eines neuen Benutzers ein Benutzername abgefragt. Durch die Überschreibung des User models wird jedoch für eine Registrierung neben dem Passwort nur eine EMail-Adresse verlangt. Damit dieses Verhalten korrekt übernommen wird, muss zudem eine Überschreibung des Admin models vorgenommen werden, da sonst Konflikte im Backend entstehen. Nach dieser Abänderung ist eine Neuerzeugung der Datenbank erforderlich, um die Aktualisierungen einzupflegen. Aus diesem Grund ist es zwingend ratsam derartige Anpassungen in der Entwicklungsphase vorzunehmen, um größere Migrationsprobleme oder das Risiko für den Verlust von Nutzerdaten zu vermeiden.\\
 Die erzeugte SQLite-Datei konnte bei der Versionierung im Versionsverwaltungssystem Git nicht ausgeschlossen werden. Dies hat zur Folge, dass nach jedem Commit, das die Datenbank beeinflusst, Daten verloren gehen können.\\
-Für die Erinnerungsbenachrichtungen per EMail sollte \textit{Django Crontab} genutzt werden. Obwohl die Logik korrekt implementiert war und auch der \textit{Cron Job} aktiv war, konnte die erwartete zeitbasierte Ausführung der Funktionalität mithilfe von Django Crontab nicht realisiert werden. Die Probleme könnten auch auf die Verwendung von Docker zurückgeführt werden.
+Für die Erinnerungsbenachrichtungen per EMail sollte \textit{Django Crontab} genutzt werden. Obwohl die Logik korrekt implementiert war und auch der \textit{Cron Job} aktiv war, konnte die erwartete zeitbasierte Ausführung der Funktionalität mithilfe von Django Crontab nicht realisiert werden. Die Probleme könnten auch auf die Verwendung von Docker zurückgeführt werden.\\
+Bezüglich der Testabdeckung im Backend gibt es vereinzelt Einsparungen: Tests für die EMail-Benachrichtungen sind nicht realisiert. Da diese Komponente das allgemeine Systemverhalten nicht stark beeinflusst, wurde das Risiko für den Mangel dieses Testfalls nicht als hoch eingestuft.
+Zudem wird das Verhalten für Benutzeraktionen, wie zum Beispiel An- und Abmeldung des Nutzers, nicht mit Tests abgedeckt.
 
 
-\textbf{TODO: Wo ist die Testabdeckung gering bzw. nicht vorhanden?}
-TODO: Die Testabdeckung für die EMail-Benachrichtungen ist nicht gewährleistet. Da diese Komponente das allgemeine Systemverhalten nicht stark beeinflusst, wurde das Risiko für den Mangel dieses Testfalls nicht als hoch eingestuft. 
 
 \section{Fazit und Ausblick}
 Zum aktuellen Stand bietet MedPlanner ein solides Selbstmanagement-Tool für die Verwaltung von Arztterminen sowie Kontaktinformationen für Arztpraxen. Es ist zudem möglich, direkt eine EMail-Benachrichtigung zu erhalten, sobald ein Patient einen neuen Termin bei MedPlanner erstellt.\\
 Für die Zukunft kann diese Benachrichtigungs-Funktionalität so erweitert werden, dass eine Benachrichtigung 24 Stunden vor Terminstart gesendet wird.\\
 Außerdem ist denkbar, dass sich Patienten neben geplanten Terminen in Zukunft auch Reminder in einer bestimmten Erinnerungs-Periode setzen können, um an das Vereinbaren eines Termins für Routineuntersuchungen erinnert zu werden.\\
-Zusätzlich könnten Termine neben der aktuellen Darstellung auch als Kalender-Einträge visualisiert werden. Somit hätte jeder Patient individuell die Möglichkeit seine bevorzugte Darstellung zu bestimmen.\\ 
+Zusätzlich könnten Termine neben der aktuellen Darstellung auch als Kalender-Einträge visualisiert werden. Somit hätte jeder Patient individuell die Möglichkeit seine bevorzugte Darstellung zu bestimmen.
 So wäre es ebenfalls möglich, bei einer EMail-Benachrichtigung eine Eintragung der Termine in eine externe Kalender-App, wie z.B. Google Kalender, bereitzustellen.\\
 In zukünftigen Versionen könnte MedPlanner auch so ausgebaut werden, dass Patienten neben der Terminverwaltung auch ihre Arztbefunde sicher abspeichern können, um somit alle gesundheitlichen Angelegenheiten kompakt in einer Web-Anwendung strukturieren zu können.\\
 Diese Entscheidungen sollten jedoch nicht ausschließlich von den Entwicklern selbst getroffen werden. Mithilfe von Umfragen, ähnlich der Methode des User-Centered-Designs~\footnote{Hierbei werden die späteren Benutzer von Anfang an einbezogen, wodurch Inhalt und Design des Endprodukts maßgeblich von den Bedürfnissen und Erwartungen der Benutzer gesteuert wird.}, können die gewünschten Erweiterungen erfasst werden.

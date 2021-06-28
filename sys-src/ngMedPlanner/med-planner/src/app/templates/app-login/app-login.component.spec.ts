@@ -10,28 +10,13 @@ import { AppLoginComponent } from './app-login.component';
 describe('AppLoginComponent', () => {
   let component: AppLoginComponent;
   let fixture: ComponentFixture<AppLoginComponent>;
-  let userState: any;
 
-  const userStateService = jasmine.createSpyObj('UserStateService', {
-    userEmail: () => {
-      return '';
+  const userStateService =
+  {
+    login: () => {
+      return LoginResult.LOGIN_SUCCESFULL;
     }
-  });
-
-  const httpService = jasmine.createSpyObj('HttpService', {
-    getData: () => {
-      return false;
-    },
-    postMessage: () => {
-      return false;
-    },
-    postUnauthorizedMessage: () => {
-      return false;
-    },
-    delete: () => {
-      return false;
-    }
-  });
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,7 +27,8 @@ describe('AppLoginComponent', () => {
         AppLoginComponent
       ],
       providers: [
-        { provide: MatSnackBar, useValue: {} }
+        { provide: MatSnackBar, useValue: {} },
+        { provide: UserStateService, useValue: userStateService }
       ]
     })
     .compileComponents();
@@ -95,14 +81,7 @@ describe('AppLoginComponent', () => {
 
   it('password form should be invalid, cause invalid login', () => {
     // spy user state service
-    userState = jasmine.createSpyObj(
-      'UserStateService',
-      {
-        login: () => {
-          return LoginResult.PASSWORD_IS_WRONG;
-        }
-      }
-    );
+    spyOn(userStateService, 'login').and.returnValue(LoginResult.PASSWORD_IS_WRONG);
 
     component.onLogInClick('email@email.com', 'password');
 
@@ -111,14 +90,7 @@ describe('AppLoginComponent', () => {
 
   it('email form should be invalid, cause invalid login', () => {
     // spy user state service
-    userState = jasmine.createSpyObj(
-      'UserStateService',
-      {
-        login: () => {
-          return LoginResult.USER_DOES_NOT_EXIST;
-        }
-      }
-    );
+    spyOn(userStateService, 'login').and.returnValue(LoginResult.USER_DOES_NOT_EXIST);
 
     component.onLogInClick('email@email.com', 'password');
 
@@ -127,14 +99,7 @@ describe('AppLoginComponent', () => {
 
   it('email and password form should be valid: loggin is succesfull', () => {
     // spy user state service
-    userState = jasmine.createSpyObj(
-      'UserStateService',
-      {
-        login: () => {
-          return LoginResult.LOGIN_SUCCESFULL;
-        }
-      }
-    );
+    spyOn(userStateService, 'login').and.returnValue(LoginResult.LOGIN_SUCCESFULL);
 
     const email = 'email@email.com';
     const password = 'password';

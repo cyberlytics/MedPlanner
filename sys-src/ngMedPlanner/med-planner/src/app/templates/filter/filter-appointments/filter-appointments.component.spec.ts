@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppLoginComponent } from '../../app-login/app-login.component';
 
 import { FilterAppointmentsComponent } from './filter-appointments.component';
 
@@ -8,6 +10,9 @@ describe('FilterAppointmentsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ RouterTestingModule.withRoutes([
+        { path: 'login', component: AppLoginComponent },
+      ])],
       declarations: [ FilterAppointmentsComponent ]
     })
     .compileComponents();

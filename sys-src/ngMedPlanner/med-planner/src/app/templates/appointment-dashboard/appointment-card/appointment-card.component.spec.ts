@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 import { AppointmentCardComponent } from './appointment-card.component';
 
@@ -8,7 +9,12 @@ describe('appointmentCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppointmentCardComponent ]
+      declarations: [ AppointmentCardComponent ],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MatDialog, useValue: {} }
+      ]
     })
     .compileComponents();
   });
@@ -21,13 +27,6 @@ describe('appointmentCardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('shoud create an empty appointment title', () => {
-    fixture.detectChanges();
-
-    const element = fixture.nativeElement.querySelector('#appointment-title');
-    expect(element.innerText).toContain('<< none >>');
   });
 
   /* it('shoud create an appointment title', () => {

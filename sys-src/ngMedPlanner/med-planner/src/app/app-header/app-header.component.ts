@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
+import { MaterialModule } from '../material/material.module';
 import { AppHeaderStateService, DrawerAction } from '../services/state-services/app-header-state.service';
-import { AppStateService } from '../services/state-services/app-state.service';
+import { AppStateService, Dashbord } from '../services/state-services/app-state.service';
 import { UserStateService } from '../services/user-services/user-state.service';
 
 @Component({
@@ -32,10 +33,15 @@ export class AppHeaderComponent implements OnInit, AfterViewInit {
     return this.userState.isLoggedIn;
   }
 
+  get getIcon(): string {
+    return this.appState.selectedDashboard === Dashbord.APPOINTMENTS ?
+      MaterialModule.ICON_APPOINTMENTS_MENU : MaterialModule.ICON_DOCTORS_MENU;
+  }
+
   constructor(
     private appState: AppStateService,
     private headerState: AppHeaderStateService,
-    private userState: UserStateService
+    private userState: UserStateService,
   ) {
     this.headerElement = new ElementRef(null);
     this._headerHeightInit = new EventEmitter<number>();

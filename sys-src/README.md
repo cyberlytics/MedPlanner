@@ -26,8 +26,8 @@ Auf diese Weise werden jeweils für Frontend(ngMedPlanner) und Backend (djangoMe
 2. Sofern das ng-image bereits existiert, kann in 1. ein Fehler aufgrund von Container-Konflikten entstehen. Mithilfe von `docker system prune`werden alle ungenutzen Container, Images und Volumes. Schritt 1 wiederholen.
 
 3. Wenn beide Container laufen (Im Terminal ersichtlich durch: Compiled Successfully) können die beiden Komponenten folgendermaßen im Browser aufgerufen werden:
-    * Angular: https://localhost:4220 
-    * Django: https://localhost:8000
+    * Angular: http://127.0.0.1:4220 
+    * Django: http://127.0.0.1:8000
 
 ## Stoppen des Projekts
 1. Die Ausführung von Docker Compose mit `Strg+C` beenden.
@@ -37,6 +37,16 @@ Auf diese Weise werden jeweils für Frontend(ngMedPlanner) und Backend (djangoMe
 TODO: die Skripte für das setup von ngMedPlanner hier erwähnen und deren setup
 TODO: hier auch das Zeugs für Django config erklären sowie das anlegen eines superusers
 
+
+## Informationen zum Django-Container
+TODO 
+* verweis auf die Ordnerstruktu
+* Angabe der Befehle 
+* Erklärung zum superuser
+## Informationen zum Angular-Container
+TODO
+* verweis auf die Ordnerstruktur
+* Angabe der Skripterklärungen
 ####
 1. More info about Django: https://docs.djangoproject.com/en/3.2/intro/tutorial01/ , https://medium.com/shot-code/running-django-postgresql-containers-and-persisting-data-with-docker-4dd8e4dd5361
 2. More info about Docker: https://docs.docker.com/samples/django/

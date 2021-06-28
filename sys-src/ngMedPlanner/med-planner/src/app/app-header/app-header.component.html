@@ -6,12 +6,16 @@
 
     <!-- Switcher between Appointments/Doctors -->
     <button mat-icon-button *ngIf="isLoggedIn" (click)="switchAppointmentDoctors()">
-        <mat-icon svgIcon="doctors-menu" class="doctors-menu-icon"></mat-icon>
+        <mat-icon [svgIcon]="getIcon" class="dashboards-menu-icon"></mat-icon>
     </button>
+
+
+
+
 
     <!-- Filter -->
     <button mat-icon-button *ngIf="isLoggedIn" (click)="onFilterClick()">
-        <mat-icon class="doctors-menu-icon">filter_alt</mat-icon>
+        <mat-icon class="dashboards-menu-icon">filter_alt</mat-icon>
     </button>
 
     <!-- Logout icon button -->
@@ -28,3 +32,12 @@
     <span class="title regular-font">{{headerTitle}}</span>
     <span class="subtitle italic-font">{{headerSubTitle}}</span>
 </div>
+
+
+
+
+
+
+
+
+

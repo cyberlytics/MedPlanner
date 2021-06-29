@@ -28,7 +28,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         super(userState);
     }
 
-    public async addNewAppointment(appointment: AppointmentModel): Promise<CreateAppontmentResult> {
+    public async addNewAppointment(
+        appointment: AppointmentModel,
+        sendEmail = false
+    ): Promise<CreateAppontmentResult> {
         const result = await this.httpService.postMessage<{ id: number | undefined }, CreateAppointmentRequestData>(
             HttpService.APPOINTMENT_CREATE,
             {
@@ -55,7 +58,24 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         });
         this.addModel(appointment);
 
+        if (sendEmail) {
+            this.requireSendEmail(result.id);
+        }
         return CreateAppontmentResult.CREATED;
+    }
+
+    private async requireSendEmail(appointmentId: number): Promise<void> {
+        const result = await this.httpService.postMessage<void>(
+            HttpService.SEND_EMAIL,
+            {
+                appointment_id: appointmentId
+            },
+            this.userState.token
+        ).catch(
+            () => {
+                console.log('error');
+            }
+        );
     }
 
     protected async initStateData(): Promise<void> {
@@ -72,7 +92,9 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
                         priority: AppointmentModel.getPriorityByName(appointment.priority),
                         note: appointment.note,
                         tags: await this.tagsState.getTagListByIds(appointment.tags),
-                        onAppointmentUpdate: (model: AppointmentModel) => { this.updateAppointment(model); },
+                        onAppointmentUpdate: (model: AppointmentModel, sendEmail: boolean) => {
+                            this.updateAppointment(model, sendEmail);
+                        },
                         onAppointmentDelete: (model: AppointmentModel) => { this.deleteAppointment(model); }
                     }
                 )
@@ -92,7 +114,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
         }
     }
 
-    private async updateAppointment(appointment: AppointmentModel): Promise<void> {
+    private async updateAppointment(
+        appointment: AppointmentModel,
+        sendEmail = false
+    ): Promise<void> {
         const updateResult = await this.httpService.postMessage<any, CreateAppointmentRequestData>(
             HttpService.APPOINTMENT_UPDATE + appointment.id,
             {
@@ -106,6 +131,10 @@ export class AppointmentsDashboardStateService extends BaseStateService<Appointm
             },
             this.userState.token
         );
+
+        if (sendEmail) {
+            this.requireSendEmail(appointment.id);
+        }
     }
 
     private async filterAppointments(): Promise<Array<AppointmentModel>> {

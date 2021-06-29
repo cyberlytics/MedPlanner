@@ -38,7 +38,8 @@ export class SpecializationStateService extends BaseStateService<SpecializationM
                 new SpecializationModel(
                     {
                         id: specialization.id,
-                        description: specialization.description
+                        description: specialization.description,
+                        color: specialization.color
                     }
                 )
             );

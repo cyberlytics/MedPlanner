@@ -35,6 +35,7 @@ export interface DoctorData {
 export interface SpecializationData {
     id: number;
     description: string;
+    color: string;
 }
 
 

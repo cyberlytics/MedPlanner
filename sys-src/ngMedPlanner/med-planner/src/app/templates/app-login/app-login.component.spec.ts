@@ -1,9 +1,9 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginResult } from 'src/app/services/user-services/login.service';
 import { UserStateService } from 'src/app/services/user-services/user-state.service';
+import { AppointmentDashboardComponent } from '../appointment-dashboard/appointment-dashboard.component';
 
 import { AppLoginComponent } from './app-login.component';
 
@@ -21,7 +21,9 @@ describe('AppLoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule.withRoutes([
+          { path: 'appointment-dashboard', component: AppointmentDashboardComponent },
+        ])
       ],
       declarations: [
         AppLoginComponent

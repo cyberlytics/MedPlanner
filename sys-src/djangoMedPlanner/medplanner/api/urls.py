@@ -2,6 +2,7 @@ from django.urls import path
 from medplanner.api import views
 from medplanner.api import user_view
 
+# list routes URLs to views
 app_name = 'medplanner'
 
 urlpatterns = [

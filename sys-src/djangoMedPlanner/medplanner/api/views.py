@@ -2,13 +2,14 @@ from rest_framework import status
 from rest_framework.response import Response
 from medplanner.models import Doctor, Appointment, Tag, Surgery, Specialization
 from medplanner.api.serializers import DoctorSerializer, AppointmentSerializer, TagSerializer, SurgerySerializer, \
-     SpecializationSerializer
+    SpecializationSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 
+# Service classes for exchanging data between Django and Angular
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def doctor_list(request):
     """
     Returns all doctor objects
@@ -23,7 +24,7 @@ def doctor_list(request):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def doctor_detail(request, pk):
     """
     Returns information of doctor object
@@ -38,7 +39,7 @@ def doctor_detail(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def doctor_create(request):
     """
     Returns new doctor object
@@ -52,7 +53,7 @@ def doctor_create(request):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def doctor_update(request, pk):
     """
     Returns updated doctor object
@@ -71,7 +72,7 @@ def doctor_update(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def doctor_delete(request, pk):
     """
     Deletes doctor object
@@ -86,10 +87,8 @@ def doctor_delete(request, pk):
 
 
 # CRUD services for Appointment model
-
-
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def appointment_list(request):
     """
     Returns all appointment objects
@@ -105,7 +104,7 @@ def appointment_list(request):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def appointment_detail(request, pk):
     """
     Returns information of appointment object
@@ -120,7 +119,7 @@ def appointment_detail(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def appointment_update(request, pk):
     """
     Returns updated appointment object
@@ -139,7 +138,7 @@ def appointment_update(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def appointment_create(request):
     """
     Returns new appointment object
@@ -154,7 +153,7 @@ def appointment_create(request):
 
 
 @api_view(['DELETE'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def appointment_delete(request, pk):
     """
     Deletes appointment object
@@ -172,7 +171,7 @@ def appointment_delete(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def tag_delete(request, pk):
     """
     Deletes tag object
@@ -187,7 +186,7 @@ def tag_delete(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def tag_update(request, pk):
     """
     Returns updated tag object
@@ -206,7 +205,7 @@ def tag_update(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def tag_create(request):
     """
     Returns new tag object
@@ -217,10 +216,10 @@ def tag_create(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(data={'id': tag.id}, status=status.HTTP_201_CREATED)
-    
+
 
 @api_view(['READ'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def tag_list(request):
     """
     Returns all tag objects
@@ -238,7 +237,7 @@ def tag_list(request):
 
 
 @api_view(['DELETE'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def surgery_delete(request, pk):
     """
     Deletes surgery object
@@ -253,7 +252,7 @@ def surgery_delete(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def surgery_update(request, pk):
     """
     Returns updated surgery object
@@ -272,7 +271,7 @@ def surgery_update(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def surgery_create(request):
     """
     Returns new surgery object
@@ -286,7 +285,7 @@ def surgery_create(request):
 
 
 @api_view(['READ'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def surgery_list(request):
     """
     Returns all surgery objects
@@ -301,7 +300,7 @@ def surgery_list(request):
 
 
 @api_view(['READ'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def specialization_list(request):
     """
     Returns all specializations objects

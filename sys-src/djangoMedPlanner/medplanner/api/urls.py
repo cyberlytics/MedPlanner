@@ -1,6 +1,7 @@
 from django.urls import path
 from medplanner.api import views
 from medplanner.api import user_view
+from medplanner.api import email
 
 app_name = 'medplanner'
 
@@ -37,4 +38,6 @@ urlpatterns = [
     path('surgery-list', views.surgery_list, name="surgery-list"),
 
     path('specialization-list', views.specialization_list, name="specialization-list"),
+
+    path('send_email', email.send_email, name="send_email"),
 ]

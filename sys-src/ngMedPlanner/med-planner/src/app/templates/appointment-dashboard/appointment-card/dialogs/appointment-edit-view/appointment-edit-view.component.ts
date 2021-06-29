@@ -65,6 +65,8 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   }
   private _doctors: Array<DoctorModel>;
 
+  public checked = false;
+
   constructor(
     private dialogRef: MatDialogRef<AppointmentEditViewComponent, EditingResult>,
     @Inject(MAT_DIALOG_DATA) appointment: AppointmentModel,
@@ -125,10 +127,12 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
       doctor: this._doctorsFormControl.value,
       date: this.getDate(),
       note: this._notesFormControl.value
-    });
+    },
+    this.checked);
 
     this.closeDialog({
       buttonClicked: ButtonClicked.SAVE,
+      sendEmail: this.checked,
       appointmentToSave: this.appointment
     });
   }
@@ -162,6 +166,7 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
 
 export interface EditingResult {
   buttonClicked: ButtonClicked;
+  sendEmail?: boolean;
   appointmentToSave?: AppointmentModel;
 }
 

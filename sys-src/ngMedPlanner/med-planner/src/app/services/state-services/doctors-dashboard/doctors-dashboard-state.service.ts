@@ -39,7 +39,7 @@ export class DoctorsDashboardStateService extends BaseStateService<DoctorModel> 
     }
 
     public sortDoctorsAlphabetically(doctors: Array<DoctorModel>): Array<DoctorModel> {
-        doctors.sort((a, b) => a.surname.localeCompare(b.surname))
+        doctors.sort((a, b) => a.surname.localeCompare(b.surname));
         return doctors;
     }
 

@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.userState.checkLogin();
   }
 
-
+  // Functions to test components before server-requests worked
   ngAfterViewInit(): void {
     // this.userState.checkLogin();
     // this.createDoctor();
@@ -169,7 +169,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Token ${this.token}`
+          Authorization: `Token ${this.token}`
         },
         body: JSON.stringify({
           title: 'Termin beim Augenarzt',

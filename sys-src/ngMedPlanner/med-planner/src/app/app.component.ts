@@ -111,7 +111,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Token ${this.token}`
+          Authorization: `Token ${this.token}`
         }
       }
     )
@@ -127,8 +127,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'GET',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         }
       }
     )
@@ -144,21 +144,21 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'POST',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         },
-        body:JSON.stringify({
-          "first_name": "Harry",
-          "surname": "Potter",
-          "surgery_id": 1,
-          "specializations": [
+        body: JSON.stringify({
+          first_name: 'Harry',
+          surname: 'Potter',
+          surgery_id: 1,
+          specializations: [
               1
           ]
         })
       }
     )
     .then(function(response){
-      console.log('Response', response)
+      console.log('Response', response);
     });
   }
 
@@ -168,27 +168,27 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'POST',
         headers: {
-          'Content-type':'application/json',
+          'Content-type': 'application/json',
           'Authorization': `Token ${this.token}`
         },
-        body:JSON.stringify({
-          "title": "Termin beim Augenarzt",
-          "doc_id": 1,
-          "user_id": 1,
-          "datetime": "2021-11-28 15:15:00",
-          "priority": "Hoch",
-          "note": "Nach Augentropfen fragen",
-          "tags": [
-            
+        body: JSON.stringify({
+          title: 'Termin beim Augenarzt',
+          doc_id: 1,
+          user_id: 1,
+          datetime: '2021-11-28 15:15:00',
+          priority: 'Hoch',
+          note: 'Nach Augentropfen fragen',
+          tags: [
+
           ]
         })
       }
     )
     .then(function (response) {
-      return response.text()
+      return response.text();
     }).then(function (data) {
-      console.log(data)
-    }).catch(console.error)
+      console.log(data);
+    }).catch(console.error);
   }
 
   private async updateDoctor(): Promise<void> {
@@ -198,21 +198,21 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'POST',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         },
-        body:JSON.stringify({
-          "first_name": "Mad",
-          "surname": "Max",
-          "surgery_id": 1,
-          "specializations": [
+        body: JSON.stringify({
+          first_name: 'Mad',
+          surname: 'Max',
+          surgery_id: 1,
+          specializations: [
               1
           ]
         })
       }
     )
     .then(function(response){
-      console.log('Response', response)
+      console.log('Response', response);
     });
   }
 
@@ -223,17 +223,17 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'POST',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         },
-        body:JSON.stringify({
-          "title": "termin 1.1",
-          "doc_id": 1,
-          "user_id": 1,
-          "datetime": "2021-12-01 15:15:00",
-          "priority": "Mittel",
-          "note": "here is a text",
-          "tags": [
+        body: JSON.stringify({
+          title: 'termin 1.1',
+          doc_id: 1,
+          user_id: 1,
+          datetime: '2021-12-01 15:15:00',
+          priority: 'Mittel',
+          note: 'here is a text',
+          tags: [
             1
           ]
         })
@@ -251,14 +251,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'GET',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         }
       }
     )
     .then((resp) => resp.json())
     .then(function(data){
-      console.log('Response', data)
+      console.log('Response', data);
     });
   }
 
@@ -269,14 +269,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'GET',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         }
       }
     )
     .then((resp) => resp.json())
     .then(function(data){
-      console.log('Response', data)
+      console.log('Response', data);
     });
   }
 
@@ -287,13 +287,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'DELETE',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         }
       }
     )
     .then(function(response){
-      console.log('Response', response)
+      console.log('Response', response);
     });
   }
 
@@ -304,13 +304,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       {
         method: 'DELETE',
         headers: {
-          'Content-type':'application/json',
-          'Authorization': `Token ${this.token}`
+          'Content-type': 'application/json',
+          Authorization: `Token ${this.token}`
         }
       }
     )
     .then(function(response){
-      console.log('Response', response)
+      console.log('Response', response);
     });
   }
 }

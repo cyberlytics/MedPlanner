@@ -25,14 +25,16 @@ def login(request):
         user = auth.authenticate(username=email, password=password)
         auth.login(request, user)
         new_token, created = Token.objects.get_or_create(user=user)
-        return Response(data={"token": str(new_token), "email": f"{email}", "id": login_user.id,  "status": status.HTTP_200_OK})
+        return Response(
+            data={"token": str(new_token), "email": f"{email}", "id": login_user.id, "status": status.HTTP_200_OK})
     else:
-        return Response(data={"message": f"Wrong password for User '{email}' or not activated", "status": status.HTTP_403_FORBIDDEN})
+        return Response(data={"message": f"Wrong password for User '{email}' or not activated",
+                              "status": status.HTTP_403_FORBIDDEN})
 
 
 # @login_required
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def logout(request):
     """
     Only logout a user if he was logged in. Otherwise redirect to Login page.
@@ -60,7 +62,8 @@ def create_user(request):
     try:
         user = User.objects.get(email=email)
         if user is not None:
-            return Response(data={"message": f"User with email '{email}' is already existing", "status": status.HTTP_403_FORBIDDEN})
+            return Response(
+                data={"message": f"User with email '{email}' is already existing", "status": status.HTTP_403_FORBIDDEN})
     except:
         try:
             new_user = User.objects.create_user(email, password)
@@ -73,12 +76,11 @@ def create_user(request):
 
 # @login_required
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def change_user_password(request):
     """
     Change user password only if the current one is typed in correctly.
     """
-    # email = request.POST.get('email')
     curr_password = request.POST.get('password')
     new_password = request.POST.get('password_new')
     try:
@@ -94,20 +96,19 @@ def change_user_password(request):
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     # show message window if password changed successfully
-    # messages.success(request, 'Your password was updated successfully !')
-    return Response(status=status.HTTP_200_OK, data={"message": f"Password updated successfully for user '{user.email}'"})
+    return Response(status=status.HTTP_200_OK,
+                    data={"message": f"Password updated successfully for user '{user.email}'"})
 
 
-# ? only if user is logged in, he should be able to deactivate the account?
+# only if user is logged in, he should be able to deactivate the account
 # @login_required
 @api_view(['POST', ])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def deactivate_user(request):
     """
     Instead of deleting the user account, it is better to only deactivate it.
     In this way the user has the chance to activate it again and can access his data.
     """
-    # email = request.POST.get('email')
     password = request.POST.get('password')
     try:
         user = request.user
@@ -123,11 +124,10 @@ def deactivate_user(request):
         return Response(status=status.HTTP_400_BAD_REQUEST,
                         data={"message": f"Cannot deactivate account of '{user.email}'. Password does not match"})
 
-    # TODO if needed logout user and delete token
     return Response(status=status.HTTP_200_OK, data={"message": f"Deactivated account of '{user.email}'"})
 
 
-# ? send email to user for account activation and reset of password?
+# send email to user for account activation and reset of password
 @api_view(['POST', ])
 def activate_user(request):
     """
@@ -146,12 +146,11 @@ def activate_user(request):
 
 # @login_required
 @api_view(['POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def delete_user(request):
     """
     Completely delete the user account.
     """
-    # email = request.POST.get('email')
     password = request.POST.get('password')
     try:
         user = request.user
@@ -159,13 +158,12 @@ def delete_user(request):
         if check:
             user.delete()
             messages.info(request, 'Your account has been deleted.')
-            # return to specific page, e.g. registration screen
+
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST,
                             data={"message": f"Current password did not match. Cannot update password"})
-        
+
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    # TODO if needed logout user and delete token
     return Response(status=status.HTTP_200_OK, data={"message": f"Successfully deleted account of '{user.email}'"})

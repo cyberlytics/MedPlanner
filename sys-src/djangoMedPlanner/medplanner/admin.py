@@ -3,11 +3,11 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from .models import (
-    Appointment, 
-    Doctor, 
-    UserProfile, 
-    Specialization, 
-    Surgery, 
+    Appointment,
+    Doctor,
+    UserProfile,
+    Specialization,
+    Surgery,
     Tag
 )
 
@@ -43,7 +43,7 @@ class MedplannerUserAdmin(UserAdmin):
     ordering = ('email',)
     search_fields = ('email',)
     list_display = ('email', 'is_staff', 'is_active', 'is_superuser')
-    list_filter = ('email', )
+    list_filter = ('email',)
 
 
 admin.site.register(Doctor)

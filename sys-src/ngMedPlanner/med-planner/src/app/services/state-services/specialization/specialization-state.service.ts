@@ -33,7 +33,7 @@ export class SpecializationStateService extends BaseStateService<SpecializationM
     protected async initStateData(): Promise<void> {
         const specializationsData = await this.specializationsData.getData();
 
-        for (const specialization of specializationsData.specializations) {
+        for (const specialization of specializationsData) {
             this.addModel(
                 new SpecializationModel(
                     {

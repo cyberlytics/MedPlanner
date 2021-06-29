@@ -18,41 +18,50 @@ sudo usermod -aG docker $USER
 3. Anzeigen der existierenden Container: `docker container ls`
 4. Container entfernen: `docker container rm container-id`
 
-## Starten des Projekts
-1. In diesem Ordner `docker-compose-up`ausführen <br>
-&rightarrow;
-Auf diese Weise werden jeweils für Frontend(ngMedPlanner) und Backend (djangoMedPlanner) zusammen mit der Datenbank Images erzeugt, wichtige Bibliotheken installiert und Container gestartet.
+## Build und Start des Projekts
+Mithilfe der Datei [docker-compose.yml](./docker-compose.yml) werden für das Frontend und das Backend (zusammen mit der Datenbank) Images erzeugt , wichtige Bibliotheken installiert und die Container gestartet.
 
-2. Sofern das ng-image bereits existiert, kann in 1. ein Fehler aufgrund von Container-Konflikten entstehen. Mithilfe von `docker system prune`werden alle ungenutzen Container, Images und Volumes. Schritt 1 wiederholen.
+1. Erzeugung und Starten von Containern
+```
+docker-compose up
+``` 
 
-3. Wenn beide Container laufen (Im Terminal ersichtlich durch: Compiled Successfully) können die beiden Komponenten folgendermaßen im Browser aufgerufen werden:
-    * Angular: http://127.0.0.1:4220 
-    * Django: http://127.0.0.1:8000
+**Hinweis**: Bei der ersten Ausführung dauert die Erzeugung am längsten, da hierbei neben der Installation von externen Modulen für Python und Angular auch die Migration der Datenbank stattfindet.
 
-## Stoppen des Projekts
+2. Warten, bis auch vom Angular-Container die Meldung *Compiled Successfully* erscheint
+3. Die Container können folgendermaßen im Browser aufgerufen werden:
+    * Frontend-Container: http://localhost:4220 
+    * Backend-Container: http://localhost:8000
+
+4. Möchte man alle existenten Container, Images und Volumes entfernen (da es bei der Ausführung zu Konflikten gekommen ist), kann man folgenden Befehl nutzen:
+```
+docker system prune --all
+```
+**Hinweis**: Mit `--filter`kann man je nach Anwendungsfall Elemente entfernen, die nicht mehr benötigt werden.
+
+### Stoppen des Projekts
 1. Die Ausführung von Docker Compose mit `Strg+C` beenden.
 2. Innerhalb eines Containers: Ausführen von `exit`.
 
+## Informationen zum Backend-Container
+Genauere Informationen, um den Docker-Container für das Backend zu nutzen, sind im zugehörigen [README.md](./djangoMedPlanner/README.md) enthalten.
 
-TODO: die Skripte für das setup von ngMedPlanner hier erwähnen und deren setup
-TODO: hier auch das Zeugs für Django config erklären sowie das anlegen eines superusers
+Darin wird u.a. die Nutzung des Admin-Modes erklärt.
 
+## Informationen zum Frontend-Container
+Genauere Informationen, um den Docker-Container für das Frontend zu nutzen, sind im zugehörigen [README.md](./ngMedPlanner/README.md) enthalten.<br>
 
-## Informationen zum Django-Container
-TODO 
-* verweis auf die Ordnerstruktu
-* Angabe der Befehle 
-* Erklärung zum superuser
-## Informationen zum Angular-Container
-TODO
-* verweis auf die Ordnerstruktur
-* Angabe der Skripterklärungen
-####
-1. More info about Django: https://docs.djangoproject.com/en/3.2/intro/tutorial01/ , https://medium.com/shot-code/running-django-postgresql-containers-and-persisting-data-with-docker-4dd8e4dd5361
-2. More info about Docker: https://docs.docker.com/samples/django/
+Darin werden u.a. die verwendeten Bash-Skripte für die Projektausfürhung erklärt
 
+## Verwendete Versionen
+Hierbei wird nur auf die relevantesten Versionen eingegangen, die nicht ohne zusätzlichen Aufwand ermittelt werden können.
+|Container| Package | Version |
+|:--:|:--|:--:|
+|Frontend|Angular| 11.0.7|
+||TypeScript|4.0.7|
+|Backend|Python|3.9.5
+||pip|21.1.3|
+||Django| 3.2.4|
 
-### Verwendete Versionen
-* Angular: 11.0.1
-
-TODO: Django und Python
+#TODO check if paths are correct
+#TODO grammar

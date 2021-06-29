@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dial
 import { AppointmentDashboardComponent } from './appointment-dashboard.component';
 import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 import { ButtonClicked, EditingResult } from './appointment-card/dialogs/appointment-edit-view/appointment-edit-view.component';
-import { AppointmentModel } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
+import { By } from '@angular/platform-browser';
 
 describe('appointmentDashboardComponent', () => {
   let component: AppointmentDashboardComponent;
@@ -59,10 +59,6 @@ describe('appointmentDashboardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppointmentDashboardComponent);
     component = fixture.componentInstance;
-
-    for (let i = 0; i < APPOINTMENTS_LENGTH; i++) {
-      appointments.push(null);
-    }
     fixture.detectChanges();
   });
 
@@ -70,13 +66,17 @@ describe('appointmentDashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // TODO: find out how to test *ngFor
-  /* it('should contain appointment components', () => {
+  it('should contain appointment components', () => {
+    for (let i = 0; i < APPOINTMENTS_LENGTH; i++) {
+      appointments.push(null);
+    }
     spyOnProperty(component, 'appointments').and.returnValue(appointments);
 
-    const elements = fixture.debugElement.queryAll(By.css('.appointment-component'));
+    fixture.detectChanges();
+
+    const elements = fixture.debugElement.queryAll(By.css('app-appointment-card-component'));
     expect(elements.length).toEqual(APPOINTMENTS_LENGTH);
-  }); */
+  });
 
   it('should call function add new appointment by click', () => {
     spyOn(component, 'addNewAppointment');

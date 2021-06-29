@@ -23,13 +23,13 @@ def send_email(request):
     except UserProfile.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     try:
-        date = appointment.datetime.strftime("%m/%d/%Y, %H:%M:%S")
+        date = appointment.datetime.strftime("%m/%d/%Y, %H:%M")
         send_mail('Terminerinnerung für: ' + str(appointment.title),
-                  'Sehr geehrte/-er Patient/-in, hiermit möchten wir sie freundlich daran erinnern, dass  ihr Termin: '
-                  + str(appointment.title) + ' bei Herr/Frau ' + str(doctor.first_name) + ' ' +
-                  str(doctor.surname) +
-                  ' am: ' + date + ' stattfindet.' + '       ' + ' Mit freundlichen Grüßen'
-                  + ' dein MedPlanner-Team'
+                  'Sehr geehrte/-er Patient/-in,' + '\n' +
+                  'hiermit möchten wir Sie freundlich daran erinnern, dass ihr Termin: '
+                  + str(appointment.title) + ' bei Dr.' + str(doctor.surname) +
+                  ' am: ' + date + ' stattfindet.' + '\n'+ '\n'+  ' Mit freundlichen Grüßen' + '\n'
+                  + 'Dein MedPlanner-Team'
                   ,
                   'MedPlanner@web.de',
                   [user.email],

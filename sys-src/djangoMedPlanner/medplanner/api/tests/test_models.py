@@ -1,6 +1,6 @@
 from django.test import TestCase
 from medplanner.api.tests.factories import DoctorFactory, UserProfileFactory, AppointmentFactory, SurgeryFactory, \
-    SpecializationFactory
+    SpecializationFactory, TagFactory
 
 
 class UserProfileTestCase(TestCase):
@@ -41,3 +41,11 @@ class SpecializationTestCase(TestCase):
         """Test for string representation."""
         specialization = SpecializationFactory.create()
         self.assertEqual(str(specialization), specialization.description)
+
+
+class TagTestCase(TestCase):
+
+    def test_str(self):
+        """Test for string representation."""
+        tag = TagFactory.create()
+        self.assertEqual(str(tag), tag.description)

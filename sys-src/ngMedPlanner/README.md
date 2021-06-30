@@ -1,5 +1,4 @@
 # Informationen für den Frontend-Container
-
 ## Bash-Skripte
 **Voraussetzung:** Für die Ausführung der Skripte sollte der Container nicht bereits aktiv sein!
 
@@ -17,10 +16,6 @@ sh <dateiname>
 &rightarrow; Erzeugung eines Docker Images für das Frontend
 * [start.sh](./start.sh)<br>
 &rightarrow; Starten des Frontend-Containers
-* [test.sh](./test.sh)<br>
-&rightarrow; Ausführung der Unit-Tests für das Frontend<br>
-**Anmerkung:** Graphisch einsehbar sind die Tests über http://localhost:9876/
-#TODO Andrei fragen, was die Debug-Darstellung jeweils zeigt.
 
 ## Isolierte Nutzung des Frontend-Containers
 1. In diesem Ordner `build.sh`ausführen.<br>
@@ -28,6 +23,11 @@ sh <dateiname>
 2. Ggf. `setup.sh`ausführen, sofern Änderungen im Master bestehen, die lokal nicht existieren.
 3. `start.sh` für das Starten des Containers ausführen.
 4. Im Browser http://localhost:4220 öffnen
+
+## Tests
+Die Unit-Tests können über die Datei [test.sh](./test.sh) ausgeführt werden, jedoch nur, wenn der Container **nicht** bereits aktiv ist. Aufgrund der Vielzahl unserer Komponenten ist es nicht möglich alle Elemente mit Unit-Tests abzudecken. Grund hierfür ist, dass der Zeitaufwand für die Testung der Funktionalität der Komponenten nahezu übereinstimmend mit der eigentlichen Realisierung der Funktionalität ist.
+
+**Anmerkung:** Graphisch einsehbar sind die Testauswertungen über http://localhost:9876/
 
 ## Befehle
 Rekursiv alle Berechtigungen für die Elemente von `<folder-name>` erteilen, sofern diese vorher schreibgeschützt waren.

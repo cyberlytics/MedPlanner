@@ -4,12 +4,13 @@ In dieser Datei wird behandelt, wie man den Container für die Backend-Funktiona
 **Voraussetzung:** Das Projekt muss bereits mittels Docker Compose gestartet sein. Mehr dazu befindet sich in der zugehörigen [README.md](../README.md)
 
 ## Admin-Mode
-Um graphisch zum Admin-Mode zu gelangen, muss Folgendes im Browser eingegeben werden:
+Um eine graphische Darstellung für den Admin-Mode zu erhalten, muss Folgendes im Browser eingegeben werden:
 ```
 http://localhost:8000/admin
 ```
-#TODO: Bild von ADMIN-Mode-Registrierung
-Dort kann man sich dann mit den folgenden Credentials anmelden:
+<img src="./figures/django_admin_mode.png" alt="Anmeldung im Django Admin Mode" width="200">
+
+Dort kann man sich dann mit den folgenden Credentials anmelden und Daten einpflegen:
 + admin_user: awe_user@admin.com
 + password: Z?D76.u(6756
 
@@ -32,16 +33,18 @@ Password (again): <password>
 
 3. Danach sollte man wie gewohnt in den Admin-Mode gelangen können.
 
+## Tests
+Die Unit-Tests können über die Datei [test.sh](./test.sh) ausgeführt werden. Dabei werden Tests für die Models ausgeführt. Die Views werden nicht explizit über automatisierte Tests getestet: Im Frontend findet die Überprüfung der Funktionalität statt, indem Beispieldaten von Frontend zu Backend geschickt werden. Damit ist trotzdem gewährleistet, dass die Services funktionieren.
+
 ## Befehle
 Generierung von SQL-Befehlen für die Datenbank jedoch ohne Ausführung!
 ```
 docker exec sys-src_backend_1 python manage.py makemigrations
 ```
 
-Einsehen der generierten Befehle 
-TODO:check command
+Einsehen der generierten SQL-Befehle Befehle 
 ```
-docker exec sys-src_backend_1 python manage.py sqlmigrate
+docker exec sys-src_backend_1 python manage.py sqlmigrate medplanner <migration-filename>
 ```
 
 Aktualisieren der Datenbank durch Ausführen von SQL-Befehlen

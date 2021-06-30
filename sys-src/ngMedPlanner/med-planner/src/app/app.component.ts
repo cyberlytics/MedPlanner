@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.userState.checkLogin();
   }
 
-  // Functions to test components before server-requests worked
+  // Functions to test views in backend
   ngAfterViewInit(): void {
     // this.userState.checkLogin();
     // this.createDoctor();
@@ -116,7 +116,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       }
     )
     .then((resp) => resp.json())
-    .then(function(data){
+    .then((data) => {
       console.log('List of doctors: ', data);
     });
   }
@@ -133,7 +133,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       }
     )
     .then((resp) => resp.json())
-    .then(function(data){
+    .then((data) => {
       console.log('List of appointments: ', data);
     });
   }
@@ -148,7 +148,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           Authorization: `Token ${this.token}`
         },
         body: JSON.stringify({
-          first_name: 'Harry',
+          first_name: 'John',
           surname: 'Potter',
           surgery_id: 1,
           specializations: [
@@ -157,7 +157,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         })
       }
     )
-    .then(function(response){
+    .then((response) => {
       console.log('Response', response);
     });
   }
@@ -184,9 +184,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         })
       }
     )
-    .then(function (response) {
+    .then((response) => {
       return response.text();
-    }).then(function (data) {
+    }).then((data) => {
       console.log(data);
     }).catch(console.error);
   }
@@ -211,7 +211,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         })
       }
     )
-    .then(function(response){
+    .then((response) => {
       console.log('Response', response);
     });
   }
@@ -239,8 +239,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         })
       }
     )
-    .then(function(response){
-      console.log('Response', response)
+    .then((response) => {
+      console.log('Response', response);
     });
   }
 
@@ -257,7 +257,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       }
     )
     .then((resp) => resp.json())
-    .then(function(data){
+    .then((data) => {
       console.log('Response', data);
     });
   }
@@ -275,7 +275,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       }
     )
     .then((resp) => resp.json())
-    .then(function(data){
+    .then((data) => {
       console.log('Response', data);
     });
   }
@@ -292,7 +292,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         }
       }
     )
-    .then(function(response){
+    .then((response) => {
       console.log('Response', response);
     });
   }
@@ -309,7 +309,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         }
       }
     )
-    .then(function(response){
+    .then((response) => {
       console.log('Response', response);
     });
   }

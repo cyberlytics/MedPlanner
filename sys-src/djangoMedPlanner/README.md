@@ -10,7 +10,9 @@ http://localhost:8000/admin
 ```
 <img src="./figures/django_admin_mode.png" alt="Anmeldung im Django Admin Mode" width="200">
 
-Dort kann man sich dann mit den folgenden Credentials anmelden und Daten einpflegen:
+Dort kann man sich dann mit den folgenden Credentials anmelden und Daten einpflegen:<br>
+
+**Login für den Admin-User**
 + admin_user: awe_user@admin.com
 + password: Z?D76.u(6756
 

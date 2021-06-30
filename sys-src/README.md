@@ -63,7 +63,7 @@ Darin wird u.a. die Nutzung des Admin-Modus erklärt.
 ## Informationen zum Frontend-Container
 Genauere Informationen, um den Docker-Container für das Frontend zu nutzen, sind im zugehörigen [README.md](./ngMedPlanner/README.md) enthalten.<br>
 
-Darin werden u.a. die verwendeten Bash-Skripte für die Ausführung erklärt
+Darin werden u.a. die verwendeten Bash-Skripte für die Ausführung erklärt und die Credentials eines Beispiel-Users genannt.
 
 ## Verwendete Versionen
 Aufgelistet sind die relevantesten Versionen, die nicht ohne zusätzlichen Aufwand ermittelt werden können.

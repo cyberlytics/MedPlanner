@@ -24,6 +24,9 @@ sh <dateiname>
 3. `start.sh` für das Starten des Containers ausführen.
 4. Im Browser http://localhost:4220 öffnen
 
+## Login als Beispielnutzer
+Email: test@user.com
+Passwort: 123.Klbd
 ## Tests
 Die Unit-Tests können über die Datei [test.sh](./test.sh) ausgeführt werden, jedoch nur, wenn der Container **nicht** bereits aktiv ist. Aufgrund der Vielzahl unserer Komponenten ist es nicht möglich alle Elemente mit Unit-Tests abzudecken. Grund hierfür ist, dass der Zeitaufwand für die Testung der Funktionalität der Komponenten nahezu übereinstimmend mit der eigentlichen Realisierung der Funktionalität ist.
 

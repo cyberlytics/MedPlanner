@@ -99,7 +99,11 @@ export class AppointmentDashboardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const createdResult = await this.appointmentsState.addNewAppointment(editingResult.appointmentToSave);
+    const createdResult =
+      await this.appointmentsState.addNewAppointment(
+        editingResult.appointmentToSave,
+        editingResult.sendEmail
+      );
   }
 
 }

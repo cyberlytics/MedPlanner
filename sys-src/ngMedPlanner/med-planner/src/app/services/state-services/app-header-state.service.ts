@@ -40,6 +40,7 @@ export class AppHeaderStateService {
     }
 
     public setOnFilterClickListener(listener: (action: DrawerAction) => void): Subscription {
+        // tslint:disable-next-line: deprecation
         return this._onFilterClickSubject.subscribe({
             next: (action: DrawerAction) => {
                 listener(action);
@@ -52,6 +53,7 @@ export class AppHeaderStateService {
     }
 
     public setOnMenuClickListener(listener: (action: DrawerAction) => void): Subscription {
+        // tslint:disable-next-line: deprecation
         return this._onMenuClickSubject.subscribe({
             next: (action: DrawerAction) => {
                 listener(action);

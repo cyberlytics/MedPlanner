@@ -3,27 +3,33 @@
     [
         {
           "id": 1,
-          "description": "Neurologie"
+          "description": "Neurologie",
+          "color": "#26a69a"
         },
         {
           "id": 2,
-          "description": "Innere Medizin"
+          "description": "Innere Medizin",
+          "color": "#26c6da"
         },
         {
           "id": 3,
-          "description": "Orthopädie"
+          "description": "Orthopädie",
+          "color": "#66bb6a"
         },
         {
           "id": 4,
-          "description": "Zahnmedizin"
+          "description": "Zahnmedizin",
+          "color": "#d4e157"
         },
         {
           "id": 5,
-          "description": "Allgemeinmedizin"
+          "description": "Allgemeinmedizin",
+          "color": "#ffca28"
         },
         {
           "id": 6,
-          "description": "Kieferorthopädie"
+          "description": "Kieferorthopädie",
+          "color": "#ec407a"
         }
     ]
 

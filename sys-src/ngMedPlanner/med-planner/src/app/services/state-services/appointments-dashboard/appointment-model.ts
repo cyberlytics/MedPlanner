@@ -4,7 +4,7 @@ import { TagModel } from '../tags/tag-model';
 
 export class AppointmentModel {
 
-    private static readonly LOCALE_DE = 'de-DE';
+    public static readonly LOCALE_DE = 'de-DE';
 
     get id(): number {
         return this.data.id ? this.data.id : -1;
@@ -93,7 +93,7 @@ export class AppointmentModel {
         datetime: string;
         doctor: DoctorModel | null;
         priority: Priority;
-        onAppointmentUpdate?: (appointment: AppointmentModel) => void,
+        onAppointmentUpdate?: (appointment: AppointmentModel, sendEmail: boolean) => void,
         onAppointmentDelete?: (appointment: AppointmentModel) => void,
         note?: string;
         tags?: Array<TagModel>;
@@ -141,9 +141,9 @@ export class AppointmentModel {
         );
     }
 
-    public update(dataToUpdate?: AppointmentUpdateData): void {
+    public update(dataToUpdate?: AppointmentUpdateData, sendEmail = false): void {
         if (dataToUpdate === undefined) {
-            this.updateAppointment();
+            this.updateAppointment(sendEmail);
             return;
         }
 
@@ -172,10 +172,10 @@ export class AppointmentModel {
             this.data.tags = dataToUpdate.tags;
         }
 
-        this.updateAppointment();
+        this.updateAppointment(sendEmail);
     }
 
-    public setOnUpdateListener(listener: (model: AppointmentModel) => void): void {
+    public setOnUpdateListener(listener: (model: AppointmentModel, sendEmail: boolean) => void): void {
         this.data.onAppointmentUpdate = listener;
     }
 
@@ -190,12 +190,12 @@ export class AppointmentModel {
         this.data.onAppointmentDelete = listener;
     }
 
-    private updateAppointment(): void {
+    private updateAppointment(sendEmail: boolean): void {
         if (this.data.onAppointmentUpdate === undefined) {
             return;
         }
 
-        this.data.onAppointmentUpdate(this);
+        this.data.onAppointmentUpdate(this, sendEmail);
     }
 
 }

@@ -5,7 +5,6 @@ import { AppointmentDialog } from '../appointment-dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { DoctorsDashboardStateService } from 'src/app/services/state-services/doctors-dashboard/doctors-dashboard-state.service';
-import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 
 @Component({
   selector: 'app-appointment-edit-view',
@@ -65,11 +64,12 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   }
   private _doctors: Array<DoctorModel>;
 
+  public checked = false;
+
   constructor(
     private dialogRef: MatDialogRef<AppointmentEditViewComponent, EditingResult>,
     @Inject(MAT_DIALOG_DATA) appointment: AppointmentModel,
-    private doctorsState: DoctorsDashboardStateService,
-    private appointmentState: AppointmentsDashboardStateService
+    private doctorsState: DoctorsDashboardStateService
   ) {
     super(appointment);
 
@@ -125,10 +125,12 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
       doctor: this._doctorsFormControl.value,
       date: this.getDate(),
       note: this._notesFormControl.value
-    });
+    },
+    this.checked);
 
     this.closeDialog({
       buttonClicked: ButtonClicked.SAVE,
+      sendEmail: this.checked,
       appointmentToSave: this.appointment
     });
   }
@@ -162,6 +164,7 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
 
 export interface EditingResult {
   buttonClicked: ButtonClicked;
+  sendEmail?: boolean;
   appointmentToSave?: AppointmentModel;
 }
 

@@ -11,12 +11,13 @@ export class SpecializationModel {
     }
 
     get color(): string | null {
-        return SpecializationModel.getColorByDescription(this.data.description);
+        return this.data.color;
     }
 
     constructor(private data: {
         id: number,
-        description: string
+        description: string,
+        color: string;
     }) {}
 
     private static getColorByDescription(description: string): string | null {

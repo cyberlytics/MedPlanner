@@ -3,7 +3,7 @@
 <div class="main-block">
     <div class="appointment-list">
         <app-appointment-card-component *ngFor="let appointment of appointments"
-            [appointment]="appointment"
+            [appointment]="appointment" class="appointment-component"
         ></app-appointment-card-component>
     </div>
 
@@ -18,7 +18,7 @@
         <span class="bold-font">Fügen Sie einen Termin hinzu</span>
     </div>
 
-    <button mat-fab color="accent" class="add-fab-button" (click)="addNewAppointment()">
+    <button mat-fab color="accent" class="add-fab-button" (click)="addNewAppointment()" id="add-new-button">
         <mat-icon>add</mat-icon>
     </button>
 </div>

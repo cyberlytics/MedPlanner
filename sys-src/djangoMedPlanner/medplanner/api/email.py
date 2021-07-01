@@ -7,7 +7,7 @@ from rest_framework import status
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
+@permission_classes((IsAuthenticated, ))
 def send_email(request):
     try:
         appointment_id = request.data.get('appointment_id')

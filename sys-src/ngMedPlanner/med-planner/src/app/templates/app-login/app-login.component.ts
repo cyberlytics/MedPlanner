@@ -106,7 +106,6 @@ export class AppLoginComponent implements OnInit {
   public onSignUpClick(): void {
 
     this.router.navigate(['signup']);
-
   }
 
   public async onLogInClick(_email: string, _password: string): Promise<void> {

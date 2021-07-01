@@ -43,7 +43,7 @@ export class TagsStateService extends BaseStateService<TagModel> {
     protected async initStateData(): Promise<void> {
         const tagsData = await this.tagsDataService.getData();
 
-        for (const tagData of tagsData.tags) {
+        for (const tagData of tagsData) {
             this.addModel(
                 new TagModel(
                     {

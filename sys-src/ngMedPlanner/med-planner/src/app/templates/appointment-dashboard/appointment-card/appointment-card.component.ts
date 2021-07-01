@@ -32,15 +32,6 @@ export class AppointmentCardComponent implements OnInit {
     return this._appointment?.doctorName;
   }
 
-
-  @Input() set tag(value: Tag | undefined) {
-    this._tag = value;
-  }
-  get tag(): Tag | undefined {
-    return this._tag;
-  }
-  private _tag: Tag | undefined;
-
   get time(): string | undefined {
     return this.appointment?.timeString;
   }
@@ -88,9 +79,4 @@ export class AppointmentCardComponent implements OnInit {
     this.onDetailsButtonClick();
   }
 
-}
-
-export interface Tag {
-  name: string;
-  color: string;
 }

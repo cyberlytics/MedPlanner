@@ -5,7 +5,6 @@ import { AppStateService, Dashbord } from './services/state-services/app-state.s
 import { Subscription } from 'rxjs';
 import { AppHeaderStateService, DrawerAction } from './services/state-services/app-header-state.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,6 +19,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private _onDashboardSwitcher: Subscription | undefined;
   private _onFilterClick: Subscription | undefined;
   private _onMenuClick: Subscription | undefined;
+
+
 
   constructor(
     private appState: AppStateService,

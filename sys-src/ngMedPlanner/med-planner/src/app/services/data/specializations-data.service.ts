@@ -7,13 +7,13 @@ import { DataServiceBasic } from './data-basic.service';
 @Injectable({
     providedIn: 'root',
 })
-export class SpecializationsDataService extends DataServiceBasic<Specializations> {
+export class SpecializationsDataService extends DataServiceBasic<Array<SpecializationData>> {
 
     constructor(httpService: HttpService, userState: UserStateService) {
         super(
             httpService,
             {
-                requestURL: HttpService.SPECIALIZATIONS_URL
+                requestURL: HttpService.SPECIALIZATION_LIST
             },
             userState
         );

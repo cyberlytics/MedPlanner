@@ -219,7 +219,7 @@ def tag_create(request):
     return Response(data={'id': tag.id}, status=status.HTTP_201_CREATED)
     
 
-@api_view(['READ'])
+@api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def tag_list(request):
     """
@@ -285,7 +285,7 @@ def surgery_create(request):
     return Response(data={'id': surgery.id}, status=status.HTTP_201_CREATED)
 
 
-@api_view(['READ'])
+@api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def surgery_list(request):
     """
@@ -300,7 +300,7 @@ def surgery_list(request):
     return Response(serializer.data)
 
 
-@api_view(['READ'])
+@api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def specialization_list(request):
     """

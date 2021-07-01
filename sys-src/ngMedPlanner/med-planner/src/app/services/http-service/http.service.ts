@@ -36,6 +36,10 @@ export class HttpService {
     public static readonly APPOINTMENT_UPDATE = `http://${HttpService.serverHost}:8000/api/appointment-update/`;
     public static readonly APPOINTMENT_CREATE = `http://${HttpService.serverHost}:8000/api/appointment-create`;
     public static readonly APPOINTMENT_DELETE = `http://${HttpService.serverHost}:8000/api/appointment-delete/`;
+
+    public static readonly SURGERY_LIST = `http://${HttpService.serverHost}:8000/api/surgery-list`;
+    public static readonly SPECIALIZATION_LIST = `http://${HttpService.serverHost}:8000/api/specialization-list`;
+    public static readonly TAG_LIST = `http://${HttpService.serverHost}:8000/api/tag-list`;
     public static readonly SEND_EMAIL = `http://${HttpService.serverHost}:8000/api/send_email`;
 
     constructor() {}

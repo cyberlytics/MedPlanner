@@ -64,6 +64,7 @@ export class UserStateService implements Login {
     }
 
     public setOnLogoutListener(listener: () => void): Subscription {
+        // tslint:disable-next-line: deprecation
         return this._onLogout.subscribe({
             next: () => {
                 listener();

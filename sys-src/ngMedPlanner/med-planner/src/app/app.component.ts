@@ -32,9 +32,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.userState.checkLogin();
   }
 
-
   ngAfterViewInit(): void {
-
     this._onDashboardSwitcher = this.appState.setOnDashboardSwitchListener(
       (dashboard: Dashbord) => { this.onDashboardSwitch(dashboard); }
     );
@@ -89,5 +87,4 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         break;
     }
   }
-
 }

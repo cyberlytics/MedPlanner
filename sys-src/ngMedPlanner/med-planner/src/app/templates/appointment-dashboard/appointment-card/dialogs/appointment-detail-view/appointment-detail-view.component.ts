@@ -27,7 +27,6 @@ export class AppointmentDetailViewComponent extends AppointmentDialog implements
   }
 
   public activateEditMode(): void {
-    // this._editMode = true;
     const dialogRef = this.dialog.open(AppointmentEditViewComponent, {
       maxHeight: '95vh',
       maxWidth: '95vw',

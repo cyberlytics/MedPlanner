@@ -4,7 +4,7 @@ import { TagModel } from '../tags/tag-model';
 
 export class AppointmentModel {
 
-    private static readonly LOCALE_DE = 'de-DE';
+    public static readonly LOCALE_DE = 'de-DE';
 
     get id(): number {
         return this.data.id ? this.data.id : -1;

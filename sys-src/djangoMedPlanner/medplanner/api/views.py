@@ -14,7 +14,8 @@ def doctor_list(request):
     Returns all doctor objects
     """
     try:
-        doctors = Doctor.objects.all()
+        user_id = request.user.id
+        doctors = Doctor.objects.filter(user_id=user_id)
     except Doctor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -26,7 +27,7 @@ def doctor_list(request):
 @permission_classes((IsAuthenticated, ))
 def doctor_detail(request, pk):
     """
-    Returns information of doctor object
+    Returns information of doctor object. It is not yet used.
     """
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -41,7 +42,7 @@ def doctor_detail(request, pk):
 @permission_classes((IsAuthenticated, ))
 def doctor_create(request):
     """
-    Returns new doctor object
+    Returns new doctor object. It is not yet used.
     """
     serializer = DoctorSerializer(data=request.data)
     if serializer.is_valid():
@@ -55,7 +56,7 @@ def doctor_create(request):
 @permission_classes((IsAuthenticated, ))
 def doctor_update(request, pk):
     """
-    Returns updated doctor object
+    Returns updated doctor object. It is not yet used.
     """
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -74,7 +75,7 @@ def doctor_update(request, pk):
 @permission_classes((IsAuthenticated, ))
 def doctor_delete(request, pk):
     """
-    Deletes doctor object
+    Deletes doctor object. It is not yet used.
     """
     try:
         doctor = Doctor.objects.get(id=pk)
@@ -108,7 +109,7 @@ def appointment_list(request):
 @permission_classes((IsAuthenticated, ))
 def appointment_detail(request, pk):
     """
-    Returns information of appointment object
+    Returns information of appointment object. It is not yet used.
     """
     try:
         appointment = Appointment.objects.get(id=pk)
@@ -175,7 +176,7 @@ def appointment_delete(request, pk):
 @permission_classes((IsAuthenticated, ))
 def tag_delete(request, pk):
     """
-    Deletes tag object
+    Deletes tag object. It is not yet used.
     """
     try:
         tag = Tag.objects.get(id=pk)
@@ -190,7 +191,7 @@ def tag_delete(request, pk):
 @permission_classes((IsAuthenticated, ))
 def tag_update(request, pk):
     """
-    Returns updated tag object
+    Returns updated tag object. It is not yet used.
     """
     try:
         tag = Tag.objects.get(id=pk)
@@ -209,7 +210,7 @@ def tag_update(request, pk):
 @permission_classes((IsAuthenticated, ))
 def tag_create(request):
     """
-    Returns new tag object
+    Returns a new tag object. It is not yet used.
     """
     serializer = TagSerializer(data=request.data)
     if serializer.is_valid():
@@ -226,7 +227,8 @@ def tag_list(request):
     Returns all tag objects
     """
     try:
-        tags = Tag.objects.all()
+        user_id = request.user.id
+        tags = Tag.objects.filter(user_id=user_id)
     except Tag.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -241,7 +243,7 @@ def tag_list(request):
 @permission_classes((IsAuthenticated, ))
 def surgery_delete(request, pk):
     """
-    Deletes surgery object
+    Deletes surgery object. It is not yet used.
     """
     try:
         surgery = Surgery.objects.get(id=pk)
@@ -256,7 +258,7 @@ def surgery_delete(request, pk):
 @permission_classes((IsAuthenticated, ))
 def surgery_update(request, pk):
     """
-    Returns updated surgery object
+    Returns updated surgery object. It is not yet used.
     """
     try:
         surgery = Surgery.objects.get(id=pk)
@@ -275,7 +277,7 @@ def surgery_update(request, pk):
 @permission_classes((IsAuthenticated, ))
 def surgery_create(request):
     """
-    Returns new surgery object
+    Returns new surgery object. It is not yet used.
     """
     serializer = SurgerySerializer(data=request.data)
     if serializer.is_valid():
@@ -292,7 +294,8 @@ def surgery_list(request):
     Returns all surgery objects
     """
     try:
-        surgeries = Surgery.objects.all()
+        user_id = request.user.id
+        surgeries = Surgery.objects.filter(user_id=user_id)
     except Surgery.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

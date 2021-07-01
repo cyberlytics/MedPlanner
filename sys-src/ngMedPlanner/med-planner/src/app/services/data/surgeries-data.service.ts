@@ -13,7 +13,7 @@ export class SurgeriesDataService extends DataServiceBasic<Array<SurgeryData>> {
         super(
             httpService,
             {
-                requestURL: HttpService.SURGERIES_URL
+                requestURL: HttpService.SURGERY_LIST
             },
             userState
         );

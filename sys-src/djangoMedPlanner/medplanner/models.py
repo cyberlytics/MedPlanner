@@ -98,6 +98,9 @@ class Tag(models.Model):
     color = models.CharField(max_length=100)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.description
+
 
 class Appointment(models.Model):
     class AppointmentsPriority(models.TextChoices):

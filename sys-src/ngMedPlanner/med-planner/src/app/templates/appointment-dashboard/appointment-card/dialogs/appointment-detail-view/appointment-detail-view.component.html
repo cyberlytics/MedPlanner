@@ -9,8 +9,8 @@
             <span>Wann</span>
         </div>
         <div class="info regular-font">
-            <span>{{date}}</span>
-            <span>{{time}}</span>
+            <span id="date-detail">{{date}}</span>
+            <span id="time-detail">{{time}}</span>
         </div>
     </div>
 
@@ -19,9 +19,9 @@
             <span>Wo</span>
         </div>
         <div class="info regular-font">
-            <span>{{address}},</span>
-            <span>{{zipcode}}</span>
-            <span>{{city}}</span>
+            <span id="address-detail">{{address}},</span>
+            <span id="zipcode-detail">{{zipcode}}</span>
+            <span id="city-detail">{{city}}</span>
         </div>
     </div>
     
@@ -30,8 +30,8 @@
             <span>Arzt</span>
         </div>
         <div class="info regular-font">
-            <span>Dr. {{doctorName}}</span><br>
-            <span *ngIf="doctorsPhoneNumber">Rufnummer: {{doctorsPhoneNumber}}</span>
+            <span id="doctor-detail">Dr. {{doctorName}}</span><br>
+            <span *ngIf="doctorsPhoneNumber" id="telephone-detail">Rufnummer: {{doctorsPhoneNumber}}</span>
         </div>
     </div>
 
@@ -46,8 +46,18 @@
     </div>
 
     <div class="dialog-buttons-block">
-        <button class="bold-font appearance-animation-fast" mat-button (click)="activateEditMode()">Bearbeiten</button>
-        <button class="bold-font appearance-animation-fast" mat-button (click)="closeDialog()">Ok</button>
+        <button 
+            class="bold-font appearance-animation-fast"
+            mat-button
+            id="edit-button"
+            (click)="activateEditMode()"
+            >Bearbeiten</button>
+        <button 
+            class="bold-font appearance-animation-fast"
+            mat-button
+            (click)="closeDialog()"
+            id="ok-button"
+            >Ok</button>
     </div>
 </mat-dialog-content>
 

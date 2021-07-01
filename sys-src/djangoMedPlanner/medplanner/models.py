@@ -63,7 +63,7 @@ class UserProfile(AbstractUser):
 
 class Specialization(models.Model):
     description = models.CharField(max_length=100)
-    color       = models.CharField(max_length=7 ,default='#80cbc4')
+    color       = models.CharField(max_length=7, default='#80cbc4')
 
     def __str__(self):
         return self.description

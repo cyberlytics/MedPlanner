@@ -5,7 +5,6 @@ import { AppointmentDialog } from '../appointment-dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { DoctorsDashboardStateService } from 'src/app/services/state-services/doctors-dashboard/doctors-dashboard-state.service';
-import { AppointmentsDashboardStateService } from 'src/app/services/state-services/appointments-dashboard/appointments-dashboard-state.service';
 
 @Component({
   selector: 'app-appointment-edit-view',
@@ -70,8 +69,7 @@ export class AppointmentEditViewComponent extends AppointmentDialog implements O
   constructor(
     private dialogRef: MatDialogRef<AppointmentEditViewComponent, EditingResult>,
     @Inject(MAT_DIALOG_DATA) appointment: AppointmentModel,
-    private doctorsState: DoctorsDashboardStateService,
-    private appointmentState: AppointmentsDashboardStateService
+    private doctorsState: DoctorsDashboardStateService
   ) {
     super(appointment);
 

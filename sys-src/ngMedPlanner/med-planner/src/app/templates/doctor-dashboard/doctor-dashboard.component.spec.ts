@@ -9,7 +9,8 @@ describe('DoctorDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DoctorDashboardComponent ], imports: [ RouterTestingModule ]
+      declarations: [ DoctorDashboardComponent ],
+      imports: [ RouterTestingModule ]
     })
     .compileComponents();
   });

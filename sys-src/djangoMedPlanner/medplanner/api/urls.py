@@ -3,6 +3,7 @@ from medplanner.api import views
 from medplanner.api import user_view
 from medplanner.api import email
 
+# list routes URLs to views
 app_name = 'medplanner'
 
 urlpatterns = [

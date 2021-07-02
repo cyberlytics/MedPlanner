@@ -32,6 +32,7 @@ class SurgeryFactory(django.DjangoModelFactory):
     user_id = SubFactory(UserProfileFactory)
 
 
+# Factory classes for testing purposes
 class DoctorFactory(django.DjangoModelFactory):
 
     class Meta:

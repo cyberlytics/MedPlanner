@@ -7,10 +7,9 @@ from rest_framework.authtoken.models import Token
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
+
 # Models: the models that can be used as a ForeignKey must be placed before
 # the model that uses the ForeignKeys
-
-
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
 
@@ -129,4 +128,3 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     """
     if created:
         Token.objects.create(user=instance)
-

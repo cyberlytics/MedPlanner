@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from medplanner.models import Doctor, Appointment, Specialization, Tag, Surgery
 
-
+# Serializer classes to serialize data from database into Json format
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor

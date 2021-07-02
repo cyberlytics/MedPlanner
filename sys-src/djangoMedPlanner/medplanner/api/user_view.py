@@ -28,8 +28,7 @@ def login(request):
         return Response(
             data={"token": str(new_token), "email": f"{email}", "id": login_user.id, "status": status.HTTP_200_OK})
     else:
-        return Response(data={"message": f"Wrong password for User '{email}' or not activated",
-                              "status": status.HTTP_403_FORBIDDEN})
+        return Response(data={"message": f"Wrong password for User '{email}' or not activated", "status": status.HTTP_403_FORBIDDEN})
 
 
 @api_view(['POST'])
@@ -88,14 +87,12 @@ def change_user_password(request):
             user.set_password(new_password)
             user.save()
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST,
-                            data={"message": f"Current password did not match. Cannot update password"})
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Current password did not match. Cannot update password"})
 
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    return Response(status=status.HTTP_200_OK,
-                    data={"message": f"Password updated successfully for user '{user.email}'"})
+    return Response(status=status.HTTP_200_OK, data={"message": f"Password updated successfully for user '{user.email}'"})
 
 
 @api_view(['POST', ])
@@ -113,12 +110,10 @@ def deactivate_user(request):
             user.is_active = False
             user.save()
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST,
-                            data={"message": f"Current password did not match. Cannot update password"})
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Current password did not match. Cannot update password"})
 
     except:
-        return Response(status=status.HTTP_400_BAD_REQUEST,
-                        data={"message": f"Cannot deactivate account of '{user.email}'. Password does not match"})
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Cannot deactivate account of '{user.email}'. Password does not match"})
 
     return Response(status=status.HTTP_200_OK, data={"message": f"Deactivated account of '{user.email}'"})
 
@@ -154,8 +149,7 @@ def delete_user(request):
             messages.info(request, 'Your account has been deleted.')
 
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST,
-                            data={"message": f"Current password did not match. Cannot update password"})
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": f"Current password did not match. Cannot update password"})
 
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)

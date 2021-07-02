@@ -54,11 +54,11 @@ class SpecializationSerializer(TestCase):
         serializer = SpecializationTestSerializer(data=specialization)
         if serializer.is_valid():
             specialization_serial = serializer.save()
-            field = 'description'
-            self.assertEqual(
-                getattr(specialization, field),
-                specialization_serial[field]
-            )
+            for field in ['description', 'color']:
+                self.assertEqual(
+                    getattr(specialization, field),
+                    specialization_serial[field]
+                )
 
 
 class TagSerializer(TestCase):

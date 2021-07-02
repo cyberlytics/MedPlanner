@@ -44,6 +44,9 @@ export class AppointmentCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Function creates MatDialog with associated data of the clicked "appointment-card".
+   */
   public async onDetailsButtonClick(): Promise<void> {
     const dialogRef =
       this.dialog.open<AppointmentDetailViewComponent, any, MatDialogRef<AppointmentEditViewComponent, EditingResult>>

@@ -47,9 +47,7 @@ class MedplannerUserAdmin(UserAdmin):
 
 
 admin.site.register(Doctor)
-# admin.site.unregister(UserProfile)
 admin.site.register(UserProfile, MedplannerUserAdmin)
-# admin.site.register(UserProfile , UserAdmin)
 admin.site.register(Appointment)
 admin.site.register(Specialization)
 admin.site.register(Surgery)

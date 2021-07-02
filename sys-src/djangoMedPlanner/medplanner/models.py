@@ -10,8 +10,6 @@ from django.utils.translation import ugettext_lazy as _
 
 # Models: the models that can be used as a ForeignKey must be placed before
 # the model that uses the ForeignKeys
-
-
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
 

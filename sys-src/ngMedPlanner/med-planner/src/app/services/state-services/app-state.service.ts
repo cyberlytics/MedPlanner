@@ -45,6 +45,7 @@ export class AppStateService {
     }
 
     public setOnDashboardSwitchListener(listener: (dashboard: Dashbord) => void): Subscription {
+        // tslint:disable-next-line: deprecation
         return this._subjectOnDashboardSwitch.subscribe({
             next: (dashboard) => {
                 listener(dashboard);

@@ -1,8 +1,9 @@
 import { DoctorModel } from 'src/app/services/state-services/doctors-dashboard/doctor-model';
 import { SpecializationModel } from 'src/app/services/state-services/specialization/specialization-model';
 
-
-
+/**
+ * Handles data for the MatDialog of current clicked "doctor-card-component"
+ */
 export abstract class DoctorDialog {
 
       get surname(): string | undefined{

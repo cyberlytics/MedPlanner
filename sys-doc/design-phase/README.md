@@ -1,4 +1,5 @@
-# Entwurf
+# Entwurfsdokumente
 
+Komponenten, die während der Projektplanung entstanden sind: 
 * Benutzeroberflächen-Spezifikation
-* Systementwurf
+* Datenbankentwurf

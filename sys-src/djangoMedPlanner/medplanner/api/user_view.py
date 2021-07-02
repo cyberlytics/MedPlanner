@@ -32,7 +32,7 @@ def login(request):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
+@permission_classes((IsAuthenticated, ))
 def logout(request):
     """
     Only logout a user if he was logged in. Otherwise redirect to Login page.
@@ -73,7 +73,7 @@ def create_user(request):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
+@permission_classes((IsAuthenticated, ))
 def change_user_password(request):
     """
     Change user password only if the current one is typed in correctly.
@@ -96,7 +96,7 @@ def change_user_password(request):
 
 
 @api_view(['POST', ])
-@permission_classes((IsAuthenticated,))
+@permission_classes((IsAuthenticated, ))
 def deactivate_user(request):
     """
     Instead of deleting the user account, it is better to only deactivate it.
@@ -135,7 +135,7 @@ def activate_user(request):
 
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
+@permission_classes((IsAuthenticated, ))
 def delete_user(request):
     """
     Completely delete the user account.

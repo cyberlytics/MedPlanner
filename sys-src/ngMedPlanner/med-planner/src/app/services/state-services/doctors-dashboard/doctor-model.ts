@@ -22,23 +22,23 @@ export class DoctorModel {
         return this.data.specializations;
     }
 
+    // Returns the color fitting to the first element in the array
     get specializationColor(): string | null | undefined {
         if (this.data.specializations && this.data.specializations?.length >= 1) {
             return this.data.specializations[0]?.color;
         }
-        
 
         return null;
     }
 
     get specialization(): string| null | undefined{
-        
+
         if (this.data.specializations?.length === 1) {
             return this.data.specializations[0]?.description;
         }
 
-        return null;        
-    } 
+        return null;
+    }
 
     get surgery(): SurgeryModel | null {
         return this.data.surgery;

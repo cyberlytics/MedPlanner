@@ -2,6 +2,8 @@
 <div class="dialog-header-block" [ngStyle]="{'background-color': docColor}">
  
     <h2 class="bold-font dialog-title">Dr. {{firstname}} {{surname}}</h2>
+
+    <!-- Adds all specialisations to the detail-view; First element gets different class -->
     <div class ="specWrapper">
         <span *ngFor ="let specialization of specializations; let first = first;" 
             [class.specfirst]="first"  class="specialization"> {{specialization?.description}} </span>

@@ -20,6 +20,7 @@ export class AppLoginComponent implements OnInit {
   private readonly PASSWORD_REQUIRED_MESSAGE = 'Passwort erforderlich!';
   private readonly WRONG_PASSWORD_MESSAGE = 'Das Passwort ist falsch';
 
+  // Handles displayed text for different wrong email inputs
   get emailErrorMessage(): string {
     if (this._emailFormControl.hasError('required')) {
       return this.EMAIL_REQUIRED_MESSAGE;
@@ -41,7 +42,7 @@ export class AppLoginComponent implements OnInit {
   }
   private _emailFormControl: FormControl;
 
-
+  // Handles displayed text for different wrong password inputs
   get passwordErrorMessage(): string {
     if (this._passwordFormControl.hasError('required')) {
       return this.PASSWORD_REQUIRED_MESSAGE;
@@ -97,12 +98,13 @@ export class AppLoginComponent implements OnInit {
     this._isLoading = false;
 
     headerState.setHeaderTitle('Hallo!');
-    headerState.setHeaderSubTitle('Melden Sie sich bitte ein.');
+    headerState.setHeaderSubTitle('Melden Sie sich bitte an.');
   }
 
   ngOnInit(): void {}
 
   public onSignUpClick(): void {
+
     this.router.navigate(['signup']);
   }
 

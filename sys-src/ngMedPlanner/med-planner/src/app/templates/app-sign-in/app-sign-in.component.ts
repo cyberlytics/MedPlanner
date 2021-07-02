@@ -20,6 +20,8 @@ export class AppSignInComponent implements OnInit {
   private readonly PASSWORD_NOT_MATCHING_MESSAGE = 'Passwort zu unsicher!';
   private readonly DIFFERENT_PASSWORDS_MESSAGE = 'Die Passwörter stimmen nicht überein!';
 
+
+  // Handles displayed text for different wrong email inputs
   get emailErrorMessage(): string {
     if (this._registerEmailFormControl.hasError('required')) {
       return this.EMAIL_REQUIRED_MESSAGE;
@@ -36,6 +38,7 @@ export class AppSignInComponent implements OnInit {
   }
 
 
+  // Handles displayed text for different wrong password inputs
   get passwordErrorMessage(): string {
     if (this._registerPasswordFormControl.hasError('required')) {
       return this.PASSWORD_REQUIRED_MESSAGE;

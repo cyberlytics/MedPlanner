@@ -1,5 +1,8 @@
 import { AppointmentModel, Priority } from 'src/app/services/state-services/appointments-dashboard/appointment-model';
 
+/**
+ * Handles data for the MatDialog of current clicked "appointment-card-component"
+ */
 export abstract class AppointmentDialog {
 
     get priority(): Priority {

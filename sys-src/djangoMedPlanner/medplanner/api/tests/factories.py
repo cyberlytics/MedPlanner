@@ -17,6 +17,7 @@ class SpecializationFactory(django.DjangoModelFactory):
         model = Specialization
 
     description = Faker('first_name')
+    color = Faker('color')
 
 
 class SurgeryFactory(django.DjangoModelFactory):
@@ -31,6 +32,7 @@ class SurgeryFactory(django.DjangoModelFactory):
     user_id = SubFactory(UserProfileFactory)
 
 
+# Factory classes for testing purposes
 class DoctorFactory(django.DjangoModelFactory):
 
     class Meta:

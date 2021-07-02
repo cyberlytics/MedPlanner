@@ -1,4 +1,6 @@
 <div class="main-block appearance-animation">
+
+    <!-- Changes border-color of card-component -->
     <div class="card-block card-shape base-shadow primary-border"
     [style.border-color]="doctor?.specializationColor">
 
@@ -12,14 +14,14 @@
 
             <div class ="docCardlabels">
  
-                <!--Adresse-->
+                <!--Address-->
                 <div class="doctoraddress">
                     <span class="bold-font" >Stadt:</span>
                     <span class="bold-font" >Postleitzahl:</span>
                     <span class="bold-font" >Straße:</span>
                 </div>
         
-                <!--Telefonnummer-->
+                <!--Telephone-->
                 <div class="doctelephone">
                     <span class="bold-font" >Telefonnummer: </span>
                 </div>
@@ -33,19 +35,19 @@
     
     
             <div class="docCardvalues">
-                <!--Adresse-->
+                <!--Address-->
                 <div class="doctoraddress">
                     <span class="regular-font" id="city">{{location}}</span>
                     <span class="regular-font" id="zipcode">{{zipcode}}</span>
                     <span class="regular-font" id="street">{{address}}</span>
                 </div>
     
-                <!--Telefonnummer-->
+                <!--Telephone-->
                 <div class="doctelephone">
                     <span class="regular-font" id="phonenumber">{{telephone}}</span>
                 </div>
 
-                <!--Website-->
+                <!--website-->
                 <div class="website">
         
                     <span id="webseite" class="regular-font" >

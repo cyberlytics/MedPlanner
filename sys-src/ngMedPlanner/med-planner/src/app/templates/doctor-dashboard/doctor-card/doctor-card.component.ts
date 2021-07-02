@@ -49,6 +49,9 @@ export class DoctorCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Function creates MatDialog with associated data of the clicked "doctor-card".
+   */
   public async onDetailsButtonClick(): Promise<void> {
     const dialogRef = this.dialog.open<DoctorDetailViewComponent, any, MatDialogRef<DoctorDetailViewComponent>>(
       DoctorDetailViewComponent,

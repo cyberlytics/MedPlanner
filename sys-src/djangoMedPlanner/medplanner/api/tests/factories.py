@@ -17,6 +17,7 @@ class SpecializationFactory(django.DjangoModelFactory):
         model = Specialization
 
     description = Faker('first_name')
+    color = Faker('color')
 
 
 class SurgeryFactory(django.DjangoModelFactory):

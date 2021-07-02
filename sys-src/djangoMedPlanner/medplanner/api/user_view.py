@@ -32,7 +32,6 @@ def login(request):
                               "status": status.HTTP_403_FORBIDDEN})
 
 
-# @login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def logout(request):
@@ -74,7 +73,6 @@ def create_user(request):
     return Response(data={"message": f"User account for '{email}' is created", "status": status.HTTP_200_OK})
 
 
-# @login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def change_user_password(request):
@@ -95,13 +93,11 @@ def change_user_password(request):
 
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    # show message window if password changed successfully
+
     return Response(status=status.HTTP_200_OK,
                     data={"message": f"Password updated successfully for user '{user.email}'"})
 
 
-# only if user is logged in, he should be able to deactivate the account
-# @login_required
 @api_view(['POST', ])
 @permission_classes((IsAuthenticated,))
 def deactivate_user(request):
@@ -127,7 +123,6 @@ def deactivate_user(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"Deactivated account of '{user.email}'"})
 
 
-# send email to user for account activation and reset of password
 @api_view(['POST', ])
 def activate_user(request):
     """
@@ -144,7 +139,6 @@ def activate_user(request):
     return Response(status=status.HTTP_200_OK, data={"message": f"Activated account of '{user.email}'"})
 
 
-# @login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def delete_user(request):
